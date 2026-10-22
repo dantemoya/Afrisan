@@ -23,7 +23,7 @@ La arquitectura está aprobada, según confirmación del estudiante recibida el 
 ## Ejecutar la implementación anterior con datos simulados
 
 En desarrollo está activado el modo demostración: no requiere PostgreSQL,
-Supabase ni secretos de conexión. Consulta [las instrucciones y cuentas de ejemplo](Afrisan.Api/Demo/README.md).
+Supabase ni secretos de conexión.
 
 En dos terminales, desde esta carpeta:
 
