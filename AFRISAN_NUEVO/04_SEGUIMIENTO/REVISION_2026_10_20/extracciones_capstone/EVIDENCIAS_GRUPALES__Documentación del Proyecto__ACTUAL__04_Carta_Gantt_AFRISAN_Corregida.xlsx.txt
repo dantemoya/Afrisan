@@ -1,0 +1,10 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/04_Carta_Gantt_AFRISAN_Corregida.xlsx
+SHEET Carta Gantt
+A1=ID | B1=Fase / Hito | C1=Semana inicio | D1=Semana fin | E1=Responsable(s) | F1=Estado | G1=Entregable principal | H1=S1 | I1=S2 | J1=S3 | K1=S4 | L1=S5 | M1=S6 | N1=S7 | O1=S8 | P1=S9 | Q1=S10 | R1=S11 | S1=S12 | T1=S13 | U1=S14 | V1=S15 | W1=S16 | X1=S17 | Y1=S18
+A2=M1 | B2=Aprobación de requisitos y alcance | C2=1 | D2=4 | E2=Dante Moya / Yarek Larraguibel | F2=En revisión | G2=Acta, entrevista y Product Backlog | H2=■ | I2=■ | J2=■ | K2=■
+A3=M2 | B3=Arquitectura base y prototipos | C3=3 | D3=5 | E3=Yarek Larraguibel / Dante Moya | F3=En revisión | G3=4+1, DER, Figma y arquitectura Afrisan.Web → Afrisan.Api → PostgreSQL/Supabase | J3=■ | K3=■ | L3=■
+A4=M3 | B4=Sprint 1 - Bodega, API y autenticación | C4=5 | D4=7 | E4=Dante Moya / Yarek Larraguibel | F4=En proceso | G4=Blazor WebAssembly, ASP.NET Core API, PostgreSQL/Supabase | L4=■ | M4=■ | N4=■
+A5=M4 | B5=Sprint 2 - Terreno / offline (planificado) | C5=7 | D5=9 | E5=Dante Moya / Yarek Larraguibel | F5=Por hacer | G5=Cliente móvil, persistencia local, evidencia y semáforo | N5=■ | O5=■ | P5=■
+A6=M5 | B6=Sprint 3 - Reportería y Regener (planificado) | C6=9 | D6=10 | E6=Dante Moya / Yarek Larraguibel | F6=Por hacer | G6=KPIs, CO2e y certificados Regener | P6=■ | Q6=■
+A7=M6 | B7=QA y ciberseguridad | C7=10 | D7=13 | E7=Yarek Larraguibel / Dante Moya | F7=Por hacer | G7=Pruebas, cobertura backend ≥80%, OWASP y UAT | Q7=■ | R7=■ | S7=■ | T7=■
+A8=M7 | B8=Corrección, marcha blanca y cierre | C8=13 | D8=18 | E8=Dante Moya / Yarek Larraguibel | F8=Por hacer | G8=Correcciones, despliegue, manuales e informe final | T8=■ | U8=■ | V8=■ | W8=■ | X8=■ | Y8=■

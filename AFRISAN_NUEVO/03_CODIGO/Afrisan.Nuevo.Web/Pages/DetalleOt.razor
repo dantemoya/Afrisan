@@ -1,0 +1,128 @@
+@page "/ordenes/{Id:guid}"
+@attribute [Authorize]
+@inject InventarioClient Api
+@inject TrabajoLocalService Local
+@inject SesionService Sesion
+
+<PageTitle>Trabajo asignado · AFRISAN</PageTitle>
+<a href="ordenes" class="back-link">← Órdenes de trabajo</a>
+@if (cargando) { <h1>Trabajo asignado</h1><p role="status">Consultando OT…</p> }
+else if (ot is null) { <h1>No se pudo consultar la OT</h1><div class="notice error">@error</div><button class="btn secondary" @onclick="Cargar">Reintentar</button> }
+else
+{
+    <div class="page-heading"><div><span class="eyebrow">@ot.Sucursal</span><h1>@ot.Codigo</h1><p>@ot.Direccion · @ot.Descripcion</p><p>Técnico asignado: <strong>@ot.TecnicoEmail</strong></p></div><span class="badge large @(ot.Estado == "Cerrada" ? "success" : "pending")">@ot.Estado</span></div>
+    @if (error is not null) { <div class="notice error" role="alert">@error</div> }
+    @if (mensaje is not null) { <div class="notice success" role="status">@mensaje</div> }
+    @if (Local.ConsultaOffline) { <div class="notice warning">Copia local. Los cambios y fotografías pueden guardarse en este dispositivo y enviarse cuando vuelva la conexión.</div> }
+    <div class="notice info">Esta revisión registra envases y pesajes. Todavía no evalúa los límites semanales/mensuales de la sucursal ni calcula emisiones a partir de una entrega.</div>
+    <div class="split-grid">
+        <section class="panel"><h2>Pedido y autorización</h2><div class="table-wrap"><table><thead><tr><th>Refrigerante</th><th>Solicitado</th><th>Autorizado</th></tr></thead><tbody>@foreach (var l in ot.Detalle) { <tr><td>@l.Refrigerante</td><td>@Formato.Gramos(l.GrSolicitados)</td><td>@Formato.Gramos(l.GrAutorizados)</td></tr> }</tbody></table></div><p class="field-help">Estos importes de masa son del pedido. No son límites semanales/mensuales ni una medición de consumo o emisiones.</p><h3>Cilindros previstos para retiro</h3><p>@(ot.CilindrosARetirar.Length == 0 ? "Sin retiros previstos: pedido para agregados." : string.Join(", ", ot.CilindrosARetirar))</p></section>
+        <section class="panel"><h2>Entrega registrada por bodega</h2>
+            @if (ot.Entregas.Length == 0) { <p class="muted">Bodega todavía no registró cilindros entregados.</p> }
+            @foreach (var e in ot.Entregas) { <p><strong>@e.Codigo</strong> · @e.Refrigerante<br /><small>@Formato.Gramos(e.PesoBrutoGr) bruto · @e.Fecha.ToLocalTime().ToString("dd/MM HH:mm")</small></p> }
+            @if (EsBodega && ot.Estado == "Asignada")
+            { <label for="entrega-codigo">Código del cilindro disponible en bodega</label><input id="entrega-codigo" @bind="codigoEntrega" placeholder="AFR-000002" /><button class="btn secondary mt" disabled="@ocupado" @onclick="Entregar">Registrar entrega al técnico</button> }
+        </section>
+    </div>
+    <section class="panel mt"><div class="panel-heading"><h2>Cambios y agregados</h2>@if (EsTecnico && ot.Estado == "Asignada") { <a class="btn primary" href="@($"ordenes/{Id}/operacion/{Guid.NewGuid()}")">+ Registrar trabajo físico</a> }</div>
+        @if (ot.Operaciones.Length == 0) { <p class="muted">No hay operaciones recibidas por la API. Los borradores locales se muestran debajo.</p> }
+        @foreach (var op in ot.Operaciones)
+        {
+            <article class="operation-card"><div class="panel-heading"><h3>@op.Tipo · @op.Estado</h3><span class="badge neutral">@op.Fotos.Length fotos</span></div><p><strong>Retirado:</strong> @(op.CodigoRetirado ?? "No aplica") · @Formato.Gramos(op.PesoRetiradoGr)<br /><strong>Instalado:</strong> @(op.CodigoInstalado ?? "Pendiente") · @Formato.Gramos(op.PesoInstaladoGr)</p>
+                @if (!string.IsNullOrWhiteSpace(op.Observacion)) { <p>@op.Observacion</p> }
+                <div class="form-actions">
+                    @if (EsTecnico && op.Estado == "Borrador" && ot.Estado == "Asignada") { <a class="btn secondary" href="@($"ordenes/{Id}/operacion/{op.Id}")">Continuar borrador</a> }
+                    @if (op.Fotos.Length > 0) { <button class="btn secondary" @onclick="() => MostrarFotos(op)" disabled="@ocupado">Ver evidencias</button> }
+                    @if (EsTecnico && op.Estado == "Registrada" && op.Tipo == "Reemplazo" && !op.EntregaInformada && !op.RecibidoBodega) { <button class="btn secondary" disabled="@ocupado" @onclick="() => InformarEntrega(op.Id)">Informar entrega del retirado en bodega</button> }
+                </div>
+                @if (op.Tipo == "Reemplazo" && op.Estado == "Registrada") { <p class="field-help">@(op.RecibidoBodega ? $"Recibido por {op.UsuarioRecepcion} el {op.FechaRecepcion?.ToLocalTime():dd/MM HH:mm}" : op.EntregaInformada ? "El técnico informó devolución. Falta recepción oficial de bodega." : "Pendiente de recepción del cilindro retirado.")</p> }
+            </article>
+        }
+        @if (EsTecnico)
+        {
+            @foreach (var b in borradores.Where(b => b.OtId == Id && b.Pendiente)) { <div class="notice warning"><strong>Borrador local: @b.Datos.Tipo</strong><p>@(b.Error ?? "Fotos/datos pendientes de sincronización.")</p><a href="@($"ordenes/{Id}/operacion/{b.Datos.Id}")">Abrir borrador local →</a></div> }
+            <button class="btn secondary" disabled="@ocupado" @onclick="Sincronizar">Sincronizar y actualizar</button>
+        }
+    </section>
+    @if (fotosVisibles.Count > 0) { <section class="panel mt"><h2>Evidencias del trabajo seleccionado</h2><div class="photo-grid">@foreach (var f in fotosVisibles) { <figure><img src="@f.Url" alt="@($"Pesaje {f.Info.Grupo} de {f.Info.CodigoCilindro}")" /><figcaption>@f.Info.Grupo · @f.Info.CodigoCilindro<br />@f.Info.Nombre</figcaption></figure> }</div><button class="btn subtle" @onclick="() => fotosVisibles.Clear()">Ocultar fotos</button></section> }
+    @if (EsBodega && ot.Estado != "Cerrada")
+    {
+        <section class="panel mt"><h2>Recepción oficial de bodega</h2><p class="muted">Recibe el envase retirado de sucursal o un cilindro entregado que no se utilizó.</p><div class="form-grid"><div><label for="recepcion-codigo">Código recibido</label><input id="recepcion-codigo" @bind="codigoRecepcion" /></div><div><label for="recepcion-peso">Peso bruto recibido (g)</label><InputNumber id="recepcion-peso" @bind-Value="pesoRecepcion" min="0" step="1" /></div></div><label for="recepcion-nota">Observación</label><textarea id="recepcion-nota" @bind="notaRecepcion" maxlength="1000"></textarea><button class="btn primary mt" disabled="@ocupado" @onclick="Recibir">Confirmar recepción física</button></section>
+    }
+    @if (EsTecnico || EsBodega)
+    {
+        <section class="panel mt"><h2>Incidencia o solicitud de rectificación</h2><div class="form-grid"><div><label for="incidencia-tipo">Tipo</label><select id="incidencia-tipo" @bind="tipoIncidencia"><option>Incidencia</option><option value="Rectificacion">Solicitud de rectificación</option></select></div><div><label for="incidencia-operacion">Trabajo relacionado (opcional)</label><select id="incidencia-operacion" @bind="operacionIncidencia"><option value="">Toda la OT</option>@foreach (var op in ot.Operaciones) { <option value="@op.Id">@op.Tipo · @op.CodigoInstalado</option> }</select></div></div><label for="incidencia-motivo">Hechos / motivo de corrección</label><textarea id="incidencia-motivo" @bind="motivoIncidencia" maxlength="2000"></textarea><button class="btn secondary mt" @onclick="Incidencia" disabled="@ocupado">Enviar para revisión</button><p class="field-help">Conserva el registro original. El Autorizador revisa; el técnico no sobrescribe ni borra los pesajes confirmados.</p></section>
+    }
+    <section class="panel mt"><h2>Revisión de incidencias</h2>
+        @foreach (var pendiente in incidenciasLocales.Where(i => i.OtId == Id && i.Pendiente)) { <div class="notice warning"><strong>@pendiente.Datos.Tipo guardada en este dispositivo</strong><p>@pendiente.Datos.Motivo</p><p>@(pendiente.Error ?? "Pendiente de enviar a la API. No equivale a una revisión del Autorizador.")</p></div> }
+        @if (ot.Incidencias.Length == 0) { <p class="muted">Sin incidencias registradas.</p> }
+        @foreach (var inc in ot.Incidencias) { <article class="operation-card"><strong>@inc.Tipo</strong><p>@inc.Motivo</p><small>@inc.Usuario · @inc.Fecha.ToLocalTime().ToString("dd/MM HH:mm")</small>@if (inc.Respuesta is not null) { <div class="notice info"><strong>Revisión: @inc.Revisor</strong><p>@inc.Respuesta</p></div> } else if (EsAutorizador) { <label>Conclusión de revisión</label><textarea @bind="respuestas[inc.Id]" maxlength="2000"></textarea><button class="btn secondary mt" disabled="@ocupado" @onclick="() => Resolver(inc.Id)">Registrar conclusión</button> } else { <p class="field-help">Pendiente de revisión del Autorizador.</p> }</article> }
+    </section>
+    @if (EsTecnico && ot.Estado == "Asignada")
+    {
+        <section class="panel mt"><h2>Informar término del trabajo</h2><p>Este envío no cierra la OT. El Autorizador revisa y bodega confirma los envases recibidos.</p><label for="termino-nota">Observaciones y pendientes</label><textarea id="termino-nota" @bind="notaTermino" maxlength="2000"></textarea><button class="btn primary mt" disabled="@ocupado" @onclick="Terminar">Enviar término técnico al Autorizador</button></section>
+    }
+    @if (ot.ObservacionTermino is not null) { <div class="notice info"><strong>Informe técnico</strong><p>@ot.ObservacionTermino</p></div> }
+    @if (EsAutorizador && ot.Estado == "PendienteRevision") { <section class="panel mt"><h2>Cierre administrativo</h2><p>La API comprueba que no haya recepciones pendientes ni incidencias sin revisar.</p><button class="btn primary" disabled="@ocupado" @onclick="Cerrar">Verificar y cerrar OT</button></section> }
+    <details class="panel mt"><summary>Historial de la OT</summary><ol class="timeline mt">@foreach (var e in ot.Historial) { <li><span>@e.Fecha.ToLocalTime().ToString("dd/MM HH:mm") · @e.Usuario</span><strong>@e.Accion</strong><p>@e.Descripcion</p></li> }</ol></details>
+}
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    private OtResponse? ot;
+    private BorradorLocal[] borradores = [];
+    private IncidenciaLocal[] incidenciasLocales = [];
+    private bool cargando = true, ocupado;
+    private string? error, mensaje;
+    private string codigoEntrega = "", codigoRecepcion = "", notaRecepcion = "", motivoIncidencia = "", tipoIncidencia = "Incidencia", operacionIncidencia = "", notaTermino = "";
+    private long? pesoRecepcion;
+    private readonly Dictionary<Guid, string> respuestas = [];
+    private readonly List<(FotoResponse Info, string Url)> fotosVisibles = [];
+    private bool EsTecnico => Sesion.Sesion?.Rol == "Tecnico";
+    private bool EsBodega => Sesion.Sesion?.Rol == "Bodega";
+    private bool EsAutorizador => Sesion.Sesion?.Rol == "Autorizador";
+    protected override Task OnParametersSetAsync() => Cargar();
+    private async Task Cargar()
+    {
+        cargando = true; error = null; fotosVisibles.Clear();
+        try { ot = await Local.OrdenAsync(Id); if (EsTecnico) { borradores = await Local.BorradoresAsync(); incidenciasLocales = await Local.IncidenciasAsync(); } foreach (var i in ot.Incidencias) respuestas.TryAdd(i.Id, ""); }
+        catch (Exception ex) { error = Formato.Error(ex); }
+        finally { cargando = false; }
+    }
+    private async Task Ejecutar(Func<Task> accion)
+    {
+        if (ocupado) return;
+        ocupado = true; error = null; mensaje = null;
+        try { await accion(); await Cargar(); mensaje ??= "Operación registrada. Revisa el estado actualizado de la OT."; }
+        catch (Exception ex) { error = Formato.Error(ex); }
+        finally { ocupado = false; }
+    }
+    private Task Entregar() => Ejecutar(async () => { await Api.EntregarAsync(Id, new() { Codigo = codigoEntrega }); codigoEntrega = ""; });
+    private Task Recibir() => Ejecutar(async () => { if (pesoRecepcion is null) throw new InvalidOperationException("Ingresa el peso recibido."); await Api.RecibirAsync(Id, new() { Codigo = codigoRecepcion, PesoBrutoGr = pesoRecepcion.Value, Observacion = notaRecepcion }); codigoRecepcion = ""; });
+    private Task InformarEntrega(Guid operacion) => Ejecutar(async () => { await Api.InformarEntregaAsync(Id, operacion); });
+    private Task Sincronizar() => Ejecutar(async () => { await Local.SincronizarAsync(); });
+    private Task Incidencia() => Ejecutar(async () =>
+    {
+        if (motivoIncidencia.Trim().Length < 5) throw new InvalidOperationException("Describe el motivo con al menos cinco caracteres.");
+        var datos = new CrearIncidenciaRequest { Id = Guid.NewGuid(), Tipo = tipoIncidencia, OperacionId = Guid.TryParse(operacionIncidencia, out var op) ? op : null, Motivo = motivoIncidencia };
+        if (EsTecnico)
+        {
+            await Local.GuardarIncidenciaAsync(Id, datos); await Local.SincronizarAsync();
+            mensaje = (await Local.IncidenciasAsync()).Any(i => i.Datos.Id == datos.Id && i.Pendiente)
+                ? "Incidencia conservada en este dispositivo, pendiente de sincronizar o resolver un conflicto."
+                : "Incidencia recibida por la API para revisión del Autorizador.";
+        }
+        else await Api.IncidenciaAsync(Id, datos);
+        motivoIncidencia = "";
+    });
+    private Task Resolver(Guid incidencia) => Ejecutar(async () => { await Api.ResolverAsync(Id, incidencia, new() { Respuesta = respuestas[incidencia] }); });
+    private Task Terminar() => Ejecutar(async () => { await Local.SincronizarAsync(); if ((await Local.BorradoresAsync()).Any(b => b.OtId == Id && b.Pendiente)) throw new InvalidOperationException("Hay borradores o fotos pendientes de enviar. Resuélvelos antes del término técnico."); await Api.TerminarAsync(Id, new() { Observacion = notaTermino }); });
+    private Task Cerrar() => Ejecutar(async () => { await Api.CerrarOtAsync(Id); });
+    private async Task MostrarFotos(OperacionResponse op)
+    {
+        ocupado = true; error = null; fotosVisibles.Clear();
+        try { foreach (var f in op.Fotos) fotosVisibles.Add((f, await Api.FotoAsync(Id, op.Id, f))); }
+        catch (Exception ex) { error = Formato.Error(ex); }
+        finally { ocupado = false; }
+    }
+}

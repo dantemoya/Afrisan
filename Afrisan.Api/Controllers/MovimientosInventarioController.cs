@@ -4,6 +4,7 @@ using Afrisan.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Afrisan.Api.Controllers
 {
@@ -32,8 +33,14 @@ namespace Afrisan.Api.Controllers
             int cilindroId,
             [FromBody] DespachoCilindroDto dto)
         {
+            var usuarioId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(usuarioId)) return Unauthorized();
+            // La fila bloqueada serializa los despachos/retornos del mismo cilindro.
+            // El índice de custodia abierta agrega protección a nivel de base de datos.
+            await using var transaccion = await _context.Database.BeginTransactionAsync();
             // 1. Buscar el cilindro.
             var cilindro = await _context.Cilindros
+                .FromSqlInterpolated($"SELECT * FROM \"Cilindros\" WHERE \"Id\" = {cilindroId} FOR UPDATE")
                 .FirstOrDefaultAsync(
                     c => c.Id == cilindroId);
 
@@ -172,6 +179,10 @@ namespace Afrisan.Api.Controllers
                     TipoMovimiento =
                         "Despacho",
 
+                    UsuarioId = usuarioId,
+                    CustodiaAbierta = true,
+                    FotoPesajeRuta = string.IsNullOrWhiteSpace(dto.FotoPesajeRuta) ? null : dto.FotoPesajeRuta.Trim(),
+
                     PesoKg =
                         pesoDespacho,
 
@@ -197,6 +208,8 @@ namespace Afrisan.Api.Controllers
                 .Add(movimiento);
 
             await _context.SaveChangesAsync();
+
+            await transaccion.CommitAsync();
 
             // 12. Respuesta.
             return Ok(new
@@ -248,9 +261,13 @@ namespace Afrisan.Api.Controllers
             int cilindroId,
             [FromBody] RetornoCilindroDto dto)
         {
+            var usuarioId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(usuarioId)) return Unauthorized();
+            await using var transaccion = await _context.Database.BeginTransactionAsync();
             // 1. Buscar cilindro.
             var cilindro =
                 await _context.Cilindros
+                    .FromSqlInterpolated($"SELECT * FROM \"Cilindros\" WHERE \"Id\" = {cilindroId} FOR UPDATE")
                     .FirstOrDefaultAsync(
                         c => c.Id == cilindroId);
 
@@ -313,6 +330,13 @@ namespace Afrisan.Api.Controllers
                 });
             }
 
+            // Vincular el retorno a su despacho evita emparejar ciclos de otra OT.
+            var despacho = await _context.MovimientosInventario.SingleOrDefaultAsync(
+                m => m.CilindroId == cilindroId && m.CustodiaAbierta);
+            if (despacho is null)
+                return Conflict(new { mensaje = "No hay un despacho con custodia abierta para este cilindro. Revisa su historial." });
+
+            despacho.CustodiaAbierta = false;
             // 6. Crear movimiento.
             var movimiento =
                 new MovimientoInventario
@@ -322,6 +346,11 @@ namespace Afrisan.Api.Controllers
 
                     TipoMovimiento =
                         "Retorno",
+
+                    UsuarioId = usuarioId,
+                    DespachoId = despacho.Id,
+                    OrdenTrabajoId = despacho.OrdenTrabajoId,
+                    FotoPesajeRuta = string.IsNullOrWhiteSpace(dto.FotoPesajeRuta) ? null : dto.FotoPesajeRuta.Trim(),
 
                     PesoKg =
                         dto.PesoKg.Value,
@@ -344,10 +373,15 @@ namespace Afrisan.Api.Controllers
                 dto.PesoKg.Value;
 
             // 8. Guardar.
+            // Primero se cierra la custodia para liberar el índice único. Todo sigue
+            // dentro de la transacción: un error revierte también este cambio.
+            await _context.SaveChangesAsync();
             _context.MovimientosInventario
                 .Add(movimiento);
 
             await _context.SaveChangesAsync();
+
+            await transaccion.CommitAsync();
 
             return Ok(new
             {
@@ -430,6 +464,10 @@ namespace Afrisan.Api.Controllers
                         m.FechaMovimiento,
 
                         m.Observaciones,
+
+                        m.UsuarioId,
+                        m.DespachoId,
+                        m.FotoPesajeRuta,
 
                         ordenTrabajoId =
                             m.OrdenTrabajoId,
@@ -555,6 +593,11 @@ namespace Afrisan.Api.Controllers
                     .ThenByDescending(m =>
                         m.Id)
                     .FirstOrDefault();
+
+            // Los datos nuevos referencian el despacho exacto. La búsqueda por fecha
+            // anterior solo queda como compatibilidad para movimientos históricos.
+            if (retorno.DespachoId.HasValue)
+                despacho = movimientos.FirstOrDefault(m => m.Id == retorno.DespachoId.Value);
 
             if (despacho == null)
             {

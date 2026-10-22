@@ -1,0 +1,252 @@
+SOURCE: ARQUITECTURA/ARQUITECTURA TECNICA/AFRISAN_06_ARQUITECTURA_TECNICA.docx
+P3: DUOC UC
+P4: Sede Melipilla
+P5: Carrera: Ingeniería en Informática
+P6: Asignatura: Portafolio de Título
+P7: Proyecto APT — AFRISAN
+P8: DOCUMENTO DE ARQUITECTURA TÉCNICA
+P9: Sistema Integral de Gestión de Inventario, Prevención de Pérdidas y Auditoría de Gases Refrigerantes — AFRISAN
+P11: Responsable de esta entrega: Yarek Larraguibel — Arquitectura técnica
+P12: Integrantes del proyecto: Carolina Ávila, Dante Moya, Yarek Larraguibel
+P13: Docente guía: Carlos Quintanilla
+P14: Fecha: 02/09/2026
+P15: Versión: 1.0
+P17: 1. Introducción
+P18: Este documento consolida los entregables de arquitectura técnica del proyecto APT AFRISAN, a cargo de Yarek Larraguibel dentro del equipo. Complementa el Documento de Especificación de Requerimientos de Software (ERS) y cubre: el diagrama de componentes, el diagrama de despliegue, el diagrama entidad-relación (DER), la identificación preliminar de APIs, los recursos técnicos requeridos, la Estructura de Desglose de Trabajo (EDT) de tres niveles, y una evaluación de apoyo a la factibilidad técnica del proyecto.
+P19: 2. Diagrama de componentes
+P20: El siguiente diagrama muestra los componentes de software del sistema, organizados según una arquitectura cliente-servidor de tres capas lógicas: capa de presentación, capa de lógica de negocio y capa de persistencia/datos, junto con sus interacciones principales.
+P22: Figura 1. Diagrama de componentes del sistema.
+P24: 3. Diagrama de despliegue
+P25: El siguiente diagrama representa la distribución física de los componentes sobre la infraestructura de hardware y los servicios cloud considerados para el proyecto.
+P27: Figura 2. Diagrama de despliegue del sistema.
+P29: 4. Diagrama entidad-relación (DER)
+P30: El siguiente modelo entidad-relación preliminar identifica las entidades principales del dominio y sus relaciones, base para el diseño físico de la base de datos.
+P32: Figura 3. Diagrama entidad-relación (DER) preliminar.
+P33: Entidades principales
+P34: Usuario (id_usuario, nombre, correo, contraseña, rol, activo)
+P35: Cliente (id_cliente, nombre, rut, teléfono)
+P36: Local (id_local, id_cliente, nombre, dirección, tipo_equipo)
+P37: GasRefrigerante (id_gas, código, nombre, factor_GWP)
+P38: Cilindro (id_cilindro, id_gas, código_QR, capacidad_kg, peso_actual_kg, estado)
+P39: MovimientoInventario (id_movimiento, id_cilindro, id_usuario, tipo, cantidad_kg, fecha)
+P40: Intervención (id_intervencion, numero_ot, id_local, id_cilindro, id_tecnico, id_autoriza, fecha, peso_retirado_kg, peso_utilizado_kg, balance_masa_porcentaje, estado_semaforo, emisiones_co2e, costo_total, estado_sincronizacion)
+P41: Auditoría (id_auditoria, id_usuario, id_intervencion, acción, valor_anterior, valor_nuevo, fecha)
+P43: 5. Identificación de APIs
+P44: A continuación se identifican los endpoints REST previstos para satisfacer los requisitos del ERS. El diseño objetivo contempla versionado mediante el prefijo /api/v1 y ASP.NET Core Web API (.NET 8). Esta tabla es una especificación futura: la API implementada durante el desarrollo local utiliza rutas /api/...; no se declara que todas las rutas /api/v1/... estén disponibles actualmente.
+P45: Método
+P46: Endpoint
+P47: Descripción
+P48: Roles con acceso
+P49: POST
+P50: /api/v1/auth/login
+P51: Autenticación de usuario y emisión de token de sesión.
+P52: Todos los perfiles
+P53: POST
+P54: /api/v1/auth/logout
+P55: Cierre de sesión del usuario autenticado.
+P56: Todos los perfiles
+P57: GET
+P58: /api/v1/usuarios
+P59: Listar usuarios registrados con su rol y zona/bodega asignada.
+P60: Administrador general
+P61: POST
+P62: /api/v1/usuarios
+P63: Crear un nuevo usuario y asignarle un rol.
+P64: Administrador general
+P65: PUT
+P66: /api/v1/usuarios/{id}
+P67: Editar datos o rol de un usuario existente.
+P68: Administrador general
+P69: DELETE
+P70: /api/v1/usuarios/{id}
+P71: Desactivar un usuario (baja lógica).
+P72: Administrador general
+P73: GET
+P74: /api/v1/cilindros
+P75: Listar cilindros registrados (código QR, tipo de gas, capacidad, GWP).
+P76: Bodeguero, Administrador general
+P77: POST
+P78: /api/v1/cilindros
+P79: Registrar un nuevo cilindro y generar su código QR.
+P80: Bodeguero, Administrador general
+P81: GET
+P82: /api/v1/cilindros/{id}/historial
+P83: Consultar historial y trazabilidad de movimientos de un cilindro.
+P84: Bodeguero, Administrador general
+P85: POST
+P86: /api/v1/movimientos-inventario
+P87: Registrar ingreso/egreso de un cilindro en bodega.
+P88: Jefe de bodega
+P89: POST
+P90: /api/v1/intervenciones
+P91: Registrar una intervención en terreno (OT, cliente, tipo, cantidades, autorización).
+P92: Técnico
+P93: PUT
+P94: /api/v1/intervenciones/{id}
+P95: Corregir datos de una intervención ya registrada.
+P96: Administrador general
+P97: GET
+P98: /api/v1/intervenciones
+P99: Consultar intervenciones filtrando por cliente, local, fecha o técnico.
+P100: Jefe de grupo, Administrador general
+P101: GET
+P102: /api/v1/intervenciones/{id}
+P103: Consultar el detalle de una intervención específica.
+P104: Jefe de grupo, Administrador general
+P105: GET
+P106: /api/v1/clientes
+P107: Listar clientes registrados (Cencosud, Walmart, etc.).
+P108: Administrador general
+P109: POST
+P110: /api/v1/clientes
+P111: Registrar un nuevo cliente.
+P112: Administrador general
+P113: GET
+P114: /api/v1/locales
+P115: Listar locales asociados a un cliente.
+P116: Administrador general
+P117: POST
+P118: /api/v1/locales
+P119: Registrar un nuevo local/punto de servicio.
+P120: Administrador general
+P121: GET
+P122: /api/v1/semaforo/zonas
+P123: Obtener el estado del semáforo GEI por local/zona en tiempo real.
+P124: Jefe de grupo, Administrador general
+P125: GET
+P126: /api/v1/indicadores/gei
+P127: Obtener emisiones de CO2e calculadas por local, cliente y periodo.
+P128: Administrador general
+P129: GET
+P130: /api/v1/indicadores/costos
+P131: Obtener costos operacionales calculados por intervención y periodo.
+P132: Administrador general
+P133: GET
+P134: /api/v1/reportes/costos
+P135: Generar reporte de costos filtrado por periodo/cliente/tipo de gas.
+P136: Administrador general
+P137: GET
+P138: /api/v1/reportes/costos/export
+P139: Exportar el reporte de costos en formato PDF o Excel.
+P140: Administrador general
+P141: POST
+P142: /api/v1/sync
+P143: Sincronizar registros creados en modo offline desde la app móvil.
+P144: Técnico, Jefe de bodega
+P145: GET
+P146: /api/v1/auditoria
+P147: Consultar el log de auditoría (correcciones) filtrando por intervención o por usuario.
+P148: Administrador general
+P150: Como requisito de diseño objetivo, las rutas protegidas deberán exigir autenticación mediante JWT y autorización según el rol, y el despliegue deberá usar HTTPS/TLS. La implementación local actual todavía no cuenta con todos esos controles; no debe interpretarse esta especificación como una validación de seguridad realizada.
+P152: 6. Recursos técnicos
+P153: 6.1 Hardware
+P154: Dispositivos móviles (Android/iOS) con cámara, para el personal técnico y de bodega — escaneo de código QR/barras y captura de fotografías de respaldo.
+P155: Estaciones de trabajo para el personal administrativo (Jefe de grupo, Jefe de bodega, Administrador general).
+P156: Impresora de etiquetas térmicas para la generación física de códigos QR/barras de los cilindros (opcional, a validar con AFRISAN).
+P157: 6.2 Software y frameworks
+P158: Frontend móvil previsto: .NET MAUI (.NET 8), con patrón MVVM aplicado únicamente a la interfaz del cliente móvil, Camera.MAUI / ZXing.Net.MAUI para cámara y lectura QR, y SQLite para funcionamiento offline.
+P159: Frontend web/escritorio: Blazor WebAssembly (.NET 8), consumidor de la API REST. El diseño de despliegue contempla HTTPS/JSON; el entorno local de desarrollo puede operar con una configuración distinta y deberá verificarse antes de producción.
+P160: Backend/API REST: ASP.NET Core Web API (.NET 8) con Entity Framework Core 8. Corresponde a la capa de lógica de negocio y centraliza validaciones, reglas de inventario, trazabilidad, auditoría y acceso controlado a los datos.
+P161: Autenticación prevista: JSON Web Tokens (JWT) mediante ASP.NET Core Authentication, con autorización por roles y almacenamiento seguro de credenciales. Su desarrollo y verificación permanecen pendientes.
+P162: 6.3 Base de datos y almacenamiento
+P163: Base de datos central: PostgreSQL / Supabase.
+P164: Almacenamiento local offline en dispositivos móviles: SQLite (sqlite-net-pcl), con sincronización asíncrona hacia la API.
+P165: 6.4 Infraestructura y servicios cloud
+P166: Hosting del backend: Microsoft Azure App Service. Base de datos central: PostgreSQL 16 alojado en Supabase Cloud.
+P167: Power BI Desktop y Power BI Service, para la construcción y publicación del dashboard ejecutivo.
+P168: 6.5 Herramientas de gestión y control de calidad
+P169: Control de versiones: Git / GitHub, con flujo de ramas y revisión de código (pull requests).
+P170: Gestión ágil del proyecto: Trello, organizado mediante Product Backlog, Sprint Backlog y seguimiento por estados.
+P171: Pruebas de seguridad: OWASP ZAP y Nessus, para la mitigación de vulnerabilidades (SQLi, XSS, RLS).
+P172: Documentación técnica: Google Drive para entregables y evidencias, y GitHub para código y documentación técnica.
+P174: 7. Estructura de Desglose de Trabajo (EDT) — 3 niveles
+P175: El siguiente diagrama presenta la EDT de tres niveles: el proyecto AFRISAN (nivel 1), sus tres fases principales (nivel 2) y los paquetes de trabajo asociados a cada fase (nivel 3).
+P177: Figura 4. Estructura de Desglose del Trabajo (EDT) de tres niveles.
+P178: 7.1 Detalle del nivel 3 (paquetes de trabajo)
+P179: La siguiente tabla detalla los paquetes de trabajo del nivel 3 asociados a las tres fases definidas para el proyecto.
+P180: Fase (nivel 2)
+P181: Cód.
+P182: Paquete de trabajo (nivel 3)
+P183: Entregable principal
+P184: 1. Definición y análisis
+P185: 1.1
+P186: Levantamiento de requerimientos
+P187: Requerimientos levantados y validados
+P188: 1. Definición y análisis
+P189: 1.2
+P190: Análisis de requerimientos
+P191: Especificación de requerimientos
+P192: 1. Definición y análisis
+P193: 1.3
+P194: Modelado de base de datos
+P195: MER / DER del sistema
+P196: 1. Definición y análisis
+P197: 1.4
+P198: Arquitectura de software 4+1 basada en tres capas
+P199: Arquitectura técnica de tres capas y diagramas
+P200: 1. Definición y análisis
+P201: 1.5
+P202: Planificación inicial
+P203: Plan de trabajo y backlog inicial
+P204: 2. Diseño y desarrollo ágil
+P205: 2.1
+P206: Prototipado UI/UX
+P207: Prototipos de interfaces
+P208: 2. Diseño y desarrollo ágil
+P209: 2.2
+P210: Sprint 1: Backend, autenticación y módulo bodega
+P211: API base, autenticación y módulo bodega
+P212: 2. Diseño y desarrollo ágil
+P213: 2.3
+P214: Sprint 2: Módulo terreno y reglas de negocio
+P215: Módulo móvil/terreno funcional
+P216: 2. Diseño y desarrollo ágil
+P217: 2.4
+P218: Sprint 3: Reportería BI y motor de emisiones
+P219: Dashboard Power BI e indicadores CO2e
+P220: 2. Diseño y desarrollo ágil
+P221: 2.5
+P222: Pruebas QA
+P223: Informe de pruebas funcionales
+P224: 2. Diseño y desarrollo ágil
+P225: 2.6
+P226: Pruebas de seguridad
+P227: Informe de pruebas de seguridad
+P228: 2. Diseño y desarrollo ágil
+P229: 2.7
+P230: Corrección de errores
+P231: Versión estabilizada
+P232: 3. Implementación y cierre
+P233: 3.1
+P234: Marcha blanca
+P235: Validación en ambiente de prueba
+P236: 3. Implementación y cierre
+P237: 3.2
+P238: Despliegue en producción
+P239: Sistema desplegado
+P240: 3. Implementación y cierre
+P241: 3.3
+P242: Elaboración de manual de usuario
+P243: Manual de usuario
+P244: 3. Implementación y cierre
+P245: 3.4
+P246: Elaboración de manual técnico
+P247: Manual técnico
+P248: 3. Implementación y cierre
+P249: 3.5
+P250: Informe final y cierre
+P251: Portafolio e informe final
+P253: 8. Apoyo a la factibilidad técnica
+P254: Esta sección entrega un análisis preliminar de factibilidad técnica del proyecto, como apoyo a la evaluación de factibilidad general del Proyecto de Título.
+P255: 8.1 Factibilidad tecnológica
+P256: Las tecnologías seleccionadas —.NET MAUI, Blazor WebAssembly, ASP.NET Core Web API, Entity Framework Core, PostgreSQL/Supabase, SQLite, Azure App Service y Power BI— son tecnologías maduras, documentadas y compatibles entre sí. La arquitectura global se organiza como cliente-servidor de tres capas lógicas, lo que reduce la ambigüedad entre presentación, lógica de negocio y persistencia, y facilita la integración progresiva entre componentes.
+P257: 8.2 Factibilidad de infraestructura
+P258: La solución propuesta no requiere infraestructura física adicional relevante por parte de AFRISAN: los dispositivos móviles y estaciones de trabajo ya existen o son de bajo costo de adquisición, y el backend/base de datos se aloja en servicios cloud gestionados, evitando la necesidad de servidores propios.
+P259: 8.3 Factibilidad de integración y trabajo offline
+P260: El requisito de funcionamiento offline en la app móvil (RF-05, RNF-10) es técnicamente factible mediante SQLite local y sincronización diferida con la API REST. Se identifica como punto de atención el diseño de reglas de resolución de conflictos de sincronización (ver riesgo R4 del ERS).
+P261: 8.4 Factibilidad de seguridad
+P262: El cumplimiento de mitigaciones OWASP (RNF-01, RNF-02) es alcanzable dentro del plazo del proyecto mediante prácticas estándar (autenticación con JWT, cifrado de contraseñas, HTTPS/TLS, validación de entradas) y la ejecución de pruebas de seguridad automatizadas (OWASP ZAP, Nessus) antes de la entrega.
+P263: 8.5 Factibilidad respecto al equipo y al tiempo disponible
+P264: Dado que las debilidades declaradas por el equipo incluyen metodologías ágiles, levantamiento de requerimientos y planificación de tiempos, se considera necesario reforzar estas competencias durante la fase de análisis y diseño para asegurar que el alcance definido sea abordable dentro de la dedicación estimada de 8 a 12 horas semanales por integrante durante el segundo semestre académico.
+P265: 8.6 Conclusión preliminar
+P266: En base a lo anterior, el proyecto se considera técnicamente factible si se mantiene el alcance definido en el ERS, se priorizan los módulos críticos de intervenciones, balance de masa/semáforo y sincronización offline, y se da seguimiento activo a los riesgos R1, R2 y R4.

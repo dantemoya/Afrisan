@@ -2,12 +2,9 @@
 
 Esta carpeta contiene las evidencias individuales de los participantes del proyecto AFRISAN correspondientes a la Fase 1 del Proyecto APT.
 
-Actualmente, el equipo del proyecto está conformado por:
+El único integrante actual del proyecto es **Dante Moya**, según la actualización informada por el estudiante el 16 de octubre de 2026. La aplicación individual de la pauta grupal debe confirmarse con el docente.
 
-- Yarek Larraguibel
-- Dante Moya
-
-Además, se conservan las evidencias individuales de Carolina Ávila, quien participó durante una etapa inicial del proyecto. Estos archivos se mantienen como parte del registro histórico y de la trazabilidad académica de AFRISAN.
+Se conservan las evidencias previas de Yarek Larraguibel y Carolina Ávila como antecedentes históricos, con su autoría original. Su presencia en esta carpeta no indica participación actual en el equipo.
 
 ## Documentos requeridos por integrante
 
@@ -38,3 +35,4 @@ EVIDENCIAS_INDIVIDUALES/
 ├── CAROLINA/
 ├── DANTE/
 └── YAREK/
+```

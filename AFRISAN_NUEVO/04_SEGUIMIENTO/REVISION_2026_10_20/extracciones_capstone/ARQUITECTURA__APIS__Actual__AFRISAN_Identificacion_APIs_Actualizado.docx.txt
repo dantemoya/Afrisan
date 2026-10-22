@@ -1,0 +1,419 @@
+SOURCE: ARQUITECTURA/APIS/Actual/AFRISAN_Identificacion_APIs_Actualizado.docx
+P1: AFRISAN
+P2: IDENTIFICACIÓN DE APIs
+P3: Especificación preliminar de la API REST propuestaSistema de Gestión de Refrigerantes AFRISAN
+P5: Responsable de esta entrega
+P6: Yarek Larraguibel — Arquitectura técnica
+P7: Integrantes del proyecto
+P8: Yarek Larraguibel, Dante Moya
+P9: Docente guía
+P10: Carlos Quintanilla
+P11: Documento
+P12: Identificación de APIs
+P13: Fecha
+P14: Septiembre 2026
+P15: Versión
+P16: 2.0
+P18: Proyecto APT — Fase 1 / transición a Fase 2
+P20: 1. Introducción
+P21: El presente documento identifica y describe preliminarmente las APIs REST necesarias para soportar las principales funcionalidades del sistema AFRISAN.
+P22: La definición se encuentra alineada con la arquitectura cliente-servidor de tres capas seleccionada para el proyecto:
+P23: Capa de presentación: Afrisan.Web, desarrollada con Blazor WebAssembly.
+P24: Capa de lógica de negocio: Afrisan.Api, desarrollada con ASP.NET Core Web API.
+P25: Capa de persistencia: PostgreSQL mediante Supabase.
+P26: La API constituye el punto central de comunicación entre la interfaz de usuario y la base de datos, permitiendo mantener las reglas de negocio fuera de la capa de presentación y centralizar las validaciones relacionadas con cilindros, gases refrigerantes, movimientos e historial.
+P27: Este documento diferencia entre los endpoints que forman parte del desarrollo actual de AFRISAN y aquellos que corresponden al diseño objetivo o funcionalidades previstas para etapas posteriores.
+P28: Los contratos definitivos, mecanismos de autenticación, validaciones exhaustivas y aspectos de seguridad serán refinados durante la etapa de desarrollo.
+P29: 2. Convenciones generales
+P30: 2.1 Formato de intercambio
+P31: La comunicación entre la aplicación cliente y la API utiliza principalmente JSON (application/json) para el intercambio de información en solicitudes y respuestas HTTP.
+P32: 2.2 Arquitectura de comunicación
+P33: La comunicación principal de AFRISAN corresponde al siguiente flujo:
+P34: Afrisan.Web  →  Afrisan.Api  →  PostgreSQL / Supabase
+P35: La interfaz web realiza solicitudes HTTP a la API. La API procesa las reglas de negocio y utiliza Entity Framework Core y Npgsql para acceder a PostgreSQL. La capa de presentación no debe acceder directamente a la base de datos.
+P36: 2.3 Versionado de API
+P37: Actualmente, el desarrollo utiliza rutas con el prefijo /api/.... Para futuras versiones se propone incorporar versionado mediante /api/v1/.... Esto permitirá modificar la API en el futuro sin afectar directamente a clientes que dependan de versiones anteriores.
+P38: Por lo tanto, el uso de /api/v1 descrito en las funcionalidades futuras representa el diseño objetivo de la API y no necesariamente el estado actual de todos los endpoints implementados.
+P39: 2.4 Autenticación y autorización
+P40: Se contempla incorporar autenticación mediante JSON Web Token (JWT). El token deberá ser enviado en el encabezado:
+P41: Authorization: Bearer <token>
+P42: La autenticación y el sistema completo de roles corresponden a funcionalidades que deberán implementarse y verificarse durante el desarrollo. No se considera que todos los endpoints actuales dispongan todavía de este mecanismo.
+P43: 2.5 Transporte
+P44: Para un ambiente productivo se contempla el uso obligatorio de HTTPS/TLS con el objetivo de proteger las comunicaciones entre los clientes y la API. Durante las etapas de desarrollo pueden utilizarse conexiones HTTP dentro del entorno local controlado.
+P45: 2.6 Formato de fechas
+P46: Las fechas deberán utilizar preferentemente el estándar ISO 8601. Ejemplo:
+P47: 2026-09-25T14:32:00-03:00
+P48: 3. Estado actual de la API AFRISAN
+P49: A la fecha de elaboración de este documento, AFRISAN cuenta con una API desarrollada mediante ASP.NET Core Web API. Las siguientes rutas corresponden al desarrollo actualmente disponible.
+P50: 3.1 Gestión de cilindros
+P51: Método
+P52: Endpoint
+P53: Descripción
+P54: GET
+P55: /api/Cilindros
+P56: Obtiene los cilindros registrados.
+P57: POST
+P58: /api/Cilindros
+P59: Registra un nuevo cilindro.
+P60: GET
+P61: /api/Cilindros/{id}
+P62: Consulta un cilindro específico.
+P63: PUT
+P64: /api/Cilindros/{id}
+P65: Actualiza los datos de un cilindro.
+P66: DELETE
+P67: /api/Cilindros/{id}
+P68: Elimina un cilindro según las reglas definidas.
+P70: La gestión de cilindros permite mantener información relacionada con identificación, código QR, tipo de refrigerante, capacidad, peso y estado.
+P71: 3.2 Gestión de gases refrigerantes
+P72: Método
+P73: Endpoint
+P74: Descripción
+P75: GET
+P76: /api/GasRefrigerantes
+P77: Lista los gases refrigerantes registrados.
+P78: POST
+P79: /api/GasRefrigerantes
+P80: Registra un gas refrigerante.
+P81: GET
+P82: /api/GasRefrigerantes/{id}
+P83: Consulta un gas específico.
+P84: PUT
+P85: /api/GasRefrigerantes/{id}
+P86: Modifica sus datos.
+P87: DELETE
+P88: /api/GasRefrigerantes/{id}
+P89: Elimina el registro según las reglas establecidas.
+P91: 3.3 Movimientos de inventario
+P92: Método
+P93: Endpoint
+P94: Descripción
+P95: POST
+P96: /api/MovimientosInventario/despacho/{cilindroId}
+P97: Registra el despacho de un cilindro.
+P98: POST
+P99: /api/MovimientosInventario/retorno/{cilindroId}
+P100: Registra el retorno de un cilindro.
+P101: GET
+P102: /api/MovimientosInventario/historial/{cilindroId}
+P103: Consulta el historial de movimientos de un cilindro.
+P105: Estas operaciones permiten mantener la trazabilidad básica de los movimientos realizados sobre cada cilindro.
+P106: 4. Catálogo objetivo de endpoints
+P107: Los siguientes endpoints forman parte del diseño objetivo de AFRISAN. Algunos ya poseen equivalentes en la API actual, mientras que otros corresponden a funcionalidades futuras.
+P108: 4.1 Autenticación y usuarios
+P109: Método
+P110: Endpoint propuesto
+P111: Descripción
+P112: Estado
+P113: POST
+P114: /api/v1/auth/login
+P115: Autenticar usuario y emitir token.
+P116: Futuro
+P117: POST
+P118: /api/v1/auth/logout
+P119: Cerrar sesión.
+P120: Futuro
+P121: GET
+P122: /api/v1/usuarios
+P123: Listar usuarios.
+P124: Futuro
+P125: POST
+P126: /api/v1/usuarios
+P127: Crear usuario.
+P128: Futuro
+P129: PUT
+P130: /api/v1/usuarios/{id}
+P131: Modificar usuario o rol.
+P132: Futuro
+P133: DELETE
+P134: /api/v1/usuarios/{id}
+P135: Desactivar usuario.
+P136: Futuro
+P138: 4.2 Cilindros
+P139: Método
+P140: Endpoint propuesto
+P141: Descripción
+P142: Estado
+P143: GET
+P144: /api/v1/cilindros
+P145: Listar cilindros registrados.
+P146: Equivalente implementado
+P147: POST
+P148: /api/v1/cilindros
+P149: Registrar cilindro.
+P150: Equivalente implementado
+P151: GET
+P152: /api/v1/cilindros/{id}
+P153: Consultar cilindro.
+P154: Equivalente implementado
+P155: PUT
+P156: /api/v1/cilindros/{id}
+P157: Actualizar cilindro.
+P158: Equivalente implementado
+P159: DELETE
+P160: /api/v1/cilindros/{id}
+P161: Eliminar/desactivar cilindro.
+P162: Equivalente implementado
+P163: GET
+P164: /api/v1/cilindros/{id}/historial
+P165: Consultar trazabilidad.
+P166: Equivalente implementado
+P168: 4.3 Gases refrigerantes
+P169: Método
+P170: Endpoint propuesto
+P171: Descripción
+P172: Estado
+P173: GET
+P174: /api/v1/gases-refrigerantes
+P175: Listar gases refrigerantes.
+P176: Equivalente implementado
+P177: POST
+P178: /api/v1/gases-refrigerantes
+P179: Registrar gas refrigerante.
+P180: Equivalente implementado
+P181: GET
+P182: /api/v1/gases-refrigerantes/{id}
+P183: Consultar gas refrigerante.
+P184: Equivalente implementado
+P185: PUT
+P186: /api/v1/gases-refrigerantes/{id}
+P187: Modificar gas refrigerante.
+P188: Equivalente implementado
+P190: 4.4 Movimientos de inventario
+P191: Método
+P192: Endpoint propuesto
+P193: Descripción
+P194: Estado
+P195: POST
+P196: /api/v1/movimientos/despacho/{cilindroId}
+P197: Registrar despacho.
+P198: Equivalente implementado
+P199: POST
+P200: /api/v1/movimientos/retorno/{cilindroId}
+P201: Registrar retorno.
+P202: Equivalente implementado
+P203: GET
+P204: /api/v1/movimientos/historial/{cilindroId}
+P205: Consultar historial.
+P206: Equivalente implementado
+P208: 4.5 Intervenciones y órdenes de trabajo
+P209: Se contempla incorporar una gestión de intervenciones asociadas a órdenes de trabajo.
+P210: Método
+P211: Endpoint propuesto
+P212: Descripción
+P213: Estado
+P214: POST
+P215: /api/v1/intervenciones
+P216: Registrar intervención en terreno.
+P217: Futuro
+P218: GET
+P219: /api/v1/intervenciones
+P220: Consultar intervenciones.
+P221: Futuro
+P222: GET
+P223: /api/v1/intervenciones/{id}
+P224: Consultar una intervención.
+P225: Futuro
+P226: PUT
+P227: /api/v1/intervenciones/{id}
+P228: Corregir información de intervención.
+P229: Futuro
+P231: Las intervenciones podrán relacionarse con cilindros, órdenes de trabajo, usuarios y datos de pesaje.
+P232: 4.6 Clientes y locales
+P233: Método
+P234: Endpoint propuesto
+P235: Descripción
+P236: Estado
+P237: GET
+P238: /api/v1/clientes
+P239: Listar clientes.
+P240: Futuro
+P241: POST
+P242: /api/v1/clientes
+P243: Registrar cliente.
+P244: Futuro
+P245: GET
+P246: /api/v1/locales
+P247: Listar locales.
+P248: Futuro
+P249: POST
+P250: /api/v1/locales
+P251: Registrar local.
+P252: Futuro
+P254: 4.7 Indicadores y reportes
+P255: Método
+P256: Endpoint propuesto
+P257: Descripción
+P258: Estado
+P259: GET
+P260: /api/v1/semaforo/zonas
+P261: Consultar estado de indicadores por zona.
+P262: Futuro
+P263: GET
+P264: /api/v1/indicadores/gei
+P265: Consultar indicadores de emisiones.
+P266: Futuro
+P267: GET
+P268: /api/v1/indicadores/costos
+P269: Consultar indicadores de costos.
+P270: Futuro
+P271: GET
+P272: /api/v1/reportes/costos
+P273: Generar reporte de costos.
+P274: Futuro
+P275: GET
+P276: /api/v1/reportes/costos/export
+P277: Exportar reporte.
+P278: Futuro
+P280: Estas funcionalidades deberán definirse con mayor detalle antes de su implementación.
+P281: 4.8 Sincronización offline
+P282: Se contempla como funcionalidad futura la operación desde dispositivos móviles sin conexión permanente. Endpoint propuesto:
+P283: POST /api/v1/sync
+P284: Su función sería recibir registros creados localmente y sincronizarlos posteriormente con el servidor central. La arquitectura definitiva de sincronización offline todavía deberá definir:
+P285: almacenamiento local;
+P286: identificación de registros;
+P287: idempotencia;
+P288: resolución de conflictos;
+P289: control de versiones;
+P290: trazabilidad;
+P291: comportamiento ante modificaciones simultáneas.
+P292: No se considera esta funcionalidad implementada en la Fase 1.
+P293: 4.9 Auditoría
+P294: Se propone incorporar un sistema de auditoría para registrar modificaciones relevantes. Endpoint propuesto:
+P295: GET /api/v1/auditoria
+P296: La auditoría podría registrar:
+P297: usuario que realizó la acción;
+P298: fecha y hora;
+P299: tipo de operación;
+P300: registro afectado;
+P301: valores anteriores;
+P302: valores nuevos.
+P303: Su diseño definitivo deberá coordinarse con la futura implementación de autenticación y autorización.
+P304: 5. Especificación preliminar de endpoints críticos
+P305: 5.1 POST /api/v1/auth/login
+P306: Estado: Propuesto / pendiente de implementación.
+P307: Su objetivo será autenticar al usuario y devolver un token de sesión junto con su información de autorización.
+P308: Solicitud propuesta
+P309: {  "usuario": "ipereza",  "password": "********"}
+P310: Respuesta propuesta
+P311: {  "token": "token_jwt",  "usuario": {    "id_usuario": "u-0231",    "nombre": "Ignacio Pérez",    "rol": "tecnico",    "zona_bodega": "Zona Sur"  }}
+P312: 5.2 Registro de intervención
+P313: POST /api/v1/intervenciones
+P314: Estado: Funcionalidad futura.
+P315: Permitirá registrar una intervención asociada a una orden de trabajo.
+P316: Solicitud preliminar
+P317: {  "n_ot": "OT-48213",  "id_local": "loc-014",  "id_cilindro": "cil-0231",  "id_autoriza": "u-0087",  "tipo_intervencion": "correctivo",  "peso_retirado": 18.0,  "peso_utilizado": 14.8}
+P318: Los campos definitivos deberán validarse durante el desarrollo de las historias de usuario relacionadas con pesaje, órdenes de trabajo y conciliación.
+P319: 5.3 Despacho de cilindro
+P320: Actualmente AFRISAN dispone de una operación de despacho equivalente a:
+P321: POST /api/MovimientosInventario/despacho/{cilindroId}
+P322: Esta operación permite registrar el despacho de un cilindro y modificar su estado. En la API versionada futura podrá evolucionar hacia:
+P323: POST /api/v1/movimientos/despacho/{cilindroId}
+P324: Deberá verificarse que la operación:
+P325: no permita despachar un cilindro no disponible;
+P326: mantenga coherencia entre estado y movimientos;
+P327: registre la información necesaria para trazabilidad;
+P328: controle operaciones simultáneas sobre el mismo cilindro.
+P329: 5.4 Retorno de cilindro
+P330: Actualmente AFRISAN dispone de:
+P331: POST /api/MovimientosInventario/retorno/{cilindroId}
+P332: Su objetivo es registrar la devolución de un cilindro anteriormente despachado. Durante el desarrollo posterior se contempla incorporar información adicional de pesaje y conciliación.
+P333: 5.5 Historial de movimientos
+P334: Actualmente se utiliza:
+P335: GET /api/MovimientosInventario/historial/{cilindroId}
+P336: Permite recuperar los movimientos asociados a un cilindro. Este servicio es relevante para la trazabilidad del sistema y para la consulta mediante identificación QR. La incorporación futura de usuarios permitirá registrar también el actor responsable de cada operación.
+P337: 5.6 Sincronización offline
+P338: Endpoint objetivo:
+P339: POST /api/v1/sync
+P340: Estado: No implementado.
+P341: La funcionalidad se considera parte de una etapa futura de AFRISAN. Una posible solicitud sería:
+P342: {  "dispositivo_id": "movil-01",  "registros": [    {      "tipo": "movimiento_inventario",      "payload": {},      "creado_en": "2026-09-25T11:40:00"    }  ]}
+P343: Antes de su implementación deberá definirse una estrategia formal para resolver conflictos. No se establece todavía una política definitiva de “última escritura gana”, ya que dicha decisión requiere ser analizada y validada.
+P344: 5.7 Auditoría
+P345: Endpoint objetivo:
+P346: GET /api/v1/auditoria
+P347: Estado: Propuesto.
+P348: Una futura respuesta podría contener:
+P349: {  "registros": [    {      "id_auditoria": "aud-0042",      "id_usuario": "u-0005",      "accion": "modificacion",      "fecha": "2026-09-25T09:15:00"    }  ]}
+P350: La estructura final dependerá del modelo de usuarios, autenticación y datos auditables que se defina durante el desarrollo.
+P351: 6. Manejo de errores
+P352: La API utilizará códigos HTTP estándar para comunicar el resultado de las solicitudes.
+P353: Código
+P354: Nombre
+P355: Uso
+P356: 200
+P357: OK
+P358: Solicitud procesada correctamente.
+P359: 201
+P360: Created
+P361: Recurso creado correctamente.
+P362: 400
+P363: Bad Request
+P364: Solicitud inválida o datos incorrectos.
+P365: 401
+P366: Unauthorized
+P367: Usuario no autenticado, cuando se implemente autenticación.
+P368: 403
+P369: Forbidden
+P370: Usuario sin autorización suficiente.
+P371: 404
+P372: Not Found
+P373: Recurso inexistente.
+P374: 409
+P375: Conflict
+P376: Conflicto de datos o de estado.
+P377: 422
+P378: Unprocessable Entity
+P379: Regla de negocio incumplida.
+P380: 500
+P381: Internal Server Error
+P382: Error no controlado del servidor.
+P384: La API deberá retornar mensajes suficientemente claros para facilitar la identificación de errores sin exponer información sensible.
+P385: 7. Seguridad y control de acceso propuesto
+P386: La seguridad deberá aplicarse principalmente desde la capa de lógica de negocio y no depender únicamente de la interfaz. Para las siguientes etapas se propone:
+P387: implementar autenticación mediante JWT;
+P388: definir roles y permisos;
+P389: validar autorización antes de operaciones restringidas;
+P390: almacenar contraseñas mediante algoritmos de hash adecuados;
+P391: impedir que contraseñas o tokens sean escritos en logs;
+P392: utilizar HTTPS en ambientes productivos;
+P393: validar los datos recibidos por la API;
+P394: incorporar rate limiting en endpoints sensibles;
+P395: registrar operaciones relevantes mediante mecanismos de auditoría;
+P396: mantener secretos y credenciales fuera del código fuente;
+P397: restringir el acceso a los recursos según usuario y rol.
+P398: La incorporación de estos mecanismos deberá realizarse progresivamente durante la Fase 2.
+P399: 8. Relación con la arquitectura de tres capas
+P400: La API constituye la capa de lógica de negocio de AFRISAN. Su función es evitar que la interfaz de usuario acceda directamente a PostgreSQL y centralizar las reglas que deben mantenerse independientemente del dispositivo utilizado.
+P401: La arquitectura queda estructurada como:
+P402: Afrisan.WebBlazor WebAssembly        ↓     JSON        ↓Afrisan.ApiASP.NET Core Web API        ↓Entity Framework Core / Npgsql        ↓PostgreSQL / Supabase
+P403: Las futuras aplicaciones móviles deberán utilizar igualmente la API para acceder a la información central. Esto permite mantener las mismas reglas de negocio para diferentes interfaces.
+P404: 9. Estado de implementación
+P405: A la fecha de elaboración de este documento, el proyecto cuenta con avances funcionales relacionados con:
+P406: gestión de cilindros;
+P407: gestión de gases refrigerantes;
+P408: códigos únicos de cilindro;
+P409: generación y consulta asociada a QR;
+P410: despacho de cilindros;
+P411: retorno de cilindros;
+P412: historial de movimientos;
+P413: comunicación entre Blazor WebAssembly y ASP.NET Core Web API;
+P414: persistencia mediante PostgreSQL/Supabase;
+P415: acceso de desarrollo desde computador y dispositivo móvil dentro de una red local.
+P416: Se mantienen como funcionalidades pendientes o futuras, entre otras:
+P417: autenticación JWT;
+P418: autorización mediante roles;
+P419: órdenes de trabajo completas;
+P420: pesaje y conciliación de masa;
+P421: escaneo óptico integrado de QR;
+P422: auditoría completa;
+P423: modo offline;
+P424: sincronización de dispositivos;
+P425: integración Power BI;
+P426: despliegue productivo;
+P427: seguridad en profundidad.
+P428: 10. Conclusión
+P429: La identificación de APIs define el contrato de comunicación entre la capa de presentación, la lógica de negocio y la persistencia de AFRISAN.
+P430: La arquitectura actual permite continuar desarrollando funcionalidades sin acoplar directamente la interfaz con la base de datos.
+P431: Durante la Fase 1 se establece el diseño general y se identifican los principales servicios necesarios. Durante la Fase 2, los endpoints deberán evolucionar conforme se implementen las historias de usuario, se incorporen pruebas, seguridad, trazabilidad y nuevas reglas de negocio.
+P432: La especificación presentada en este documento debe entenderse como una base técnica evolutiva, en la cual se distingue claramente entre los servicios actualmente implementados y las capacidades previstas para etapas posteriores del proyecto.

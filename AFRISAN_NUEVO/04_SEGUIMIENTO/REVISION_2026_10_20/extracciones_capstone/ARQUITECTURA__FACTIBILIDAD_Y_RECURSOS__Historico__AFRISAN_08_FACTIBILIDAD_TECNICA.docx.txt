@@ -1,0 +1,80 @@
+SOURCE: ARQUITECTURA/FACTIBILIDAD_Y_RECURSOS/Historico/AFRISAN_08_FACTIBILIDAD_TECNICA.docx
+P2: DUOC UC
+P3: Sede Melipilla
+P5: APOYO A LA FACTIBILIDAD TÉCNICA
+P6: Evaluación preliminar — Sistema de Gestión de Refrigerantes AFRISAN
+P13: Responsable de esta entrega: Yarek Larraguibel — Arquitectura técnica
+P14: Integrantes del proyecto: Carolina Ávila, Dante Moya, Yarek Larraguibel
+P15: Docente guía: Carlos Quintanilla
+P16: Documento: Apoyo a Factibilidad Técnica
+P17: Fecha: 02/09/2026
+P18: Versión: 1.0
+P20: 1. Introducción
+P21: Este documento entrega un análisis de apoyo a la factibilidad técnica del proyecto APT AFRISAN, como insumo para la evaluación de factibilidad general del Proyecto de Título. Se evalúan las dimensiones tecnológica, de infraestructura, de integración/trabajo offline, de seguridad y de capacidad del equipo, y se comparan alternativas tecnológicas relevantes.
+P22: 2. Factibilidad tecnológica
+P23: Las tecnologías seleccionadas para AFRISAN —.NET MAUI (.NET 8), Blazor WebAssembly (.NET 8), ASP.NET Core Web API (.NET 8), Entity Framework Core 8, PostgreSQL 16 en Supabase, SQLite, Microsoft Azure App Service y Power BI— son tecnologías maduras, documentadas y compatibles entre sí. La concentración del desarrollo principal en el ecosistema .NET reduce la complejidad de integración y el riesgo tecnológico del proyecto.
+P24: 3. Factibilidad de infraestructura
+P25: La solución propuesta no requiere infraestructura física adicional relevante por parte de AFRISAN: los dispositivos móviles y estaciones de trabajo ya existen o son de bajo costo de adquisición, y el backend/base de datos se aloja en servicios cloud gestionados, evitando la necesidad de servidores propios o de personal de TI dedicado a su mantención.
+P26: 4. Factibilidad de integración y trabajo offline
+P27: El requisito de funcionamiento offline en la app móvil (RF-05, RNF-10) es técnicamente factible mediante SQLite local y un mecanismo de sincronización diferida con la API REST. Este patrón permite registrar información en terreno sin conectividad y sincronizarla cuando se recupera el acceso a Internet. Se mantiene como punto de atención el diseño de reglas de resolución de conflictos de sincronización, ya señalado como riesgo R4 en el ERS.
+P28: 5. Factibilidad de seguridad
+P29: El cumplimiento de mitigaciones OWASP (RNF-01, RNF-02) es alcanzable dentro del plazo del proyecto mediante prácticas estándar: autenticación con JWT, cifrado de contraseñas, comunicación exclusivamente HTTPS/TLS, validación de entradas y pruebas de seguridad automatizadas (OWASP ZAP, Nessus) antes de la entrega final.
+P30: 6. Factibilidad respecto al equipo y al tiempo disponible
+P31: Considerando las debilidades del equipo en metodologías ágiles, levantamiento de requerimientos y planificación, estas competencias deberán reforzarse durante análisis y diseño para mantener el alcance dentro de la dedicación prevista de 8 a 12 horas semanales por integrante.
+P33: 7. Alternativas tecnológicas evaluadas
+P34: 7.1 Framework de desarrollo móvil
+P35: Alternativa
+P36: Ventajas
+P37: Desventajas
+P38: Factibilidad
+P39: .NET MAUI (.NET 8)
+P40: Una sola base de código para Android/iOS; integración directa con ASP.NET Core y el ecosistema .NET; soporte para cámara/QR y SQLite.
+P41: Requiere familiaridad con C# y particularidades de MAUI en cada plataforma.
+P42: Alta — seleccionada
+P43: Flutter
+P44: Una sola base de código para Android/iOS; buen rendimiento y amplio ecosistema.
+P45: Introduce Dart y un ecosistema diferente al backend .NET seleccionado.
+P46: Alta — alternativa
+P47: React Native
+P48: Una sola base de código y amplio ecosistema JavaScript.
+P49: Introduce un stack adicional y menor coherencia tecnológica con el backend .NET.
+P50: Alta — alternativa
+P51: Desarrollo nativo (Kotlin/Swift)
+P52: Máximo acceso a APIs nativas y rendimiento.
+P53: Requiere dos bases de código; mayor esfuerzo para el plazo académico.
+P54: Baja
+P55: Tecnología seleccionada: .NET MAUI (.NET 8), por su capacidad multiplataforma Android/iOS, integración con el ecosistema .NET definido para el backend y compatibilidad con librerías de cámara, lectura QR y almacenamiento SQLite requeridas por AFRISAN.
+P56: 7.2 Proveedor de infraestructura cloud
+P57: Alternativa
+P58: Ventajas
+P59: Desventajas
+P60: Factibilidad
+P61: Microsoft Azure App Service
+P62: Integración natural con .NET y Power BI; despliegue administrado del backend ASP.NET Core.
+P63: Requiere configuración inicial del servicio y conocimiento básico del portal Azure.
+P64: Alta — seleccionado
+P65: AWS
+P66: Amplia documentación, comunidad y servicios equivalentes.
+P67: Añade complejidad y un ecosistema distinto al seleccionado.
+P68: Media — alternativa
+P69: Vercel
+P70: Despliegue sencillo para frontends y aplicaciones web.
+P71: Menos alineado con el despliegue de ASP.NET Core definido para este proyecto.
+P72: Media — alternativa
+P73: Proveedor seleccionado: Microsoft Azure App Service para el despliegue del backend ASP.NET Core Web API. La base de datos PostgreSQL 16 se aloja en Supabase Cloud y Power BI se utiliza para la reportería y visualización de indicadores.
+P74: 8. Matriz resumen de factibilidad
+P75: Dimensión
+P76: Evaluación
+P77: Tecnológica
+P78: Factible — tecnologías maduras, documentadas y de bajo costo de adopción.
+P79: Infraestructura
+P80: Factible — no requiere infraestructura física adicional relevante.
+P81: Integración / offline
+P82: Factible con atención — requiere definir bien las reglas de sincronización (riesgo R4).
+P83: Seguridad
+P84: Factible — alcanzable con prácticas estándar y herramientas ya definidas en el alcance.
+P85: Equipo y tiempo
+P86: Factible con reservas — depende de reforzar metodologías ágiles y planificación temprano en el proyecto.
+P87: 9. Conclusión y recomendación
+P88: En base al análisis anterior, el proyecto se considera técnicamente factible, siempre que se mantenga acotado el alcance definido en el ERS, se prioricen los módulos críticos (registro de intervenciones, cálculo de balance de masa/semáforo GEI y sincronización offline) en las primeras iteraciones, y se dé seguimiento activo a los riesgos identificados en la sección 9 del ERS, en particular a los de mayor puntaje (R1, R2 y R4).
+P89: Las principales decisiones tecnológicas se encuentran definidas: .NET MAUI para la aplicación móvil, Blazor WebAssembly para la aplicación web, ASP.NET Core Web API y Entity Framework Core para el backend, PostgreSQL/Supabase para datos y Azure App Service para despliegue. Esto permite avanzar a la fase de desarrollo sin bloqueos por selección de plataforma.

@@ -2,12 +2,13 @@
 
 Esta carpeta contiene la documentación vigente del proyecto AFRISAN correspondiente al Proyecto APT.
 
-Los archivos incluidos representan las versiones actualmente válidas para revisión, seguimiento y presentación académica.
+Los archivos incluidos constituyen la línea de referencia documental de Fase 1. El seguimiento de Fase 2, la composición actual y el plan de continuidad se documentan en `EVIDENCIAS_GRUPALES/EVA_2`. Los documentos originales no se reescriben para atribuir a una sola persona el trabajo histórico del equipo.
 
 ## Equipo actual
 
-- Yarek Larraguibel
-- Dante Moya
+- Dante Moya, único integrante actual y responsable de continuidad desde la actualización informada el 16 de octubre de 2026.
+
+La aplicación individual de la pauta de evaluación debe confirmarse con el docente. Los nombres de otros integrantes en los documentos de Fase 1 corresponden a su participación histórica.
 
 ## Documentos vigentes
 
@@ -32,4 +33,4 @@ La documentación vigente se encuentra alineada con el alcance definido para AFR
 
 Las versiones anteriores de estos documentos se conservan en la carpeta `HISTORICO` para mantener la trazabilidad del proyecto.
 
-> Para evaluaciones, revisiones y presentaciones del proyecto debe utilizarse la documentación contenida en esta carpeta.
+> Para EVA 2 debe utilizarse el informe y el plan de `EVIDENCIAS_GRUPALES/EVA_2`, conservando esta carpeta como referencia de requisitos y planificación original.

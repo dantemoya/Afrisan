@@ -157,6 +157,7 @@ namespace Afrisan.Api.Controllers
                         usuario.Email,
                     activo =
                         usuario.Activo,
+                    rolId = usuario.RolId,
                     rol =
                         rolValido
                 });

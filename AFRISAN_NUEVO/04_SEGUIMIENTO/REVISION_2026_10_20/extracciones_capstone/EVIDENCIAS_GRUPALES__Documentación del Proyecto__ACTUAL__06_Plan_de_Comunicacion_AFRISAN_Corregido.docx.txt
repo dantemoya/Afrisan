@@ -1,0 +1,52 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/06_Plan_de_Comunicacion_AFRISAN_Corregido.docx
+P2: DUOC UC
+P3: Sede Melipilla
+P4: Carrera: Ingeniería en Informática
+P5: Asignatura: Portafolio de Título
+P6: Proyecto APT — AFRISAN
+P7: PLAN DE COMUNICACIÓN
+P8: Sistema de Gestión de Refrigerantes AFRISAN
+P10: Integrantes del proyecto: Dante Moya, Yarek Larraguibel
+P11: Líder Técnico: Carlos Quintanilla
+P12: Versión: 1.0
+P14: 1. Objetivo
+P15: Definir con quién, cuándo y por qué medio se comunica el equipo durante el proyecto, para que la contraparte AFRISAN y el docente guía estén informados sin generar reuniones o reportes innecesarios.
+P16: 2. Interesados
+P17: Interesado
+P18: Rol
+P19: Qué necesita saber
+P20: Carlos Aguilera
+P21: Data Manager AFRISAN — Stakeholder / válida requerimientos
+P22: Avances funcionales, cambios de alcance, riesgos que afecten al negocio
+P23: Carlos Quintanilla
+P24: Líder Técnico
+P25: Cumplimiento de hitos y entregables de cada fase
+P26: Dante Moya, Yarek Larraguibel
+P27: Scrum Master / Desarrollo / QA / Arquitectura
+P28: Coordinación de tareas, bloqueos técnicos, decisiones pendientes
+P29: 3. Comunicaciones
+P30: Comunicación
+P31: Emisor → Receptor
+P32: Canal
+P33: Frecuencia
+P34: Formato
+P35: Coordinación semanal de equipo
+P36: Equipo ↔ Equipo
+P37: WhatsApp
+P38: Semanal
+P39: Minuta breve o tablero Trello actualizado
+P40: Avance con la contraparte
+P41: Equipo → Carlos Aguilera
+P42: Discord, Llamada
+P43: Al cierre de cada Sprint (Fase 2) y en hitos de Fase 1 y 3
+P44: Demo funcional + acta de validación
+P45: Entrega de hitos académicos
+P46: Equipo → Carlos Quintanilla
+P47: Encargo a través de AVA
+P48: Según calendario de evaluaciones
+P49: Documento o entregable formal según pauta
+P50: Aviso de riesgo crítico
+P51: Equipo → Líder Técnico y Carlos Aguilera
+P52: Discord
+P53: Dentro de 48 h desde que se detecta
+P54: Correo o acta breve

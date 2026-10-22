@@ -92,9 +92,15 @@ namespace Afrisan.Api.Data
                 admin,
                 "Administrador"))
             {
-                await userManager.AddToRoleAsync(
+                var resultadoAsignacion = await userManager.AddToRoleAsync(
                     admin,
                     "Administrador");
+
+                if (!resultadoAsignacion.Succeeded)
+                {
+                    throw new InvalidOperationException(
+                        "No se pudo asignar el rol Administrador al usuario inicial.");
+                }
             }
         }
     }

@@ -1,0 +1,242 @@
+SOURCE: ARQUITECTURA/APIS/Historico/AFRISAN_10_IDENTIFICACION_APIS.docx
+P4: IDENTIFICACIÓN DE APIs
+P5: Especificación preliminar de la API REST — Sistema de Gestión de Refrigerantes AFRISAN
+P12: Responsable de esta entrega: Yarek Larraguibel — Arquitectura técnica
+P13: Integrantes del proyecto: Carolina Ávila, Dante Moya, Yarek Larraguibel
+P14: Docente guía: Carlos Quintanilla
+P15: Documento: Identificación de APIs
+P16: Fecha: 02-09-2026
+P17: Versión: 1.0
+P19: 1. Introducción
+P20: Este documento identifica y especifica preliminarmente los endpoints REST necesarios para soportar los requisitos funcionales del ERS del proyecto APT AFRISAN. El diseño detallado de contratos (esquemas completos de solicitud/respuesta, validaciones exhaustivas) se refinará durante la etapa de desarrollo, en conjunto con el resto del equipo.
+P21: 2. Convenciones generales
+P22: Formato de intercambio de datos: JSON (application/json) en el cuerpo de solicitudes y respuestas.
+P23: Autenticación: JSON Web Token (JWT), enviado en el encabezado Authorization: Bearer <token>, salvo en /api/v1/auth/login.
+P24: Versionado: todas las rutas se prefijan con /api/v1, para permitir futuras versiones de la API sin romper la compatibilidad con clientes existentes.
+P25: Transporte: todas las comunicaciones se realizan exclusivamente sobre HTTPS/TLS (RNF-02 del ERS).
+P26: Formato de fechas: ISO 8601 (por ejemplo, 2026-08-26T14:32:00-04:00).
+P27: 3. Catálogo de endpoints
+P28: Método
+P29: Endpoint
+P30: Descripción
+P31: Roles con acceso
+P32: POST
+P33: /api/v1/auth/login
+P34: Autenticación de usuario y emisión de token de sesión.
+P35: Todos los perfiles
+P36: POST
+P37: /api/v1/auth/logout
+P38: Cierre de sesión del usuario autenticado.
+P39: Todos los perfiles
+P40: GET
+P41: /api/v1/usuarios
+P42: Listar usuarios registrados con su rol y zona/bodega asignada.
+P43: Administrador general
+P44: POST
+P45: /api/v1/usuarios
+P46: Crear un nuevo usuario y asignarle un rol.
+P47: Administrador general
+P48: PUT
+P49: /api/v1/usuarios/{id}
+P50: Editar datos o rol de un usuario existente.
+P51: Administrador general
+P52: DELETE
+P53: /api/v1/usuarios/{id}
+P54: Desactivar un usuario (baja lógica).
+P55: Administrador general
+P56: GET
+P57: /api/v1/cilindros
+P58: Listar cilindros registrados (código QR, tipo de gas, capacidad, GWP).
+P59: Bodeguero, Administrador general
+P60: POST
+P61: /api/v1/cilindros
+P62: Registrar un nuevo cilindro y generar su código QR.
+P63: Bodeguero, Administrador general
+P64: GET
+P65: /api/v1/cilindros/{id}/historial
+P66: Consultar historial y trazabilidad de movimientos de un cilindro.
+P67: Bodeguero, Administrador general
+P68: POST
+P69: /api/v1/movimientos-inventario
+P70: Registrar ingreso/egreso de un cilindro en bodega.
+P71: Jefe de bodega
+P72: POST
+P73: /api/v1/intervenciones
+P74: Registrar una intervención en terreno (OT, cliente, tipo, cantidades, autorización).
+P75: Técnico
+P76: GET
+P77: /api/v1/intervenciones
+P78: Consultar intervenciones filtrando por cliente, local, fecha o técnico.
+P79: Jefe de grupo, Administrador general
+P80: GET
+P81: /api/v1/intervenciones/{id}
+P82: Consultar el detalle de una intervención específica.
+P83: Jefe de grupo, Administrador general
+P84: PUT
+P85: /api/v1/intervenciones/{id}
+P86: Corregir datos de una intervención ya registrada (queda en log de auditoría).
+P87: Administrador general
+P88: GET
+P89: /api/v1/clientes
+P90: Listar clientes registrados (Cencosud, Walmart, etc.).
+P91: Administrador general
+P92: POST
+P93: /api/v1/clientes
+P94: Registrar un nuevo cliente.
+P95: Administrador general
+P96: GET
+P97: /api/v1/locales
+P98: Listar locales asociados a un cliente.
+P99: Administrador general
+P100: POST
+P101: /api/v1/locales
+P102: Registrar un nuevo local/punto de servicio.
+P103: Administrador general
+P104: GET
+P105: /api/v1/semaforo/zonas
+P106: Obtener el estado del semáforo GEI por local/zona en tiempo real.
+P107: Jefe de grupo, Administrador general
+P108: GET
+P109: /api/v1/indicadores/gei
+P110: Obtener emisiones de CO2e calculadas por local, cliente y periodo.
+P111: Administrador general
+P112: GET
+P113: /api/v1/indicadores/costos
+P114: Obtener costos operacionales calculados por intervención y periodo.
+P115: Administrador general
+P116: GET
+P117: /api/v1/reportes/costos
+P118: Generar reporte de costos filtrado por periodo/cliente/tipo de gas.
+P119: Administrador general
+P120: GET
+P121: /api/v1/reportes/costos/export
+P122: Exportar el reporte de costos en formato PDF o Excel.
+P123: Administrador general
+P124: POST
+P125: /api/v1/sync
+P126: Sincronizar registros creados en modo offline desde la app móvil.
+P127: Técnico, Jefe de bodega
+P128: GET
+P129: /api/v1/auditoria
+P130: Consultar el log de auditoría (correcciones) filtrando por intervención o por usuario.
+P131: Administrador general
+P133: 4. Especificación detallada de endpoints críticos
+P134: A continuación se detallan, a modo de ejemplo, los endpoints más críticos del sistema, con un esquema preliminar de solicitud y respuesta.
+P135: 4.1 POST /api/v1/auth/login
+P136: Autentica a un usuario y retorna un token de sesión junto con su rol.
+P137: Solicitud
+P138: {
+P139:   "usuario": "ipereza",
+P140:   "password": "********"
+P141: }
+P142: Respuesta (200 OK)
+P143: {
+P144:   "token": "eyJhbGciOiJIUzI1NiIs...",
+P145:   "usuario": {
+P146:     "id_usuario": "u-0231",
+P147:     "nombre": "Ignacio Pérez",
+P148:     "rol": "tecnico",
+P149:     "zona_bodega": "Zona Sur"
+P150:   }
+P151: }
+P152: 4.2 POST /api/v1/intervenciones
+P153: Registra una nueva intervención en terreno realizada por un técnico.
+P154: Solicitud
+P155: {
+P156:   "n_ot": "OT-48213",
+P157:   "id_local": "loc-014",
+P158:   "id_cilindro": "cil-0231",
+P159:   "id_autoriza": "u-0087",
+P160:   "tipo_intervencion": "correctivo",
+P161:   "peso_retirado": 18.0,
+P162:   "peso_utilizado": 14.8,
+P163:   "foto_respaldo": "base64://..."
+P164: }
+P165: Respuesta (201 Created)
+P166: {
+P167:   "id_intervencion": "int-9931",
+P168:   "balance_masa": 0.18,
+P169:   "estado_semaforo": "rojo",
+P170:   "costo_estimado": 118400
+P171: }
+P172: 4.3 GET /api/v1/semaforo/zonas
+P173: Obtiene el estado del semáforo GEI por local/zona, para el monitoreo en tiempo real.
+P174: Respuesta (200 OK)
+P175: {
+P176:   "zonas": [
+P177:     { "local": "Walmart — Lo Espejo", "pct_exceso": 0.18, "semaforo": "rojo" },
+P178:     { "local": "Jumbo — Ñuñoa",        "pct_exceso": 0.09, "semaforo": "amarillo" },
+P179:     { "local": "Santa Isabel — Maipú", "pct_exceso": 0.02, "semaforo": "verde" }
+P180:   ]
+P181: }
+P182: 4.4 POST /api/v1/sync
+P183: Recibe un lote de registros generados en modo offline por la app móvil y los concilia con la base de datos central.
+P184: Solicitud
+P185: {
+P186:   "dispositivo_id": "movil-ipereza-01",
+P187:   "registros": [
+P188:     { "tipo": "intervencion", "payload": { "...": "..." }, "creado_en": "2026-08-26T11:02:00" },
+P189:     { "tipo": "movimiento_inventario", "payload": { "...": "..." }, "creado_en": "2026-08-26T11:40:00" }
+P190:   ]
+P191: }
+P192: Respuesta (200 OK)
+P193: {
+P194:   "sincronizados": 2,
+P195:   "conflictos": 0,
+P196:   "detalle": []
+P197: }
+P198: En caso de conflicto (por ejemplo, un cilindro que ya fue movido por otro usuario), el registro correspondiente se reporta en el arreglo "detalle" con el motivo del conflicto, conforme a la regla de resolución definida (última escritura gana, con marca de tiempo), según el riesgo R4 identificado en el ERS.
+P199: 4.5 GET /api/v1/auditoria
+P200: Consulta el log de auditoría generado automáticamente cada vez que el Administrador general corrige una intervención, almacenado en la tabla auditoria (columnas JSONB valores_anteriores / valores_nuevos del MER).
+P201: Respuesta (200 OK)
+P202: {
+P203:   "registros": [
+P204:     {
+P205:       "id_auditoria": "aud-0042",
+P206:       "id_intervencion": "int-9931",
+P207:       "id_usuario": "u-0005",
+P208:       "accion": "correccion",
+P209:       "valores_anteriores": { "peso_utilizado": 14.8 },
+P210:       "valores_nuevos": { "peso_utilizado": 15.2 },
+P211:       "fecha": "2026-08-27T09:15:00"
+P212:     }
+P213:   ]
+P214: }
+P215: 5. Manejo de errores
+P216: La API utiliza códigos de estado HTTP estándar para señalar el resultado de cada solicitud:
+P217: Código
+P218: Nombre
+P219: Uso
+P220: 200
+P221: OK
+P222: Solicitud procesada correctamente.
+P223: 201
+P224: Created
+P225: Recurso creado correctamente (por ejemplo, una nueva intervención).
+P226: 400
+P227: Bad Request
+P228: La solicitud no cumple el formato o las validaciones esperadas.
+P229: 401
+P230: Unauthorized
+P231: El token de autenticación no fue enviado o no es válido.
+P232: 403
+P233: Forbidden
+P234: El usuario autenticado no tiene permisos para el recurso solicitado (rol insuficiente).
+P235: 404
+P236: Not Found
+P237: El recurso solicitado no existe.
+P238: 409
+P239: Conflict
+P240: Conflicto de sincronización o de datos (por ejemplo, un registro duplicado desde offline).
+P241: 422
+P242: Unprocessable Entity
+P243: La solicitud tiene formato válido pero incumple una regla de negocio.
+P244: 500
+P245: Internal Server Error
+P246: Error no controlado en el servidor.
+P247: 6. Seguridad y control de acceso
+P248: Cada endpoint valida el rol del usuario autenticado antes de ejecutar la operación solicitada, conforme a la columna "Roles con acceso" del catálogo (sección 3).
+P249: Las contraseñas se almacenan cifradas (hash) y nunca se transmiten ni se registran en texto plano en los logs del servidor.
+P250: Se recomienda aplicar límites de tasa de solicitudes (rate limiting) sobre /api/v1/auth/login para mitigar ataques de fuerza bruta.
+P251: Se recomienda validar y sanitizar todas las entradas del usuario en el backend, para mitigar inyección SQL (SQLi) y Cross-Site Scripting (XSS), conforme al requisito RNF-01 del ERS.
+P252: El endpoint /api/v1/intervenciones/{id} (PUT), utilizado para corregir registros, escribe automáticamente una entrada en la tabla auditoria (valores_anteriores, valores_nuevos, usuario y fecha), consultable mediante GET /api/v1/auditoria, conforme al panel de corrección descrito en el ERS.

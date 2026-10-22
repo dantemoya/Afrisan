@@ -4,6 +4,7 @@
 
 @inject AuthService AuthService
 @inject NavigationManager Navigation
+@inject EntornoService Entorno
 
 <div class="page">
 
@@ -45,6 +46,12 @@
         </div>
 
         <article class="content px-4">
+            @if (Entorno.Info?.Demo == true)
+            {
+                <div class="alert alert-warning" role="status">
+                    <strong>Modo demostración.</strong> Datos simulados; los cambios se reinician al cerrar la API.
+                </div>
+            }
             @Body
         </article>
 

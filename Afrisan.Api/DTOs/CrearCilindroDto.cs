@@ -8,12 +8,15 @@ namespace Afrisan.Api.DTOs
         public int? GasRefrigeranteId { get; set; }
 
         [Required(ErrorMessage = "Debes ingresar la capacidad del cilindro.")]
+        [PesoKg]
         public decimal? CapacidadKg { get; set; }
 
         [Required(ErrorMessage = "Debes ingresar la tara del cilindro.")]
+        [PesoKg]
         public decimal? TaraKg { get; set; }
 
         [Required(ErrorMessage = "Debes ingresar el peso bruto actual.")]
+        [PesoKg]
         public decimal? PesoActualKg { get; set; }
 
 

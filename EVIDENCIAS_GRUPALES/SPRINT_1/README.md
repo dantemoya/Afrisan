@@ -44,4 +44,4 @@ Las principales evidencias del Sprint 1 se encuentran en:
 
 La arquitectura fue definida y documentada durante este Sprint.
 
-Actualmente se encuentra pendiente de validación formal.
+Actualización de seguimiento: la arquitectura está aprobada, según confirmación del estudiante recibida el 16 de octubre de 2026. La definición y documentación de este Sprint constituyen la base para continuar el desarrollo.

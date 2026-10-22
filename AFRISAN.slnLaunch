@@ -5,12 +5,12 @@
       {
         "Path": "Afrisan.Api\\Afrisan.Api.csproj",
         "Action": "Start",
-        "DebugTarget": "RedLocal"
+        "DebugTarget": "http"
       },
       {
         "Path": "Afrisan.Web\\Afrisan.Web.csproj",
         "Action": "Start",
-        "DebugTarget": "RedLocal"
+        "DebugTarget": "http"
       }
     ]
   }

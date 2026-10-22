@@ -6,6 +6,10 @@
 
         public string CodigoQr { get; set; } = string.Empty;
 
+        public string? NumeroSerie { get; set; }
+
+        public DateTime? FechaImportacion { get; set; }
+
         // Se mantiene temporalmente para no romper los datos existentes
         public string TipoRefrigerante { get; set; } = string.Empty;
 

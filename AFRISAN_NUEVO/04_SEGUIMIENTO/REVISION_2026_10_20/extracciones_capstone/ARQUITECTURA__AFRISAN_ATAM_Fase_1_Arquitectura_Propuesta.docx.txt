@@ -1,0 +1,603 @@
+SOURCE: ARQUITECTURA/AFRISAN_ATAM_Fase_1_Arquitectura_Propuesta.docx
+P1: AFRISAN
+P2: Evaluación arquitectónica ATAM – Fase 1
+P3: Escenarios de calidad, decisiones de diseño y riesgos de la arquitectura propuesta
+P4: Estado: evaluación preliminar de diseño – Fase 1Corte documental: septiembre de 2026Arquitectura candidata: Blazor WebAssembly · ASP.NET Core Web API · PostgreSQL / Supabase
+P5: Base del documento: arquitectura y requisitos propuestos para AFRISAN en la Fase 1. Este análisis no constituye evidencia de desarrollo, ejecución de pruebas, puesta en producción ni cumplimiento medido de atributos de calidad.
+P7: Resumen ejecutivo
+P8: Este informe aplica ATAM como evaluación de diseño para la Fase 1 de AFRISAN. Examina la arquitectura candidata frente a escenarios de integridad del inventario, trazabilidad, seguridad, acceso móvil, disponibilidad, recuperabilidad y evolución del sistema. El objetivo es anticipar riesgos, identificar compromisos y dejar decisiones técnicas y pruebas previstas para las fases siguientes; no se evalúa un producto implementado.
+P9: La evidencia utilizada en esta fase es documental: objetivos del negocio, requisitos, arquitectura candidata y escenarios de calidad. Las respuestas y medidas descritas son criterios de aceptación propuestos, no resultados obtenidos. Los procedimientos de verificación se planifican para la implementación y las pruebas posteriores.
+P10: La arquitectura candidata separa la presentación web Blazor WebAssembly, la API REST ASP.NET Core y la persistencia PostgreSQL/Supabase. El análisis identifica como decisiones a especificar la generación y unicidad de códigos, la atomicidad de movimientos, la autorización por rol y el registro de auditoría. Los componentes futuros del alcance documental deben contrastarse con escenarios específicos antes de fijar sus mecanismos.
+P11: Ficha de control del informe
+P12: Elemento
+P13: Registro
+P14: Método
+P15: Architecture Tradeoff Analysis Method (ATAM), nueve pasos.
+P16: Corte temporal
+P17: Septiembre de 2026.
+P18: Alcance actual
+P19: Arquitectura propuesta de Fase 1: interfaz web Blazor WebAssembly, API ASP.NET Core, PostgreSQL/Supabase y funciones de inventario, movimientos y consulta QR definidas como alcance.
+P20: Fuera de alcance validado
+P21: Fuera del diseño verificable de esta fase: funcionamiento operativo, pruebas de carga, accesibilidad móvil medida, restauración, seguridad probada, sincronización offline y despliegue real.
+P22: Origen de datos
+P23: Fuente de análisis: propuesta arquitectónica y requisitos de AFRISAN para Fase 1. La ejecución y evidencia de laboratorio quedan programadas para fases posteriores.
+P24: Convención de estados
+P25: D = decisión propuesta; R = riesgo de diseño; V = verificación posterior; A = aspecto por acordar con interesados.
+P27: Cómo interpretar este documento
+P28: Los umbrales cuantitativos son criterios de aceptación propuestos para aprobar con los interesados; no representan acuerdos ya suscritos ni mediciones. Las prioridades expresan una hipótesis de trabajo del equipo y deben ratificarse en una sesión ATAM cuando corresponda.
+P29: Fase 0. Preparación de la evaluación
+P30: Propósito. Definir objetivos, interesados, requisitos arquitectónicamente significativos, restricciones y material de diseño para la evaluación prospectiva de Fase 1.
+P31: Material de entrada previsto: requisitos de AFRISAN, alcance de Fase 1, arquitectura candidata y sus vistas de contexto, componentes, datos y despliegue. Material a completar: acuerdos sobre los atributos de calidad, reglas de pesaje y formatos de identificación; actas de los interesados y protocolos de verificación para fases posteriores.
+P32: Interesados por convocar. Responsable del proyecto; representantes de bodega y operaciones; responsables de API, interfaz, datos y seguridad; representantes de calidad y evaluación. La composición, la fecha y los acuerdos de la sesión se registrarán cuando esta se realice.
+P33: Decisión de alcance. Este documento es una evaluación de arquitectura propuesta en Fase 1. No declara ejecución integral de ATAM ni pruebas funcionales; los escenarios priorizados y los hallazgos deben validarse con interesados y, posteriormente, frente a la implementación.
+P34: Paso 1. Presentar ATAM
+P35: ATAM es una evaluación basada en escenarios que relaciona objetivos del sistema, atributos de calidad y decisiones arquitectónicas para identificar riesgos, no riesgos, puntos de sensibilidad, puntos de compromiso y temas de riesgo. Los pasos 1–6 constituyen la primera ronda centrada en el equipo técnico; los pasos 7–9 incorporan la visión ampliada de los interesados y el cierre.
+P36: Punto comunicado
+P37: Aplicación en AFRISAN
+P38: Objeto
+P39: Evaluar la arquitectura candidata frente a escenarios de calidad y objetivos del negocio; definir cómo se verificará cada decisión en fases posteriores.
+P40: Técnicas
+P41: Árbol de utilidad preliminar, escenarios de seis elementos, recorrido lógico de componentes, identificación de riesgos y compromisos, y matriz de evidencias previstas.
+P42: Entregables
+P43: Escenarios propuestos, decisiones arquitectónicas justificadas, riesgos y compromisos, acciones de mitigación y plan de validación posterior.
+P44: Reglas
+P45: No afirmar funcionalidades implementadas, requisitos satisfechos ni pruebas ejecutadas durante Fase 1; separar evaluación del diseño y validación futura.
+P47: Estado del paso 1: método descrito para la evaluación documental de Fase 1; la presentación formal a interesados queda programada.
+P48: Paso 2. Presentar objetivos del negocio y restricciones
+P49: ID
+P50: Objetivo o restricción
+P51: Implicancia arquitectónica
+P52: ON-01
+P53: Gestionar cada cilindro con una identificación única.
+P54: Mecanismo de generación de código y restricción de unicidad persistente.
+P55: ON-02
+P56: Controlar despacho, retorno y estado actual del cilindro.
+P57: Invariantes de dominio y persistencia transaccional para los movimientos.
+P58: ON-03
+P59: Consultar historial a través de QR.
+P60: Modelo de movimientos relacionado con un identificador estable y consultas rastreables.
+P61: ON-04
+P62: Permitir operación desde equipos móviles.
+P63: Interfaz adaptable, accesibilidad de la API y seguridad de comunicaciones.
+P64: ON-05
+P65: Proteger información y operaciones por usuario/rol.
+P66: Autenticación, autorización a nivel de operación y objeto, auditoría.
+P67: RT-01
+P68: Diseñar la solución con Blazor WebAssembly, ASP.NET Core y PostgreSQL/Supabase como arquitectura candidata de Fase 1.
+P69: Evaluar responsabilidades de cada componente y las dependencias sin presuponer que existe una aplicación operativa.
+P70: RT-02
+P71: Considerar funcionamiento offline, Azure y Power BI como capacidades previstas en la documentación del proyecto.
+P72: Definir interfaces, compromisos y escenarios específicos; diferenciar lo previsto en Fase 1 de su implementación futura.
+P74: Prioridad de negocio propuesta para Fase 1: preservar la integridad de inventario y la trazabilidad de movimientos, con seguridad como condición de diseño para el futuro uso multiusuario. Los responsables del proyecto y usuarios deberán confirmar estas prioridades.
+P75: Paso 3. Presentar la arquitectura
+P76: Vista lógica propuesta: navegador o dispositivo móvil con Blazor WebAssembly → API REST ASP.NET Core → reglas de negocio y acceso a PostgreSQL/Supabase. El QR contendrá una referencia estable para recuperar la ficha e historial; su posesión no debe equivaler a autorización. El diseño de conexión pública segura, si aplica, se especificará en despliegue.
+P77: Elemento
+P78: Responsabilidad
+P79: Aspecto por definir y validar
+P80: Blazor WebAssembly
+P81: Proveer pantallas de cilindros, operaciones y consulta QR; orientar la entrada con validaciones de interfaz.
+P82: Precisar experiencia móvil, manejo de errores y compatibilidad; diseñar matriz de pruebas de dispositivos.
+P83: ASP.NET Core API REST
+P84: Exponer operaciones y consultas; validar reglas de dominio y autorización antes de persistir.
+P85: Definir contratos, componentes internos, reglas de negocio, manejo de concurrencia y pruebas de API.
+P86: PostgreSQL / Supabase
+P87: Persistir cilindros, identificadores, estados y movimientos; soportar claves externas, unicidad y transacciones.
+P88: Especificar índices, restricciones, integridad referencial, aislamiento, política de respaldos y recuperación.
+P89: QR
+P90: Portar una referencia de identificación para acceder a ficha e historial de forma controlada.
+P91: Definir formato estable, acceso autorizado y política ante cambio de dirección o pérdida de etiqueta.
+P92: Azure / Power BI / offline
+P93: Capacidades contempladas en la planificación: despliegue en Azure, análisis en Power BI y eventual operación offline.
+P94: Detallar su alcance e interfaces y diseñar sus escenarios propios; su funcionamiento no se afirma en Fase 1.
+P96: Flujo arquitectónico esperado: (1) el usuario solicita una operación; (2) la API identifica y autoriza al actor; (3) valida las reglas del dominio; (4) persiste estado y movimiento de manera atómica; (5) conserva evidencia auditable; (6) retorna el resultado a la interfaz. Cada paso constituye una condición de diseño, no un comportamiento ya probado.
+P97: Estado del paso 3: arquitectura candidata de Fase 1. Los diagramas de contexto, componentes, datos y despliegue deben mantenerse coherentes con estas responsabilidades y evolucionar cuando se implemente el sistema.
+P98: Paso 4. Identificar enfoques y decisiones arquitectónicas
+P99: ID
+P100: Decisión arquitectónica propuesta
+P101: Atributos relacionados / incertidumbre
+P102: DA-01
+P103: Separar frontend Blazor WebAssembly y API REST ASP.NET Core.
+P104: Modificabilidad y separación de responsabilidades; diseñar CORS, HTTPS, contratos y acceso móvil.
+P105: DA-02
+P106: Centralizar en la API las reglas de registro y movimientos.
+P107: Consistencia y mantenibilidad; definir restricciones de dominio y casos negativos para todas las rutas.
+P108: DA-03
+P109: Utilizar PostgreSQL con unicidad persistente para el identificador de cilindro.
+P110: Integridad; definir formato, secuencia, manejo de colisiones y concurrencia sin depender solo de la interfaz.
+P111: DA-04
+P112: Relacionar cada movimiento con el cilindro y permitir consultar su historial por referencia QR.
+P113: Trazabilidad; especificar actor, fecha, inmutabilidad, rectificaciones y control de acceso.
+P114: DA-05
+P115: Diseñar autenticación, permisos por rol/objeto y auditoría en la API.
+P116: Seguridad y atribución de acciones; establecer política de privilegios y eventos auditables.
+P117: DA-06
+P118: Definir un destino de despliegue accesible por nombre estable y HTTPS; evitar acoplar los QR a direcciones locales.
+P119: Disponibilidad y portabilidad; definir DNS, TLS, variables de entorno y continuidad entre redes.
+P120: DA-07
+P121: Conservar offline, Azure y Power BI como capacidades arquitectónicas previstas por el proyecto.
+P122: Consistencia e interoperabilidad; delimitar contratos y evaluar complejidad antes de implementación.
+P124: El paso 4 explicita decisiones de la arquitectura candidata. Los efectos esperados se analizan conceptualmente en el paso 6 y se revisarán con los escenarios adicionales del paso 8.
+P125: Paso 5. Construir árbol de utilidad y escenarios
+P126: Raíz: utilidad de AFRISAN. Ramas propuestas: integridad, trazabilidad, seguridad, movilidad, disponibilidad/recuperabilidad, interoperabilidad y modificabilidad. Las hojas son escenarios de calidad del diseño. La importancia y dificultad propuestas deberán validarse con los interesados; no representan resultados de pruebas.
+P127: Rama / escenario
+P128: Importancia sugerida
+P129: Dificultad técnica estimada
+P130: Estado en Fase 1
+P131: Integridad – EC-01 código único
+P132: Alta
+P133: Media
+P134: Escenario definido; verificación de unicidad y concurrencia prevista.
+P135: Integridad – EC-02 despacho duplicado
+P136: Alta
+P137: Alta
+P138: Escenario definido; diseñar mecanismo de exclusión de movimientos incompatibles.
+P139: Trazabilidad – EC-03 historial QR
+P140: Alta
+P141: Media
+P142: Escenario definido; definir completitud, auditoría y permisos de consulta.
+P143: Seguridad – EC-04 acceso por roles/objeto
+P144: Alta
+P145: Alta
+P146: Escenario definido; preparar matriz de roles y políticas de API.
+P147: Movilidad – EC-05 consulta celular
+P148: Media
+P149: Media
+P150: Escenario definido; preparar matriz de dispositivos, redes y tiempos.
+P151: Recuperabilidad – EC-06 caída de datos
+P152: Alta
+P153: Alta
+P154: Escenario definido; acordar respaldos y objetivos RTO/RPO.
+P155: Integridad – EC-07 pesaje
+P156: Alta
+P157: Alta
+P158: Escenario definido; acordar tara, unidades, tolerancias y conciliación.
+P159: Offline – EC-08 sincronización
+P160: Por confirmar
+P161: Alta
+P162: Capacidad planificada; diseñar resolución de conflictos e idempotencia.
+P163: Interoperabilidad – EC-09 Azure/BI
+P164: Por confirmar
+P165: Media/alta
+P166: Integraciones planificadas; delimitar interfaces y seguridad.
+P168: La importancia y dificultad son una priorización preliminar de Fase 1, no un puntaje automático ni una votación efectuada. Servirán para seleccionar los escenarios que los interesados consideren relevantes al ejecutar la evaluación formal.
+P169: Catálogo detallado de escenarios de calidad
+P170: EC-01 · Código único del cilindro
+P171: Campo
+P172: Definición para AFRISAN
+P173: Atributo
+P174: Integridad
+P175: Fuente del estímulo
+P176: Operador de inventario
+P177: Estímulo
+P178: Solicita crear dos cilindros con códigos iguales o se produce una colisión de generación.
+P179: Entorno
+P180: Operación normal; considerar dos solicitudes simultáneas.
+P181: Artefacto
+P182: API y restricción de unicidad PostgreSQL.
+P183: Respuesta esperada
+P184: El sistema persiste a lo sumo un cilindro por código y responde la solicitud conflictiva sin crear un registro duplicado.
+P185: Medida de respuesta
+P186: 0 códigos duplicados al ejecutar la batería de inserción secuencial y concurrente; registrar códigos, respuestas HTTP y consulta de comprobación.
+P187: Estado de evaluación
+P188: D: proponer generación controlada e índice UNIQUE. V: ejecutar pruebas secuenciales y concurrentes en fase de implementación.
+P190: Enfoque arquitectónico: Generación automática de código en flujo controlado y restricción UNIQUE a nivel de persistencia.
+P191: Evidencia de Fase 1: diseño propuesto de generación automática y unicidad; la documentación de implementación y resultados de prueba se recopilarán en fases posteriores.
+P192: Límite de la evaluación: sin ejecutar solicitudes ni comprobar el esquema desplegado no puede afirmarse que la restricción evita colisiones operativas.
+P193: EC-02 · Despacho duplicado y concurrencia
+P194: Campo
+P195: Definición para AFRISAN
+P196: Atributo
+P197: Integridad / consistencia
+P198: Fuente del estímulo
+P199: Dos operadores o dos solicitudes del mismo operador
+P200: Estímulo
+P201: Intentan despachar simultáneamente el mismo cilindro disponible.
+P202: Entorno
+P203: Ambas solicitudes llegan antes de que cualquiera concluya.
+P204: Artefacto
+P205: API de movimientos, estado del cilindro, transacción de base de datos.
+P206: Respuesta esperada
+P207: Se registra exactamente un despacho activo y la otra operación se rechaza de forma consistente, sin movimientos incompatibles.
+P208: Medida de respuesta
+P209: 1 despacho activo como máximo por cilindro; una solicitud exitosa y otra rechazada o reintentada controladamente, sin doble movimiento.
+P210: Estado de evaluación
+P211: D: exigir comprobación y escritura atómicas. V: realizar pruebas con despachos simultáneos y verificar estado/historial.
+P213: Enfoque arquitectónico: Comprobar de forma atómica el estado y escribir el movimiento mediante transacción/bloqueo o actualización condicional equivalente.
+P214: Evidencia de Fase 1: escenario de despacho concurrente y requisito de transición de estado definidos para orientar el diseño.
+P215: Límite de la evaluación: una validación previa a la escritura no basta frente a solicitudes simultáneas; el mecanismo atómico deberá verificarse posteriormente.
+P216: EC-03 · Historial consultable mediante QR
+P217: Campo
+P218: Definición para AFRISAN
+P219: Atributo
+P220: Trazabilidad
+P221: Fuente del estímulo
+P222: Usuario autorizado que lee un QR
+P223: Estímulo
+P224: Solicita la ficha y movimientos de un cilindro.
+P225: Entorno
+P226: Cilindro con movimientos previos; conexión disponible.
+P227: Artefacto
+P228: Interfaz, endpoint de historial, relación cilindro–movimientos.
+P229: Respuesta esperada
+P230: Muestra los eventos asociados al cilindro, ordenados y sin omitir despachos/retornos registrados; aplica autorización.
+P231: Medida de respuesta
+P232: Comparar N movimientos persistidos con N eventos recuperados, sus tipos, fechas y actores; no divulgar datos sin autorización.
+P233: Estado de evaluación
+P234: D: vincular movimientos a identificador estable. V: contrastar historial, auditoría y permisos con datos de ensayo.
+P236: Enfoque arquitectónico: Identificador estable y consulta de movimientos relacionados; verificar orden, integridad referencial y control de acceso.
+P237: Evidencia de Fase 1: diseño de relación entre cilindro, QR y movimientos para recuperar el historial.
+P238: Límite de la evaluación: el identificador QR no acredita identidad; el diseño debe definir auditoría, retención y permisos de lectura.
+P239: EC-04 · Autenticación y permisos
+P240: Campo
+P241: Definición para AFRISAN
+P242: Atributo
+P243: Seguridad
+P244: Fuente del estímulo
+P245: Usuario no autenticado o de un rol sin permiso
+P246: Estímulo
+P247: Intenta crear movimientos, cambiar estados o consultar información ajena manipulando URL/ID.
+P248: Entorno
+P249: API expuesta mediante red y cliente web.
+P250: Artefacto
+P251: Middleware de identidad, autorización por operación y objeto, endpoints de la API.
+P252: Respuesta esperada
+P253: La API rechaza cada acceso indebido y no revela información restringida.
+P254: Medida de respuesta
+P255: 100 % de casos negativos definidos denegados en la matriz rol × operación × objeto; sin modificación de datos.
+P256: Estado de evaluación
+P257: D: exigir control de acceso en servidor. V: ejecutar matriz de casos autorizados y denegados al implementarse.
+P259: Enfoque arquitectónico: Definir esquema de identidad y políticas de autorización sobre recursos, aplicadas en servidor.
+P260: Evidencia de Fase 1: escenario de acceso indebido y propuesta de autorización centralizada en la API.
+P261: Límite de la evaluación: ocultar botones o conocer un QR no sustituye autorización en el servidor; definir y verificar controles posteriormente.
+P262: EC-05 · Consulta móvil
+P263: Campo
+P264: Definición para AFRISAN
+P265: Atributo
+P266: Compatibilidad / usabilidad
+P267: Fuente del estímulo
+P268: Operador que trabaja en terreno
+P269: Estímulo
+P270: Escanea QR desde un teléfono y consulta ficha e historial.
+P271: Entorno
+P272: Red de prueba definida, navegadores y tamaños de pantalla predefinidos.
+P273: Artefacto
+P274: Blazor WebAssembly, navegación y API.
+P275: Respuesta esperada
+P276: La ficha se puede consultar y utilizar en un tamaño de pantalla móvil sin pérdida de datos ni operaciones inaccesibles.
+P277: Medida de respuesta
+P278: Pasar la lista de verificación en cada dispositivo y navegador de la matriz acordada; registrar tiempo y errores de carga si el requisito los define.
+P279: Estado de evaluación
+P280: D: diseñar interfaz adaptable y QR con URL estable. V: medir experiencia con teléfonos y redes definidas.
+P282: Enfoque arquitectónico: Interfaz adaptable, acceso HTTPS y URL de API independiente de IP local.
+P283: Evidencia de Fase 1: escenario de consulta móvil y decisión de interfaz adaptable con referencia QR.
+P284: Límite de la evaluación: sin pruebas posteriores no puede afirmarse compatibilidad o desempeño en dispositivos y redes concretas.
+P285: EC-06 · Caída y recuperación de PostgreSQL
+P286: Campo
+P287: Definición para AFRISAN
+P288: Atributo
+P289: Disponibilidad / recuperabilidad
+P290: Fuente del estímulo
+P291: Falla de infraestructura o error de datos
+P292: Estímulo
+P293: Se interrumpe la conexión a la base de datos o se requiere restaurar un respaldo.
+P294: Entorno
+P295: Servicio en despliegue definido y política de copias establecida.
+P296: Artefacto
+P297: API, PostgreSQL, respaldo y observabilidad.
+P298: Respuesta esperada
+P299: Errores controlados durante la falla y restauración documentada sin inconsistencia del inventario.
+P300: Medida de respuesta
+P301: Definir y medir RTO (tiempo de recuperación) y RPO (pérdida máxima aceptada) con valores acordados; comprobar integridad posterior.
+P302: Estado de evaluación
+P303: A: acordar respaldo, RTO y RPO. V: ensayar restauración y cotejo de integridad.
+P305: Enfoque arquitectónico: Configurar respaldos, restauración, monitoreo, límites de espera y respuestas controladas.
+P306: Evidencia de Fase 1: escenario de pérdida de disponibilidad y propuesta de respaldo/restauración.
+P307: Límite de la evaluación: el proveedor de nube por sí solo no demuestra disponibilidad ni recuperabilidad; deben acordarse y medirse los objetivos.
+P308: EC-07 · Conciliación de masa y pesaje
+P309: Campo
+P310: Definición para AFRISAN
+P311: Atributo
+P312: Integridad de dominio
+P313: Fuente del estímulo
+P314: Operador que registra pesaje o retorno
+P315: Estímulo
+P316: Ingresa masas inconsistentes, valores negativos, fuera de capacidad o una devolución incompatible con el despacho.
+P317: Entorno
+P318: Datos de cilindro y unidades definidas.
+P319: Artefacto
+P320: API, modelo de masa y persistencia.
+P321: Respuesta esperada
+P322: El sistema rechaza valores fuera del dominio, conserva unidades explícitas y registra movimientos consistentes.
+P323: Medida de respuesta
+P324: 0 registros aceptados fuera de reglas formales de masa; definir tolerancias, unidades, capacidad y política de conciliación antes de probar.
+P325: Estado de evaluación
+P326: A: acordar unidades, tara y tolerancias. V: ejecutar casos límite y conciliación de masa.
+P328: Enfoque arquitectónico: Validación de dominio centralizada en API, restricciones aplicables en BD y registro del evento.
+P329: Evidencia de Fase 1: necesidad de reglas cuantificadas de masa y plan de pruebas de frontera.
+P330: Límite de la evaluación: las tolerancias y definiciones de tara/peso bruto/neto deben ser aprobadas por los responsables operativos.
+P331: EC-08 · Sincronización offline futura
+P332: Campo
+P333: Definición para AFRISAN
+P334: Atributo
+P335: Consistencia / disponibilidad
+P336: Fuente del estímulo
+P337: Operador móvil sin conectividad
+P338: Estímulo
+P339: Registra un movimiento desconectado y sincroniza tras recuperar la red; otro usuario modifica el mismo cilindro.
+P340: Entorno
+P341: Dos clientes con datos divergentes; mecanismo offline todavía no definido.
+P342: Artefacto
+P343: Almacenamiento local, API y datos centrales.
+P344: Respuesta esperada
+P345: El sistema evita doble despacho o registra conflicto explícito, preserva auditoría y no confirma una operación inválida silenciosamente.
+P346: Medida de respuesta
+P347: 0 pérdidas silenciosas y 0 estados incompatibles al ejecutar una batería de conflictos definida; registrar resolución y trazabilidad.
+P348: Estado de evaluación
+P349: D: evaluar sincronización offline como capacidad prevista. V: ensayar conflictos e idempotencia cuando exista diseño implementado.
+P351: Enfoque arquitectónico: Diseñar cola local, idempotencia, versionado de registros y reglas de conciliación antes de validar.
+P352: Evidencia de Fase 1: escenario y principios de diseño para sincronización offline contemplada en el proyecto.
+P353: Límite de la evaluación: las garantías de consistencia offline no pueden deducirse del diseño online; requieren diseño y pruebas específicos.
+P354: EC-09 · Integración futura con Azure y Power BI
+P355: Campo
+P356: Definición para AFRISAN
+P357: Atributo
+P358: Interoperabilidad / seguridad
+P359: Fuente del estímulo
+P360: Administrador o proceso de exportación
+P361: Estímulo
+P362: Configura despliegue cloud y extrae datos para análisis.
+P363: Entorno
+P364: Infraestructura, identidades y contratos de datos definidos.
+P365: Artefacto
+P366: Despliegue, API o capa de datos de análisis, credenciales.
+P367: Respuesta esperada
+P368: La infraestructura mantiene integridad de operaciones; la extracción respeta permisos y evita exponer secretos o datos personales.
+P369: Medida de respuesta
+P370: Matriz de permisos y contrato de extracción aprobados; ejecutar pruebas de conectividad, filtrado, actualización y seguridad.
+P371: Estado de evaluación
+P372: D: definir contratos y controles de futuras integraciones. V: comprobar despliegue y extracción de datos cuando corresponda.
+P374: Enfoque arquitectónico: Separar configuración de entorno, identidad y vistas/consultas para análisis; decidir patrón concreto al diseñarlas.
+P375: Evidencia de Fase 1: escenarios de integración, seguridad y extracción asociados al despliegue previsto y análisis BI.
+P376: Límite de la evaluación: las garantías de Azure o Power BI no equivalen a cumplimiento del sistema; deben comprobarse sobre el despliegue definido.
+P377: Paso 6. Analizar enfoques frente a escenarios priorizados
+P378: Se analizan de forma prospectiva las decisiones de la arquitectura candidata frente a los escenarios de integridad, trazabilidad y seguridad. Los recorridos siguientes anticipan consecuencias técnicas y establecen criterios de verificación, sin describir código ejecutado ni pruebas completadas.
+P379: EC-01: unicidad de códigos
+P380: Recorrido esperado. La interfaz solicita un alta; la API asigna el código y PostgreSQL intenta persistirlo. Se propone un índice UNIQUE que rechace códigos duplicados; el tratamiento del conflicto deberá devolver una respuesta controlada.
+P381: No riesgo condicionado NR-01 (hipótesis de diseño). Si se define y aplica un índice único a la columna de identificación, habrá una barrera persistente frente a duplicados exactos, independiente de la validación visual. Su eficacia y normalización requerirán pruebas.
+P382: Riesgo R-01. Un algoritmo de generación o un manejo de errores insuficiente podría producir colisiones, fallos no controlados o variantes del identificador. Mitigación prevista: formato único, restricción persistente y prueba de concurrencia.
+P383: Sensibilidad S-01. Algoritmo y espacio de códigos; frecuencia de colisiones; estrategia de reintento. La unicidad del código no garantiza por sí sola la unicidad de la identidad física de cilindros mal etiquetados.
+P384: EC-02: despacho duplicado
+P385: Recorrido. Dos operaciones leen “disponible”; ambas pueden intentar escribir “despachado”. Si comprobación y escritura no están protegidas como una única operación lógica, existe una condición de carrera.
+P386: Riesgo R-02. Validar el estado y escribirlo por separado permitiría un doble despacho bajo concurrencia. Se propone definir una operación atómica y planificar pruebas simultáneas de despacho y retorno.
+P387: Sensibilidad S-02. Tiempo entre lectura de estado y escritura, nivel de aislamiento y cantidad de solicitudes concurrentes.
+P388: Compromiso C-01. El bloqueo/persistencia transaccional favorece integridad, pero puede aumentar contención y latencia; debe medirse con carga realista antes de ajustar el mecanismo.
+P389: EC-03 y EC-04: historial y seguridad
+P390: Recorrido esperado. La lectura del QR identifica un cilindro y la API consulta sus movimientos. Sin autorización por usuario y objeto, conocer la referencia podría exponer información que no corresponde al solicitante.
+P391: Riesgo R-03. Tratar el QR como credencial permitiría acceso indebido. Decisión de mejora: autenticación y autorización sobre la API, con auditoría del actor y del recurso consultado.
+P392: Sensibilidad S-03. Granularidad de permisos: por rol, operación, cilindro, ubicación o empresa. Cambia la complejidad del control de acceso y del modelo de datos.
+P393: Compromiso C-02. Permisos granulares reducen acceso indebido, pero agregan consultas, manejo de excepciones y complejidad de administración.
+P394: EC-07: masa, datos y dominio
+P395: Riesgo R-04. Si no se especifican capacidad, tara, peso neto/bruto, unidades y tolerancias, el diseño no podrá garantizar coherencia material aunque las relaciones de base de datos sean correctas.
+P396: Acción arquitectónica propuesta. Definir invariantes de masa y persistencia atómica de cilindro/movimiento, documentar rectificaciones y preparar pruebas de límites y conciliación.
+P397: Paso 7. Generar y priorizar escenarios con interesados
+P398: Este paso requiere una sesión real de generación y priorización con interesados. En Fase 1 se propone la cartera siguiente para someterla a discusión; ninguna prioridad se declara votada o aprobada.
+P399: ID
+P400: Interesado sugerido / escenario adicional
+P401: Prioridad propuesta
+P402: EA-01
+P403: Encargado de inventario: dos operadores intentan retornar y despachar simultáneamente el mismo cilindro.
+P404: Alta
+P405: EA-02
+P406: Supervisor: se corrige un movimiento erróneo sin borrar el historial original; debe permanecer el actor y la razón de la rectificación.
+P407: Alta
+P408: EA-03
+P409: Responsable de seguridad: se extravía un QR y una persona ajena intenta leer datos del cilindro.
+P410: Alta
+P411: EA-04
+P412: Operador móvil: dispositivo cambia de red local a datos móviles durante una consulta o registro.
+P413: Media
+P414: EA-05
+P415: Administrador: un respaldo se restaura y debe verificarse consistencia entre estado actual e historial.
+P416: Alta
+P417: EA-06
+P418: Operador offline: dos equipos sincronizan operaciones incompatibles tras horas sin conexión.
+P419: Por confirmar
+P421: Protocolo previsto. Registrar fecha, participantes y roles; presentar escenarios, admitir nuevos casos, acordar criterios de priorización y documentar los votos o consensos que efectivamente se produzcan.
+P422: Resultado del paso 7 en Fase 1: cartera de escenarios preparada para validación con los interesados; la priorización participativa se realizará cuando se convoque la sesión.
+P423: Paso 8. Volver a analizar la arquitectura ante nuevos escenarios
+P424: Se efectúa un análisis preliminar de diseño frente a los escenarios adicionales propuestos, sujeto a su selección formal por los interesados. Las acciones consignadas son condiciones arquitectónicas y pruebas previstas, no resultados de ejecución.
+P425: Escenario
+P426: Recorrido o decisión que debe inspeccionarse
+P427: Hallazgo provisional / prueba necesaria
+P428: EA-01, conflicto entre operaciones
+P429: Verificar si todas las rutas de despacho y retorno comparten un invariante de estado y una escritura atómica.
+P430: Riesgo adicional: proteger solo el endpoint de despacho no impediría conflicto con retorno; prueba multirruta concurrente.
+P431: EA-02, rectificación auditable
+P432: Revisar modelo de eventos, política de borrado/edición, identidad del actor y causal de corrección.
+P433: Riesgo adicional: historial consultable no equivale a historial inalterable/auditable; diseñar correcciones compensatorias.
+P434: EA-03, QR extraviado
+P435: Revisar endpoints con ID predecible, autorización por objeto, mínima información y logs de acceso.
+P436: Riesgo de diseño: si se omite autorización por objeto, conocer un QR podría exponer datos; definir matriz de permisos y pruebas negativas futuras.
+P437: EA-04, cambio de red
+P438: Comprobar endpoint público, HTTPS, configuración de URL y manejo de pérdidas temporales de conectividad.
+P439: Riesgo de diseño: una URL ligada a una IP local limitaría movilidad; proponer dirección pública estable y futura prueba de cambio de red.
+P440: EA-05, restauración
+P441: Revisar estrategia de backup, cronología de movimientos, RTO/RPO e integridad referencial después de restaurar.
+P442: Riesgo de diseño: respaldo insuficiente impediría recuperación confiable; acordar RTO/RPO y plan de restauración para fases siguientes.
+P443: EA-06, sincronización offline
+P444: Definir identidad de operación, idempotencia, detección y resolución de conflictos y semántica de confirmación.
+P445: Requiere diseño específico: definir reglas de sincronización, idempotencia y conflictos y planificar pruebas posteriores de casos incompatibles.
+P447: Temas de riesgo transversales
+P448: Tema
+P449: Riesgos relacionados
+P450: Impacto sobre objetivos
+P451: TR-01: integridad bajo concurrencia
+P452: R-01, R-02 y EA-01
+P453: Puede comprometer unicidad lógica y coherencia de estados/movimientos.
+P454: TR-02: autorización y atribución incompletas
+P455: R-03, EA-02 y EA-03
+P456: Puede permitir accesos indebidos y limitar auditoría del historial.
+P457: TR-03: continuidad operativa no demostrada
+P458: Dependencia de conectividad y respaldo por diseñar, EC-06, EA-04 y EA-05
+P459: Puede impedir consulta y movimiento o comprometer restauración.
+P460: TR-04: complejidad de operaciones futuras
+P461: EC-08 y EC-09
+P462: Puede introducir conflictos offline y riesgos nuevos en integraciones.
+P464: Paso 9. Presentar resultados y decisiones
+P465: Este paso consolida los hallazgos prospectivos de Fase 1 para su presentación y validación por el equipo. No se atribuyen reuniones ni aprobaciones realizadas; el cierre formal de ATAM requerirá registrar decisiones y acuerdos de los interesados.
+P466: Síntesis de hallazgos
+P467: Aspecto
+P468: Conclusión fundamentada
+P469: Estado
+P470: Registro y código único
+P471: Se propone generación automática y restricción de unicidad. Verificar formato, DDL y tratamiento de colisiones cuando se implemente.
+P472: Diseño propuesto; verificación futura
+P473: Despacho y retorno
+P474: Se propone comprobar el estado y registrar cada movimiento atómicamente; diseñar prueba de concurrencia y retorno.
+P475: Riesgo identificado; verificación futura
+P476: Consulta de historial por QR
+P477: Se propone consultar movimientos por referencia QR, con control de acceso y auditoría; acordar datos exigibles.
+P478: Diseño propuesto; verificación futura
+P479: Seguridad de acceso
+P480: Se plantea autenticación y permisos en servidor; definir matriz de roles y pruebas negativas.
+P481: Decisión pendiente de detalle
+P482: Accesibilidad móvil
+P483: Se plantea interfaz móvil adaptable, HTTPS y dirección estable; definir matriz de dispositivos y redes.
+P484: Escenario por validar
+P485: Disponibilidad y recuperabilidad
+P486: Se plantea respaldar y recuperar el sistema; acordar RTO/RPO, retención y ejercicios de restauración.
+P487: Política por acordar
+P488: Pesaje y conciliación de masa
+P489: Definir reglas de tara, masa bruta/neta, capacidad y tolerancias antes de diseñar la conciliación.
+P490: Reglas por acordar
+P491: Offline, Azure y Power BI
+P492: Offline, Azure y Power BI figuran en el alcance propuesto; delimitar contratos y evaluar sus propios escenarios.
+P493: Diseño específico por precisar
+P495: Decisiones de mejora propuestas y criterios para las fases siguientes
+P496: ID
+P497: Acción verificable
+P498: Responsable por designar / criterio de cierre
+P499: AC-01
+P500: Especificar formato, generador y restricción UNIQUE; preparar protocolo de duplicados secuenciales y simultáneos.
+P501: Backend/BD; especificación del identificador, índice y protocolo aprobado; evidencia de ejecución se anexará después.
+P502: AC-02
+P503: Diseñar la unidad atómica de despacho/retorno y el protocolo de concurrencia multirruta.
+P504: Arquitectura/backend/QA; mecanismo transaccional diseñado y criterios de aceptación definidos.
+P505: AC-03
+P506: Definir matriz de roles y autorización por objeto; diseñar pruebas negativas de cada operación.
+P507: Seguridad/backend; roles y permisos documentados y trazados a escenarios.
+P508: AC-04
+P509: Definir unidades, tara, capacidad, tolerancias y conciliación; especificar pruebas de frontera.
+P510: Operación/backend; reglas de masa aprobadas y casos de validación diseñados.
+P511: AC-05
+P512: Diseñar auditoría de actor, fecha, tipo y causal de rectificación con historial no destructivo.
+P513: Operación/seguridad; eventos y política de rectificación definidos.
+P514: AC-06
+P515: Definir destino de despliegue, dirección estable, HTTPS y plan de pruebas móviles entre redes.
+P516: Frontend/infraestructura; diseño de URL, TLS y matriz móvil aprobados.
+P517: AC-07
+P518: Acordar RTO/RPO y política de copias; redactar plan futuro de restauración y cotejo.
+P519: Infraestructura/BD; objetivos y procedimiento de recuperación especificados.
+P520: AC-08
+P521: Especificar interfaces y escenarios independientes de offline, Azure y Power BI conforme al alcance aprobado.
+P522: Arquitectura/equipo; contratos y límites de componentes versionados.
+P523: AC-09
+P524: Convocar a interesados, ratificar escenarios y registrar las decisiones para completar ATAM.
+P525: Líder de proyecto; acta de sesión y decisiones ratificadas cuando se efectúe.
+P527: Conclusión formal del corte de septiembre de 2026
+P528: La Fase 1 identifica una arquitectura candidata y escenarios para evaluar la integridad del inventario, la trazabilidad, la seguridad y la continuidad operativa. El análisis de diseño permite anticipar riesgos en generación de códigos, concurrencia, autorización, masa y recuperación, y proponer mitigaciones verificables. Este informe no afirma funcionalidades implementadas ni atributos de calidad cumplidos: la validación formal requiere acuerdos de interesados, construcción del sistema y pruebas posteriores con evidencia documentada.
+P529: Anexo A. Plan de pruebas y evidencias previstas para fases posteriores
+P530: Prueba
+P531: Pasos mínimos y resultado esperado
+P532: Evidencia prevista (no producida en Fase 1)
+P533: PT-01 Unicidad
+P534: Intentar insertar un código existente por web, API y dos solicitudes simultáneas; consultar tabla; no hay duplicados.
+P535: Versión migración, salida SQL, solicitudes HTTP, respuestas y tabla final.
+P536: PT-02 Carrera de despacho
+P537: Lanzar dos despachos simultáneos del mismo cilindro; revisar respuestas, estado y movimientos; máximo uno activo.
+P538: Script de carga, trazas con marcas de tiempo y consultas posteriores.
+P539: PT-03 Acceso indebido
+P540: Probar endpoints sin sesión, con rol insuficiente y alterando ID de cilindro ajeno.
+P541: Matriz de permisos, respuestas y evidencia de no modificación.
+P542: PT-04 Historial QR
+P543: Crear secuencia controlada despacho–retorno–rectificación y recuperar por QR; comparar todos los eventos.
+P544: Datos de prueba, API de historial y cotejo SQL ordenado.
+P545: PT-05 Masa
+P546: Probar límites (0, capacidad, negativos, unidades, retorno fuera de tolerancia) y confirmar rechazos consistentes.
+P547: Reglas de masa aprobadas, entradas/salidas y estado en BD.
+P548: PT-06 Recuperación
+P549: Simular indisponibilidad, restaurar respaldo y cotejar cilindros/movimientos; medir RTO/RPO.
+P550: Registro del ejercicio, duración, punto recuperado y diferencias.
+P551: PT-07 Móvil
+P552: Abrir ficha por QR en dispositivos/navegadores definidos, probar cambio Wi-Fi/datos y registrar interfaz/red.
+P553: Matriz de dispositivos y capturas con resultados.
+P554: PT-08 Offline futuro
+P555: Crear conflictos entre clientes desconectados y sincronizar; probar idempotencia y resolución explícita.
+P556: Diseño aprobado, registro de conflictos y auditoría del resultado.
+P558: Anexo B. Matriz de trazabilidad del diseño y verificación futura
+P559: Objetivo
+P560: Escenario
+P561: Decisión / componente
+P562: Prueba asociada
+P563: Estado de Fase 1
+P564: ON-01
+P565: EC-01
+P566: DA-02, DA-03 / API + PostgreSQL
+P567: PT-01
+P568: Decisión propuesta
+P569: ON-02
+P570: EC-02 / EA-01
+P571: DA-02 / API + datos
+P572: PT-02
+P573: Riesgo identificado
+P574: ON-03
+P575: EC-03 / EA-02
+P576: DA-04 / QR + API + movimientos
+P577: PT-04
+P578: Escenario definido
+P579: ON-05
+P580: EC-04 / EA-03
+P581: DA-05 / identidad + autorización
+P582: PT-03
+P583: Control por diseñar
+P584: ON-04
+P585: EC-05 / EA-04
+P586: DA-01, DA-06 / cliente + red
+P587: PT-07
+P588: Escenario definido
+P589: Continuidad
+P590: EC-06 / EA-05
+P591: BD + respaldo + despliegue
+P592: PT-06
+P593: Política por acordar
+P594: Integridad de pesaje
+P595: EC-07
+P596: API + datos + reglas de masa
+P597: PT-05
+P598: Reglas por acordar
+P599: Operación futura
+P600: EC-08 / EC-09
+P601: DA-07 / sincronización e integraciones
+P602: PT-08 y diseño futuro
+P603: Diseño futuro previsto
+P605: Anexo C. Glosario de hallazgos ATAM
+P606: Término
+P607: Significado aplicado
+P608: Riesgo
+P609: Decisión o característica arquitectónica que puede impedir satisfacer un atributo de calidad.
+P610: No riesgo
+P611: Decisión justificada que responde al escenario bajo supuestos explícitos; no es garantía universal.
+P612: Punto de sensibilidad
+P613: Propiedad o parámetro cuyo cambio altera notablemente un atributo de calidad.
+P614: Punto de compromiso
+P615: Decisión que influye en más de un atributo; favorecer uno puede afectar otro.
+P616: Tema de riesgo
+P617: Agrupación de varios riesgos que amenaza un objetivo compartido.
+P618: RTO / RPO
+P619: Tiempo objetivo para recuperar el servicio / pérdida temporal máxima de información admisible, respectivamente.
+P620: Invariante
+P621: Regla que debe mantenerse antes y después de toda operación del dominio.
+P623: Referencias metodológicas
+P624: Software Engineering Institute, Carnegie Mellon University. (2018). Architecture Tradeoff Analysis Method Collection. https://insights.sei.cmu.edu/library/architecture-tradeoff-analysis-method-collection/
+P625: Software Engineering Institute, Carnegie Mellon University. (2001). Documento técnico CMU/SEI-2001-TN-022 sobre el uso de ATAM y su organización en fases. https://www.sei.cmu.edu/documents/1980/2001_004_001_13835.pdf
+P626: Fuente interna de Fase 1: arquitectura y requisitos propuestos para AFRISAN. Los criterios de aceptación y protocolos de validación aquí descritos corresponden a planificación de evaluación, no a resultados de desarrollo.

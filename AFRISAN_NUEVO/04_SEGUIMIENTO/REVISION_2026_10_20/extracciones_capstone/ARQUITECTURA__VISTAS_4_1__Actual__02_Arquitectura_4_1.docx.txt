@@ -1,0 +1,149 @@
+SOURCE: ARQUITECTURA/VISTAS_4_1/Actual/02_Arquitectura_4_1.docx
+P2: DUOC UC
+P3: Sede Melipilla
+P5: ARQUITECTURA DE SOFTWARE — VISTAS 4+1
+P6: Modelo de Kruchten — Sistema de Gestión de Refrigerantes AFRISAN
+P12: Responsable de esta entrega: Yarek Larraguibel — Arquitectura técnica
+P13: Integrantes del proyecto: Carolina Ávila, Dante Moya, Yarek Larraguibel
+P14: Docente guía: Carlos Quintanilla
+P15: Documento: Arquitectura de Software (Vistas 4+1)
+P16: Fecha: 02/09/2026
+P17: Versión: 1.0
+P19: 1. Introducción
+P20: Este documento presenta la arquitectura de software del Sistema de Gestión de Refrigerantes AFRISAN utilizando el modelo de Vistas 4+1 de Kruchten, correspondiente al paquete de trabajo 1.4 de la EDT del proyecto. El modelo describe la arquitectura desde cinco perspectivas complementarias: Vista Lógica, Vista de Desarrollo, Vista de Procesos, Vista Física, y una quinta vista (+1) de Escenarios que ilustra cómo las cuatro vistas anteriores trabajan juntas para soportar los casos de uso del sistema.
+P21: Estas vistas son consistentes con el resto de la documentación de arquitectura del proyecto: el Diagrama Entidad-Relación (DER) y diccionario de datos, la Identificación de APIs, los Recursos Técnicos y el EDT de 3 fases, todos elaborados sobre el stack tecnológico oficial: ASP.NET Core Web API (.NET 8), Entity Framework Core 8, Blazor WebAssembly, .NET MAUI, PostgreSQL 16 en Supabase Cloud, y despliegue en Microsoft Azure App Service.
+P22: 1.1 Las cinco vistas
+P23: Vista
+P24: Responde a la pregunta
+P25: Audiencia principal
+P26: Lógica
+P27: ¿Qué hace el sistema? (entidades y su comportamiento)
+P28: Analistas, diseñadores
+P29: Desarrollo
+P30: ¿Cómo se organiza el código fuente?
+P31: Programadores, líder técnico
+P32: Procesos
+P33: ¿Cómo se ejecuta en tiempo real? (concurrencia, sincronización)
+P34: Integradores, QA
+P35: Física
+P36: ¿Dónde se despliega cada componente?
+P37: Ingenieros de infraestructura
+P38: Escenarios (+1)
+P39: ¿Cómo colaboran las 4 vistas para un caso de uso real?
+P40: Todo el equipo, contraparte
+P42: 2. Vista Lógica
+P43: La Vista Lógica describe las abstracciones clave del dominio del problema: las entidades del sistema, sus atributos y su comportamiento (reglas de negocio). Corresponde al mismo modelo documentado en detalle en el documento "DER y Diccionario de Datos", complementado aquí con el comportamiento de las clases de dominio más relevantes.
+P45: Figura 1. Modelo de dominio (Vista Lógica) — ver diccionario de datos completo en el documento DER.
+P47: Comportamiento clave de las clases de dominio
+P48: Clase
+P49: Método
+P50: Responsabilidad
+P51: Intervencion
+P52: CalcularBalanceMasa()
+P53: Calcula el porcentaje de pérdida entre el peso retirado y el peso utilizado.
+P54: Intervencion
+P55: CalcularEstadoSemaforo()
+P56: Determina verde/amarillo/rojo según el balance de masa (umbrales 5%-15%).
+P57: Intervencion
+P58: CalcularCosto()
+P59: Calcula el costo monetario de la intervención según el tipo de gas y la cantidad utilizada.
+P60: IndicadorAmbiental
+P61: CalcularEmisionesCO2e()
+P62: Calcula las emisiones de CO2 equivalente usando el factor GWP del cilindro.
+P63: Auditoria
+P64: RegistrarCorreccion()
+P65: Genera un snapshot JSONB del estado anterior y nuevo cuando el Administrador general corrige un registro.
+P66: Estas operaciones se concentran en la capa de lógica de negocio, implementada en Afrisan.Api. Los controladores, servicios y validaciones del backend aplican las reglas del sistema antes de persistir información en PostgreSQL/Supabase, evitando que la interfaz de usuario modifique directamente los datos o duplique lógica crítica.
+P68: 3. Vista de Desarrollo
+P69: La Vista de Desarrollo describe la organización del código fuente mediante una arquitectura cliente-servidor de tres capas lógicas. Esta arquitectura separa la presentación, la lógica de negocio y la persistencia de datos, manteniendo una comunicación controlada entre Afrisan.Web, Afrisan.Api y PostgreSQL/Supabase.
+P71: Figura 2. Vista de Desarrollo — tres capas lógicas y sus componentes principales.
+P72: Capa lógica / componente
+P73: Contenido
+P74: Presentación — Afrisan.Web / cliente móvil previsto
+P75: Componentes Blazor WebAssembly para la aplicación web y, en el alcance previsto, pantallas .NET MAUI para el cliente móvil. Esta capa contiene vistas, formularios, navegación y consumo de la API REST; no accede directamente a la base de datos.
+P76: Lógica de negocio — Afrisan.Api
+P77: Backend ASP.NET Core Web API. Contiene controladores, DTOs, validaciones, reglas de registro, despacho, retorno, consulta QR, auditoría y coordinación de operaciones mediante Entity Framework Core.
+P78: Persistencia — PostgreSQL / Supabase
+P79: Base de datos relacional central. Administra cilindros, gases refrigerantes, movimientos, intervenciones, auditoría, relaciones, índices, transacciones y restricciones de integridad.
+P80: Integraciones y servicios previstos
+P81: SQLite para persistencia local offline del cliente móvil, Azure App Service para despliegue del backend y Power BI para reportería. Estos componentes se validarán según su estado de implementación.
+P82: Esta organización permite trabajar en paralelo: el frontend desarrolla vistas y formularios, la API centraliza validaciones y reglas de negocio, y PostgreSQL/Supabase conserva relaciones, restricciones e historial. Las integraciones futuras se documentan como componentes previstos o en validación.
+P84: 4. Vista de Procesos
+P85: La Vista de Procesos describe el comportamiento previsto del sistema en tiempo de ejecución. En la solución actual, Afrisan.Web consume de forma asíncrona las operaciones disponibles de Afrisan.Api. Para el escenario futuro de una intervención en terreno se propone incorporar un cliente .NET MAUI con almacenamiento SQLite y sincronización diferida; dichos mecanismos todavía requieren implementación y pruebas. El flujo siguiente es una representación de diseño, no una ejecución verificada.
+P87: Figura 3. Vista de Procesos — flujo propuesto para registrar una intervención con y sin conexión.
+P89: Se propone realizar las llamadas de los clientes a la API de manera asíncrona para evitar que la espera de red bloquee la interfaz. Este comportamiento deberá comprobarse en los clientes implementados.
+P90: En el cliente móvil .NET MAUI previsto, un mecanismo de sincronización en segundo plano deberá reintentar el envío de registros almacenados localmente cuando se recupere la conectividad. Se deberán definir y probar idempotencia, resolución de conflictos y recuperación ante errores.
+P91: Se prevé utilizar el procesamiento asíncrono de ASP.NET Core para atender solicitudes concurrentes; los límites de carga y la integridad de operaciones simultáneas deberán validarse mediante pruebas específicas.
+P92: Para las operaciones que exijan atomicidad, la confirmación se producirá después del commit de la transacción en PostgreSQL. La autorización de usuarios deberá comprobarse en la API; una eventual política de Row-Level Security (RLS) requerirá configuración y verificación independiente en la base de datos y no se presupone aplicada por la transacción.
+P94: 5. Vista Física
+P95: La Vista Física representa el despliegue propuesto de los componentes sobre infraestructura local o servicios cloud, conforme al documento «Diagrama de Despliegue». La implementación actual de desarrollo local debe distinguirse de Azure App Service, previsto para una etapa posterior.
+P97: Figura 4. Vista Física — diagrama de despliegue.
+P98: La siguiente figura sintetiza los componentes principales de la arquitectura cliente-servidor de tres capas. El despliegue futuro en Azure y las integraciones con sistemas externos se documentan por separado; la figura no presupone su implementación.
+P100: Figura 5. Diagrama de componentes de AFRISAN — Afrisan.Web, Afrisan.Api y PostgreSQL/Supabase.
+P102: 6. Vista de Escenarios (+1)
+P103: La quinta vista describe cómo colaborarán las cuatro vistas anteriores para soportar los casos de uso definidos en el ERS. Los escenarios relacionados con funciones aún no desarrolladas se presentan como comportamientos previstos que deberán contrastarse durante la implementación y las pruebas.
+P104: ID
+P105: Caso de uso
+P106: Actor principal
+P107: CU-01
+P108: Registrar movimiento de inventario (QR)
+P109: Jefe de bodega
+P110: CU-02
+P111: Registrar intervención en terreno
+P112: Técnico
+P113: CU-03
+P114: Visualizar semáforo GEI
+P115: Técnico, Jefe de grupo
+P116: CU-04
+P117: Iniciar sesión / seleccionar perfil
+P118: Todos los roles
+P119: CU-05
+P120: Gestionar usuarios y roles
+P121: Administrador general
+P122: CU-06
+P123: Visualizar dashboard ejecutivo (Power BI)
+P124: Administrador general
+P125: CU-07
+P126: Generar y exportar reporte de costos
+P127: Administrador general
+P128: CU-08
+P129: Consultar historial de un cilindro
+P130: Jefe de bodega, Administrador general
+P131: CU-09
+P132: Registrar cliente y local
+P133: Administrador general
+P134: CU-10
+P135: Registrar cilindro
+P136: Jefe de bodega, Administrador general
+P137: CU-11
+P138: Corregir datos de una intervención
+P139: Administrador general
+P140: 6.1 Escenario previsto: «Técnico registra una intervención con fuga detectada, sin conexión»
+P141: Paso
+P142: Vista involucrada
+P143: Qué ocurre
+P144: 1
+P145: Lógica
+P146: En el escenario previsto, el técnico completaría en .NET MAUI un formulario de intervención con tipo «fuga detectada».
+P147: 2
+P148: Procesos
+P149: Ante la ausencia de conectividad, el cliente móvil propuesto guardaría la operación en SQLite local hasta poder sincronizarla; la persistencia y el mecanismo de reintento requieren implementación y pruebas.
+P150: 3
+P151: Desarrollo
+P152: Al recuperar conectividad, el cliente móvil previsto enviaría la operación a Afrisan.Api mediante la API REST. El backend deberá validar los datos y aplicar las reglas de negocio.
+P153: 4
+P154: Lógica
+P155: Las reglas de negocio previstas calcularían el balance de masa y determinarían el estado del semáforo según los umbrales que se aprueben; las fórmulas y resultados deberán comprobarse.
+P156: 5
+P157: Desarrollo
+P158: Afrisan.Api persistiría los cambios mediante Entity Framework Core; PostgreSQL/Supabase deberá confirmarlos de forma atómica para las operaciones que lo requieran.
+P159: 6
+P160: Física
+P161: En el despliegue futuro, se prevé alojar la API en Azure App Service y la base de datos en PostgreSQL/Supabase. El control de acceso deberá verificarse; una eventual RLS no se considera implementada.
+P162: 7
+P163: Física
+P164: Una integración futura de Power BI podría consultar los datos autorizados para mostrar intervenciones y métricas. La frecuencia de actualización y los permisos deberán definirse y probarse.
+P165: 8
+P166: Procesos
+P167: Se propone que el jefe de grupo consulte el estado del semáforo desde Blazor. Si se requiere actualización en tiempo real sin recarga, deberá diseñarse e implementarse un mecanismo específico.
+P168: Este escenario de diseño relaciona el cálculo de negocio, su ubicación en Afrisan.Api, la sincronización móvil prevista, el despliegue futuro y la consulta de resultados. No constituye evidencia de que el cliente offline, Azure, Power BI o las alertas en tiempo real se encuentren operativos.

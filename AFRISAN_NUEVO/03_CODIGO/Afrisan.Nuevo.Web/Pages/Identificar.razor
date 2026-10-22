@@ -1,0 +1,17 @@
+@page "/identificar"
+@attribute [Authorize]
+@inject NavigationManager Nav
+
+<PageTitle>Identificar cilindro · AFRISAN</PageTitle>
+<div class="page-heading"><div><span class="eyebrow">CONSULTA POR CÓDIGO</span><h1>Identificar cilindro</h1><p>Escribe el identificador o utiliza un lector que ingrese el código como teclado.</p></div></div>
+<section class="panel narrow"><h2>Buscar el envase</h2>
+    <EditForm Model="form" OnValidSubmit="Buscar"><DataAnnotationsValidator /><label for="identificador">Código del cilindro</label><InputText id="identificador" @bind-Value="form.Codigo" placeholder="AFR-000001" autofocus /><ValidationMessage For="() => form.Codigo" />
+        <button class="btn primary wide" type="submit">Consultar cilindro →</button>
+    </EditForm>
+    <p class="field-help">Esta versión permite buscar por código. No incluye lectura mediante cámara ni consulta offline.</p>
+</section>
+@code {
+    private readonly BuscarForm form = new();
+    private void Buscar() => Nav.NavigateTo($"cilindros/{Uri.EscapeDataString(form.Codigo.Trim())}");
+    private sealed class BuscarForm { [Required(ErrorMessage = "Ingresa un código."), StringLength(120)] public string Codigo { get; set; } = ""; }
+}

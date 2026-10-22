@@ -22,6 +22,107 @@ namespace Afrisan.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Afrisan.Api.Models.CausaFalla", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activa")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.ToTable("CausasFalla", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_CausasFalla_Codigo", "length(btrim(\"Codigo\")) > 0");
+                        });
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.CertificadoCilindro", b =>
+                {
+                    b.Property<int>("CertificadoDisposicionId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CilindroId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal?>("PesoEntregadoKg")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
+
+                    b.HasKey("CertificadoDisposicionId", "CilindroId");
+
+                    b.HasIndex("CilindroId")
+                        .IsUnique();
+
+                    b.ToTable("CertificadosCilindros", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_CertificadosCilindros_Peso", "\"PesoEntregadoKg\" IS NULL OR \"PesoEntregadoKg\" >= 0");
+                        });
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.CertificadoDisposicion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("EmpresaEmisora")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateOnly>("FechaEmision")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Folio")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("RutaDocumento")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.HasIndex("EmpresaEmisora", "Folio")
+                        .IsUnique();
+
+                    b.ToTable("CertificadosDisposicion", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Certificados_Folio", "length(btrim(\"Folio\")) > 0");
+                        });
+                });
+
             modelBuilder.Entity("Afrisan.Api.Models.Cilindro", b =>
                 {
                     b.Property<int>("Id")
@@ -31,7 +132,8 @@ namespace Afrisan.Api.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("CapacidadKg")
-                        .HasColumnType("numeric");
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
 
                     b.Property<string>("CodigoQr")
                         .IsRequired()
@@ -41,17 +143,26 @@ namespace Afrisan.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime?>("FechaImportacion")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int?>("GasRefrigeranteId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("NumeroSerie")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<decimal>("PesoActualKg")
-                        .HasColumnType("numeric");
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
 
                     b.Property<decimal?>("TaraKg")
-                        .HasColumnType("numeric");
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
 
                     b.Property<string>("TipoRefrigerante")
                         .IsRequired()
@@ -64,7 +175,98 @@ namespace Afrisan.Api.Migrations
 
                     b.HasIndex("GasRefrigeranteId");
 
+                    b.HasIndex("NumeroSerie")
+                        .IsUnique()
+                        .HasFilter("\"NumeroSerie\" IS NOT NULL");
+
                     b.ToTable("Cilindros");
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Cliente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Rut")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("Telefono")
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Rut")
+                        .IsUnique()
+                        .HasFilter("\"Rut\" IS NOT NULL");
+
+                    b.ToTable("Clientes", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Clientes_Nombre", "length(btrim(\"Nombre\")) > 0");
+                        });
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Equipo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("boolean");
+
+                    b.Property<decimal>("CapacidadNominalKg")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<int?>("GasRefrigeranteId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int>("SucursalId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GasRefrigeranteId");
+
+                    b.HasIndex("SucursalId", "Codigo")
+                        .IsUnique();
+
+                    b.ToTable("Equipos", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Equipos_Capacidad", "\"CapacidadNominalKg\" > 0");
+
+                            t.HasCheckConstraint("CK_Equipos_Codigo", "length(btrim(\"Codigo\")) > 0");
+                        });
                 });
 
             modelBuilder.Entity("Afrisan.Api.Models.GasRefrigerante", b =>
@@ -86,13 +288,196 @@ namespace Afrisan.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<decimal?>("FactorGwp")
+                        .HasPrecision(12, 3)
+                        .HasColumnType("numeric(12,3)");
+
+                    b.Property<string>("FuenteGwp")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<string>("MetodologiaGwp")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("GasesRefrigerantes");
+                    b.ToTable("GasesRefrigerantes", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Gases_FactorGwp", "\"FactorGwp\" IS NULL OR \"FactorGwp\" >= 0");
+                        });
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Intervencion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AutorizadorId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CausaFallaId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CilindroId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal?>("CostoTotal")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasPrecision(20, 4)
+                        .HasColumnType("numeric(20,4)")
+                        .HasComputedColumnSql("\"KgUtilizados\" * \"PrecioKgAplicado\"", true);
+
+                    b.Property<int>("DespachoId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("DispositivoId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<decimal?>("EmisionesCo2eToneladas")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasPrecision(20, 6)
+                        .HasColumnType("numeric(20,6)")
+                        .HasComputedColumnSql("\"KgEmitidos\" * \"FactorGwpAplicado\" / 1000.0", true);
+
+                    b.Property<int>("EquipoId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("EstadoIntervencion")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("EstadoSemaforo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("EstadoSincronizacion")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<decimal?>("FactorGwpAplicado")
+                        .HasPrecision(12, 3)
+                        .HasColumnType("numeric(12,3)");
+
+                    b.Property<DateTime?>("FechaCierre")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("FechaCreacionLocal")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaIntervencion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaRecepcion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("FotoBalanzaRuta")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<string>("FuenteGwpAplicada")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<Guid>("IdOperacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<decimal?>("KgEmitidos")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
+
+                    b.Property<decimal>("KgUtilizados")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
+
+                    b.Property<string>("MetodologiaGwpAplicada")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Moneda")
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)");
+
+                    b.Property<string>("Observaciones")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<int>("OrdenTrabajoId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal?>("PesoRestanteBrutoKg")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
+
+                    b.Property<string>("PlanCorreccion")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<decimal?>("PrecioKgAplicado")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("numeric(18,4)");
+
+                    b.Property<int>("SucursalId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TecnicoId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AutorizadorId");
+
+                    b.HasIndex("CausaFallaId");
+
+                    b.HasIndex("CilindroId");
+
+                    b.HasIndex("IdOperacion")
+                        .IsUnique();
+
+                    b.HasIndex("SucursalId");
+
+                    b.HasIndex("TecnicoId");
+
+                    b.HasIndex("DespachoId", "CilindroId");
+
+                    b.HasIndex("EquipoId", "FechaIntervencion");
+
+                    b.HasIndex("EquipoId", "SucursalId");
+
+                    b.HasIndex("OrdenTrabajoId", "CilindroId");
+
+                    b.ToTable("Intervenciones", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Intervenciones_Estado", "\"EstadoIntervencion\" IN ('Registrada', 'Revisada', 'Cerrada')");
+
+                            t.HasCheckConstraint("CK_Intervenciones_Factores", "(\"FactorGwpAplicado\" IS NULL OR \"FactorGwpAplicado\" >= 0) AND (\"PrecioKgAplicado\" IS NULL OR \"PrecioKgAplicado\" >= 0)");
+
+                            t.HasCheckConstraint("CK_Intervenciones_FotoCierre", "\"EstadoIntervencion\" <> 'Cerrada' OR (\"FechaCierre\" IS NOT NULL AND length(btrim(coalesce(\"FotoBalanzaRuta\", ''))) > 0 AND \"PesoRestanteBrutoKg\" IS NOT NULL)");
+
+                            t.HasCheckConstraint("CK_Intervenciones_Moneda", "\"PrecioKgAplicado\" IS NULL OR (\"Moneda\" IS NOT NULL AND \"Moneda\" ~ '^[A-Z]{3}$')");
+
+                            t.HasCheckConstraint("CK_Intervenciones_Pesos", "\"KgUtilizados\" > 0 AND (\"KgEmitidos\" IS NULL OR \"KgEmitidos\" >= 0) AND (\"PesoRestanteBrutoKg\" IS NULL OR \"PesoRestanteBrutoKg\" >= 0)");
+
+                            t.HasCheckConstraint("CK_Intervenciones_PlanRojo", "\"EstadoSemaforo\" <> 'Rojo' OR length(btrim(coalesce(\"PlanCorreccion\", ''))) > 0");
+
+                            t.HasCheckConstraint("CK_Intervenciones_Semaforo", "\"EstadoSemaforo\" IN ('Pendiente', 'Verde', 'Amarillo', 'Rojo')");
+
+                            t.HasCheckConstraint("CK_Intervenciones_Sync", "\"EstadoSincronizacion\" IN ('Pendiente', 'Sincronizado', 'Conflicto')");
+                        });
                 });
 
             modelBuilder.Entity("Afrisan.Api.Models.MovimientoInventario", b =>
@@ -106,8 +491,23 @@ namespace Afrisan.Api.Migrations
                     b.Property<int>("CilindroId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("CustodiaAbierta")
+                        .HasColumnType("boolean");
+
+                    b.Property<int?>("DespachoId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("FechaMovimiento")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("FotoPesajeRuta")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<Guid>("IdOperacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("Observaciones")
                         .HasColumnType("text");
@@ -116,7 +516,8 @@ namespace Afrisan.Api.Migrations
                         .HasColumnType("integer");
 
                     b.Property<decimal>("PesoKg")
-                        .HasColumnType("numeric");
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
 
                     b.Property<string>("Responsable")
                         .IsRequired()
@@ -126,13 +527,39 @@ namespace Afrisan.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CilindroId");
+                    b.HasIndex("CilindroId")
+                        .IsUnique()
+                        .HasDatabaseName("UX_Movimientos_CustodiaAbierta")
+                        .HasFilter("\"CustodiaAbierta\"");
+
+                    b.HasIndex("DespachoId")
+                        .IsUnique()
+                        .HasFilter("\"DespachoId\" IS NOT NULL");
+
+                    b.HasIndex("IdOperacion")
+                        .IsUnique();
 
                     b.HasIndex("OrdenTrabajoId");
 
-                    b.ToTable("MovimientosInventario");
+                    b.HasIndex("UsuarioId");
+
+                    b.HasIndex("CilindroId", "FechaMovimiento");
+
+                    b.HasIndex("DespachoId", "CilindroId");
+
+                    b.ToTable("MovimientosInventario", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Movimientos_Custodia", "NOT \"CustodiaAbierta\" OR \"TipoMovimiento\" = 'Despacho'");
+
+                            t.HasCheckConstraint("CK_Movimientos_Peso", "\"PesoKg\" >= 0");
+
+                            t.HasCheckConstraint("CK_Movimientos_Retorno", "\"DespachoId\" IS NULL OR \"TipoMovimiento\" = 'Retorno'");
+                        });
                 });
 
             modelBuilder.Entity("Afrisan.Api.Models.OrdenTrabajo", b =>
@@ -146,22 +573,177 @@ namespace Afrisan.Api.Migrations
                     b.Property<bool>("Activa")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("AutorizadorId")
+                        .HasColumnType("text");
+
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("CodigoExterno")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("FechaCierre")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Origen")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasDefaultValue("Local");
+
+                    b.Property<int?>("SucursalId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TecnicoAsignadoId")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AutorizadorId");
 
                     b.HasIndex("Codigo")
                         .IsUnique();
 
+                    b.HasIndex("SucursalId");
+
+                    b.HasIndex("TecnicoAsignadoId");
+
+                    b.HasIndex("Origen", "CodigoExterno")
+                        .IsUnique()
+                        .HasFilter("\"CodigoExterno\" IS NOT NULL");
+
                     b.ToTable("OrdenesTrabajo");
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.PrecioRefrigerante", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GasRefrigeranteId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Moneda")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)");
+
+                    b.Property<decimal>("PrecioKg")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("numeric(18,4)");
+
+                    b.Property<DateTime>("VigenteDesde")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GasRefrigeranteId", "Moneda", "VigenteDesde")
+                        .IsUnique();
+
+                    b.ToTable("PreciosRefrigerantes", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Precios_Importe", "\"PrecioKg\" >= 0");
+
+                            t.HasCheckConstraint("CK_Precios_Moneda", "\"Moneda\" ~ '^[A-Z]{3}$'");
+                        });
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.RegistroAuditoria", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Accion")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Entidad")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("IntervencionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("RegistroId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ValoresAnteriores")
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("ValoresNuevos")
+                        .HasColumnType("jsonb");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Fecha");
+
+                    b.HasIndex("IntervencionId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.HasIndex("Entidad", "RegistroId");
+
+                    b.ToTable("Auditorias");
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Sucursal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("character varying(400)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId", "Nombre");
+
+                    b.ToTable("Sucursales", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Sucursales_Nombre", "length(btrim(\"Nombre\")) > 0");
+                        });
                 });
 
             modelBuilder.Entity("Afrisan.Api.Models.Usuario", b =>
@@ -216,6 +798,9 @@ namespace Afrisan.Api.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("RolId")
+                        .HasColumnType("text");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -234,6 +819,8 @@ namespace Afrisan.Api.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("RolId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -336,21 +923,6 @@ namespace Afrisan.Api.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
@@ -370,6 +942,30 @@ namespace Afrisan.Api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Afrisan.Api.Models.CertificadoCilindro", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.CertificadoDisposicion", null)
+                        .WithMany()
+                        .HasForeignKey("CertificadoDisposicionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Afrisan.Api.Models.Cilindro", null)
+                        .WithMany()
+                        .HasForeignKey("CilindroId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.CertificadoDisposicion", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Afrisan.Api.Models.Cilindro", b =>
                 {
                     b.HasOne("Afrisan.Api.Models.GasRefrigerante", "GasRefrigerante")
@@ -377,6 +973,72 @@ namespace Afrisan.Api.Migrations
                         .HasForeignKey("GasRefrigeranteId");
 
                     b.Navigation("GasRefrigerante");
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Equipo", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.GasRefrigerante", null)
+                        .WithMany()
+                        .HasForeignKey("GasRefrigeranteId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Afrisan.Api.Models.Sucursal", null)
+                        .WithMany()
+                        .HasForeignKey("SucursalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Intervencion", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("AutorizadorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Afrisan.Api.Models.CausaFalla", null)
+                        .WithMany()
+                        .HasForeignKey("CausaFallaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Afrisan.Api.Models.Cilindro", null)
+                        .WithMany()
+                        .HasForeignKey("CilindroId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Afrisan.Api.Models.OrdenTrabajo", null)
+                        .WithMany("Intervenciones")
+                        .HasForeignKey("OrdenTrabajoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Afrisan.Api.Models.Sucursal", null)
+                        .WithMany()
+                        .HasForeignKey("SucursalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Afrisan.Api.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("TecnicoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Afrisan.Api.Models.MovimientoInventario", null)
+                        .WithMany()
+                        .HasForeignKey("DespachoId", "CilindroId")
+                        .HasPrincipalKey("Id", "CilindroId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Afrisan.Api.Models.Equipo", null)
+                        .WithMany()
+                        .HasForeignKey("EquipoId", "SucursalId")
+                        .HasPrincipalKey("Id", "SucursalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Afrisan.Api.Models.MovimientoInventario", b =>
@@ -392,9 +1054,80 @@ namespace Afrisan.Api.Migrations
                         .HasForeignKey("OrdenTrabajoId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("Afrisan.Api.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Afrisan.Api.Models.MovimientoInventario", null)
+                        .WithMany()
+                        .HasForeignKey("DespachoId", "CilindroId")
+                        .HasPrincipalKey("Id", "CilindroId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Cilindro");
 
                     b.Navigation("OrdenTrabajo");
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.OrdenTrabajo", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("AutorizadorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Afrisan.Api.Models.Sucursal", null)
+                        .WithMany()
+                        .HasForeignKey("SucursalId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Afrisan.Api.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("TecnicoAsignadoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.PrecioRefrigerante", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.GasRefrigerante", null)
+                        .WithMany()
+                        .HasForeignKey("GasRefrigeranteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.RegistroAuditoria", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.Intervencion", null)
+                        .WithMany()
+                        .HasForeignKey("IntervencionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Afrisan.Api.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Sucursal", b =>
+                {
+                    b.HasOne("Afrisan.Api.Models.Cliente", null)
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Afrisan.Api.Models.Usuario", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Rol")
+                        .WithMany()
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Rol");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -424,21 +1157,6 @@ namespace Afrisan.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Afrisan.Api.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("Afrisan.Api.Models.Usuario", null)
@@ -455,6 +1173,8 @@ namespace Afrisan.Api.Migrations
 
             modelBuilder.Entity("Afrisan.Api.Models.OrdenTrabajo", b =>
                 {
+                    b.Navigation("Intervenciones");
+
                     b.Navigation("Movimientos");
                 });
 #pragma warning restore 612, 618

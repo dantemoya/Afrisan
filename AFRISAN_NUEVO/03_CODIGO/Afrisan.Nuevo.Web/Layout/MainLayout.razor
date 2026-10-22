@@ -1,0 +1,33 @@
+@inherits LayoutComponentBase
+@inject SesionService Sesion
+@inject NavigationManager Nav
+
+<div class="app-shell">
+    <aside class="sidebar">
+        <a href="" class="brand"><span class="brand-mark">A</span><span>AFRISAN<small>CONTROL DE REFRIGERANTES</small></span></a>
+        <p class="nav-caption">OPERACIÓN DE BODEGA</p>
+        <nav aria-label="Menú principal">
+            <NavLink href="ordenes"><span aria-hidden="true">▣</span> @(Sesion.Sesion?.Rol == "Tecnico" ? "Mis órdenes de trabajo" : "Órdenes de trabajo")</NavLink>
+            <AuthorizeView Roles="@Roles.Lectura">
+                <NavLink href="" Match="NavLinkMatch.All"><span aria-hidden="true">▦</span> Resumen</NavLink>
+                <NavLink href="inventario"><span aria-hidden="true">▤</span> Inventario de cilindros</NavLink>
+                <NavLink href="refrigerantes"><span aria-hidden="true">◈</span> Refrigerantes</NavLink>
+            </AuthorizeView>
+            <NavLink href="identificar"><span aria-hidden="true">⌕</span> Identificar cilindro</NavLink>
+        </nav>
+        <div class="sidebar-bottom"><span class="status-dot"></span> Entorno de revisión<small>Inventario y trabajo técnico</small></div>
+    </aside>
+    <div class="workspace">
+        <header class="topbar"><span>Gestión y trazabilidad <span class="separator">/</span> @(Sesion.Sesion?.Rol == "Tecnico" ? "Terreno" : "Operación")</span>
+            <AuthorizeView><Authorized><div class="user-menu"><div><strong>@Sesion.Sesion?.Nombre</strong><small>@Sesion.Sesion?.Rol</small></div><button class="btn subtle" @onclick="Salir">Salir</button></div></Authorized></AuthorizeView>
+        </header>
+        <main>
+            <div class="demo-bar" role="status"><span class="status-dot"></span><strong>Demostración en memoria</strong><span>La API se reinicia sin datos. Los borradores y fotos pendientes se conservan en este navegador. Sin conexión a Supabase.</span></div>
+            @Body
+        </main>
+    </div>
+</div>
+
+@code {
+    private async Task Salir() { await Sesion.SalirAsync(); Nav.NavigateTo("acceso"); }
+}

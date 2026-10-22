@@ -11,12 +11,15 @@ namespace Afrisan.Api.DTOs
         public string TipoRefrigerante { get; set; } = string.Empty;
 
         [Range(0.01, double.MaxValue)]
+        [PesoKg]
         public decimal CapacidadKg { get; set; }
 
         [Range(0, double.MaxValue)]
+        [PesoKg]
         public decimal PesoActualKg { get; set; }
 
         [Range(0.01, double.MaxValue)]
+        [PesoKg]
         public decimal? TaraKg { get; set; }
 
         [Required]

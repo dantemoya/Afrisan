@@ -1,0 +1,26 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/10_Retrospectiva_Semana_2_AFRISAN_Corregida.docx
+P1: Resumen de la 
+P2: Reunión Retrospectiva
+P5: Información de la empresa y proyecto:
+P7: Empresa / Organización
+P8: Accesorios Frigoríficos Santiago Limitada (AFRISAN Ltda.)
+P9: Proyecto
+P10: Sistema Integral de Gestión de Inventario, Prevención de Pérdidas y Auditoría de Gases Refrigerantes. 
+P12: Información de la reunión:
+P14: Lugar
+P15: Llamada de voz
+P16: Fecha
+P17: 27-08-2026
+P18: Número de iteración / sprint
+P19: 2
+P20: Personas convocadas a la reunión
+P21: Dante Moya - Scrum Master / DesarrolloYarek Larraguibel - QA / Arquitectura
+P22: Personas que asistieron a la reunión
+P23: Dante Moya - Scrum Master / DesarrolloYarek Larraguibel - QA / Arquitectura
+P26: Formulario de reunión retrospectiva
+P28: ¿Qué salió bien en la iteración? (aciertos)
+P29: ¿Qué no salió bien en la iteración? (errores)
+P30: ¿Qué mejoras vamos a implementar en la próxima iteración? (recomendaciones de mejora continua)
+P31: Se definió con claridad qué elementos entran en el desarrollo (núcleo web/API, trazabilidad QR y módulos posteriores de operación en terreno y reportería) y qué queda fuera (modificación del ERP Defontana), evitando riesgos de sobrecostos o retrasos futuros.
+P32: Surgieron complicaciones y vacíos en los requerimientos iniciales debido a la dificultad para coordinar horarios con los técnicos que se encuentran desplegados en las centrales de frío de los clientes.
+P33: Diseñar e iterar los prototipos en Figma con los técnicos antes de implementar el cliente móvil planificado, garantizando que el flujo de escaneo QR en las salas de máquinas sea rápido y ejecutable a un solo toque.

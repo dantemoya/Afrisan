@@ -1,0 +1,59 @@
+@page "/ordenes/nueva"
+@attribute [Authorize(Roles = "Autorizador")]
+@inject InventarioClient Api
+@inject SesionService Sesion
+@inject NavigationManager Nav
+
+<PageTitle>Preparar OT · AFRISAN</PageTitle>
+<a href="ordenes" class="back-link">← Órdenes</a><div class="page-heading"><div><span class="eyebrow">AUTORIZADOR / REVISIÓN</span><h1>Preparar una OT</h1><p>Asigna el técnico y registra el pedido por refrigerante.</p></div></div>
+<div class="notice info">Preparación manual para revisar el recorrido. No importa Defontana ni reemplaza todavía los catálogos de clientes/sucursales.</div>
+@if (error is not null) { <div class="notice error" role="alert">@error</div> }
+@if (cargando) { <p>Cargando refrigerantes…</p> }
+else if (gases.Length == 0) { <div class="panel"><p>Bodega debe registrar al menos un refrigerante antes de crear una OT.</p></div> }
+else
+{
+    <section class="panel"><EditForm Model="form" OnValidSubmit="Crear"><DataAnnotationsValidator /><ValidationSummary />
+        <fieldset disabled="@ocupado"><div class="form-grid"><div><label for="ot-sucursal">Sucursal</label><InputText id="ot-sucursal" @bind-Value="form.Sucursal" maxlength="200" /></div><div><label for="ot-direccion">Dirección</label><InputText id="ot-direccion" @bind-Value="form.Direccion" maxlength="400" /></div></div>
+        <label for="ot-descripcion">Trabajo solicitado</label><InputText id="ot-descripcion" @bind-Value="form.Descripcion" maxlength="150" />
+        <label for="ot-tecnico">Técnico asignado</label><InputSelect id="ot-tecnico" @bind-Value="form.Tecnico"><option value="">Selecciona técnico</option>@foreach (var cuenta in Sesion.Entorno?.Cuentas.Where(c => c.Rol == "Tecnico") ?? []) { <option value="@cuenta.Email">@cuenta.Nombre — @cuenta.Email</option> }</InputSelect>
+        <h2 class="mt">Pedido por refrigerante</h2>
+        @foreach (var linea in lineas)
+        { <div class="linea-pedido" @key="linea"><div><label>Refrigerante</label><InputSelect @bind-Value="linea.RefrigeranteId"><option value="0">Seleccionar</option>@foreach (var g in gases) { <option value="@g.Id">@g.Codigo</option> }</InputSelect></div><div><label>Solicitado (g)</label><InputNumber @bind-Value="linea.Solicitados" min="1" step="1" /></div><div><label>Autorizado (g)</label><InputNumber @bind-Value="linea.Autorizados" min="1" step="1" /></div><button class="btn subtle" type="button" @onclick="() => lineas.Remove(linea)" disabled="@(lineas.Count == 1)">Quitar línea</button></div> }
+        <button type="button" class="btn secondary mt" @onclick="() => lineas.Add(new())" disabled="@(lineas.Count >= 20)">Agregar otro refrigerante</button>
+        <label for="ot-retirar">Códigos de cilindros que ya están en sucursal y se retirarán</label><InputTextArea id="ot-retirar" @bind-Value="form.Retirar" rows="3" placeholder="AFR-000001, AFR-000002" />
+        <p class="field-help">Deben existir en inventario. Esta preparación declara su ubicación inicial en esa sucursal y los reserva para el retiro. Déjalo vacío si el pedido es solo de agregados.</p>
+        <div class="form-actions"><a class="btn secondary" href="ordenes">Cancelar</a><button class="btn primary" type="submit">@(ocupado ? "Preparando…" : "Autorizar y asignar OT")</button></div>
+        </fieldset>
+    </EditForm></section>
+}
+@code {
+    private readonly OtForm form = new();
+    private readonly List<LineaForm> lineas = [new()];
+    private readonly Guid idOperacion = Guid.NewGuid();
+    private RefrigeranteResponse[] gases = [];
+    private bool ocupado, cargando = true;
+    private string? error;
+    protected override async Task OnInitializedAsync() { try { gases = await Api.RefrigerantesAsync(); } catch (Exception ex) { error = Formato.Error(ex); } finally { cargando = false; } }
+    private async Task Crear()
+    {
+        ocupado = true; error = null;
+        try
+        {
+            var ot = await Api.CrearOtAsync(new() { IdOperacion = idOperacion, Sucursal = form.Sucursal, Direccion = form.Direccion,
+                Descripcion = form.Descripcion, TecnicoEmail = form.Tecnico, Detalle = lineas.Select(l => new LineaOtRequest { RefrigeranteId = l.RefrigeranteId, GrSolicitados = l.Solicitados, GrAutorizados = l.Autorizados }).ToArray(),
+                CilindrosARetirar = form.Retirar.Split([',','\n',';'], StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries) });
+            Nav.NavigateTo($"ordenes/{ot.Id}");
+        }
+        catch (Exception ex) { error = Formato.Error(ex); }
+        finally { ocupado = false; }
+    }
+    private sealed class OtForm
+    {
+        [Required, StringLength(200)] public string Sucursal { get; set; } = "";
+        [Required, StringLength(400)] public string Direccion { get; set; } = "";
+        [Required, StringLength(150)] public string Descripcion { get; set; } = "";
+        [Required] public string Tecnico { get; set; } = "";
+        public string Retirar { get; set; } = "";
+    }
+    private sealed class LineaForm { public long RefrigeranteId { get; set; } public long Solicitados { get; set; } public long Autorizados { get; set; } }
+}

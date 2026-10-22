@@ -1,0 +1,149 @@
+SOURCE: ARQUITECTURA/VISTAS_4_1/Historico/AFRISAN_07_ARQUITECTURA_4_1.docx
+P2: DUOC UC
+P3: Sede Melipilla
+P5: ARQUITECTURA DE SOFTWARE — VISTAS 4+1
+P6: Modelo de Kruchten — Sistema de Gestión de Refrigerantes AFRISAN
+P12: Responsable de esta entrega: Yarek Larraguibel — Arquitectura técnica
+P13: Integrantes del proyecto: Carolina Ávila, Dante Moya, Yarek Larraguibel
+P14: Docente guía: Carlos Quintanilla
+P15: Documento: Arquitectura de Software (Vistas 4+1)
+P16: Fecha: 02/09/2026
+P17: Versión: 1.0
+P19: 1. Introducción
+P20: Este documento presenta la arquitectura de software del Sistema de Gestión de Refrigerantes AFRISAN utilizando el modelo de Vistas 4+1 de Kruchten, correspondiente al paquete de trabajo 1.4 de la EDT del proyecto. El modelo describe la arquitectura desde cinco perspectivas complementarias: Vista Lógica, Vista de Desarrollo, Vista de Procesos, Vista Física, y una quinta vista (+1) de Escenarios que ilustra cómo las cuatro vistas anteriores trabajan juntas para soportar los casos de uso del sistema.
+P21: Estas vistas son consistentes con el resto de la documentación de arquitectura del proyecto: el Diagrama Entidad-Relación (DER) y diccionario de datos, la Identificación de APIs, los Recursos Técnicos y el EDT de 3 fases, todos elaborados sobre el stack tecnológico oficial: ASP.NET Core Web API (.NET 8), Entity Framework Core 8, Blazor WebAssembly, .NET MAUI, PostgreSQL 16 en Supabase Cloud, y despliegue en Microsoft Azure App Service.
+P22: 1.1 Las cinco vistas
+P23: Vista
+P24: Responde a la pregunta
+P25: Audiencia principal
+P26: Lógica
+P27: ¿Qué hace el sistema? (entidades y su comportamiento)
+P28: Analistas, diseñadores
+P29: Desarrollo
+P30: ¿Cómo se organiza el código fuente?
+P31: Programadores, líder técnico
+P32: Procesos
+P33: ¿Cómo se ejecuta en tiempo real? (concurrencia, sincronización)
+P34: Integradores, QA
+P35: Física
+P36: ¿Dónde se despliega cada componente?
+P37: Ingenieros de infraestructura
+P38: Escenarios (+1)
+P39: ¿Cómo colaboran las 4 vistas para un caso de uso real?
+P40: Todo el equipo, contraparte
+P42: 2. Vista Lógica
+P43: La Vista Lógica describe las abstracciones clave del dominio del problema: las entidades del sistema, sus atributos y su comportamiento (reglas de negocio). Corresponde al mismo modelo documentado en detalle en el documento "DER y Diccionario de Datos", complementado aquí con el comportamiento de las clases de dominio más relevantes.
+P45: Figura 1. Modelo de dominio (Vista Lógica) — ver diccionario de datos completo en el documento DER.
+P47: Comportamiento clave de las clases de dominio
+P48: Clase
+P49: Método
+P50: Responsabilidad
+P51: Intervencion
+P52: CalcularBalanceMasa()
+P53: Calcula el porcentaje de pérdida entre el peso retirado y el peso utilizado.
+P54: Intervencion
+P55: CalcularEstadoSemaforo()
+P56: Determina verde/amarillo/rojo según el balance de masa (umbrales 5%-15%).
+P57: Intervencion
+P58: CalcularCosto()
+P59: Calcula el costo monetario de la intervención según el tipo de gas y la cantidad utilizada.
+P60: IndicadorAmbiental
+P61: CalcularEmisionesCO2e()
+P62: Calcula las emisiones de CO2 equivalente usando el factor GWP del cilindro.
+P63: Auditoria
+P64: RegistrarCorreccion()
+P65: Genera un snapshot JSONB del estado anterior y nuevo cuando el Administrador general corrige un registro.
+P66: Estas operaciones residen en la capa AFRISAN.Domain (ver Vista de Desarrollo) y son invocadas por los casos de uso de la capa AFRISAN.Application, nunca directamente por la interfaz de usuario, para asegurar que la lógica de negocio se aplique de manera consistente sin importar si la solicitud proviene de la app móvil, la app web o un proceso de sincronización.
+P68: 3. Vista de Desarrollo
+P69: La Vista de Desarrollo describe la organización del código fuente en capas, siguiendo el estilo de Arquitectura Limpia (Clean Architecture) con separación de responsabilidades y regla de dependencia hacia el centro (el Dominio no depende de ninguna otra capa).
+P71: Figura 2. Vista de Desarrollo — organización en capas (Clean Architecture).
+P72: Capa (proyecto .NET)
+P73: Contenido
+P74: AFRISAN.Presentation
+P75: Componentes Blazor (web) y páginas/ViewModels .NET MAUI (móvil), siguiendo el patrón MVVM en el cliente móvil.
+P76: AFRISAN.Application
+P77: Casos de uso implementados como Commands y Queries (patrón CQS), DTOs de entrada/salida, validadores, e interfaces de repositorio que la infraestructura debe implementar.
+P78: AFRISAN.Domain
+P79: Entidades del dominio (Usuario, Cliente, Local, Cilindro, Intervención, MovimientoInventario, Costo, IndicadorAmbiental, Auditoría), enums, reglas de negocio y excepciones de dominio. No depende de ninguna otra capa.
+P80: AFRISAN.Infrastructure
+P81: Implementación de los repositorios con Entity Framework Core 8 sobre PostgreSQL/Supabase, servicios de lectura de código QR, y el conector de exportación de datos hacia Power BI.
+P82: Esta organización permite que el equipo trabaje en paralelo: por ejemplo, el desarrollo de un caso de uso en AFRISAN.Application puede avanzar con una implementación simulada (mock) del repositorio, mientras otro integrante completa la implementación real en AFRISAN.Infrastructure, conforme a los Sprints definidos en la Fase 2 del EDT.
+P84: 4. Vista de Procesos
+P85: La Vista de Procesos describe el comportamiento del sistema en tiempo de ejecución, incluyendo la concurrencia entre la interfaz de usuario, la tarea de sincronización en segundo plano de la app móvil, y el procesamiento asíncrono de solicitudes en el backend. Se ilustra con el flujo de registro de una intervención, que es el proceso más crítico del sistema.
+P87: Figura 3. Vista de Procesos — registro de una intervención, con y sin conexión.
+P89: El hilo principal de la app móvil/web nunca bloquea la interfaz mientras se espera una respuesta de red; las llamadas a la API se realizan de forma asíncrona (async/await).
+P90: Cuando no hay conexión, un Background Service de .NET MAUI reintenta la sincronización periódicamente, sin intervención del usuario.
+P91: En el backend, ASP.NET Core procesa cada solicitud de forma asíncrona, permitiendo atender múltiples solicitudes concurrentes de distintos técnicos sin bloquear el servidor.
+P92: La confirmación final ocurre solo cuando PostgreSQL confirma el commit de la transacción, incluyendo la política de Row-Level Security (RLS) aplicable al usuario que originó la solicitud.
+P94: 5. Vista Física
+P95: La Vista Física describe cómo se distribuyen los componentes de software sobre la infraestructura de hardware y los servicios cloud, consistente con el documento "Diagrama de Despliegue".
+P97: Figura 4. Vista Física — diagrama de despliegue.
+P98: Los componentes de software correspondientes a esta distribución se muestran en el siguiente diagrama de componentes, que complementa la vista física con el detalle de los módulos desplegados en el servidor de aplicación (Azure App Service):
+P100: Figura 5. Diagrama de componentes desplegados en el servidor de aplicación.
+P102: 6. Vista de Escenarios (+1)
+P103: La quinta vista ilustra cómo las cuatro vistas anteriores colaboran para soportar los casos de uso del sistema, ya documentados en el ERS. Se listan a continuación, seguidos de un escenario detallado que recorre las cinco vistas.
+P104: ID
+P105: Caso de uso
+P106: Actor principal
+P107: CU-01
+P108: Registrar movimiento de inventario (QR)
+P109: Jefe de bodega
+P110: CU-02
+P111: Registrar intervención en terreno
+P112: Técnico
+P113: CU-03
+P114: Visualizar semáforo GEI
+P115: Técnico, Jefe de grupo
+P116: CU-04
+P117: Iniciar sesión / seleccionar perfil
+P118: Todos los roles
+P119: CU-05
+P120: Gestionar usuarios y roles
+P121: Administrador general
+P122: CU-06
+P123: Visualizar dashboard ejecutivo (Power BI)
+P124: Administrador general
+P125: CU-07
+P126: Generar y exportar reporte de costos
+P127: Administrador general
+P128: CU-08
+P129: Consultar historial de un cilindro
+P130: Jefe de bodega, Administrador general
+P131: CU-09
+P132: Registrar cliente y local
+P133: Administrador general
+P134: CU-10
+P135: Registrar cilindro
+P136: Jefe de bodega, Administrador general
+P137: CU-11
+P138: Corregir datos de una intervención
+P139: Administrador general
+P140: 6.1 Escenario detallado: "Técnico registra una intervención con fuga detectada, sin conexión"
+P141: Paso
+P142: Vista involucrada
+P143: Qué ocurre
+P144: 1
+P145: Lógica
+P146: El técnico completa el formulario de Intervención (entidad de dominio) con tipo "fuga detectada".
+P147: 2
+P148: Procesos
+P149: La app detecta ausencia de conexión y escribe el registro en SQLite local (proceso offline).
+P150: 3
+P151: Desarrollo
+P152: Al reconectar, el Background Service invoca el caso de uso RegistrarIntervencion (capa Application), que delega el cálculo a la entidad Intervencion (capa Domain).
+P153: 4
+P154: Lógica
+P155: Intervencion.CalcularBalanceMasa() y CalcularEstadoSemaforo() determinan que el resultado es "rojo" (balance de masa > 15%).
+P156: 5
+P157: Desarrollo
+P158: AFRISAN.Infrastructure persiste el registro mediante Entity Framework Core, dentro de una transacción.
+P159: 6
+P160: Física
+P161: La transacción se ejecuta en Azure App Service y se confirma en PostgreSQL 16 (Supabase Cloud), aplicando la política RLS del rol Técnico.
+P162: 7
+P163: Física
+P164: Power BI Service consulta la base de datos y refleja la nueva intervención crítica en el dashboard ejecutivo y en el ranking de locales críticos.
+P165: 8
+P166: Procesos
+P167: El Jefe de grupo ve la alerta en el semáforo GEI en tiempo real (CU-03) desde la app web (Blazor), sin haber recargado manualmente la página.
+P168: Este escenario demuestra que ninguna de las cinco vistas es suficiente por sí sola para entender el sistema: la Vista Lógica explica qué se calcula, la de Desarrollo dónde vive ese cálculo en el código, la de Procesos cómo se comporta con o sin conexión, la Física dónde se ejecuta cada parte, y el escenario conecta todo con el caso de uso real que le importa a AFRISAN.

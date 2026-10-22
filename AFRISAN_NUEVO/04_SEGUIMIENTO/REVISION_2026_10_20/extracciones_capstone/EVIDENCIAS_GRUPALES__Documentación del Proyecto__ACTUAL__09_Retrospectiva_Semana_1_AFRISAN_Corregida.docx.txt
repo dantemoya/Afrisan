@@ -1,0 +1,26 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/09_Retrospectiva_Semana_1_AFRISAN_Corregida.docx
+P1: Resumen de la 
+P2: Reunión Retrospectiva
+P5: Información de la empresa y proyecto:
+P7: Empresa / Organización
+P8: Accesorios Frigoríficos Santiago Limitada (AFRISAN Ltda.)
+P9: Proyecto
+P10: Sistema Integral de Gestión de Inventario, Prevención de Pérdidas y Auditoría de Gases Refrigerantes. 
+P12: Información de la reunión:
+P14: Lugar
+P15: Llamada de voz
+P16: Fecha
+P17: 14-08-2026
+P18: Número de iteración / sprint
+P19: 1
+P20: Personas convocadas a la reunión
+P21: Dante Moya - Scrum Master / DesarrolloYarek Larraguibel - QA / Arquitectura
+P22: Personas que asistieron a la reunión
+P23: Dante Moya - Scrum Master / DesarrolloYarek Larraguibel - QA / Arquitectura
+P26: Formulario de reunión retrospectiva
+P28: ¿Qué salió bien en la iteración? (aciertos)
+P29: ¿Qué no salió bien en la iteración? (errores)
+P30: ¿Qué mejoras vamos a implementar en la próxima iteración? (recomendaciones de mejora continua)
+P31: El contacto directo con Carlos Aguilera (Product Owner) y la apertura operativa de AFRISAN Ltda. facilitaron un entendimiento profundo del quiebre de trazabilidad en terreno con clientes críticos como Walmart y Cencosud.
+P32: Al ser un inicio con metodología tradicional, se detectó una debilidad en la capacidad de planificar de forma eficiente el ciclo de trabajo bajo el marco Scrum, lo que generó dudas sobre los tiempos requeridos para los entregables de desarrollo.
+P33: Implementar de forma estricta las ceremonias ágiles (planificación de sprint, revisiones y retrospectivas cortas) y utilizar activamente el tablero Kanban (Trello/GitHub) para mejorar la estimación de tiempos y el seguimiento del equipo.

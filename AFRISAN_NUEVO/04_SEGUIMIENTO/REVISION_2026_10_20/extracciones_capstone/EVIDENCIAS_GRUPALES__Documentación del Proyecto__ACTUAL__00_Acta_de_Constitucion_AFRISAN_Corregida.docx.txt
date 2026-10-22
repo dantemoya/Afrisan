@@ -1,0 +1,281 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/00_Acta_de_Constitucion_AFRISAN_Corregida.docx
+P1: Duoc UC
+P2: Escuela de Informática y Telecomunicaciones
+P3: Sede Melipilla
+P8: Acta de Constitución del Proyecto
+P9: (Project Charter)
+P11: “Sistema Integral de Gestión de Inventario, Prevención de Pérdidas, Auditoría y Trazabilidad de Gases Refrigerantes”
+P13: Empresa Contraparte: Accesorios Frigoríficos Santiago Limitada (AFRISAN Ltda.) 
+P21: Integrantes del Equipo de Proyecto: 
+P22: Dante Moya (RUT: 21.685.640-6) 
+P23: Yarek Larraguibel (RUT: 20.604.664-3) 
+P25: Carrera: Ingeniería en Informática 
+P26: Asignatura: Portafolio de Título (APT) 
+P27: Docente Guía: Carlos Quintanilla 
+P28: Cliente / Sponsor: Carlos Aguilera (AFRISAN Ltda.) 
+P30: Melipilla, Chile 
+P31: Agosto, 2026 
+P33: Índice
+P34: Información General del Proyecto3
+P35: Justificación y Propósito del Proyecto3
+P36: Objetivos del Proyecto4
+P37: Objetivo General4
+P38: Objetivos SMART4
+P39: Alcance del Proyecto6
+P40: En Alcance6
+P41: Fuera de Alcance6
+P42: Requerimientos de Alto Nivel y Criterios de Éxito7
+P43: Reglas de Negocio8
+P44: Especificación de Requerimientos Funcionales (RF)9
+P45: Especificación de Requerimientos No Funcionales (RNF)10
+P46: Dependencias y Restricciones11
+P47: Dependencias11
+P48: Restricciones11
+P49: Supuestos y Riesgos12
+P50: Supuestos12
+P51: Riesgos y Plan de Mitigación13
+P52: Aprobaciones14
+P55: Información General del Proyecto
+P56: Proyecto
+P57: Sistema Integral de Gestión de Inventario, Prevención de Pérdidas y Auditoría de Gases Refrigerantes. 
+P58: Cliente Solicitante
+P59: Accesorios Frigoríficos Santiago Limitada (AFRISAN Ltda.). 
+P60: Responsable del Levantamiento
+P61: Equipo de Proyecto AFRISAN (Dante Moya y Yarek Larraguibel)
+P62: Fecha y Lugar
+P63: 23 de Agosto 2026
+P64: Versionado
+P65: 1.1
+P66: Justificación y Propósito del Proyecto 
+P67: AFRISAN importa gases refrigerantes (HFCs como R-507, R-404A, R-134a, R-22) desde China y EE.UU., registrándolos en su ERP Defontana. Al momento de despachar cilindros hacia clientes nacionales como Walmart Chile y Cencosud, se produce un quiebre crítico de trazabilidad: no existen identificadores unitarios por envase, se desconoce el volumen exacto inyectado en terreno, y no existe un mecanismo estricto de logística inversa para asegurar la devolución del 100% de los cilindros vacíos.
+P68: Esto genera pérdidas económicas por mermas o robos de cilindros en traslado/terreno, además de riesgos ambientales severos cuando los envases no devueltos terminan en destinos informales (vertederos o fabricación de braseros artesanales, liberando gases tóxicos a la atmósfera). El proyecto nace para digitalizar de extremo a extremo la cadena de custodia, controlar la entrega de chatarra a la empresa Regener y automatizar el reporte de emisiones CO2e ante el Ministerio del Medio Ambiente.
+P70: Objetivos del Proyecto
+P71: Objetivo General
+P72: Diseñar e implementar un sistema informático multiplataforma para la gestión centralizada de inventarios, trazabilidad mediante captura óptica (código QR), control de cadena de custodia y cuantificación de emisiones de gases de efecto invernadero CO2e derivados del uso de refrigerantes en AFRISAN. 
+P73: Objetivos SMART
+P75: Específico
+P76: Medible
+P77: Alcanzable
+P78: Relevante
+P79: Temporal
+P80: Documentar el 100% de las reglas de negocio, flujo AS-IS y requerimientos funcionales/no funcionales del proceso de gestión de refrigerantes, a través de entrevistas y talleres con el personal de AFRISAN.
+P81: Entregar un Acta de Constitución y un Product Backlog con al menos 10 historias de usuario priorizadas (MoSCoW), validado y firmado por el cliente
+P82: Se dispone de acceso directo a los técnicos y administrativos de AFRISAN, con reuniones semanales agendadas.
+P83: Base fundamental para todo el desarrollo posterior; sin esto, el sistema no reflejaría la realidad operativa.
+P84: Completar a más tardar semana 4
+P85: Levantar, documentar y aprobar los requerimientos funcionales y no funcionales del proyecto.
+P86: Registrar al menos 15 requerimientos del proyecto y validar su aprobación con la contraparte.
+P87: Los requerimientos se registrarán en una hoja de cálculo compartida de Google para facilitar su trazabilidad y revisión.
+P88: Permite mantener una base verificable de necesidades del cliente y criterios de aceptación.
+P89: Completar en la semana 4.
+P90: Diseñar el modelo relacional y documentar la arquitectura cliente-servidor de tres capas lógicas, con separación entre presentación, lógica de negocio y persistencia de datos. La comunicación se realizará mediante API REST entre los clientes y el backend ASP.NET Core, utilizando PostgreSQL como base de datos central.
+P91: Entregar el Diagrama Entidad-Relación (DER) validado y el documento de arquitectura 4+1, dejando explícita la estructura Afrisan.Web → Afrisan.Api → PostgreSQL y su correspondencia con presentación, lógica de negocio y persistencia.
+P92: El equipo cuenta con experiencia en PostgreSQL, .NET y modelado de software.
+P93: Asegura coherencia entre la arquitectura documentada y la solución implementada, facilita el mantenimiento y separa responsabilidades entre interfaz, API y datos.
+P94: Finalizar la semana 6.
+P95: Implementar el backend (API REST en ASP.NET Core) y el módulo web de escritorio para la bodega, que permita el registro de entrada/salida de cilindros mediante escaneo QR asociado a órdenes de trabajo (OT) de Defontana.
+P96: El sistema debe ser capaz de procesar 50 despachos simulados con lectura QR en menos de 2 segundos por cilindro, almacenando correctamente el pesaje de salida y la vinculación con la OT.
+P97: Se usa .NET 8, Entity Framework Core y Supabase (tier gratuito); hay experiencia previa en desarrollo de APIs.
+P98: Corresponde al primer entregable funcional que valida la integración con el ERP y la trazabilidad desde la bodega.
+P99: Finalizar la semana 6
+P100: Desarrollar la aplicación móvil (PWA o .NET MAUI) para técnicos en terreno, que permita registrar cargas de refrigerante, escanear QR, capturar foto de la balanza, calcular el semáforo de criticidad (verde, amarillo, rojo) y funcionar sin conexión a internet.
+P101: La app debe ser capaz de almacenar localmente (SQLite) al menos 20 registros de intervención sin conexión, sincronizar automáticamente al recuperar la red, y generar el cálculo de CO2e (GWP) en menos de 3 segundos. Las pruebas de usabilidad con 3 técnicos deben arrojar una calificación de satisfacción ≥ 4/5 
+P102: Se propone utilizar .NET MAUI para el cliente móvil, compartiendo el ecosistema C# con el backend. La captura QR y la persistencia local deberán validarse técnicamente antes de considerarse implementadas.
+P103: Es el módulo de mayor impacto operativo; ataca directamente el problema de pérdida de trazabilidad en terreno. 
+P104: Finalizar semana 8 
+P105: Construir un panel interactivo en Power BI conectado a la base de datos central, que visualice el balance de masa, costos acumulados por intervención, ranking de fugas por local y toneladas de CO2e emitidas (con factores GWP). Además, implementar el motor de cálculo automático de emisiones. 
+P106: El dashboard debe mostrar al menos 5 KPIs principales: (1) Total de kg cargados vs devueltos, (2) Costo total de refrigerantes, (3) Emisiones CO2e acumuladas, (4) Semáforo de criticidad por local, (5) Porcentaje de devolución de cilindros. El motor debe calcular correctamente la conversión para al menos 4 tipos de refrigerantes 
+P107: Power BI Desktop es gratuito y se integra con PostgreSQL vía Npgsql; el equipo tiene conocimientos básicos de DAX y Power Query. 
+P108: Proporciona visibilidad gerencial y cumple con el requisito ambiental de reporte al Ministerio del Medio Ambiente. 
+P109: Finalizar semana 9 
+P110: Ejecutar un plan de pruebas que incluya pruebas unitarias, de integración, de vulnerabilidades (OWASP: SQLi, XSS, RLS) y pruebas de aceptación con usuarios finales de AFRISAN (técnicos, bodegueros, administradores). 
+P111: Lograr una cobertura de pruebas unitarias ≥ 80% en el backend; realizar al menos 15 casos de prueba UAT con usuarios finales, documentar los resultados y obtener la conformidad del cliente (Carlos Aguilera) sin errores críticos abiertos.
+P112: Se usarán herramientas como xUnit, Moq, OWASP ZAP y una matriz de pruebas detallada. El equipo de QA  tiene experiencia en pruebas de software. 
+P113: Garantiza que el sistema sea seguro, confiable y aceptado operativamente antes del despliegue. 
+P114: Finalizar semana 12 
+P115: Corregir los errores encontrados durante el período de pruebas.
+P116: Lograr una aprobación del 90% de los requerimientos funcionales y del 80% de los no funcionales.
+P117: Se utilizará Visual Studio Community, adecuado para fines académicos y equipos pequeños de desarrollo.
+P118: Garantizar la calidad del software antes del cierre del proyecto.
+P119: Finalizar en la semana 15.
+P120: Desplegar la solución en un entorno cloud (Azure App Service / Supabase) con etiquetas QR físicas de prueba, elaborar el manual de usuario (paso a paso para cada rol) y el manual técnico de despliegue/mantenimiento, y redactar el informe final del proyecto.
+P121: Entregar 3 manuales (técnico en terreno, bodeguero, administrador) con al menos 10 pasos ilustrados cada uno; el sistema debe estar accesible públicamente durante la demostración final; el informe debe contener todas las evidencias solicitadas (acta, backlog, arquitectura, dashboards, resultados de pruebas).
+P122: El equipo tiene experiencia en despliegues en Azure y redacción de documentación. Las etiquetas se imprimirán en una impresora térmica (recursos disponibles).
+P123: Cierra formalmente el proyecto y asegura su transferencia a AFRISAN, permitiendo su uso continuo.
+P124: Finalizar a más tardar semana 17
+P126: Alcance del Proyecto
+P127: En Alcance
+P128: Módulo de despacho y registro en bodega vinculado en las OTs y Guías de Defontana mediante serialización con código QR/Barra.
+P129: Módulo de operaciones en terreno para técnicos: registro de cargas, selección de cliente (Walmart/Cencosud), causa de falla, captura de foto de balanza y funcionamiento offline.
+P130: Algoritmo de conciliación automática de masa  (pesaje salida vs. pesaje de retorno vs declarado).
+P131: Módulo de logística inversa para auditar cilindros pendientes de devolución y registro de Certificados de Disposición Intermedia emitidos por Regener.
+P132: Dashboard ejecutivo en Power BI para la gerencia de AFRISAN.
+P133: Fuera de Alcance
+P134: Modificación directa del código fuente o base de datos interna del ERP Defontana. Para asegurar costo cero en licenciamiento de terceros y viabilidad operativa, la integración se realizará mediante carga automatizada de archivos estructurados (CSV/Excel exportados desde Defontana) y/o consumo de un servicio simulado (Mock API). 
+P135: Compra, mantención o calibración de balanzas físicas de pesaje en terreno.
+P136: Gestión de facturación electrónica o cobranza directa a los clientes finales (Walmart/Cencosud)
+P138: Requerimientos  de Alto Nivel y Criterios de Éxito
+P139: Operacional
+P140: Técnico
+P141: Calidad/Seguridad
+P142: Ambiental
+P143: Disminuir a 0% la incertidumbre sobre la ubicación y estado de los cilindros despachados a terreno. 
+P144: Tiempo de respuesta en lectura óptica de código QR/Barra inferior a 2 segundos y operatividad sin conexión a internet en salas de máquinas subterráneas. 
+P145: Cumplimiento de directrices OWASP (cero vulnerabilidades críticas de SQL Injection y control de acceso RBAC). 
+P146: Cálculo automático y exacto de toneladas de CO2e mediante factores oficiales GWP para auditorías de clientes corporativos.
+P148: Supuestos, Restricciones y Riesgos Iniciales
+P149: Supuesto Clave
+P150: AFRISAN y sus técnicos facilitarán la información operativa, catálogos de equipos y participarán activamente en las pruebas UAT. 
+P151: Restricción Principal
+P152: Desarrollo adaptado a capas cloud gratuitas/educativas y plazos acotados al semestre académico (18 semanas).
+P153: Riesgo Crítico y Mitigación
+P154: Pérdida de conexión en salas de máquinas -> Mitigado mediante arquitectura local persistente (SQLite/IndexedDB) y sincronización asíncrona. 
+P156: Reglas de Negocio
+P158: ID
+P159: Regla de Negocio
+P160: Descripción
+P161: RN-01
+P162: Identificación unitaria por QR/Código de barra
+P163: Todo cilindro despachado desde bodega debe poseer una etiqueta QR única adherida que identifique su número de serie, tipo de refrigerante y tara base. 
+P164: RN-02
+P165: Conciliación de Logística Inversa
+P166: La Orden de Trabajo (OT) no podrá cerrarse administrativamente hasta que la cantidad de envases vacíos devueltos a bodega coincida con la cantidad de cilindros despachados en la guía de Defontana. 
+P167: RN-03
+P168: Semáforo de fuga crítica
+P169: 🟢 Verde: Recarga < 5% de la capacidad nominal del equipo.
+P170: 🟡 Amarillo: Recarga entre 5% y $15% de la capacidad nominal.
+P171: 🔴 Rojo: Recarga > 15% o equipo recargado hace menos de 30 días (emite alerta de fuga recurrente).
+P172: RN-04
+P173: Conversión de Emisiones GEI
+P174: Las emisiones se calcularán automáticamente multiplicando los kilogramos cargados por el factor GWP del refrigerante (R-404A=3.922, R-507=3.985, R-134a=1.430, R-22=1.810) y dividiendo por 1.000 para obtener toneladas de CO2e
+P175: RN-05
+P176: Costeo Integral de Intervención 
+P177: Costo total = (Kg cargados x Precio Unitario) + Mano de Obra + Repuestos + Traslado
+P180: Especificación de Requerimientos Funcionales (RF)
+P181: Código
+P182: Nombre del Requerimiento
+P183: Descripción Detallada
+P184: RF-01
+P185: Autenticación y Control de Roles
+P186: Permitir acceso seguro con credenciales según perfiles: Técnico, Bodeguero, Administrador y Auditor
+P187: RF-02
+P188: Asociación de Despacho (Defontana)
+P189: Registrar la salida de cilindros vinculando el N° de Guía de Despacho/OT de Defontana con los códigos QR/Barra escaneados de cada envase
+P190: RF-03
+P191: Pesaje de Salida y Retorno a Bodega
+P192: Registrar el peso bruto de salida y el peso final del envase al volver a bodega, calculando el consumo real de gas. 
+P193: RF-04
+P194: Registro de Carga en Terreno (App Móvil) 
+P195: Permitir al técnico escanear el QR/Barra del cilindro, registrar kilos inyectados, seleccionar cliente (Walmart/Cencosud), tipo de equipo y causa raíz de falla. 
+P196: RF-05
+P197: Captura de Evidencia Fotográfica 
+P198: Habilitar la cámara del dispositivo móvil para adjuntar foto obligatoria del pesaje en balanza y manómetros en terreno. 
+P199: RF-06
+P200: Operación Offline y Sincronización 
+P201: Permitir el registro de intervenciones sin conexión a internet en salas de máquinas y sincronizar automáticamente al detectar red. 
+P202: RF-07
+P203: Módulo de Logística Inversa y Devoluciones 
+P204: Monitorear el estado de los cilindros (Despachado, En Local, Devuelto Vacío, Extraviado/No Conforme). 
+P205: RF-08
+P206: Vinculación con Certificados Regener 
+P207: Registrar el número de Certificado de Disposición Intermedia de Regener asociado a los lotes de cilindros enviados a chatarra. 
+P208: RF-09
+P209: Motor de Emisiones y Semáforos 
+P210: Ejecutar los cálculos de CO2e y clasificar en tiempo real las alertas de criticidad (Verde, Amarillo, Rojo). 
+P211: RF-10
+P212: Tablero Analítico en Power BI 
+P213: Exponer vistas de datos para visualizar: consumo por local/zona, ranking de fugas, balance de envases devueltos y emisiones GEI acumuladas. 
+P214: Especificación de Requerimientos No Funcionales (RNF)
+P215: Código
+P216: Nombre del Requerimiento
+P217: Descripción Detallada
+P218: RNF-01
+P219: Seguridad - OWASP 
+P220: Implementar consultas parametrizadas contra la base de datos (prevención de SQL Injection) y saneamiento de entradas (prevención de XSS). 
+P221: RNF-02
+P222: Rendimiento Óptico 
+P223: La lectura e interpretación de códigos QR/Barra desde la cámara del celular no debe superar los 2 segundos de respuesta. 
+P224: RNF-03
+P225: Compatibilidad Multiplataforma 
+P226: La interfaz móvil debe adaptarse fluidamente a pantallas de dispositivos Android e iOS, y el panel administrativo a navegadores de escritorio. 
+P227: RNF-04
+P228: Integridad y Auditoría 
+P229: Toda edición o corrección de datos realizada por el administrador debe registrar usuario, fecha, hora y motivo de cambio en una tabla de logs. 
+P230: RNF-05
+P231: Disponibilidad de Datos 
+P232: La base de datos en la nube debe garantizar disponibilidad de acceso mayor o igual a 99.5% para sincronización de los técnicos
+P233: RNF-06
+P234: Control de acceso y mínimo privilegio
+P235: Restringir la información según el rol autenticado
+P236: RNF-07
+P237: Cifrado de comunicaciones y credenciales
+P238: La transmisión de datos debe realizarse obligatoriamente mediante protocolo HTTPS/TLS, y las contraseñas de usuario deben almacenarse mediante algoritmos de hash seguros
+P243: Dependencias y Restricciones
+P244: Dependencias
+P245: DEP-01 (Datos Maestros ERP Defontana): La asignación de cilindros depende de la existencia previa del número de Orden de Trabajo (OT) y Guía de Despacho emitida en el ERP Defontana.
+P246: DEP-02 (Hardware de Captura): El correcto registro en terreno depende de la disponibilidad de dispositivos móviles con cámara funcional (mínimo 8 MP con enfoque automático) para la lectura de códigos QR/Barra y captura de evidencia fotográfica.
+P247: DEP-03 (Conectividad para Sincronización): La funcionalidad de operación offline propuesta permitirá registrar información temporalmente sin conexión; sin embargo, la sincronización con la base de datos central y la actualización de los tableros dependerán de que el dispositivo recupere conectividad WiFi o red móvil 4G/5G.
+P248: DEP-04 (Recepción de Certificados Regener): La trazabilidad final del reciclaje depende de la emisión oportuna del número de Certificado de Disposición Intermedia por parte de la empresa Regener.
+P249: Restricciones
+P250: RES-01 (Plataforma Tecnológica): La solución se estructura bajo una arquitectura cliente-servidor de tres capas lógicas: Afrisan.Web como presentación, Afrisan.Api en ASP.NET Core como lógica de negocio/API REST y PostgreSQL como persistencia central. Los componentes móviles o cloud adicionales se consideran extensiones planificadas cuando corresponda.
+P251: RES-02 (Presupuesto y Licenciamiento): El proyecto debe ajustarse a plataformas cloud y bases de datos con capas gratuitas/educativas (Tier gratuito) durante la fase de desarrollo y validación académica.
+P252: RES-03 (Estándares de Seguridad): El sistema no debe almacenar contraseñas en texto plano y debe restringir el acceso a los datos según el rol asignado (RBAC), cumpliendo con las directrices de mitigación OWASP.
+P253: RES-04 (Resistencia de Etiquetas): Las etiquetas con código QR/Barra adheridas a los cilindros deben ser de material resistente a la abrasión, grasa, humedad y bajas temperaturas propias de cámaras de frío.
+P255: Supuestos y Riesgos
+P256: Supuestos
+P257: SUP-01 (Colaboración del Personal): Se asume que los técnicos en terreno y el personal de bodega de AFRISAN tienen la disposición de utilizar la aplicación móvil y registrar los pesajes en cada servicio.
+P258: SUP-02 (Acceso a Información Operativa): Se asume que la contraparte (AFRISAN) facilitará el listado maestro de refrigerantes, capacidades nominales de equipos de clientes (Walmart/Cencosud) y costos unitarios referenciales.
+P259: SUP-03 (Calidad de Balanzas en Terreno): Se asume que las balanzas utilizadas por los técnicos en terreno están calibradas para asegurar la precisión del pesaje declarado.
+P260: SUP-04 (Estabilidad de Factores GWP): Se asume que los factores de emisión GWP utilizados corresponden a los valores estandarizados vigentes por el Ministerio del Medio Ambiente (Unidad Ozono).
+P262: Riesgos y Plan de Mitigación 
+P264: ID
+P265: Riesgo Identificado
+P266: Probabilidad
+P267: Impacto
+P268: Estrategia de Mitigación
+P269: RSG-01
+P270: Resistencia al cambio o rechazo de los técnicos: Dificultad para que los técnicos adopten el escaneo QR y captura de fotos. 
+P271: Media
+P272: Alto
+P273: Diseñar una interfaz móvil sumamente intuitiva (a 1 o 2 toques) y realizar capacitaciones prácticas previas al despliegue. 
+P274: RSG-02
+P275: Falta de cobertura de red en subterráneos: Pérdida de datos al intentar registrar cargas sin internet en cámaras de frío. 
+P276: Alta
+P277: Alto
+P278: Implementar persistencia local robusta (almacenamiento offline con SQLite/IndexedDB) y sincronización automática en segundo plano. 
+P279: RSG-03
+P280: Deterioro o ilegibilidad de códigos QR/Barra: Imposibilidad de escanear cilindros con etiquetas dañadas por uso rudo. 
+P281: Media
+P282: Medio
+P283: Permitir el ingreso manual de respaldo del número de serie o código alfanumérico del cilindro en caso de falla de lectura óptica. 
+P284: RSG-04
+P285: Descalces por errores de digitación en balanza: Ingreso erróneo de kilogramos por parte del técnico. 
+P286: Media
+P287: Medio
+P288: Exigir la fotografía de la balanza como evidencia obligatoria (RF-05) y habilitar la opción de auditoría/corrección al Administrador (RNF-04). 
+P289: RSG-05
+P290: Retrasos en la integración con Defontana: Imposibilidad de conectar una API directa con el ERP por limitaciones de acceso de terceros. 
+P291: Media
+P292: Bajo
+P293: Habilitar un módulo de carga e importación masiva mediante archivos estructurados (CSV/Excel) como mecanismo de contingencia. 
+P295: Aprobaciones 
+P296: Nombre
+P297: Rol
+P298: Estado
+P299: Fecha
+P300: Carlos Aguilera
+P301: Stakeholder
+P302: Aprobado
+P303: 03/09/2026
+P304: Carlos Quintanilla
+P305: Líder Técnico
+P306: Pendiente
+P307: 03/09/2026
+P308: Yarek Larraguibel
+P309: Analista QA / Arquitectura y Datos
+P310: Aprobado
+P311: 03/09/2026
+P312: Dante Moya
+P313: Scrum Master / Desarrollo
+P314: Aprobado
+P315: 03/09/2026

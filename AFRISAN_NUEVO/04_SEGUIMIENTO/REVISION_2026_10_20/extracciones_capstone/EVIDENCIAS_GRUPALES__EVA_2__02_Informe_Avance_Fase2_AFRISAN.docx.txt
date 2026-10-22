@@ -1,0 +1,309 @@
+SOURCE: EVIDENCIAS_GRUPALES/EVA_2/02_Informe_Avance_Fase2_AFRISAN.docx
+P1: Informe de avance de AFRISAN
+P2: Fase 2 del Proyecto APT
+P3: Sistema Integral de Gestión y Trazabilidad de Refrigerantes
+P4: Duoc UC
+P5: Asignatura: Capstone PTY4614, según pauta proporcionada
+P6: Único integrante actual: Dante Moya
+P7: Fecha de corte: 16 de octubre de 2026
+P8: Entrega: semana 9 según pauta; fecha exacta por confirmar
+P9: Ponderación: 20% de la nota final
+P10: Aplicación individual de la pauta: pendiente de confirmación docente
+P11: El informe presenta la implementación identificada en el repositorio, sus límites y la planificación de validación. La responsabilidad actual no modifica la autoría de las contribuciones previas.
+P13: Índice
+P14: 1 Resumen del avance
+P15: 2 Abstract
+P16: 3 Objetivos y metodología del avance
+P17: 4 Continuidad individual y ajustes
+P18: 5 Desarrollo de ingeniería identificado
+P19: 6 Evidencias y calidad
+P20: 7 Monitoreo del plan de trabajo
+P21: 8 Dificultades y ajustes a partir del monitoreo
+P22: 9 Individual conclusions
+P23: 10 Individual reflection
+P24: 11 Fuentes y referencias
+P25: 12 Anexo de operaciones principales
+P26: 13 Anexo de validación propuesta
+P28: 1 Resumen del avance
+P29: AFRISAN busca dar trazabilidad a cilindros de refrigerante y sus movimientos. El repositorio contiene una aplicación Blazor WebAssembly, una API ASP.NET Core y un modelo de persistencia para PostgreSQL. La inspección identifica código de inventario, órdenes de trabajo locales, despacho, retorno, historial, diferencia de pesos y autenticación por roles.
+P30: Dante Moya continúa como único integrante actual. Se corrige la documentación para distinguir implementación, validación y aceptación. Las funciones de terreno, trabajo offline, fotografía, semáforo, certificados y reportería siguen pendientes. No se declara cumplimiento total de historias ni se acredita funcionamiento en producción.
+P31: 2 Abstract
+P32: AFRISAN aims to track refrigerant cylinders and inventory movements. The repository contains a Blazor WebAssembly client, an ASP.NET Core API, and a PostgreSQL persistence model. Source inspection identifies inventory management, local work orders, dispatch, returns, movement history, a basic weight comparison, and role-based authentication.
+P33: Dante Moya is the sole current student member responsible for continuing the project. This report distinguishes implemented code from runtime validation and user acceptance. Field interventions, offline synchronization, photographic evidence, leak alerts, disposal certificates, and environmental reporting remain pending. No full completion percentage or production readiness is claimed.
+P34: 3 Objetivos y metodología del avance
+P35: El objetivo de este avance es documentar la base implementada, identificar sus límites y preparar la validación del recorrido de bodega. El alcance completo del proyecto se mantiene en las diez historias originales del Product Backlog. Cualquier modificación de objetivos o criterios de aceptación se debe acordar con el cliente y el docente.
+P36: Describir el modelo real, las operaciones de la API y las vistas existentes.
+P37: Relacionar HU-01, HU-02, HU-03 y HU-08 con su implementación y sus pendientes, sin declararlas aceptadas.
+P38: Actualizar el plan y la responsabilidad actual para la continuidad individual.
+P39: Diseñar casos de validación y registrar posteriormente resultados reproducibles.
+P40: La organización propuesta es incremental por historias de usuario: revisar alcance, planificar tareas, implementar o corregir, validar y registrar resultados. En esta entrega se acredita inspección de código y corrección documental. El historial Git permite identificar cambios anteriores. No se adjuntan actas que acrediten ceremonias Scrum ni resultados de pruebas ejecutadas.
+P41: 4 Continuidad individual y ajustes
+P42: Dante Moya es el único integrante actual y responsable de continuidad, según lo informado por el estudiante. Esta asignación es prospectiva: no sustituye la autoría de los aportes previos. La aplicación individual de la pauta grupal debe acordarse con el docente; no se adjunta una autorización. Las duraciones y fechas de actividades pendientes deben estimarse con la capacidad actual.
+P43: La pauta 2.5 exige grupos de dos a tres estudiantes y asigna indicadores al aporte de cada integrante y al trabajo en equipo. Se debe confirmar con el docente cómo se aplicarán a la continuidad individual. La asistencia de herramientas de IA no representa un segundo estudiante. Se conserva el aporte de integrantes anteriores como antecedente histórico.
+P44: Se conservan los diez identificadores HU-01 a HU-10, las prioridades, los puntos y los sprints de referencia del Product Backlog de Fase 1. HU-03 sigue siendo autenticación; no se crea HU-SEG. Los sprints indicados son la planificación de referencia, no una confirmación de calendario vigente. La siguiente iteración y sus fechas están por acordar.
+P45: El backlog original ubica HU-03 en Sprint 1. Los commits que implementaron autenticación llevan la etiqueta sprint-3; esto describe el historial de implementación y no demuestra un adelanto desde la planificación original. La reprogramación de funciones pendientes es una propuesta por confirmar, sin semanas ni fechas comprometidas en este informe.
+P46: 5 Desarrollo de ingeniería identificado
+P47: La arquitectura está aprobada, según confirmación del estudiante recibida el 16 de octubre de 2026. El desarrollo continúa sobre la arquitectura seleccionada; los pendientes corresponden a implementación, integración, validación funcional y evidencias.
+P48: La presentación se implementa en Afrisan.Web con Blazor WebAssembly .NET 8. La API está en Afrisan.Api con ASP.NET Core .NET 8, controladores, DTOs y Entity Framework Core con Npgsql. Se configura PostgreSQL como proveedor. Supabase es la plataforma prevista en la documentación del proyecto; este informe no adjunta una consulta del servidor ni acredita versión, disponibilidad o despliegue en producción.
+P49: Flujo de comunicación: Afrisan.Web utiliza HttpClient para enviar JSON a Afrisan.Api; los controladores consultan o actualizan AfrisanDbContext. El código de negocio está principalmente en controladores. No hay un proyecto de modelos compartidos entre cliente y API que permita afirmar reutilización automática de DTOs.
+P50: Entidad
+P51: Campos implementados
+P52: Límites relevantes
+P53: Cilindro
+P54: Id, CodigoQr, TipoRefrigerante, CapacidadKg, TaraKg, PesoActualKg, Estado, FechaRegistro, GasRefrigeranteId.
+P55: Sin número de serie ni fecha de inspección en este modelo.
+P56: GasRefrigerante
+P57: Id, Nombre, Codigo, Descripcion, Activo; colección Cilindros.
+P58: Sin fórmula química, GWP, toxicidad o inflamabilidad.
+P59: OrdenTrabajo
+P60: Id, Codigo, Descripcion, Activa, FechaCreacion; colección Movimientos.
+P61: Sin cliente, dirección, equipo o estado de cierre administrativo.
+P62: MovimientoInventario
+P63: Id, CilindroId, OrdenTrabajoId opcional, TipoMovimiento, PesoKg, Responsable, FechaMovimiento, Observaciones.
+P64: Responsable es texto libre. No hay UsuarioId ni entidad de intervención.
+P65: Usuario
+P66: IdentityUser más NombreCompleto, Activo y FechaCreacion.
+P67: Identity permite cuentas y roles; el movimiento aún no se relaciona con esta entidad.
+P69: AfrisanDbContext configura índices únicos para el código QR y el código de OT y relaciones de los movimientos con cilindro y OT. Se incluyen migraciones en el repositorio. Se debe comprobar su aplicación sobre la base utilizada en la demostración; la existencia del archivo de migración no acredita su ejecución.
+P70: AuthController valida credenciales mediante Identity, controla cuenta activa e intentos fallidos y emite JWT con vigencia de ocho horas. La API valida firma, emisor, audiencia y expiración. Los roles implementados son Administrador, Jefatura, Bodega y Tecnico. El cliente conserva el token y usa JwtAuthenticationStateProvider para representar la sesión; la autorización efectiva corresponde a la API.
+P71: El despacho exige cilindro Disponible, OT local activa, responsable y peso válido. La tara debe estar registrada y ser positiva. Se valida: Peso bruto de salida > Tara; Peso bruto de salida <= Tara + Capacidad. La comprobación del estado no demuestra protección frente a dos solicitudes simultáneas: ese caso queda pendiente de validación.
+P72: El retorno exige estado Despachado, responsable y peso válido. Guarda un movimiento y cambia el cilindro a Disponible. Actualmente el movimiento de retorno no conserva OrdenTrabajoId ni un identificador explícito del despacho. El cálculo de balance empareja el último retorno con el despacho anterior por fecha e identificador.
+P73: Diferencia de peso (kg) = Peso bruto de despacho - Peso bruto de retorno. Esta comparación básica no implementa toda HU-08: faltan consumos declarados en intervenciones, tolerancia, gestión de descalces, comprobación de cilindros por OT y cierre de custodia. La regla RN-03 del backlog corresponde al semáforo de fuga, no se redefine como esta resta.
+P74: IdentificacionQr.razor genera QR mediante QRCoder en el proyecto web y permite buscar por código. Cilindros.razor contiene los formularios de inventario y movimientos. DetalleCilindro.razor consulta ficha, historial y balance según rol. No se identificó un lector óptico integrado en la aplicación ni integración con Defontana. El método de lectura externo o por cámara debe acordarse y demostrarse.
+P75: 6 Evidencias y calidad
+P76: Las evidencias identificadas a continuación permiten inspeccionar la implementación y la planificación. No sustituyen los resultados de compilación, pruebas o aceptación que aún se deben adjuntar. No se afirma compilación sin advertencias, despliegue efectivo de migraciones ni certificación de calidad sin resultados verificables.
+P77: ID
+P78: Evidencia identificada
+P79: Qué acredita y qué falta
+P80: E-01
+P81: Afrisan.Api/Models y Data/AfrisanDbContext.cs.
+P82: Estructura definida en código. Falta cotejar con base desplegada.
+P83: E-02
+P84: Afrisan.Api/Migrations.
+P85: Migraciones disponibles. Su presencia no demuestra ejecución en Supabase.
+P86: E-03
+P87: Controllers de Auth, Cilindros, Gases, OrdenesTrabajo, Usuarios y MovimientosInventario.
+P88: Operaciones y validaciones implementadas. Falta registrar ejecución.
+P89: E-04
+P90: Afrisan.Web/Pages y Services.
+P91: Vistas y manejo de autenticación en código. Falta evidencia de uso del sistema.
+P92: E-05
+P93: Commits c2a7bfd, 3ed71c2 y 4cfce18.
+P94: Avances históricos registrados con autor Tormenta-Yarek; no se reasigna su autoría a Dante.
+P95: E-06
+P96: Documentos de EVIDENCIAS_GRUPALES/EVA_2.
+P97: Plan, backlog e informe corregidos. Su entrega en Git sigue pendiente hasta versionarlos.
+P98: E-07
+P99: 04_MATRIZ_VALIDACION_PENDIENTE.md.
+P100: Diez casos diseñados como propuesta. No acredita ejecución ni aprobación.
+P102: Para completar el avance se requiere registrar entorno y fecha de compilación, ejecutar los casos de validación acordados y adjuntar respuestas de API, capturas y consultas de persistencia con datos de prueba. Cada evidencia debe indicar qué objetivo o criterio demuestra. Deben registrarse defectos encontrados y correcciones; las credenciales no deben aparecer en las capturas.
+P104: 7 Monitoreo del plan de trabajo
+P105: El plan siguiente usa las ocho columnas de la guía 2.4. Dante Moya es el responsable actual de las actividades. Las duraciones quedan por estimar con la capacidad disponible; no se inventan fechas históricas ni avances de validación.
+P106: Competencia o unidades de competencias
+P107: Actividades
+P108: Recursos
+P109: Duración de la actividad
+P110: Responsable
+P111: Observaciones
+P112: Estado de avance
+P113: Ajustes
+P114: Construir modelos de datos para soportar los requerimientos de la organización de acuerdo a un diseño definido y escalable en el tiempo.
+P115: Revisar y validar el esquema relacional existente.
+P116: EF Core 8, Npgsql, modelos y migraciones.
+P117: Por estimar
+P118: Dante Moya
+P119: Hay modelos y migraciones en código. Su aplicación en la base de datos requiere evidencia de ejecución.
+P120: En curso
+P121: Describir solo las entidades reales. Preparar ampliaciones de terreno como trabajo pendiente.
+P122: Desarrollar una solución de software utilizando técnicas que permitan sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro de los objetivos.
+P123: Consolidar la API de cilindros, gases, OT y movimientos.
+P124: .NET 8, controladores y DTOs.
+P125: Por estimar
+P126: Dante Moya
+P127: Se inspeccionaron reglas de estado y pesaje. No hay resultados de ejecución adjuntos a esta entrega.
+P128: En curso
+P129: Corregir defectos tras validar el recorrido funcional y la operación simultánea.
+P130: Desarrollar una solución de software utilizando técnicas que permitan sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro de los objetivos.
+P131: Validar autenticación y permisos por rol (HU-03).
+P132: ASP.NET Core Identity, JWT, Blazor.
+P133: Por estimar
+P134: Dante Moya
+P135: Hay login, tokens y autorización. No se atribuye auditoría de usuario a movimientos que solo guardan responsable en texto.
+P136: En curso
+P137: Conservar HU-03 y la estimación original. Registrar pruebas y completar administración web si se acuerda.
+P138: Desarrollar una solución de software utilizando técnicas que permitan sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro de los objetivos.
+P139: Completar el recorrido web de identificación y despacho.
+P140: Blazor WebAssembly, QRCoder, HttpClient.
+P141: Por estimar
+P142: Dante Moya
+P143: QR se genera en IdentificacionQr; el despacho está en Cilindros; DetalleCilindro consulta ficha e historial.
+P144: En curso
+P145: Confirmar método de lectura QR y origen de OT. Las OT actuales se crean localmente.
+P146: Desarrollar una solución de software utilizando técnicas que permitan sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro de los objetivos.
+P147: Completar retorno y conciliación (HU-08).
+P148: Controlador de movimientos, modelo y web.
+P149: Por estimar
+P150: Dante Moya
+P151: Hay retorno y diferencia de pesos; no existe todavía conciliación con consumos de terreno.
+P152: En curso
+P153: Vincular retorno con despacho/OT. Definir consumo declarado, tolerancia, alertas y cierre.
+P154: Desarrollar una solución de software utilizando técnicas que permitan sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro de los objetivos.
+P155: Diseñar intervenciones en terreno, evidencia y modo offline.
+P156: Cliente móvil o web por definir; API y datos a ampliar.
+P157: Por estimar
+P158: Dante Moya
+P159: HU-04 a HU-07 sin implementación identificada. El esquema actual no contiene equipos ni intervenciones.
+P160: No iniciado
+P161: Proponer nueva secuencia y estimación según capacidad individual, pendiente de acuerdo con cliente/docente.
+P162: Desarrollar una solución de software utilizando técnicas que permitan sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro de los objetivos.
+P163: Diseñar certificados Regener y reportería ambiental.
+P164: Requisitos, modelo de datos y tecnología por definir.
+P165: Por estimar
+P166: Dante Moya
+P167: HU-09 y HU-10 pendientes. Confirmar documentos y datos disponibles antes de elegir integración.
+P168: No iniciado
+P169: Planificar después de acordar alcance y dependencias, sin comprometer semanas no confirmadas.
+P170: Realizar pruebas de certificación tanto de los productos como de los procesos utilizando buenas prácticas definidas por la industria.
+P171: Ejecutar y documentar validaciones del flujo y permisos.
+P172: Matriz de 10 casos propuesta; web, API y datos de prueba.
+P173: Por estimar
+P174: Dante Moya
+P175: Se propone una matriz en esta corrección. Los casos no están ejecutados ni existen resultados observados.
+P176: No iniciado
+P177: Registrar resultado esperado/observado, fecha, evidencia y correcciones antes de declarar conformidad.
+P178: Gestionar proyectos informáticos, ofreciendo alternativas para la toma de decisiones de acuerdo a los requerimientos de la organización.
+P179: Actualizar planificación y documentar continuidad individual.
+P180: Git, backlog, plan de trabajo y acuerdos.
+P181: Seguimiento continuo
+P182: Dante Moya
+P183: El estudiante informa que continúa como único integrante. Falta constancia docente para aplicar la pauta grupal.
+P184: En curso
+P185: Responsabilidad actual de Dante; conservar autoría histórica. Acordar fechas y criterios de evaluación.
+P188: 8 Dificultades y ajustes a partir del monitoreo
+P189: Criterio de monitoreo
+P190: Situación observada
+P191: Acción o propuesta
+P192: Dificultades
+P193: Dante Moya informa que continúa como único integrante. La revisión detecta diferencias entre documentación y código, funciones de terreno pendientes y ausencia de resultados de validación adjuntos.
+P194: Actualizar responsables y alcance; solicitar acuerdo docente sobre evaluación individual; estimar trabajo restante y reunir evidencia.
+P195: Facilitadores
+P196: Arquitectura aprobada, según confirmación del estudiante recibida el 16 de octubre de 2026. El repositorio ya contiene API, web, modelos, migraciones y autenticación.
+P197: Continuar implementación y validación funcional sobre la arquitectura aprobada, sin atribuir despliegues o pruebas no demostrados.
+P198: Ajustes documentales realizados
+P199: Se recuperan HU-03, puntos y prioridades originales; se corrigen esquema, rutas y estados declarados. Se identifica a Dante como único integrante actual.
+P200: Mantener una única base coherente en Markdown, Word y Excel. Registrar los acuerdos de replanificación cuando se obtengan.
+P201: Actividades pendientes y reprogramación propuesta
+P202: HU-01, HU-02, HU-03 y HU-08 tienen código por validar o completar. HU-04 a HU-07, HU-09 y HU-10 no tienen implementación identificada.
+P203: Priorizar la validación del recorrido de bodega; luego acordar secuencia de terreno, offline, evidencias, semáforo y reportería. Fechas por confirmar.
+P205: La siguiente secuencia es una propuesta de trabajo: confirmar alcance y modalidad de evaluación; estimar y actualizar el plan; validar identificación, OT, pesaje, despacho, retorno y permisos; corregir defectos; completar evidencias; y acordar luego el desarrollo de terreno, offline y reportería. La fecha exacta de entrega de semana 9 debe confirmarse en Aula Virtual o con el docente.
+P206: 9 Individual conclusions
+P207: The current repository provides an implementation baseline for warehouse operations and access control. Source inspection supports the existence of code for inventory, local work orders, dispatch, returns, movement history, and role-based authentication. It does not establish runtime correctness, completed ERP integration, or user acceptance.
+P208: As the sole current student member, I am responsible for continuing the project, validating the implemented flow, and documenting the remaining work. Historical contributions retain their original attribution. The next delivery should link every completion claim to reproducible evidence and agreed acceptance criteria.
+P209: 10 Individual reflection
+P210: Continuing AFRISAN individually requires me to review the inherited code, understand its limitations, and plan work according to my available capacity. I need to be able to explain the data model, authentication flow, business rules, and results of the validations I execute.
+P211: Preparing this report highlights the distinction between a feature present in source code and a feature demonstrated through testing and acceptance. My next task is to gather that evidence, record defects and corrections, and agree on a realistic delivery scope with the client and instructor. This reflection describes my current responsibilities and planned actions; it does not claim unrecorded test results or achievements.
+P212: 11 Fuentes y referencias
+P213: Duoc UC. Guía 2.4 de Desarrollo Proyecto APT, Fase 2; instrumento 2.5 de Evaluación Sumativa de Avance Fase 2; guía 2.6 de Informe Final Proyecto APT. Documentos proporcionados en la raíz del repositorio. La pauta de avance indica 20% de ponderación y semana 9, sin fecha de calendario.
+P214: Product Backlog de referencia: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/01_Product_Backlog_AFRISAN_Corregido.xlsx. Se conservan sus identificadores, puntos, prioridades y criterios de aceptación como base histórica.
+P215: Fuentes de implementación: Afrisan.Api/Models, Afrisan.Api/Data, Afrisan.Api/Controllers, Afrisan.Api/Migrations; Afrisan.Web/Pages, Afrisan.Web/Services y archivos de proyecto .csproj. Versión inspeccionada: commit c2a7bfd y archivos documentales locales de EVA 2.
+P216: 12 Anexo de operaciones principales
+P217: Las rutas siguientes corresponden al código actual. Los parámetros entre llaves deben sustituirse por identificadores o códigos existentes. La gestión de OT es local; no se presenta como consulta a Defontana.
+P218: Método y ruta
+P219: Propósito
+P220: Permiso
+P221: POST /api/Auth/login
+P222: Validar credenciales y emitir JWT.
+P223: Sin token previo
+P224: GET /api/Auth/perfil
+P225: Consultar claims del usuario autenticado.
+P226: Autenticado
+P227: GET /api/Cilindros
+P228: Listar inventario; sin paginación implementada.
+P229: Administrador, Jefatura, Bodega
+P230: GET /api/Cilindros/qr/{codigoQr}
+P231: Consultar cilindro por código.
+P232: Los cuatro roles
+P233: GET /api/GasRefrigerantes
+P234: Listar catálogo implementado de gases.
+P235: Administrador, Jefatura, Bodega
+P236: GET /api/OrdenesTrabajo
+P237: Listar OT locales, activas e inactivas.
+P238: Administrador, Jefatura, Bodega
+P239: GET /api/OrdenesTrabajo/activas
+P240: Listar solo OT locales activas.
+P241: Administrador, Jefatura, Bodega
+P242: POST /api/OrdenesTrabajo
+P243: Crear OT local con código generado por la API.
+P244: Administrador, Bodega
+P245: POST /api/MovimientosInventario/despacho/{cilindroId}
+P246: Registrar despacho y pesaje con OT activa.
+P247: Administrador, Bodega
+P248: POST /api/MovimientosInventario/retorno/{cilindroId}
+P249: Registrar retorno; estado final Disponible.
+P250: Administrador, Bodega
+P251: GET /api/MovimientosInventario/historial/{cilindroId}
+P252: Consultar movimientos.
+P253: Los cuatro roles
+P254: GET /api/MovimientosInventario/balance/{cilindroId}
+P255: Comparar último retorno con despacho anterior.
+P256: Administrador, Jefatura, Bodega
+P257: POST /api/Usuarios
+P258: Crear usuario y asignar rol.
+P259: Administrador
+P261: 13 Anexo de validación propuesta
+P262: Esta matriz se diseña en la corrección documental. Todos los casos están pendientes de ejecución. Al realizarlos se debe agregar fecha, entorno, datos de prueba, resultado observado y ruta de evidencia. CP-08 comprueba un riesgo que no se considera resuelto por la sola validación de estado.
+P263: Caso
+P264: Operación y condición
+P265: Resultado esperado
+P266: Resultado observado
+P267: Estado
+P268: CP-01
+P269: Login con cuenta activa y credenciales válidas.
+P270: Token y acceso según rol.
+P271: Sin registro
+P272: Pendiente de ejecución
+P273: CP-02
+P274: Login con contraseña incorrecta.
+P275: Rechazo sin emitir token.
+P276: Sin registro
+P277: Pendiente de ejecución
+P278: CP-03
+P279: Acceder a recurso protegido con token ausente o expirado.
+P280: Rechazo por falta de autenticación.
+P281: Sin registro
+P282: Pendiente de ejecución
+P283: CP-04
+P284: Técnico intenta despachar un cilindro.
+P285: Operación denegada por rol.
+P286: Sin registro
+P287: Pendiente de ejecución
+P288: CP-05
+P289: Bodega despacha cilindro disponible con OT activa y peso válido.
+P290: Un movimiento persistido y estado Despachado.
+P291: Sin registro
+P292: Pendiente de ejecución
+P293: CP-06
+P294: Despacho con OT inexistente o inactiva.
+P295: Rechazo sin crear movimiento.
+P296: Sin registro
+P297: Pendiente de ejecución
+P298: CP-07
+P299: Despacho con peso menor o igual a tara, o mayor a tara más capacidad.
+P300: Rechazo de cada variante sin alterar datos.
+P301: Sin registro
+P302: Pendiente de ejecución
+P303: CP-08
+P304: Dos solicitudes de despacho simultáneas del mismo cilindro.
+P305: Solo un despacho aceptado; analizar y corregir si ambas se guardan.
+P306: Sin registro
+P307: Pendiente de ejecución
+P308: CP-09
+P309: Retorno de cilindro despachado con peso válido; repetir con estado no despachado.
+P310: Primer retorno persistido y estado Disponible; segunda operación rechazada.
+P311: Sin registro
+P312: Pendiente de ejecución
+P313: CP-10
+P314: Consultar historial y balance tras despacho y retorno; repetir sin retorno.
+P315: Datos coinciden con los registros; sin retorno no se informa balance cerrado.
+P316: Sin registro
+P317: Pendiente de ejecución

@@ -1,0 +1,128 @@
+SOURCE: ARQUITECTURA/FACTIBILIDAD_Y_RECURSOS/Historico/AFRISAN_09_RECURSOS_TECNICOS.docx
+P2: DUOC UC
+P3: Sede Melipilla
+P5: RECURSOS TÉCNICOS
+P6: Plan de recursos — Sistema de Gestión de Refrigerantes AFRISAN
+P12: Responsable de esta entrega: Yarek Larraguibel — Arquitectura técnica
+P13: Integrantes del proyecto: Carolina Ávila, Dante Moya, Yarek Larraguibel
+P14: Docente guía: Carlos Quintanilla
+P15: Documento: Recursos Técnicos
+P16: Fecha: 02/09/2026
+P17: Versión: 1.0
+P19: 1. Introducción
+P20: Este documento identifica los recursos técnicos —hardware, software, infraestructura y herramientas de gestión— necesarios para el desarrollo, despliegue y operación del Sistema de Gestión de Refrigerantes AFRISAN, junto con una estimación referencial de costos y la asignación preliminar de responsables por recurso.
+P21: 2. Hardware
+P22: Recurso
+P23: Usuarios / rol asociado
+P24: Requisito
+P25: Observaciones
+P26: Dispositivo móvil (Android/iOS)
+P27: Técnico, Jefe de bodega
+P28: Con cámara, para escaneo QR/código de barras y fotos de respaldo del peso.
+P29: Se asume que AFRISAN provee o autoriza el uso de dispositivos propios del personal (BYOD) [COMPLETAR].
+P30: Estación de trabajo
+P31: Jefe de grupo, Administrador general
+P32: Con navegador web actualizado.
+P33: Equipos ya disponibles en las oficinas de AFRISAN.
+P34: Impresora de etiquetas térmicas
+P35: Jefe de bodega
+P36: Para generar físicamente los códigos QR/barras de los cilindros.
+P37: Opcional; a validar con AFRISAN si ya cuentan con una.
+P38: 3. Software y frameworks
+P39: La siguiente tabla resume las tecnologías seleccionadas para el desarrollo del sistema AFRISAN y su justificación técnica, en coherencia con la arquitectura definida para el proyecto.
+P40: Componente
+P41: Tecnología propuesta
+P42: Justificación
+P43: Frontend móvil
+P44: .NET MAUI (.NET 8)
+P45: Permite desarrollar una aplicación multiplataforma para Android/iOS con una sola base de código. Se integra con Camera.MAUI / ZXing.Net.MAUI para lectura QR y con SQLite para operación offline.
+P46: Frontend web/escritorio
+P47: Blazor WebAssembly (.NET 8)
+P48: Mantiene el ecosistema .NET en la capa cliente web y consume la API REST mediante HTTPS/JSON.
+P49: Backend / API REST
+P50: ASP.NET Core Web API (.NET 8)
+P51: Framework seleccionado para implementar servicios REST, reglas de negocio, autenticación y acceso seguro a los datos.
+P52: Autenticación
+P53: JWT + ASP.NET Core Authentication
+P54: Permite autenticación stateless para la API, control de acceso por roles y transmisión segura sobre HTTPS/TLS.
+P55: ORM / acceso a datos
+P56: Entity Framework Core 8
+P57: ORM seleccionado para el mapeo objeto-relacional, consultas y migraciones sobre PostgreSQL.
+P59: 4. Base de datos y almacenamiento
+P60: Recurso
+P61: Tecnología propuesta
+P62: Justificación
+P63: Base de datos central
+P64: PostgreSQL 16 / Supabase Cloud
+P65: Motor relacional robusto y compatible con Entity Framework Core. Supabase se utiliza como servicio administrado para alojar PostgreSQL en la nube.
+P66: Almacenamiento local offline (móvil)
+P67: SQLite (sqlite-net-pcl)
+P68: Persistencia local embebida para registrar información sin conexión y sincronizarla posteriormente con la API.
+P69: 5. Infraestructura y servicios cloud
+P70: Recurso
+P71: Tecnología seleccionada
+P72: Justificación
+P73: Hosting del backend
+P74: Microsoft Azure App Service
+P75: Servicio seleccionado para desplegar ASP.NET Core Web API en un entorno administrado, compatible con el ecosistema .NET.
+P76: Base de datos cloud
+P77: Supabase Cloud — PostgreSQL 16
+P78: Servicio administrado seleccionado para alojar la base de datos central PostgreSQL.
+P79: Inteligencia de negocios
+P80: Power BI Desktop + Power BI Service
+P81: Herramienta definida para el dashboard ejecutivo de inventario, costos e indicadores ambientales.
+P82: 6. Herramientas de gestión, control de versiones y calidad
+P83: Recurso
+P84: Herramienta propuesta
+P85: Justificación
+P86: Control de versiones
+P87: Git + GitHub
+P88: Repositorio, ramas por funcionalidad y revisión mediante pull requests.
+P89: Gestión ágil del proyecto
+P90: Trello
+P91: Seguimiento del Product Backlog, Sprint Backlog y tareas por estado.
+P92: Pruebas de seguridad
+P93: OWASP ZAP y Nessus
+P94: Pruebas automatizadas de vulnerabilidades y controles OWASP.
+P95: Documentación técnica
+P96: Google Drive + GitHub
+P97: Drive para entregables/evidencias y GitHub para código y documentación.
+P98: Comunicación del equipo
+P99: [COMPLETAR — por ejemplo, WhatsApp / Discord / Teams]
+P100: Canal de coordinación diaria del equipo y con el docente guía.
+P102: 7. Estimación referencial de costos
+P103: La siguiente tabla entrega una estimación referencial de costos mensuales o anuales asociados a los servicios cloud considerados. Estos valores son aproximados y deberán confirmarse con cotizaciones actualizadas durante la etapa de desarrollo.
+P104: Ítem
+P105: Costo estimado
+P106: Observación
+P107: Azure App Service + Supabase (nivel gratuito/básico)
+P108: $0 — $20.000 CLP/mes aprox.
+P109: Costo referencial sujeto al nivel de uso; ambos servicios disponen de opciones de entrada adecuadas para desarrollo académico.
+P110: Power BI (licencia Pro, si se requiere publicar/compartir)
+P111: $0 — $13.000 CLP/mes por usuario aprox.
+P112: Power BI Desktop es gratuito; Power BI Pro puede requerirse para compartir el dashboard con AFRISAN.
+P113: Dominio o subdominio propio (opcional)
+P114: $0 — $15.000 CLP/año aprox.
+P115: Opcional; puede utilizarse un subdominio gratuito del proveedor cloud durante el desarrollo.
+P116: Cuenta de desarrollador (Google Play / App Store, si se publica)
+P117: $0 — $99 USD/año aprox. (App Store)
+P118: Solo aplica si se decide publicar la app móvil en tiendas oficiales; no es requisito para el alcance académico.
+P119: Para un proyecto de alcance académico, se espera que la mayoría de los servicios pueda operar dentro de los niveles gratuitos o de entrada de cada proveedor, salvo que AFRISAN requiera capacidades adicionales (por ejemplo, licencias Power BI Pro para compartir el dashboard con múltiples usuarios).
+P120: 8. Matriz de responsables por recurso
+P121: La siguiente tabla asigna, de forma preliminar, un responsable dentro del equipo para cada frente técnico. Los campos [COMPLETAR] deberán definirse en conjunto con el equipo.
+P122: Frente técnico
+P123: Responsable
+P124: Backend / API REST
+P125: [COMPLETAR — integrante responsable]
+P126: App móvil
+P127: [COMPLETAR — integrante responsable]
+P128: App web/escritorio
+P129: [COMPLETAR — integrante responsable]
+P130: Base de datos y modelo de datos
+P131: Yarek Larraguibel (arquitectura técnica)
+P132: Dashboard Power BI
+P133: [COMPLETAR — integrante responsable]
+P134: Infraestructura cloud y despliegue
+P135: Yarek Larraguibel (arquitectura técnica)
+P136: Pruebas de seguridad
+P137: [COMPLETAR — integrante responsable]

@@ -135,7 +135,10 @@ namespace Afrisan.Api.Controllers
                             : dto.Descripcion.Trim(),
 
                     Activo =
-                        dto.Activo
+                        dto.Activo,
+                    FactorGwp = dto.FactorGwp,
+                    FuenteGwp = dto.FuenteGwp?.Trim(),
+                    MetodologiaGwp = dto.MetodologiaGwp?.Trim()
                 };
 
             _context.GasesRefrigerantes
@@ -231,6 +234,10 @@ namespace Afrisan.Api.Controllers
 
             gas.Activo =
                 dto.Activo;
+
+            gas.FactorGwp = dto.FactorGwp;
+            gas.FuenteGwp = dto.FuenteGwp?.Trim();
+            gas.MetodologiaGwp = dto.MetodologiaGwp?.Trim();
 
             await _context.SaveChangesAsync();
 

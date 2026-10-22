@@ -1,0 +1,45 @@
+SOURCE: 2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx
+P2: Guía2. Desarrollo Proyecto APT Asignatura CapstoneGuía2. Desarrollo Proyecto APT Asignatura Capstone
+P4: Guía2. Desarrollo Proyecto APT 
+P5: Asignatura Capstone
+P7: Guía2. Desarrollo Proyecto APT 
+P8: Asignatura Capstone
+P15: 1. Resumen avance Proyecto APT
+P16: A continuación, encontrarás distintos campos que deberás completar con la información solicitada. 
+P19: Resumen de avance proyecto APT
+P20: En esta sección deberás realizar un resumen de los avances que has realizado en tu proyecto APT. Relata brevemente qué actividades del proyecto has llevado a cabo y qué objetivos específicos has cumplido hasta el minuto y de qué manera.
+P21: En caso que hayas realizado ajustes a los objetivos o metodología, debes incluir dichos apartados nuevamente en este informe, señalando cuáles son dichos ajustes.
+P22: Objetivos
+P23: Opcional en caso de ajuste
+P24: Metodología
+P25: Opcional en caso de ajuste
+P26: Evidencias de avance
+P27: Describe la(s) evidencia(s) que presentarás en este informe de avance y justifica de qué manera esta(s) evidencia(s) permite(n) dar cuenta del desarrollo del proyecto.
+P28: En caso de ser pertinente explica cómo resguardaste la calidad de tu Proyecto APT a partir de aspectos propios de tu disciplina (correcta aplicación de metodologías, actividades, herramientas, recursos propios, etc.).
+P29: En este apartado adjuntar la(s) evidencia(s) seleccionada(s) para ser evaluada por el docente.
+P30: 2. Monitoreo del Plan de Trabajo 
+P31: Examina cuidadosamente tu plan de trabajo, enfocándote especialmente en la columna de estado de avance y ajustes.
+P33: Plan de Trabajo
+P34: Competencia o unidades de competencias
+P35: Actividades
+P36: Recursos
+P37: Duración de la actividad
+P38: Responsable
+P39: Observaciones
+P40: Estado de avance
+P41: Ajustes
+P42: Nombra las competencias o unidades de competencias que se relacionan con las diferentes actividades requeridas para el desarrollo del proyecto APT.
+P43: Nombra las actividades que se necesitan para desarrollar el proyecto APT. 
+P44: Nombra los recursos necesarios para llevar a cabo las actividades definidas.
+P45: Señala la duración de cada actividad. 
+P46: Escribe el nombre del integrante del equipo responsable de cada actividad.
+P47: Señala las dificultades o facilitadores que se podrían presentar durante la ejecución de cada una de las actividades propuestas.
+P48: Describe el estado de avance de cada actividad.
+P50: Tipos de estado: 
+P51: En curso/ Con retraso/ No iniciado/ Completado/ Ajustada 
+P52: Señala los ajustes o reformulaciones que has realizado. 
+P54: 3. Ajustes a partir del monitoreo 
+P55: Profundiza en las observaciones de tu plan de trabajo. Analiza las actividades planificadas y señala qué aspectos facilitaron u obstaculizaron la ejecución del plan. Plantea cómo abordaste y/o abordarás los obstáculos. Por último, señala los ajustes que realizaste al plan de trabajo a partir de este análisis.
+P57: Factores que han facilitado y/o dificultado el desarrollo de mi plan de trabajo: Describe los factores que han facilitado y/o dificultado el desarrollo de tu Proyecto APT hasta ahora. En el caso de las dificultades debes describir qué acciones tomaste y/o tomarás para solucionarlas.  
+P64: Actividades ajustadas o eliminadas: Señalar los ajustes que realizaste a tu plan de trabajo o actividades que eliminaste y, justifica por qué lo hiciste.  En el caso de que tu plan de trabajo no haya requerido ni requiera ajustes, justifica esta decisión a partir de los facilitadores que te han permitido desarrollarlo como fue planeado.
+P74: Actividades que no has iniciado o están retrasadas: En caso de que no hayas iniciado actividades o estén retrasadas de acuerdo a tu planificación, señala los motivos por los que no has podido cumplir dichos plazos y qué estrategias utilizarás para avanzar en dichas actividades y no afectar tu proyecto APT. 

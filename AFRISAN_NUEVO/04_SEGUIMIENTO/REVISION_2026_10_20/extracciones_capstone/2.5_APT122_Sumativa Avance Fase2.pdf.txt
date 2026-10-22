@@ -1,0 +1,551 @@
+SOURCE: 2.5_APT122_Sumativa Avance Fase2.pdf
+PAGE 1
+ 
+ 
+1 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+Evaluación Fase 2 
+Nombre: Informe avance Proyecto APT 
+ 
+01. Agente evaluativo 
+X Heteroevaluación   Coevaluación   Autoevaluación 
+ 
+02. T abla de Especificaciones 
+Resultado de Aprendizaje Indicador de Logro (IL) Indicador de Evaluación (IE)* 
+Ponderación 
+Indicador 
+Logro 
+Ponderación 
+Indicador de 
+Evaluación 
+RA2  
+Desarrolla el Proyecto APT, 
+según los estándares de calidad 
+establecidos por la disciplina. 
+ 
+IL 2.1 
+Desarrolla las actividades planificadas del 
+proyecto APT, incluyendo las evidencias 
+que cumplen con los estándares 
+definidos por la disciplina. 
+1. Propone ajustes al Proyecto APT 
+considerando dificultades, facilitadores y 
+retroalimentación.  
+45 
+10 
+2. Aplica una metodología que permite el 
+logro de los objetivos propuestos, de acuerdo 
+a los estándares de la disciplina. 
+10 
+3. Genera evidencias que dan cuenta del 
+avance del Proyecto APT en relación a 
+documentación, programación y 
+almacenamiento de datos , de acuerdo a lo 
+planificado por el equipo y que cumpla con 
+estándares de desarrollo de la industria 
+25 
+Sigla Nombre Asignatura Tiempo Asignado % Ponderación 
+PTY4614 Capstone semana 9 20% 
+PAGE 2
+ 
+ 
+2 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+IL 2.3 
+Cumple con aspectos formales 
+requeridos en el informe de avance y 
+final del Proyecto APT. 
+4. Utiliza de manera precisa el lenguaje 
+técnico de acuerdo con lo requerido por la 
+disciplina, tanto en el informe de avance 
+como en las evidencias. 
+30 
+5 
+5. Utiliza reglas de redacción, ortografía 
+(literal, puntual, acentual) y las normas para 
+citas y referencias , tanto en el informe de 
+avance como en las evidencias. 
+5 
+6. Entrega la documentación y evidencias 
+requerida por la asignatura de acuerdo a la 
+estructura y nombres solicitados, guardando 
+todas las evidencias de avances en Git 
+20 
+IL 2.4 
+Cumple con los indicadores de calidad 
+requeridos en la presentación del  
+informe de avance y final de acuerdo a 
+estándares definidos por la disciplina. 
+7.- Generan evidencias claras dentro del 
+repositorio del aporte de cada uno de los 
+integrantes del equipo que permitan 
+identificar la equidad en el trabajo y la 
+participación de cada estudiante. 25 
+15 
+8. Demuestra un trabajo en equipo en donde 
+todos los miembros del equipo expresan con 
+fluidez el conocimiento del tema expuesto y  
+participan de las actividades planificadas en 
+el proyecto 
+10 
+Total 100% 100% 
+ 
+Para evaluar el logro del IL 2.4, el/la docente deberá revisar si el Informe de Avance del Proyecto APT entregado cumple con los indicadores de 
+calidad disciplinarios, propios de las competencias del Perfil de Egreso de la Carrera que están involucradas en el Proyecto.  Para ello, deberá 
+seleccionar de la siguiente tabla aquellos indicadores de calidad propios de cada una de las competencias del perfil de egreso que se  está 
+desarrollando en el Proyecto presentado y determinar si estos están o no presentes en la propuesta. 
+ 
+ 
+Competencia del Perfil de Egreso Indicadores de Calidad 
+Realizar pruebas de certificación tanto de los productos como de los 
+procesos utilizando buenas prácticas definidas por la industria. 
+1.1   Diseña pruebas de validación tanto de los productos como de los procesos 
+utilizando buenas prácticas definidas por la industria. 
+1.2 Aplica Pruebas de validación tanto de los productos como de los procesos 
+utilizando buenas prácticas definidas por la industria. 
+PAGE 3
+ 
+ 
+3 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+1.3 Desarrolla mejoras al producto en base al resultado de las mismas.  
+Gestionar proyectos informáticos, ofreciendo alternativas para la toma de 
+decisiones de acuerdo a los requerimientos de la organización. 
+2.1 Planifica proyectos informáticos, ofreciendo alternativas para la toma de 
+decisiones de acuerdo a los requerimientos de la organización. 
+2.2 Controla proyectos informáticos, ofreciendo alternativas para la toma de 
+decisiones de acuerdo a los requerimientos de la organización. 
+Construir modelos de datos para soportar los requerimientos de la 
+organización de acuerdo a un diseño definido y escalable en el tiempo.  
+3.1 Diseña modelos de datos para soportar los requerimientos de la 
+organización de acuerdo a un diseño definido y escalable en el tiempo.  
+3.2 Implementa modelos de datos para soportar los requerimientos de la 
+organización de acuerdo a un diseño definido y escalable en el tiempo.  
+Desarrollar una solución de software utilizando técnicas que permitan 
+sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro 
+de los objetivos. 
+4.1 Construye una solución de software utilizando técnicas que permitan 
+sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro 
+de los objetivos. 
+4.2 Integra los distintos componentes de una solución de software utilizando 
+técnicas que permitan sistematizar el proceso de desarrollo y mantenimiento, 
+asegurando el logro de los objetivos. 
+4.3 Implanta una solución de software utilizando técnicas que permitan 
+sistematizar el proceso de desarrollo y mantenimiento, asegurando el logro 
+de los objetivos. 
+ 
+ 
+  
+PAGE 4
+ 
+ 
+4 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+03. Instrucciones para el/la estudiante 
+ 
+Esta es una evaluación que corresponde a una entrega de encargo y tiene un 20% de ponderación sobre la nota final de la asignatura. 
+ 
+El tiempo para desarrollar esta evaluación es hasta el momento de su entrega en la semana 9 y se realiza de manera grupal (2 a 3 integrantes) 
+en el taller de proyectos. 
+ 
+Deberán redactar los siguientes apartados según este formato:  
+• Abstract (inglés y español)  
+• Conclusiones individuales solo en inglés.  
+• Reflexión solo en inglés.  
+ 
+Tu informe debe contener: 
+• Ajustes a la propuesta considerando dificultades, facilitadores y la retroalimentación. 
+• Metodología de trabajo que permita alcanzar metodología y sea pertinente con los requerimientos disciplinares. 
+• Evidencias que dan cuenta del avance del proyecto. 
+ 
+Además, debe cumplir con:  
+• Los indicadores de calidad requeridos en la presentación del diseño del proyecto APT. 
+ 
+Aspectos formales:  
+• Respeta las reglas de redacción y ortografía.  
+• Utilización precisa de lenguaje técnico de acuerdo a lo requerido por la disciplina. 
+• Formato informe técnico: Portada, índice, abstract, desarrollo de ingeniería, conclusiones y reflexiones individuales. 
+ 
+Letra: Arial, verdana o calibri 
+Tamaño: 11 o 12 
+Interlineado: 1,0 o 1,5 según corresponda 
+Número de página 
+Fuente o bibliografía (Si corresponde) 
+Anexo de evidencia (Si corresponde) 
+ 
+PAGE 5
+ 
+ 
+5 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+  
+La siguiente pauta será aplicada por el/la docente de la asignatura para evaluar el estado de avance del informe del Proyecto APT y te entregará 
+retroalimentación sobre tu trabajo para que puedas identificar las fortalezas y aspectos por mejorar, con el fin de ajustarlo  para la entrega del 
+informe final del Proyecto APT. 
+ 
+PAGE 6
+ 
+ 
+6 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+Pauta de Evaluación 
+Pauta tipo: Rúbrica 
+ 
+ 
+Categoría % logro Descripción niveles de logro 
+Completamente Logrado 100% Demuestra logro destacado en todos los aspectos evaluados en el indicador. Se considera como el punto 
+óptimo dentro del rango competente. 
+Logrado  60% Demuestra logro en los elementos básicos del indicador, las omisiones, dificultades o errores le permiten 
+ser considerado competente. 
+Logro incipiente  30% Presenta importantes omisiones, dificultades o errores que no permiten evidenciar los elementos básicos 
+del logro del indicador, por lo que no puede ser considerado competente.  
+No Logrado 0% Presenta ausencia o incorrecto logro de los aspectos evaluados en el indicador. 
+Indicador de Evaluación 
+Categorías de Respuesta Ponderación 
+del Indicador 
+de Evaluación 
+Completamente 
+Logrado  (100%) Logrado  (60%) Logro incipiente  
+(30%) 
+No logrado 
+(0%) 
+1. Propone ajustes al Proyecto 
+APT considerando dificultades, 
+facilitadores y 
+retroalimentación.  
+Señala los ajustes que 
+realizó o realizará y los 
+justifica considerando las 
+dificultades, facilitadores 
+y retroalimentación del 
+docente. 
+Señala algunos de los 
+ajustes que realizó o 
+realizará y los justifica 
+considerando las 
+dificultades, facilitadores 
+o retroalimentación del 
+docente. 
+Señala los ajustes que 
+realizó o realizará, 
+pero no los justifica. 
+No incluye ajustes 
+ni justifica por qué 
+mantiene su plan 
+inicial. 
+10 
+2. Aplica una metodología que 
+permite el logro de los objetivos 
+propuestos, de acuerdo a los 
+estándares de la disciplina. 
+Aplica la metodología 
+definida de acuerdo a los 
+estándares de la 
+disciplina, alcanzando los 
+objetivos propuestos para 
+el avance del proyecto.  
+Aplica la metodología 
+definida de acuerdo a los 
+estándares de la 
+disciplina, pero no se 
+observa el cumplimiento 
+de objetivos propuestos 
+para el avance del 
+proyecto.  
+Aplica la metodología 
+definida cumpliendo 
+parcialmente con los 
+estándares de la 
+disciplina y con los 
+objetivos propuestos 
+para el avance del 
+proyecto.  
+Aplica la 
+metodología 
+definida sin cumplir 
+los estándares de la 
+disciplina ni los 
+objetivos 
+propuestos para el 
+avance del 
+proyecto.  
+10 
+PAGE 7
+ 
+ 
+7 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+3. Genera evidencias que dan 
+cuenta del avance del Proyecto 
+APT en relación a 
+documentación, programación y 
+almacenamiento de datos , de 
+acuerdo a lo planificado por el 
+equipo y que cumpla con 
+estándares de desarrollo de la 
+industria 
+Presenta evidencias de 
+avance que cumplen con 
+lo planificado por el 
+equipo en relación a 
+documentación, 
+programación y 
+almacenamiento de datos, 
+entregando evidencias 
+que cumplan con 
+estándares de desarrollo 
+que actualmente se 
+encuentran presentes en 
+la industria 
+Presenta evidencias de 
+avance sin cumplir con lo 
+planificado por el equipo 
+en relación a 
+documentación, 
+programación y 
+almacenamiento de datos, 
+pero si sus entregas 
+evidencian el 
+cumplimiento de 
+estándares de desarrollo 
+que actualmente se 
+encuentran presentes en 
+la industria. 
+Presenta evidencias 
+de avance que 
+cumplen con lo 
+planificado por el 
+equipo en relación a 
+documentación, 
+programación y 
+almacenamiento de 
+datos, entregando 
+evidencias que no 
+cumplen con 
+estándares de 
+desarrollo que 
+actualmente se 
+encuentran presentes 
+en la industria 
+Presenta evidencias 
+de avance sin 
+cumplir con lo 
+planificado por el 
+equipo en relación a 
+documentación, 
+programación y 
+almacenamiento de 
+datos y las 
+evidencias no 
+cumplen con 
+estándares de 
+desarrollo que 
+actualmente se 
+encuentran 
+presentes en la 
+industria 
+25 
+4. Utiliza de manera precisa el 
+lenguaje técnico de acuerdo con 
+lo requerido por la disciplina. 
+Utiliza lenguaje técnico de 
+su disciplina siempre de 
+manera precisa.  
+Utiliza lenguaje técnico de 
+su disciplina la mayoría de 
+las veces de manera 
+precisa. 
+Utiliza lenguaje 
+técnico de su 
+disciplina pocas veces 
+o casi nunca de 
+manera precisa.  
+No utiliza de 
+manera precisa el 
+lenguaje técnico de 
+su disciplina.  
+5 
+5. Utiliza reglas de redacción, 
+ortografía (literal, puntual, 
+acentual) y las normas para citas 
+y referencias.  
+El texto cumple con las 
+reglas ortografía y de 
+redacción en todos sus 
+apartados. 
+Y 
+Utiliza correctamente 
+todas las normas de 
+citación y referencias. 
+El texto presenta de 1 a 5 
+errores de ortografía, 
+redacción o en las citas y 
+referencias del informe. 
+El texto presenta de 6 
+a 10 errores de 
+ortografía, redacción 
+o en las citas y 
+referencias del 
+informe. 
+El texto presenta 
+más de 10 errores 
+de ortografía, 
+redacción o en las 
+citas y referencias 
+del informe. 
+5 
+6. Entrega la documentación y 
+evidencias requerida por la 
+asignatura de acuerdo a la 
+estructura y nombres 
+solicitados, guardando todas las 
+evidencias de avances en Git 
+Entrega la documentación 
+y evidencias requeridas 
+por la asignatura de 
+acuerdo a la estructura y 
+nombres solicitados, 
+guardando todas las 
+evidencias de avances en 
+Git 
+Entrega la documentación 
+y evidencias requeridas 
+por la asignatura de 
+acuerdo a la estructura y 
+nombres solicitados, 
+guardando algunas de las 
+evidencias de avances en 
+Git 
+Entrega la 
+documentación y 
+evidencias requeridas 
+por la asignatura sin 
+una la estructura y 
+nombres solicitados, 
+guardando algunas de 
+No entrega a través 
+de Git la 
+documentación y 
+evidencias de 
+avance requeridas 
+por la asignatura 
+20 
+PAGE 8
+ 
+ 
+8 
+Subdirección de Evaluación de Resultados de Aprendizaje - Subdirección de Diseño Instruccional  
+ 
+ 
+las evidencias de 
+avances en Git 
+7.- Generan evidencias claras 
+dentro del repositorio del 
+aporte de cada uno de los 
+integrantes del equipo que 
+permitan identificar la equidad 
+en el trabajo y la participación 
+de cada estudiante. 
+Generan evidencias 
+dentro del repositorio del 
+proyecto del aporte de 
+cada uno de los 
+integrantes del equipo 
+que permitan identificar la 
+equidad en el trabajo y la 
+participación de cada 
+estudiante 
+Generan evidencias 
+dentro del repositorio del 
+proyecto del aporte de 
+cada uno de los 
+integrantes del equipo, 
+pero la evidencia no 
+demuestra una equidad 
+en la participación de cada 
+estudiante 
+Generan evidencias 
+dentro del repositorio 
+del proyecto del 
+aporte de cada uno 
+de los integrantes del 
+equipo, pero la 
+evidencia no 
+demuestra la 
+participación de 
+algunos(s) 
+participante(s) del 
+equipo 
+No generan 
+evidencias dentro 
+del repositorio del 
+proyecto del aporte 
+de cada uno de los 
+integrantes del 
+equipo por lo que 
+no se permite 
+identificar la 
+equidad en el 
+trabajo y la 
+participación de 
+cada estudiante 
+15 
+8. Demuestra un trabajo en 
+equipo en donde todos los 
+miembros del equipo expresan 
+con fluidez el conocimiento del 
+tema expuesto y  participan de 
+las actividades planificadas en el 
+proyecto. 
+ 
+Demuestra un trabajo en 
+equipo en donde todos los 
+miembros del equipo 
+expresan con fluidez el 
+conocimiento del tema 
+expuesto y  participan de 
+las actividades 
+planificadas en el 
+proyecto 
+Demuestra un trabajo en 
+equipo de manera parcial, 
+en donde todos los 
+miembros del equipo 
+expresan con fluidez el 
+conocimiento del tema 
+expuesto, pero no todos 
+participan de manera 
+equitativa de las 
+actividades planificadas 
+en el proyecto 
+Demuestra de 
+manera deficiente el 
+trabajo en equipo en 
+donde los integrantes 
+expresan con poca 
+fluidez y de manera 
+imparcial el 
+conocimiento del 
+tema expuesto y no 
+todos sus miembros 
+participan de manera 
+equitativa de las 
+actividades 
+planificadas en el 
+proyecto 
+No demuestran un 
+trabajo en equipo, 
+evidenciando en su 
+presentación la nula 
+colaboración de 
+alguno de sus 
+integrantes. 
+10 
+Total 100% 

@@ -1,0 +1,26 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/11_Retrospectiva_Semana_3_AFRISAN_Corregida.docx
+P1: Resumen de la 
+P2: Reunión Retrospectiva
+P5: Información de la empresa y proyecto:
+P7: Empresa / Organización
+P8: Accesorios Frigoríficos Santiago Limitada (AFRISAN Ltda.)
+P9: Proyecto
+P10: Sistema Integral de Gestión de Inventario, Prevención de Pérdidas y Auditoría de Gases Refrigerantes. 
+P12: Información de la reunión:
+P14: Lugar
+P15: Llamada de voz
+P16: Fecha
+P17: 20-08-2026
+P18: Número de iteración / sprint
+P19: 3
+P20: Personas convocadas a la reunión
+P21: Dante Moya - Scrum Master / DesarrolloYarek Larraguibel - QA / Arquitectura
+P22: Personas que asistieron a la reunión
+P23: Dante Moya - Scrum Master / DesarrolloYarek Larraguibel - QA / Arquitectura
+P26: Formulario de reunión retrospectiva
+P28: ¿Qué salió bien en la iteración? (aciertos)
+P29: ¿Qué no salió bien en la iteración? (errores)
+P30: ¿Qué mejoras vamos a implementar en la próxima iteración? (recomendaciones de mejora continua)
+P31: Se lograron estandarizar matemáticamente las reglas del negocio esenciales antes de escribir código: los rangos del semáforo de fugas (5% - 15%) y los factores internacionales de conversión GWP para el cálculo
+P32: El equipo evidenció una marcada tendencia a concentrarse en la arquitectura del software y herramientas de programación antes de comprender en su totalidad los flujos de negocio y las necesidades específicas de los usuarios finales.
+P33: Programar sesiones breves de inducción práctica con los técnicos en terreno y bodegueros utilizando los prototipos de Figma y las primeras versiones funcionales del sistema. Esto facilitará la adopción de la lectura óptica y asegurará que el flujo sea intuitivo.

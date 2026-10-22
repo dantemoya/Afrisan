@@ -1,0 +1,30 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/07_Pauta_Entrevista_Tecnica_AFRISAN_Corregida.docx
+P12: PAUTA Y REGISTRO DE ENTREVISTA TÉCNICA
+P13: Equipo actual: Dante Moya y Yarek Larraguibel
+P14: Asignatura: Portafolio de Título (APT)
+P15: Líder Técnico: Carlos Quintanilla
+P16: Nota de trazabilidad: entrevista original realizada por Carolina Ávila Medina el 23 de agosto de 2026.
+P32: Ficha Técnica de la Entrevista
+P34: Proyecto
+P35: Sistema Integral de Gestión de Inventario, Prevención de Pérdidas y Auditoría de Gases Refrigerantes. 
+P36: Organización
+P37: Accesorios Frigoríficos Santiago Limitada (AFRISAN Ltda.). 
+P38: Entrevistado
+P39: Carlos Aguilera
+P40: Entrevistador(a)
+P41: Carolina Ávila Medina
+P42: Fecha y Lugar
+P43: 23 de Agosto 2026
+P44: Objetivo de la sesión
+P45: Levantar el flujo operativo real del ciclo de vida del refrigerante (importación, despacho, aplicación en terreno y logística inversa), identificar los puntos de quiebre de trazabilidad, riesgos de robo y requerimientos normativos ambientales. 
+P47: Cuestionario Aplicado y Registro de Respuestas
+P48: Pregunta 1: ¿De dónde provienen los gases refrigerantes y cómo se registran al llegar a AFRISAN?
+P49: Respuesta de la contraparte: Los refrigerantes (refrigerantes como R-507, R-404A, R-134a y R-22) se importan directamente desde China o Estados Unidos. Al ingresar a la bodega central en Cerrillos, se dan de alta en el ERP Defontana con un código de producto/lote genérico.
+P50: Pregunta 2: ¿Cómo se gestiona el despacho hacia los locales de los clientes (Walmart, Cencosud)?
+P51: Respuesta de la contraparte: Cuando una tienda requiere mantenimiento, se genera una Orden de Trabajo (OT) y una Guía de Despacho desde Defontana. Por ejemplo, si se necesitan 10 botellas de R-507, la guía ampara la salida de 10 unidades hacia el local y el técnico llega al lugar a realizar el trabajo.
+P52: Pregunta 3: ¿Dónde se detecta el quiebre de trazabilidad o pérdida de control?
+P53: Respuesta de la contraparte: La trazabilidad se pierde totalmente en la carga en terreno y durante el traslado. Los envases no cuentan con un código de barra o QR unitario (solo se sabe que salieron 10 botellas en grupo). Además, en los locales de los clientes no se audita la carga real y antiguamente se usaban precintos manuales pero esa práctica se abandonó, por lo que todo queda sujeto a la confianza en el técnico. Existe riesgo latente de robos hormiga o desvíos durante los traslados.
+P54: Pregunta 4: ¿Qué ocurre con la logística inversa y la devolución de los envases vacíos?
+P55: Respuesta de la contraparte: Hoy el técnico no tiene un mecanismo estricto u obligatorio que lo fuerce a devolver el 100% de los envases. De 10 botellas despachadas, a veces devuelven 7. Los 3 envases restantes quedan en destino informal: vertederos, acopiados sin control o usados por terceros para fabricar braseros/parrillas artesanales, lo que provoca la perforación del metal y la liberación directa de remanentes tóxicos a la atmósfera.
+P56: Pregunta 5: ¿A qué entidad se entregan los envases recuperados y qué respaldo entregan?
+P57: Respuesta de la contraparte: Los envases que sí se recuperan se entregan como chatarra a la empresa Regener, quienes realizan la disposición intermedia y emiten un Certificado de Disposición Intermedia. Se necesita vincular digitalmente qué cilindros salieron con qué certificado de Regener para auditorías del Ministerio del Medio Ambiente (Unidad Ozono - Protocolo de Montreal / Enmienda de Kigali).

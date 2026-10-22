@@ -5,6 +5,7 @@
 
 @inject AuthService AuthService
 @inject NavigationManager Navigation
+@inject EntornoService Entorno
 
 <PageTitle>Iniciar sesión - AFRISAN</PageTitle>
 
@@ -16,6 +17,21 @@
             <h1>❄ AFRISAN</h1>
             <p>Gestión y Trazabilidad de Refrigerantes</p>
         </div>
+
+        @if (Entorno.Info?.Demo == true)
+        {
+            <div class="alert alert-info">
+                <strong>Prueba una cuenta de demostración</strong>
+                <div class="d-flex flex-wrap gap-2 my-2">
+                    @foreach (var cuenta in Entorno.Info.Cuentas)
+                    {
+                        <button type="button" class="btn btn-outline-primary btn-sm"
+                                disabled="@cargando" @onclick="() => UsarCuenta(cuenta)">@cuenta.Rol</button>
+                    }
+                </div>
+                <small>Contraseña de ejemplo: <code>@Entorno.Info.Password</code></small>
+            </div>
+        }
 
         <EditForm Model="@modelo"
                   OnValidSubmit="@IniciarSesion">
@@ -122,6 +138,13 @@
 @code {
 
     private LoginFormulario modelo = new();
+
+    private void UsarCuenta(CuentaDemo cuenta)
+    {
+        modelo.Email = cuenta.Email;
+        modelo.Password = Entorno.Info?.Password ?? "";
+        mensajeError = string.Empty;
+    }
 
     private bool cargando;
 

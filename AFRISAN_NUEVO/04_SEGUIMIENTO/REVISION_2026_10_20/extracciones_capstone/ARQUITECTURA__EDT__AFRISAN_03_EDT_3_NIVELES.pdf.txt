@@ -1,0 +1,36 @@
+SOURCE: ARQUITECTURA/EDT/AFRISAN_03_EDT_3_NIVELES.pdf
+PAGE 1
+Estructura de Desglose del Trabajo (EDT)
+Sistema AFRISAN · Proyecto APT · Organización en tres niveles jerárquicos
+Sistema Integral de Gestión de Inventario,
+Prevención de Pérdidas y Auditoría de Gases
+Refrigerantes
+P R O Y E C T O  A F R I S A N
+Nivel 1: proyecto general
+FASE 1
+Definición y análisis
+Levantamiento, análisis y planificación inicial del proyecto
+FASE 2
+Diseño y desarrollo ágil
+Prototipado, sprints de desarrollo y aseguramiento de calidad
+FASE 3
+Implementación y cierre
+Marcha blanca, despliegue, documentación y cierre formal
+1.1 Levantamiento de requerimientos
+1.2 Análisis de requerimientos
+1.3 Modelado de base de datos
+1.4 Arquitectura de software 4+1
+1.5 Planificación inicial
+2.1 Prototipado UI/UX
+2.2 Sprint 1: Backend, autenticación y módulo bodega
+2.3 Sprint 2: Módulo terreno y reglas de negocio
+2.4 Sprint 3: Reportería BI y motor de emisiones
+2.5 Pruebas QA
+2.6 Pruebas de seguridad
+2.7 Corrección de errores
+3.1 Marcha blanca
+3.2 Despliegue en producción
+3.3 Elaboración de manual de usuario
+3.4 Elaboración de manual técnico
+3.5 Informe final y cierre
+Nivel 1: Proyecto general · Nivel 2: Fases · Nivel 3: Paquetes de trabajo AFRISAN · Ingeniería en Informática

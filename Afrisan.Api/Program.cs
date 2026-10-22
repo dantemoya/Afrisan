@@ -1,68 +1,99 @@
 using Afrisan.Api.Data;
 using Afrisan.Api.Models;
+using Afrisan.Api.Demo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Security.Cryptography;
 
-var builder = WebApplication.CreateBuilder(args);
+var initializeDatabase = args.Contains("--initialize-database", StringComparer.Ordinal);
+var builder = WebApplication.CreateBuilder(
+    args.Where(arg => arg != "--initialize-database").ToArray());
+
+var demo = builder.Configuration.GetValue<bool>("Demo:Enabled");
+if (demo && !builder.Environment.IsDevelopment())
+    throw new InvalidOperationException("El modo demo solo puede iniciarse en Development.");
+if (demo && initializeDatabase)
+    throw new InvalidOperationException("Desactiva Demo:Enabled para inicializar una base real.");
 
 // =====================================================
 // KESTREL
 // =====================================================
 
-if (builder.Environment.IsDevelopment())
-{
-    builder.WebHost.ConfigureKestrel(options =>
-    {
-        options.ListenAnyIP(5141);
-    });
-}
+// Los perfiles http/https/RedLocal controlan los puertos. No se fuerza HTTP
+// sobre el perfil HTTPS, para que la dirección que usa la Web sea coherente.
 
 // =====================================================
 // BASE DE DATOS
 // =====================================================
 
-var connectionString =
-    builder.Configuration.GetConnectionString("DefaultConnection");
-
-if (string.IsNullOrWhiteSpace(connectionString))
+if (demo)
 {
-    throw new InvalidOperationException(
-        "No se encontró la cadena de conexión 'DefaultConnection'."
-    );
+    builder.Services.AddSingleton<DemoStore>();
+    builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
+    builder.Services.Configure<Microsoft.AspNetCore.DataProtection.KeyManagement.KeyManagementOptions>(
+        options => options.XmlRepository = new DemoKeyRepository());
+    // Credenciales de firma efímeras y emisor propios: no se reutilizan secretos
+    // reales ni se permite que estos tokens entren en el entorno con base de datos.
+    builder.Configuration["Jwt:Issuer"] = "AFRISAN.Demo";
+    builder.Configuration["Jwt:Audience"] = "AFRISAN.Demo.Web";
+    builder.Configuration["Jwt:Key"] = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
 }
+else
+{
+    var connectionString =
+        builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AfrisanDbContext>(options =>
-    options.UseNpgsql(connectionString)
-);
-
-// =====================================================
-// IDENTITY
-// =====================================================
-
-builder.Services
-    .AddIdentity<Usuario, IdentityRole>(options =>
+    if (string.IsNullOrWhiteSpace(connectionString))
     {
-        options.User.RequireUniqueEmail = true;
+        throw new InvalidOperationException(
+            "No se encontró la cadena de conexión 'DefaultConnection'."
+        );
+    }
 
-        options.Password.RequiredLength = 8;
-        options.Password.RequireDigit = true;
-        options.Password.RequireLowercase = true;
-        options.Password.RequireUppercase = true;
-        options.Password.RequireNonAlphanumeric = false;
+    builder.Services.AddDbContext<AfrisanDbContext>(options =>
+        options.UseNpgsql(connectionString)
+    );
 
-        options.Lockout.AllowedForNewUsers = true;
-        options.Lockout.MaxFailedAccessAttempts = 5;
-        options.Lockout.DefaultLockoutTimeSpan =
-            TimeSpan.FromMinutes(15);
-    })
-    .AddEntityFrameworkStores<AfrisanDbContext>()
-    .AddDefaultTokenProviders();
+    // =====================================================
+    // IDENTITY
+    // =====================================================
+
+    builder.Services
+        .AddIdentity<Usuario, IdentityRole>(options =>
+        {
+            options.User.RequireUniqueEmail = true;
+
+            options.Password.RequiredLength = 8;
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireNonAlphanumeric = false;
+
+            options.Lockout.AllowedForNewUsers = true;
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.DefaultLockoutTimeSpan =
+                TimeSpan.FromMinutes(15);
+        })
+        .AddEntityFrameworkStores<AfrisanDbContext>()
+        .AddUserStore<UsuarioStore>()
+        .AddDefaultTokenProviders();
+
+    // Comando explícito: crea/aplica el esquema y los roles sin arrancar el servidor HTTP.
+    if (initializeDatabase)
+    {
+        await using var initializationApp = builder.Build();
+        await DatabaseInitializer.InitializeAsync(
+            initializationApp.Services, initializationApp.Configuration);
+        return;
+    }
+}
 
 // =====================================================
 // JWT
@@ -115,6 +146,8 @@ builder.Services
 // =====================================================
 // CORS
 // =====================================================
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddCors(options =>
 {
@@ -180,7 +213,9 @@ builder.Services.AddCors(options =>
 // CONTROLADORES
 // =====================================================
 
-builder.Services.AddControllers();
+if (!demo) builder.Services.AddControllers();
+
+if (!demo) builder.Services.AddHealthChecks().AddCheck<DatabaseHealthCheck>("database");
 
 // =====================================================
 // SWAGGER + JWT
@@ -243,14 +278,29 @@ app.UseCors("AfrisanWeb");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+if (demo)
+{
+    app.MapDemoEndpoints();
+    app.Logger.LogInformation("AFRISAN DEMO: datos simulados en memoria. Se reinician al cerrar la API.");
+}
+else
+{
+    app.MapControllers();
+    app.MapHealthChecks("/health/ready");
+    app.MapGet("/api/entorno", () => Results.Ok(new { demo = false })).AllowAnonymous();
+}
 
 // =====================================================
 // SEED DE ROLES Y ADMINISTRADOR
 // =====================================================
 
-using (var scope = app.Services.CreateScope())
+if (!demo)
 {
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<AfrisanDbContext>();
+    if ((await db.Database.GetPendingMigrationsAsync()).Any())
+        throw new InvalidOperationException(
+            "Hay migraciones pendientes. Revisa Afrisan.Api/Database/README.md antes de iniciar la API.");
     await IdentitySeeder.InicializarAsync(
         scope.ServiceProvider,
         app.Configuration);

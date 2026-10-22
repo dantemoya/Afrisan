@@ -1,0 +1,388 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/05_Informe_Fase_1_AFRISAN_Corregido.docx
+P4: FASE 1: DEFINICIÓN DEL PROYECTO APT
+P5: Sistema Integral de Gestión de Inventario, Prevención de Pérdidas y Auditoría de Gases Refrigerantes
+P6: Proyecto AFRISAN
+P17: Integrantes: Dante Moya, Yarek Larraguibel
+P18: Docente / Líder Técnico: Carlos Quintanilla
+P22: 1.1 Resumen4
+P23: 1.2 Abstract4
+P24: 3.1 Problemática5
+P25: 3.2 Solución propuesta5
+P26: 3.3 Usuarios y beneficiarios5
+P27: 3.4 Relevancia para el campo laboral6
+P28: 6.1 Objetivo general7
+P29: 6.2 Objetivos específicos7
+P30: 7.1 Factibilidad técnica8
+P31: 7.2 Factibilidad operativa8
+P32: 7.3 Factibilidad temporal8
+P33: 7.4 Factibilidad de recursos8
+P34: 7.5 Riesgos y mitigaciones10
+P35: 7.6 Conclusión de factibilidad10
+P36: 8.1 Enfoque metodológico11
+P37: 8.2 Roles de gestión11
+P38: 8.3 Artefactos utilizados11
+P39: 8.4 Ceremonias y seguimiento12
+P40: 9.1 Levantamiento y análisis de requerimientos12
+P41: 9.2 Arquitectura propuesta12
+P42: 9.3 Modelo de datos14
+P43: 9.4 APIs e integraciones15
+P44: 9.5 Seguridad y calidad15
+P45: 12.1 Backlog inicial priorizado18
+P46: 12.2 Diagramas requeridos18
+P47: 12.3 Mockup inicial18
+P48: 14.1 Actualización del equipo19
+P49: 14.2 Dante Moya19
+P50: 14.3 Yarek Larraguibel20
+P51: Anexo A. Estructura de Desglose del Trabajo21
+P52: Anexo B. Archivos fuente de arquitectura21
+P53: Anexo C. Evidencias pendientes de incorporar antes de entrega21
+P57: 1. RESUMEN / ABSTRACT
+P58: 1.1 Resumen
+P59: El proyecto AFRISAN tiene como propósito diseñar e implementar un sistema informático para gestionar de manera centralizada el inventario, la trazabilidad, el control y la auditoría de gases refrigerantes utilizados en operaciones de mantenimiento y reparación de equipos de refrigeración comercial e industrial. La necesidad surge de oportunidades de mejora en el registro manual de movimientos, el control de cilindros, la conciliación de masa, el seguimiento de costos y la generación de indicadores ambientales asociados a emisiones equivalentes de CO2. El núcleo actualmente desarrollado considera Afrisan.Web en Blazor WebAssembly, Afrisan.Api en ASP.NET Core Web API y PostgreSQL/Supabase como persistencia central. El proyecto contempla para fases posteriores extensiones de operación móvil/offline, sincronización y reportería ejecutiva, sujetas a validación técnica antes de considerarse implementadas. La Fase 1 permitió levantar requerimientos, estructurar el Product Backlog, definir el modelo de datos, elaborar la arquitectura técnica, construir diagramas de componentes y despliegue, identificar APIs, analizar recursos y factibilidad y organizar el trabajo mediante EDT, RACI, Carta Gantt, retrospectivas y planificación inicial. El proyecto se gestiona con un enfoque híbrido: planificación estructurada para la definición, alcance e hitos, y Scrum para el desarrollo iterativo en sprints.
+P60: 1.2 Abstract
+P61: The AFRISAN project aims to design and implement an information system for centralized inventory management, traceability, control, and audit of refrigerant gases used in commercial and industrial refrigeration maintenance operations. The currently developed core consists of Afrisan.Web using Blazor WebAssembly, Afrisan.Api using ASP.NET Core Web API, and PostgreSQL/Supabase as the central persistence layer. Mobile/offline operation, synchronization, and executive reporting are planned extensions for later phases and must be technically validated before being considered implemented. Phase 1 focused on requirements elicitation, Product Backlog definition, data modeling, technical architecture, component and deployment diagrams, API identification, resource and feasibility analysis, and project organization through a Work Breakdown Structure, RACI matrix, Gantt chart, retrospectives, and initial planning. The project combines structured planning for scope and milestones with Scrum for iterative development.
+P62: 2. INTRODUCCIÓN
+P63: AFRISAN presta servicios técnicos de mantenimiento, reparación y soporte de equipos de refrigeración comercial e industrial. En este contexto, el uso de gases refrigerantes implica una cadena operativa que comienza en bodega, continúa con el despacho de cilindros y las intervenciones en terreno, y termina con su retorno, conciliación y eventual disposición final. La documentación levantada durante la Fase 1 evidencia la necesidad de fortalecer la trazabilidad de este ciclo, reducir errores asociados a registros manuales y disponer de información consolidada para control operacional, auditoría, análisis de costos y seguimiento ambiental.
+P64: La solución propuesta busca digitalizar este proceso mediante una arquitectura compuesta por aplicaciones móviles y web, servicios de backend, persistencia local y central, mecanismos de seguridad y herramientas de inteligencia de negocios. La Fase 1 se concentra en análisis y planificación. Por lo tanto, los diagramas, modelos, backlog y decisiones tecnológicas incluidos en este informe representan el diseño de la solución y la base para las fases posteriores de desarrollo, pruebas y despliegue.
+P65: 3. DESCRIPCIÓN DEL PROYECTO Y RELEVANCIA
+P66: 3.1 Problemática
+P67: Actualmente existen oportunidades de mejora en el control del inventario de refrigerantes, la identificación individual de cilindros, el registro de consumos, la conciliación entre cantidades despachadas, utilizadas y retornadas, el respaldo de intervenciones realizadas en terreno y la consolidación de información para costos y métricas ambientales. También se identifican restricciones operacionales relevantes, como la falta de conectividad en salas de máquinas subterráneas, la posible ilegibilidad de etiquetas QR y el riesgo de errores de digitación.
+P68: 3.2 Solución propuesta
+P69: El proyecto propone un sistema integral que permita identificar cilindros mediante códigos QR, registrar pesajes de salida y retorno, administrar la cadena de custodia, documentar intervenciones móviles, operar sin conexión a Internet y sincronizar posteriormente, generar alertas visuales de sobreconsumo, mantener auditoría de correcciones, asociar la disposición final de cilindros y ofrecer dashboards y reportes para la toma de decisiones.
+P71: 3.3 Usuarios y beneficiarios
+P72: Técnicos de terreno, responsables del registro de intervenciones y consumo de refrigerante.
+P73: Bodegueros y jefatura de bodega, responsables de despacho, pesaje, retorno y conciliación de cilindros.
+P74: Jefaturas y supervisores, que requieren visualizar alertas, trazabilidad e intervenciones.
+P75: Administrador general, responsable de usuarios, datos maestros, auditoría, reportería e indicadores.
+P76: AFRISAN como organización, al disponer de información centralizada y trazable.
+P77: Clientes atendidos por AFRISAN, al beneficiarse indirectamente de una gestión más controlada y auditable.
+P78: 3.4 Relevancia para el campo laboral
+P79: La propuesta se vincula directamente con la Ingeniería en Informática porque requiere analizar procesos organizacionales, traducirlos a requerimientos de software, diseñar arquitectura y modelos de datos, integrar aplicaciones y servicios, implementar seguridad, desarrollar mecanismos de sincronización, gestionar un proyecto TI y transformar datos operacionales en información útil. Además, se trata de una problemática real de una organización, lo que exige equilibrar decisiones técnicas con restricciones de negocio, usuarios, plazos y recursos.
+P80: 4. RELACIÓN CON LAS COMPETENCIAS DEL PERFIL DE EGRESO
+P81: Competencia
+P82: Aplicación en AFRISAN
+P83: Ofrecer propuestas de solución informática analizando integralmente los procesos de la organización.
+P84: Se evidencia en el levantamiento con AFRISAN, la entrevista técnica, la identificación del flujo de cilindros y la definición de una solución que conecta bodega, terreno, administración y reportería.
+P85: Gestionar proyectos informáticos ofreciendo alternativas para la toma de decisiones.
+P86: Se aplica mediante Acta de Constitución, RACI, Plan de Comunicación, EDT, Carta Gantt, Product Backlog, Sprint Backlog, hitos y retrospectivas.
+P87: Construir modelos de datos escalables de acuerdo con los requerimientos de la organización.
+P88: Se demuestra con el MER/DER preliminar y las entidades Usuario, Cliente, Local, GasRefrigerante, Cilindro, MovimientoInventario, Intervención y Auditoría.
+P89: Desarrollar e integrar una solución de software de forma sistemática.
+P90: La arquitectura base se estructura en Afrisan.Web (Blazor WebAssembly), Afrisan.Api (ASP.NET Core Web API) y PostgreSQL/Supabase. Las extensiones móviles, offline y de reportería se mantienen como funcionalidades planificadas para fases posteriores.
+P91: Realizar pruebas de validación de productos y procesos utilizando buenas prácticas.
+P92: La planificación incorpora pruebas unitarias, integración, seguridad con OWASP ZAP/Nessus y pruebas de aceptación con usuarios finales antes del despliegue.
+P93: Transformar datos para apoyar la toma de decisiones.
+P94: Se refleja en la generación de KPIs de costos, consumo, trazabilidad y emisiones CO2e a partir de PostgreSQL/Supabase, considerando la reportería ejecutiva como extensión planificada.
+P96: 5. RELACIÓN CON LOS INTERESES PROFESIONALES
+P97: El proyecto permite desarrollar competencias e intereses profesionales en desarrollo de software, arquitectura de sistemas, bases de datos, automatización de procesos, ciberseguridad, análisis de información, inteligencia de negocios y gestión de proyectos TI. El carácter multidisciplinario de la solución resulta especialmente pertinente porque exige comprender tanto la experiencia móvil en terreno como los procesos administrativos y de auditoría, además de integrar tecnologías cloud y mecanismos de operación offline.
+P98: La distribución actual de responsabilidades permite orientar el aprendizaje del equipo: Dante Moya participa principalmente en desarrollo, metodología Scrum y coordinación del trabajo iterativo; Yarek Larraguibel concentra actividades de arquitectura, modelado de datos, integración y aseguramiento de calidad. Ambos integrantes colaboran transversalmente en análisis, desarrollo, documentación y validación del sistema.
+P99: 6. OBJETIVOS
+P100: 6.1 Objetivo general
+P101: Diseñar e implementar un sistema informático que permita gestionar de forma centralizada el inventario, control y auditoría de los gases refrigerantes utilizados por AFRISAN en sus labores de mantenimiento y reparación de equipos de refrigeración comercial e industrial.
+P102: 6.2 Objetivos específicos
+P103: Levantar y analizar los requerimientos funcionales y no funcionales del proceso de gestión de refrigerantes junto a los actores de AFRISAN.
+P104: Diseñar el modelo de datos y la arquitectura de la solución que soporten el registro y la trazabilidad de los refrigerantes.
+P105: Desarrollar los módulos de registro, control de inventario y auditoría de gases refrigerantes.
+P106: Implementar mecanismos de autenticación y control de acceso para resguardar la información almacenada en el sistema.
+P107: Generar reportes e indicadores de costos operacionales e impacto ambiental que apoyen la toma de decisiones.
+P108: Validar y probar el sistema desarrollado junto a los usuarios de AFRISAN previo a su implementación.
+P110: 7. ANÁLISIS DE FACTIBILIDAD
+P111: 7.1 Factibilidad técnica
+P112: La arquitectura base de AFRISAN utiliza tecnologías maduras y compatibles: Blazor WebAssembly para Afrisan.Web, ASP.NET Core Web API y Entity Framework Core para Afrisan.Api, y PostgreSQL/Supabase como persistencia central. Esta estructura constituye el núcleo actualmente desarrollado. El proyecto contempla como extensiones planificadas un cliente móvil, mecanismos de operación offline y sincronización, reportería ejecutiva y despliegue cloud, los cuales deberán validarse técnicamente antes de considerarse implementados.
+P113: 7.2 Factibilidad operativa
+P114: La solución actual se ajusta al trabajo administrativo mediante una interfaz web y servicios API centralizados. Para fases posteriores se contempla soporte a operaciones de terreno, captura QR/evidencia y funcionamiento offline. La viabilidad operativa de esas extensiones dependerá de pruebas con usuarios, facilidad de uso, capacitación y validación durante la marcha blanca.
+P115: 7.3 Factibilidad temporal
+P116: La Carta Gantt organiza el proyecto desde agosto hasta diciembre de 2026 en tres macrofases: definición y análisis, diseño/desarrollo ágil e implementación/cierre. La viabilidad temporal depende de mantener el alcance controlado y priorizar primero el núcleo web/API/base de datos, dejando las extensiones móviles/offline y de reportería para sprints posteriores según disponibilidad y validación técnica.
+P117: 7.4 Factibilidad de recursos
+P118: Los recursos requeridos incluyen computadores personales, conectividad, dispositivos móviles con cámara, herramientas de desarrollo, servicios cloud, repositorio GitHub y herramientas de gestión. La documentación señala que gran parte de estos recursos ya están disponibles o pueden utilizarse mediante servicios gestionados, por lo que no se identifica una necesidad de infraestructura física compleja.
+P122: 7.5 Riesgos y mitigaciones
+P123: ID
+P124: Riesgo
+P125: Prob.
+P126: Impacto
+P127: Mitigación
+P128: RSG-01
+P129: Resistencia al cambio de técnicos
+P130: Media
+P131: Alta
+P132: Interfaz móvil simple y capacitaciones prácticas.
+P133: RSG-02
+P134: Falta de cobertura en subterráneos
+P135: Alta
+P136: Alta
+P137: Validar en Sprint 2 una estrategia de persistencia local y sincronización diferida para el cliente móvil planificado.
+P138: RSG-03
+P139: QR deteriorado o ilegible
+P140: Media
+P141: Media
+P142: Permitir ingreso manual del código/serie como contingencia.
+P143: RSG-04
+P144: Errores de digitación en pesaje
+P145: Media
+P146: Media
+P147: Fotografía obligatoria de balanza y auditoría de correcciones.
+P148: RSG-05
+P149: Retrasos de integración con Defontana
+P150: Media
+P151: Baja
+P152: Importación estructurada mediante CSV/Excel como alternativa.
+P154: 7.6 Conclusión de factibilidad
+P155: El proyecto se considera factible dentro del semestre siempre que se controle el alcance, se mantenga la priorización del backlog, se gestione activamente el riesgo de operación offline y se valide oportunamente la adopción con usuarios. La arquitectura seleccionada no presenta dependencias tecnológicas extraordinarias y la planificación contempla pruebas, correcciones y marcha blanca antes del cierre.
+P157: 8. METODOLOGÍA DE TRABAJO
+P158: 8.1 Enfoque metodológico
+P159: La documentación inicial presenta referencias tanto a una planificación secuencial como a Scrum. Para evitar contradicciones y representar de forma fiel los artefactos ya elaborados, el proyecto adopta un enfoque híbrido. La Fase 1 utiliza prácticas de planificación estructurada para definir alcance, requerimientos, arquitectura, EDT, responsabilidades, hitos y cronograma. La Fase 2 se ejecuta de manera iterativa e incremental mediante Scrum, con Product Backlog, Sprint Backlog, sprints, revisión y retrospectiva. La Fase 3 concentra marcha blanca, despliegue, documentación y cierre.
+P160: 8.2 Roles de gestión
+P161: Persona
+P162: Rol
+P163: Responsabilidad principal
+P164: Carlos Aguilera
+P165: Cliente 
+P166: Valida requerimientos y prioridades de negocio.
+P167: Dante Moya
+P168: Scrum Master / Desarrollo
+P169: Facilita el trabajo ágil, ceremonias, seguimiento e implementación de incrementos.
+P170: Yarek Larraguibel
+P171: QA / Arquitectura y Datos
+P172: Apoya arquitectura, datos, integración, calidad, pruebas y consistencia técnica.
+P173: Carlos Quintanilla
+P174: Líder Técnico / Docente guía
+P175: Supervisa hitos y entregables técnicos y académicos.
+P177: 8.3 Artefactos utilizados
+P178: Acta de Constitución: formaliza propósito, alcance inicial, interesados, riesgos y roles.
+P179: Product Backlog: contiene 10 historias de usuario priorizadas y asignadas a sprints.
+P180: Sprint Backlog / lista de tareas: descompone historias en tareas técnicas y permite seguimiento de ejecución.
+P181: EDT de tres niveles: organiza el trabajo en fases y paquetes de trabajo.
+P182: Matriz RACI: define responsables, aprobadores, consultados e informados.
+P183: Carta Gantt y Plan de Trabajo e Hitos: ordenan dependencias, fechas y entregables.
+P184: Plan de Comunicación: establece canales, responsables y frecuencia de comunicación.
+P185: Retrospectivas semanales: registran aprendizajes, dificultades y acciones de mejora.
+P186: Diagramas técnicos y MER: documentan la solución propuesta antes del desarrollo.
+P187: 8.4 Ceremonias y seguimiento
+P188: Durante la ejecución ágil se consideran Sprint Planning para seleccionar trabajo priorizado, Daily Scrum breves para coordinación, Sprint Review para validar incrementos con la contraparte y Sprint Retrospective para identificar mejoras al proceso. El avance se registra en herramientas de seguimiento y en el repositorio GitHub, manteniendo trazabilidad de entregables y cambios.
+P189: 9. DESARROLLO DE INGENIERÍA
+P190: 9.1 Levantamiento y análisis de requerimientos
+P191: La Fase 1 incluye entrevista técnica y revisión del proceso real de gestión de refrigerantes. A partir de este levantamiento se identificaron actores, requerimientos funcionales y no funcionales, reglas de negocio, restricciones de conectividad y necesidades de auditoría. Los requerimientos priorizan la trazabilidad de cilindros, el registro de intervenciones, la conciliación de masa, la operación offline, la seguridad por roles y la reportería.
+P192: 9.2 Arquitectura propuesta
+P193: La arquitectura base de AFRISAN sigue una estructura cliente-servidor de tres capas: Afrisan.Web en Blazor WebAssembly como capa de presentación; Afrisan.Api en ASP.NET Core Web API con Entity Framework Core como capa de servicios y lógica de negocio; y PostgreSQL/Supabase como capa de persistencia. La comunicación se realiza mediante HTTPS/JSON. Como extensiones planificadas se consideran un cliente móvil con operación offline y sincronización, reportería ejecutiva y despliegue cloud, sin presentarlas como componentes ya implementados.
+P195: Figura 1. Diagrama de componentes objetivo preliminar de AFRISAN. El núcleo implementado corresponde a Afrisan.Web → Afrisan.Api → PostgreSQL/Supabase; los demás componentes se consideran planificados.
+P197: Figura 2. Diagrama de despliegue objetivo preliminar de AFRISAN. Los servicios móviles, BI y cloud adicionales corresponden a la arquitectura futura planificada.
+P199: 9.3 Modelo de datos
+P200: El MER/DER preliminar identifica entidades para usuarios, clientes, locales, gases refrigerantes, cilindros, movimientos de inventario, intervenciones y auditoría. Este modelo busca sostener la trazabilidad completa desde el despacho hasta el retorno y disposición final, además de registrar cambios administrativos y datos necesarios para indicadores.
+P202: Figura 3. Modelo Entidad-Relación preliminar de AFRISAN.
+P203: 9.4 APIs e integraciones
+P204: La API se organiza para soportar autenticación, usuarios, cilindros, movimientos de inventario, intervenciones, clientes, locales, indicadores, reportes y auditoría. Las rutas protegidas deberán requerir autenticación y comunicación cifrada. Los endpoints asociados a sincronización offline y funcionalidades móviles se consideran parte de la arquitectura objetivo y deberán validarse contra la implementación real antes de su liberación.
+P205: Método
+P206: Endpoint
+P207: Propósito
+P208: POST
+P209: /api/v1/auth/login
+P210: Autenticación y emisión de token.
+P211: GET/POST
+P212: /api/v1/cilindros
+P213: Consulta y registro de cilindros.
+P214: POST
+P215: /api/v1/movimientos-inventario
+P216: Ingreso/egreso de cilindros.
+P217: POST
+P218: /api/v1/intervenciones
+P219: Registro de intervención en terreno.
+P220: GET
+P221: /api/v1/semaforo/zonas
+P222: Estado del semáforo por zona/local.
+P223: GET
+P224: /api/v1/indicadores/gei
+P225: Emisiones CO2e por filtros.
+P226: GET
+P227: /api/v1/reportes/costos
+P228: Reporte de costos.
+P229: POST
+P230: /api/v1/sync
+P231: Extensión planificada: sincronización de registros offline.
+P232: GET
+P233: /api/v1/auditoria
+P234: Consulta de trazabilidad de correcciones.
+P236: 9.5 Seguridad y calidad
+P237: Los requisitos no funcionales contemplan control de acceso por roles, principio de mínimo privilegio, transmisión cifrada mediante HTTPS/TLS, almacenamiento seguro de credenciales, registro de auditoría y disponibilidad de la base central. La estrategia de pruebas considera validaciones funcionales, integración, pruebas unitarias, pruebas de seguridad automatizadas y UAT con usuarios de AFRISAN.
+P238: 10. PLAN DE TRABAJO E HITOS
+P239: El plan de trabajo se estructura en tres fases principales y utiliza hitos verificables para demostrar avance. Los estados de esta tabla describen el objetivo esperado de cada bloque; el porcentaje real debe mantenerse actualizado en la Carta Gantt y repositorio.
+P240: Hito
+P241: Actividad
+P242: Resultado
+P243: Evidencia
+P244: Etapa
+P245: H1
+P246: Levantamiento y análisis de requerimientos
+P247: Requerimientos levantados y validados
+P248: Acta, entrevista técnica,  backlog
+P249: Fase 1
+P250: H2
+P251: Modelo de datos
+P252: Modelo lógico inicial definido
+P253: MER/DER AFRISAN
+P254: Fase 1
+P255: H3
+P256: Arquitectura y planificación
+P257: Arquitectura, componentes, despliegue, EDT y cronograma
+P258: Diagramas, EDT, RACI, Gantt
+P259: Fase 1
+P260: H4
+P261: Prototipado UI/UX
+P262: Interfaces iniciales validadas
+P263: Mockup inicial / prototipos
+P264: Sprint 0
+P265: H5
+P266: Sprint 1
+P267: Backend, autenticación y módulo bodega
+P268: Código, API y pruebas del incremento
+P269: Fase 2
+P270: H6
+P271: Sprint 2
+P272: Módulo de terreno y reglas de negocio planificado
+P273: Cliente móvil/offline, semáforo y balance - evidencia futura
+P274: Fase 2
+P275: H7
+P276: Sprint 3
+P277: Reportería y emisiones planificadas
+P278: Dashboard/KPIs CO2e - evidencia futura
+P279: Fase 2
+P280: H8
+P281: QA y seguridad
+P282: Resultados de pruebas y correcciones
+P283: Informe QA / seguridad
+P284: Fase 2
+P285: H9
+P286: Marcha blanca y despliegue
+P287: Solución desplegada y validada
+P288: Ambiente productivo / acta UAT
+P289: Fase 3
+P290: H10
+P291: Cierre
+P292: Documentación y presentación final
+P293: Manuales e informe final
+P294: Fase 3
+P297: 11. EVIDENCIAS DEL PROYECTO
+P298: Evidencia
+P299: Por qué demuestra logro o avance
+P300: Acta de Constitución
+P301: Formaliza el problema, alcance, riesgos, interesados y roles; demuestra que existe una base acordada para el proyecto.
+P302: Pauta y Registro de Entrevista Técnica
+P303: Evidencia levantamiento directo con la organización y sustento de los requerimientos.
+P304: Product Backlog
+P305: Demuestra traducción de necesidades a 10 historias priorizadas, con esfuerzo, sprint y criterios de aceptación.
+P306: Sprint Backlog / Lista de tareas
+P307: Evidencia descomposición del trabajo y asignación de tareas técnicas a integrantes.
+P308: RACI
+P309: Demuestra definición de responsabilidades y gobernanza del proyecto.
+P310: Plan de Comunicación
+P311: Define mecanismos de coordinación entre equipo, cliente y líder técnico.
+P312: Retrospectivas semanas 1 a 4
+P313: Demuestran seguimiento del proceso, identificación de problemas y acciones de mejora.
+P314: Plan de Trabajo e Hitos / Carta Gantt
+P315: Evidencian secuencia temporal, dependencias, recursos y puntos de control.
+P316: EDT de 3 niveles
+P317: Demuestra estructuración del alcance en fases y paquetes de trabajo.
+P318: MER/DER
+P319: Evidencia el diseño preliminar de la persistencia y relaciones de información.
+P320: Diagrama de componentes
+P321: Demuestra la arquitectura base y la separación entre componentes actuales y extensiones planificadas.
+P322: Diagrama de despliegue
+P323: Evidencia el despliegue objetivo y distingue los componentes actuales de los planificados.
+P324: Arquitectura técnica 4+1
+P325: Documenta vistas y decisiones estructurales de la solución.
+P326: Identificación de APIs
+P327: Demuestra definición de interfaces para soportar funcionalidades principales.
+P328: Recursos técnicos y factibilidad
+P329: Demuestran que las tecnologías, infraestructura y restricciones fueron evaluadas antes de desarrollar.
+P332: 12. PREPARACIÓN PARA SPRINT 0
+P333: 12.1 Backlog inicial priorizado
+P334: ID
+P335: Rol
+P336: Necesidad resumida
+P337: Prioridad
+P338: Sprint
+P339: HU-01
+P340: Bodeguero
+P341: Escanear QR y asociar cilindro a OT
+P342: Alta
+P343: Sprint 1
+P344: HU-02
+P345: Bodeguero
+P346: Registrar peso bruto inicial del cilindro
+P347: Alta
+P348: Sprint 1
+P349: HU-03
+P350: Usuario
+P351: Iniciar sesión con credenciales seguras y acceso según rol
+P352: Alta
+P353: Sprint 1
+P354: HU-04
+P355: Técnico
+P356: Registrar intervenciones sin Internet
+P357: Alta
+P358: Sprint 2
+P359: HU-05
+P360: Técnico
+P361: Escanear cilindro y registrar carga/falla
+P362: Alta
+P363: Sprint 2
+P364: HU-06
+P365: Técnico
+P366: Capturar fotografía obligatoria de balanza
+P367: Alta
+P368: Sprint 2
+P369: HU-07
+P370: Técnico/Supervisor
+P371: Visualizar semáforo de fuga crítica
+P372: Alta
+P373: Sprint 2
+P374: HU-08
+P375: Bodeguero
+P376: Conciliar retorno y balance de masa
+P377: Alta
+P378: Sprint 1
+P379: HU-09
+P380: Administrador
+P381: Trazar disposición de cilindros con Regener
+P382: Media
+P383: Sprint 3
+P384: HU-10
+P385: Administrador/Gerencia
+P386: Consultar dashboard BI y emisiones GEI
+P387: Media
+P388: Sprint 3
+P390: 12.2 Diagramas requeridos
+P391: Los requerimientos adicionales para Sprint 0 se encuentran cubiertos por el diagrama de componentes, el diagrama de despliegue y el MER/DER incluidos en la sección de Desarrollo de Ingeniería. Los archivos editables .drawio también forman parte de la documentación del proyecto.
+P392: 12.3 Mockup inicial
+P393: La documentación de trabajo define como mínimo las siguientes pantallas: inicio de sesión; escaneo QR y pesaje para bodega; registro de intervención móvil; historial y trazabilidad de cilindro; dashboard ejecutivo; y gestión de usuarios y roles.
+P396: 13. CONCLUSIONES
+P397: La Fase 1 permitió transformar una necesidad operacional de AFRISAN en una propuesta de solución informática estructurada y verificable. El equipo levantó información del proceso, definió requerimientos y riesgos, construyó un backlog priorizado, diseñó un modelo de datos y una arquitectura técnica y organizó el proyecto mediante responsabilidades, hitos y cronograma. Estas evidencias permiten justificar la pertinencia del proyecto para Ingeniería en Informática y demostrar que existe una ruta de trabajo concreta para ejecutar el desarrollo durante el semestre.
+P398: El análisis muestra que la factibilidad depende principalmente de controlar el alcance y mantener coherencia entre documentación e implementación. El núcleo basado en Blazor WebAssembly, ASP.NET Core y PostgreSQL/Supabase proporciona una base tecnológica consolidada. Las extensiones asociadas a cliente móvil, operación offline, sincronización, reportería BI y despliegue cloud deberán validarse progresivamente durante las siguientes iteraciones. A nivel metodológico, el enfoque híbrido permite conservar la planificación estructurada de la Fase 1 y utilizar Scrum para priorizar, desarrollar y validar incrementos funcionales.
+P399: En consecuencia, AFRISAN cumple con condiciones suficientes para avanzar hacia Sprint 0 y desarrollo, siempre que se complete la evidencia visual de mockups, se mantenga actualizado GitHub y se valide continuamente el backlog con el Product Owner. La trazabilidad entre requerimientos, historias, arquitectura, pruebas e hitos será un factor clave para demostrar el logro individual y grupal durante las siguientes fases.
+P401: 14. REFLEXIONES INDIVIDUALES
+P402: 14.1 Actualización del equipo
+P403: Durante el desarrollo del proyecto se produjo una actualización en la composición del equipo. La versión vigente de AFRISAN queda conformada por Dante Moya y Yarek Larraguibel. Los documentos históricos de levantamiento pueden conservar referencias a participantes que intervinieron en actividades anteriores cuando corresponda, con el fin de mantener trazabilidad documental. A partir de esta actualización, la planificación, responsabilidades, backlog y evidencias posteriores deben asignarse únicamente a los integrantes actuales, sin alterar la autoría histórica de entrevistas o entregables realizados previamente.
+P404: 14.2 Dante Moya
+P405: Mi trabajo en la Fase 1 se relacionó con metodología, gestión y organización del equipo. La revisión de los artefactos del proyecto mostró la importancia de utilizar una metodología coherente y no tratar Scrum únicamente como una lista de documentos. Comprendí que el valor de las ceremonias, el backlog y las retrospectivas está en facilitar decisiones, hacer visible el avance y corregir problemas a tiempo. También identifiqué la necesidad de fortalecer la planificación, la seguridad y la coordinación entre tareas técnicas. En las siguientes fases mi desafío será apoyar la aplicación disciplinada de Scrum, remover impedimentos y asegurar que cada sprint produzca resultados demostrables.
+P406: 14.3 Yarek Larraguibel
+P407: En la Fase 1 me enfoqué principalmente en el diseño de la arquitectura técnica, el modelo de datos, los diagramas de componentes y despliegue, la identificación de APIs y el análisis de recursos y factibilidad. Este trabajo me permitió comprender con mayor profundidad cómo las decisiones de arquitectura deben responder a requerimientos concretos del negocio, como la operación offline, el control de acceso, la trazabilidad y la reportería. También reforcé la importancia de documentar interfaces y riesgos antes de programar. Para las siguientes fases debo mantener la coherencia entre arquitectura e implementación, apoyar las pruebas de calidad y validar que las decisiones técnicas sigan siendo viables a medida que avance el desarrollo.
+P409: 15. REFERENCIAS Y FUENTES DEL PROYECTO
+P410: AFRISAN. Acta de Constitución del proyecto, 2026.
+P411: AFRISAN. Pauta y Registro de Entrevista Técnica, 2026.
+P412: Equipo AFRISAN APT. Product Backlog y criterios de aceptación, 2026.
+P413: Equipo AFRISAN APT. Sprint Backlog / Lista de tareas de la iteración, 2026.
+P414: Equipo AFRISAN APT. Plan de Trabajo e Hitos y Carta Gantt, 2026.
+P415: Equipo AFRISAN APT. Matriz RACI y Plan de Comunicación, 2026.
+P416: Equipo AFRISAN APT. Resúmenes de Retrospectiva, semanas 1 a 4, 2026.
+P417: Equipo AFRISAN APT. Arquitectura Técnica AFRISAN, Identificación de APIs, Recursos Técnicos y Factibilidad Técnica, 2026.
+P418: Duoc UC. Guía del Estudiante Fase 1: Definición Proyecto APT, 2026.
+P419: Duoc UC. Evaluación Formativa Fase 1, 2026.
+P421: 16. ANEXOS
+P422: Anexo A. Estructura de Desglose del Trabajo
+P423: La EDT de tres niveles organiza el proyecto en: (1) Definición y análisis; (2) Diseño y desarrollo ágil; y (3) Implementación y cierre. El archivo original “EDT AFRISAN 3 niveles.pdf” debe mantenerse dentro de las evidencias grupales del repositorio.
+P424: Anexo B. Archivos fuente de arquitectura
+P425: Diagrama de componentes.drawio
+P426: despliegue del sistema.drawio
+P427: Diagrama_Componentes_AFRISAN.png
+P428: Diagrama_Despliegue_AFRISAN.png
+P429: MER AFRISAN.png
+P430: Arquitectura_Tecnica_AFRISAN_ACTUALIZADA.docx

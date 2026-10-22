@@ -1,0 +1,10 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/03_Plan_de_Trabajo_e_Hitos_AFRISAN_Corregido.xlsx
+SHEET Hoja 1
+B2=Hito | C2=Nombre del Hito | D2=Semana Límite | E2=Entregable Asociado | F2=Criterio de Cumplimiento | G2=Estado
+B3=M1 | C3=Aprobación de Requisitos y Alcance | D3=Semana 4 | E3=Acta de Constitución, Pauta de Entrevista y Product Backlog en Excel. | F3=Firma de conformidad de Carlos Aguilera (AFRISAN) y validación del Docente Guía. | G3=En revisión
+B4=M2 | C4=Diseño de Arquitectura y Mockups | D4=Semana 5 | E4=Documento 4+1, modelo DER (PostgreSQL) y prototipos interactivos en Figma. | F4=Arquitectura base validada: Afrisan.Web → Afrisan.Api → PostgreSQL/Supabase; extensiones futuras documentadas como planificadas. | G4=En revisión
+B5=M3 | C5=Entrega de Sprint 1 (Bodega & API) | D5=Semana 7 | E5=Backend ASP.NET Core, base en Supabase y módulo web Blazor para despacho QR. | F5=Registro y gestión de cilindros operativos mediante Blazor/API, con validaciones y pruebas del incremento. | G5=En proceso
+B6=M4 | C6=Entrega de Sprint 2 (Terreno Offline) | D6=Semana 9 | E6=Cliente móvil planificado, persistencia local, evidencia fotográfica y semáforo crítico. | F6=Pruebas de operación sin conexión y sincronización exitosa una vez implementado el cliente móvil. | G6=Por Hacer
+B7=M5 | C7=Entrega de Sprint 3 (BI & Regener) | D7=Semana 10 | E7=Reportería ejecutiva planificada con CO2e y módulo de certificados Regener. | F7=Visualización de KPIs y balance de cilindros devueltos vs despachados una vez habilitada la reportería. | G7=Por Hacer
+B8=M6 | C8=Certificación QA y Ciberseguridad | D8=Semana 13 | E8=Informe de pruebas unitarias (xUnit), escaneo OWASP ZAP y actas UAT. | F8=Cobertura backend ≥80% y cero vulnerabilidades críticas abiertas. | G8=Por Hacer
+B9=M7 | C9=Cierre, Manuales y Despliegue | D9=Semana 18 | E9=Despliegue en entorno cloud validado, manuales de usuario/técnico y defensa de título. | F9=Software operativo en el entorno aprobado y entrega del informe final consolidado. | G9=Por Hacer

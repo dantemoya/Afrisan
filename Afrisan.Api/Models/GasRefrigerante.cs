@@ -14,6 +14,12 @@ namespace Afrisan.Api.Models
 
         public bool Activo { get; set; } = true;
 
+        public decimal? FactorGwp { get; set; }
+
+        public string? FuenteGwp { get; set; }
+
+        public string? MetodologiaGwp { get; set; }
+
         [JsonIgnore]
         public ICollection<Cilindro> Cilindros { get; set; }
             = new List<Cilindro>();

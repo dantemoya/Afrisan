@@ -61,9 +61,12 @@ builder.Services.AddScoped<
             JwtAuthenticationStateProvider>());
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<EntornoService>();
 
 // =====================================================
 // EJECUTAR APLICACIÓN
 // =====================================================
 
-await builder.Build().RunAsync();
+var host = builder.Build();
+await host.Services.GetRequiredService<EntornoService>().InicializarAsync();
+await host.RunAsync();

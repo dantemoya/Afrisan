@@ -1,0 +1,97 @@
+SOURCE: EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/08_RACI_AFRISAN_Corregido.pdf
+PAGE 1
+Matriz RACI - Proyecto AFRISAN
+Equipo actual: Dante Moya y Yarek Larraguibel | Cliente/Sponsor: Carlos Aguilera | Líder Técnico/Docente: Carlos Quintanilla
+ Tarea
+ Yarek Larraguibel
+ Dante Moya
+ Carlos Aguilera
+ Carlos Quintanilla
+Acta de constitución
+ R
+ C
+ A
+ C
+Definición del proyecto
+ C
+ R
+ A
+ C
+Arquitectura 4+1
+ R
+ C
+ I
+ A
+Mockups iniciales
+ C
+ R
+ A
+ I
+Plan de comunicación
+ C
+ R
+ I
+ I
+Carta Gantt
+ C
+ R
+ I
+ A
+Actas de reuniones
+ C
+ R
+ I
+ I
+EDT
+ C
+ R
+ I
+ A
+Prototipo UI/UX
+ C
+ R
+ A
+ I
+Sprint 1
+ R
+ R
+ C
+ A
+Sprint 2
+ R
+ R
+ C
+ A
+Sprint 3
+ R
+ R
+ C
+ A
+Pruebas de QA
+ R
+ C
+ I
+ A
+Pruebas de seguridad
+ R
+ C
+ I
+ A
+Corrección de errores
+ R
+ R
+ I
+ A
+Manual de usuario
+ C
+ R
+ A
+ I
+Software funcional y desplegado
+ R
+ R
+ A
+ C
+Leyenda: R = Responsable de ejecutar | A = Aprobador / responsable final | C = Consultado | I = Informado
+La matriz se actualiza para reflejar el equipo vigente del proyecto. Se mantiene un único A por actividad, salvo actividades colaborativas en las que ambos integrantes pueden
+actuar como R.

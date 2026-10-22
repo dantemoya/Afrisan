@@ -12,8 +12,9 @@ El proyecto cuenta con una base técnica previamente desarrollada, por lo que du
 
 ## Integrantes
 
-- Yarek Larraguibel
-- Dante Moya
+- Dante Moya, único integrante actual y responsable de continuidad.
+
+Actualización informada por el estudiante el 16 de octubre de 2026. Las contribuciones anteriores conservan su autoría histórica. La planificación de continuidad y los pendientes de validación se detallan en `EVIDENCIAS_GRUPALES/EVA_2`; la aplicación individual de la pauta grupal está por confirmar con el docente.
 
 ---
 
@@ -78,9 +79,9 @@ Antes de cerrar una historia se debe revisar su implementación, criterios de ac
 
 La arquitectura de AFRISAN fue definida y documentada durante el Sprint 1.
 
-Actualmente se encuentra pendiente su validación formal.
+La arquitectura está aprobada, según confirmación del estudiante recibida el 16 de octubre de 2026.
 
-Esta revisión permitirá confirmar que el desarrollo existente mantiene coherencia con la arquitectura propuesta y determinar si es necesario realizar ajustes.
+El trabajo continúa con la implementación e integración de las historias priorizadas y la validación funcional del recorrido de bodega. La aprobación de arquitectura se registra como un hito cerrado; las pruebas y la aceptación de funcionalidades mantienen su propio seguimiento.
 
 ---
 

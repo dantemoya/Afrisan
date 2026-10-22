@@ -4,6 +4,17 @@
     {
         public int Id { get; set; }
 
+        public Guid IdOperacion { get; set; } = Guid.NewGuid();
+
+        public string? UsuarioId { get; set; }
+
+        public int? DespachoId { get; set; }
+
+        public bool CustodiaAbierta { get; set; }
+
+        // Clave privada del objeto en Storage; opcional para registros históricos.
+        public string? FotoPesajeRuta { get; set; }
+
         // Cilindro al que pertenece el movimiento
         public int CilindroId { get; set; }
 

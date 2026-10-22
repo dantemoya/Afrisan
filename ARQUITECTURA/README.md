@@ -1,6 +1,10 @@
 # ARQUITECTURA DEL SISTEMA
 
-Esta carpeta contiene los documentos y diagramas técnicos que describen la arquitectura propuesta para el proyecto AFRISAN durante la Fase 1 del Proyecto APT.
+Esta carpeta contiene los documentos y diagramas técnicos que describen la arquitectura de AFRISAN definida durante la Fase 1 del Proyecto APT.
+
+## Estado de aprobación
+
+La arquitectura está **aprobada**, según la confirmación del estudiante recibida el 16 de octubre de 2026. El desarrollo continúa sobre la arquitectura de tres capas seleccionada. Los pendientes actuales corresponden a implementación, integración, validación funcional y evidencias del avance.
 
 ## Arquitectura seleccionada
 

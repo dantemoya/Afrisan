@@ -2,3 +2,7 @@
 bin/
 obj/
 *.user
+.local/
+.env
+.env.*
+!.env.example

@@ -91,6 +91,9 @@ namespace Afrisan.Api.Controllers
             var roles =
                 await _userManager.GetRolesAsync(usuario);
 
+            if (roles.Count == 0)
+                return Unauthorized(new { mensaje = "La cuenta no tiene un rol asignado. Contacta al administrador." });
+
             var token = GenerarToken(
                 usuario,
                 roles);

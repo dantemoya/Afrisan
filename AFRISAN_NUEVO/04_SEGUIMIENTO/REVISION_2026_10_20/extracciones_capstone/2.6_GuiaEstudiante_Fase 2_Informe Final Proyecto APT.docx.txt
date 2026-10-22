@@ -1,0 +1,46 @@
+SOURCE: 2.6_GuiaEstudiante_Fase 2_Informe Final Proyecto APT.docx
+P1: Guía3. Informe final Proyecto APT Asignatura CapstoneGuía3. Informe final Proyecto APT Asignatura Capstone
+P3: Guía3. Informe final Proyecto APT 
+P4: Asignatura Capstone
+P6: Guía3. Informe final Proyecto APT 
+P7: Asignatura Capstone
+P14: 1. Informe final Proyecto APT
+P16: El objetivo de este informe es que describas los aspectos más relevantes de tu Proyecto APT. Es importante que fundamentes las decisiones que tuviste que tomar a lo largo del proceso. 
+P18: A continuación, encontrarás distintos campos que deberás completar con la información solicitada, los que dan cuenta del resumen de tu proyecto APT y sus principales resultados.
+P20: Nombre del proyecto
+P21: Escribe el nombre de tu Proyecto APT.
+P22: Área (s) de desempeño(s)
+P23: Menciona la(s) área(s) de desempeño de tu Plan de Estudio que abordaron tu Proyecto APT.
+P24: Competencias 
+P26: Menciona las competencias  de tu Plan de Estudio que abordaste en tu Proyecto APT.
+P28: Contenidos del informe final
+P29: 1. Relevancia del proyecto APT
+P30: Señala qué problema buscó solucionar tu proyecto y su relevancia para el contexto de la profesión. Algunas preguntas que pueden ayudarte a responder este apartado son:  
+P31: ¿Por qué es relevante este tema para el campo laboral de tu carrera? 
+P32: ¿Dónde se ubica la situación que vas a abordar? (Ej.: País, región, comuna o institución) ¿Cuáles son las características principales de ese lugar?  
+P33: ¿A quiénes afecta o impacta la situación que abordaste? (Ej.: Grupo etario, usuarios de algún servicio, etc.). 
+P34: ¿Cuál fue el aporte de valor (real o simulado) de tu Proyecto APT para el contexto laboral y/o social en que se situó? 
+P36: 2. Objetivos 
+P37: Objetivo general y específicos.
+P38: ¿Cuál es el objetivo general de tu Proyecto APT? ¿Cuáles son los objetivos específicos de tu Proyecto APT?
+P39: 3. Metodología
+P40: Metodología utilizada y su pertinencia para cumplir objetivos.
+P41: ¿Qué metodología utilizaste para desarrollar tu Proyecto APT? Describe las fases y procedimientos que llevaste a cabo para ejecutar tu proyecto.
+P42: Fundamenta, ¿por qué esta metodología era pertinente para cumplir los objetivos planteados?
+P43: 4. Desarrollo
+P44: Descripción de las etapas o actividades del Proyecto APT.
+P45: ¿Cuáles fueron las etapas o actividades que desarrollaste en tu Proyecto APT?
+P46: Dificultades y facilitadores en el desarrollo del Proyecto APT.
+P47: ¿Qué elementos/aspectos te facilitaron o ayudaron en el desarrollo de tu proyecto APT?
+P48: ¿A qué dificultades enfrentaste en el desarrollo de tu Proyecto APT?
+P49: Ajustes realizados.
+P50: ¿Cómo abordaste las dificultades para cumplir con los objetivos? ¿Tuviste que hacer algún ajuste? ¿Qué ajuste? 
+P51: 5. Evidencias
+P52: Adjunta evidencias que permitan dar cuenta del desarrollo del Proyecto APT y sus resultados finales.
+P53: ¿Qué evidencias pueden servir para que los demás puedan visualizar y entender las distintas etapas de tu Proyecto APT y el resultado final? 
+P54: 6. Intereses y proyecciones profesionales
+P55: Reflexión sobre el aporte del Proyecto APT en el desarrollo de los intereses profesionales.
+P56: ¿De qué manera tu Proyecto APT te sirvió para tener mayor conocimiento de tus intereses profesionales? Luego de terminar tu Proyecto APT, ¿tus intereses profesionales siguen siendo los mismos que planteaste al comienzo de la asignatura?
+P57: Proyecciones laborales a partir de Proyecto APT.
+P58: ¿Qué intereses profesionales te gustaría explorar o seguir profundizando?
+P59: ¿Cómo te proyectas laboralmente después de haber terminado tu Proyecto APT? 

@@ -235,6 +235,21 @@
 
                     </div>
 
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Factor GWP</label>
+                        <input class="form-control" type="number" min="0" step="0.001"
+                               @bind="formulario.FactorGwp" disabled="@guardando" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Fuente del GWP</label>
+                        <input class="form-control" maxlength="300" @bind="formulario.FuenteGwp"
+                               disabled="@guardando" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Metodología del GWP</label>
+                        <input class="form-control" maxlength="100" @bind="formulario.MetodologiaGwp"
+                               placeholder="Informe y horizonte temporal" disabled="@guardando" />
+                    </div>
                     <!-- ESTADO -->
 
                     <div class="col-12">
@@ -839,7 +854,10 @@
                     gas.Descripcion,
 
                 Activo =
-                    gas.Activo
+                    gas.Activo,
+                FactorGwp = gas.FactorGwp,
+                FuenteGwp = gas.FuenteGwp,
+                MetodologiaGwp = gas.MetodologiaGwp
             };
 
         mostrarFormulario = true;
@@ -977,7 +995,10 @@
                         formulario.Descripcion,
 
                     activo =
-                        formulario.Activo
+                        formulario.Activo,
+                    factorGwp = formulario.FactorGwp,
+                    fuenteGwp = formulario.FuenteGwp,
+                    metodologiaGwp = formulario.MetodologiaGwp
                 };
 
 
@@ -1183,6 +1204,9 @@
             string.Empty;
 
         public bool Activo { get; set; }
+        public decimal? FactorGwp { get; set; }
+        public string? FuenteGwp { get; set; }
+        public string? MetodologiaGwp { get; set; }
     }
 
 
@@ -1203,5 +1227,8 @@
 
         public bool Activo { get; set; } =
             true;
+        public decimal? FactorGwp { get; set; }
+        public string? FuenteGwp { get; set; }
+        public string? MetodologiaGwp { get; set; }
     }
 }
