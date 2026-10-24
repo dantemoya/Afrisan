@@ -2,6 +2,8 @@
 @attribute [Authorize]
 @inject InventarioClient Api
 @inject SesionService Sesion
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
 
 <PageTitle>Detalle de cilindro · AFRISAN</PageTitle>
 <a class="back-link" href="@(Sesion.Sesion?.Rol == "Tecnico" ? "identificar" : "inventario")">← Volver a la consulta</a>
@@ -25,7 +27,7 @@ else
             else { <p class="field-help">No se supone lleno ni vacío: falta medirlo.</p> }
         </section>
         <section class="panel qr-panel"><h2>Identificación QR</h2>
-            @if (qr is not null) { <img src="@qr" alt="@($"Código QR del cilindro {cilindro.Codigo}")" width="170" height="170" /><strong>@cilindro.Codigo</strong><a class="btn secondary" href="@qr" download="@($"{cilindro.Codigo}.png")">Descargar QR</a> }
+            @if (qr is not null) { <img src="@qr" alt="@($"Código QR del cilindro {cilindro.Codigo}")" width="170" height="170" /><strong>@cilindro.Codigo</strong><button class="btn secondary" @onclick="DescargarQr">Descargar QR</button> }
             else { <p class="muted">No se pudo generar el QR. Actualiza la ficha para reintentar.</p> }
         </section>
     </div>
@@ -41,7 +43,7 @@ else
     <section class="panel mt"><h2>Historial del registro</h2>
         <ol class="timeline">@foreach (var evento in historial) { <li><span>@evento.Fecha.ToLocalTime().ToString("dd/MM/yyyy HH:mm") · @evento.Usuario</span><strong>@evento.Accion</strong><p>@evento.Descripcion</p></li> }</ol>
     </section>
-    <p class="fine-print">La información corresponde a la instancia de revisión. Esta ficha todavía no representa ubicación en sucursal, OT ni custodia.</p>
+    <p class="fine-print">La información corresponde a la instancia de revisión. La ubicación y el último pesaje se actualizan al registrar entregas, instalaciones, retiros y recepciones.</p>
 }
 
 @code {
@@ -52,6 +54,16 @@ else
     private string? qr, error, mensaje;
     private bool cargando = true, guardando;
     protected override Task OnParametersSetAsync() => Cargar();
+    private async Task DescargarQr()
+    {
+        if (qr is null || cilindro is null) return;
+        try
+        {
+            await using var modulo = await JS.InvokeAsync<IJSObjectReference>("import", "./js/qr-reader.js");
+            await modulo.InvokeVoidAsync("downloadQr", qr, $"{cilindro.Codigo}.png");
+        }
+        catch (JSException) { error = "El navegador no pudo descargar el QR. Vuelve a intentarlo."; }
+    }
     private async Task Cargar()
     {
         cargando = true; error = null; qr = null; cilindro = null; historial = [];

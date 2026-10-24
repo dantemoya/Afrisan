@@ -24,7 +24,8 @@ public sealed record CrearOtRequest
 /// <summary>Detalle del pedido y cantidades por refrigerante.</summary>
 public sealed record LineaOtResponse(long RefrigeranteId, string Refrigerante, long GrSolicitados, long GrAutorizados);
 /// <summary>Envase entregado al técnico; recepción de retirados se confirma por bodega.</summary>
-public sealed record EntregaResponse(string Codigo, string Refrigerante, long TaraGr, long CapacidadGr, long PesoBrutoGr, string Usuario, DateTimeOffset Fecha);
+public sealed record EntregaResponse(string Codigo, string Refrigerante, long TaraGr, long CapacidadGr, long PesoBrutoGr, string Usuario, DateTimeOffset Fecha,
+    string Estado = "ConTecnico", long? PesoRecepcionGr = null, string? UsuarioRecepcion = null, DateTimeOffset? FechaRecepcion = null);
 /// <summary>Registro operativo de la OT sin fotografías binarias.</summary>
 public sealed record OtResponse(Guid Id, string Codigo, string Sucursal, string Direccion, string Descripcion,
     string TecnicoEmail, string Estado, string Autorizador, DateTimeOffset Fecha,
@@ -59,6 +60,7 @@ public sealed record GuardarOperacionRequest
 /// <summary>Foto con identificador estable: el reintento no crea otra imagen.</summary>
 public sealed record SubirFotoRequest
 {
+    public int Version { get; init; }
     public Guid Id { get; init; }
     [Required] public string Grupo { get; init; } = "";
     [Required, StringLength(150)] public string Nombre { get; init; } = "";
@@ -97,6 +99,7 @@ public sealed record TerminarTrabajoRequest
 /// <summary>Datos locales de un borrador y sus fotos. No significan confirmación del servidor.</summary>
 public sealed record BorradorLocal
 {
+    public bool Descartado { get; init; }
     public string Usuario { get; init; } = "";
     public Guid OtId { get; init; }
     public GuardarOperacionRequest Datos { get; init; } = new();

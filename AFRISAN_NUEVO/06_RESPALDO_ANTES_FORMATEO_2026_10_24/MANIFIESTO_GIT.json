@@ -1,0 +1,1839 @@
+{
+  "Fecha": "2026-10-24",
+  "Repositorio": "https://github.com/dantemoya/Afrisan.git",
+  "Etiqueta": "respaldo-antes-formateo-2026-10-24",
+  "Algoritmo": "Identificador de objeto Git",
+  "Exclusion": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/MANIFIESTO_GIT.json",
+  "Archivos": [
+    {
+      "Ruta": ".gitignore",
+      "Modo": "100644",
+      "ObjetoGit": "84df3606465a6439fde75471d1bcd76214f05b76"
+    },
+    {
+      "Ruta": "2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx",
+      "Modo": "100644",
+      "ObjetoGit": "485b085c9e447d19e352c944715dabb7449421ed"
+    },
+    {
+      "Ruta": "2.5_APT122_Sumativa Avance Fase2.pdf",
+      "Modo": "100644",
+      "ObjetoGit": "e3a0942184fcc254dd8b50fa8b08257f19cf41ad"
+    },
+    {
+      "Ruta": "2.6_GuiaEstudiante_Fase 2_Informe Final Proyecto APT.docx",
+      "Modo": "100644",
+      "ObjetoGit": "fdbf487371ae2f167d112943b77d28e5ec709634"
+    },
+    {
+      "Ruta": "AFRISAN.slnLaunch",
+      "Modo": "100644",
+      "ObjetoGit": "3228bf79db244687ddcbeba403d93d7ad7aa4392"
+    },
+    {
+      "Ruta": "AFRISAN.slnx",
+      "Modo": "100644",
+      "ObjetoGit": "6fd65784d98293a8823b642ebfba441b58fc708e"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/00_CONTEXTO_Y_ACUERDOS.md",
+      "Modo": "100644",
+      "ObjetoGit": "9d2644716c11bd19985fcc8b82d4aa3bf117294c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/01_REGISTRO_REFRIGERANTES_Y_CILINDROS.md",
+      "Modo": "100644",
+      "ObjetoGit": "6d76ea047426360574d50fb73a0c5bcaf3192319"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/02_CONSULTA_INVENTARIO.md",
+      "Modo": "100644",
+      "ObjetoGit": "52fabefa49f5f70184deaacea8e85650f544f79c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/03_PROCESOS_PENDIENTES.md",
+      "Modo": "100644",
+      "ObjetoGit": "2dbb1c44e239ca0dc66e6bd08499f5de9adfa985"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/04_PREPARACION_OT_Y_GUIA.md",
+      "Modo": "100644",
+      "ObjetoGit": "9acefe2bd7bf775f88279e17a0eba0a677141e72"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/05_DESPACHO_CILINDROS.md",
+      "Modo": "100644",
+      "ObjetoGit": "307e7c5ad67cb7c9f44d0fda613f49030629615e"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/06_SEGUIMIENTO_CUSTODIA.md",
+      "Modo": "100644",
+      "ObjetoGit": "0942fcac6b41eb9f6909780f3d28cd43c6a4544a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/07_OT_DEFINICION_DANTE.md",
+      "Modo": "100644",
+      "ObjetoGit": "62f5909e1ac946809c10ae32f63f031c012d3cd9"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/08_RESPONSABLES_PROCESOS.md",
+      "Modo": "100644",
+      "ObjetoGit": "1f0f03e5c4d647a61142c99f16591612a7390a19"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/09_PROCESOS_TECNICO.md",
+      "Modo": "100644",
+      "ObjetoGit": "ab3a4c69b33da972472293507f9a2ba9e73edadf"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/10_PROCESOS_AUTORIZADOR.md",
+      "Modo": "100644",
+      "ObjetoGit": "926f2ada1a413db6a0ca921bb96fa097bc0f9310"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/11_MODULO_POWER_BI.md",
+      "Modo": "100644",
+      "ObjetoGit": "9dd2687ec904b8dd3f79fa6f744c441c969af076"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/01_NEGOCIO/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "125b979faa54d098ae71e02dd89ec86a7f64f1c5"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/02_BASE_DATOS/01_Crear_Afrisan_Supabase.sql",
+      "Modo": "100644",
+      "ObjetoGit": "355fb7031ee84308827815da8ec99d4e6578fbab"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/02_BASE_DATOS/02_MER_Completo_Afrisan_Nuevo.sql",
+      "Modo": "100644",
+      "ObjetoGit": "1a7744e8fed6ef3b04a816cef216d85cb7151bbf"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/02_BASE_DATOS/03_Crear_Tablas_Sin_Datos.sql",
+      "Modo": "100644",
+      "ObjetoGit": "c9c5f099fd113a3667ef6443e25724f2a7240715"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/02_BASE_DATOS/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "552a497adaec530d85af70b52c218af0a9145059"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/02_BASE_DATOS/TABLAS_PK_FK_TIPOS_MANUAL.md",
+      "Modo": "100644",
+      "ObjetoGit": "40aa402d94afa8442907a23ebb91194f4f70ed8c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/Afrisan.Nuevo.Api.csproj",
+      "Modo": "100644",
+      "ObjetoGit": "dd46027fe4496dde62e25b0b4e8e3737e3162938"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/InventarioEndpoints.cs",
+      "Modo": "100644",
+      "ObjetoGit": "07fb2054c3e1b1417fb05273ac9c2eba0b38e5e2"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/InventarioStore.cs",
+      "Modo": "100644",
+      "ObjetoGit": "911a1cca1d8dcff3c68573b47ec01d11e19ddcd5"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/Program.cs",
+      "Modo": "100644",
+      "ObjetoGit": "cfd7dc0125c30511fb84f13fa759275b989f6f4c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/Properties/launchSettings.json",
+      "Modo": "100644",
+      "ObjetoGit": "acda186decfefa936dca4e0241bc32430672adf4"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/SesionesDemo.cs",
+      "Modo": "100644",
+      "ObjetoGit": "b4dc92848a50d88fd48a4f5da0a01122154cd992"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/TrabajoEndpoints.cs",
+      "Modo": "100644",
+      "ObjetoGit": "b5350ed87fdcfc2bffcc9388f199635cc64124b9"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Api/TrabajoStore.cs",
+      "Modo": "100644",
+      "ObjetoGit": "94dfec80ef8cfcf63f481be9b25cecd8a4a49d09"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Contratos/Afrisan.Nuevo.Contratos.csproj",
+      "Modo": "100644",
+      "ObjetoGit": "bfa77a1116215ad2f90d990da1d5f2c903aa263b"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Contratos/Inventario.cs",
+      "Modo": "100644",
+      "ObjetoGit": "eeb70643dbe90ef9b4cf7e906b3069397207bc19"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Contratos/TrabajoTecnico.cs",
+      "Modo": "100644",
+      "ObjetoGit": "e794bac7eed4ce36ed2393636083b776e447807c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Afrisan.Nuevo.Web.csproj",
+      "Modo": "100644",
+      "ObjetoGit": "6deb2dd4fe13cf52a1f995a317a6b7edebfc76ba"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/App.razor",
+      "Modo": "100644",
+      "ObjetoGit": "a3005ee2aa0de457bf67e0bc8b987fdfef19500f"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Layout/AccesoLayout.razor",
+      "Modo": "100644",
+      "ObjetoGit": "cdec1af5b7b4cb558934d176170af8304b01a293"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Layout/IrAcceso.razor",
+      "Modo": "100644",
+      "ObjetoGit": "f6b789841ce98eede855706bf2d7dd990ed90fe8"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Layout/MainLayout.razor",
+      "Modo": "100644",
+      "ObjetoGit": "409ed845539b6cac5fba7c70541d03fb11380b75"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Models/Formularios.cs",
+      "Modo": "100644",
+      "ObjetoGit": "e58741ac8cbaef3af0fb9b50e8fbe50cae667cab"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/Acceso.razor",
+      "Modo": "100644",
+      "ObjetoGit": "58af125a74f94b24d2d15bc2534b0b8fc4f904b4"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/DetalleCilindro.razor",
+      "Modo": "100644",
+      "ObjetoGit": "8993362c805cb23fcd069c39ee5f87debff12e10"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/DetalleOt.razor",
+      "Modo": "100644",
+      "ObjetoGit": "d26c71e72f0897b574b73231a48dbc357c009ed1"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/Identificar.razor",
+      "Modo": "100644",
+      "ObjetoGit": "de3efee739a957a4b0dc78b14b6ebd8ab857edf0"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/Inicio.razor",
+      "Modo": "100644",
+      "ObjetoGit": "12133328b957e3d0c26142ec4577952be5fd3f28"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/Inventario.razor",
+      "Modo": "100644",
+      "ObjetoGit": "db84bd27fc46c41e996ec82b18ae5ffc85027a28"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/NuevaOt.razor",
+      "Modo": "100644",
+      "ObjetoGit": "910dd91df9c3e02f206f6a07e33b3682c548408e"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/NuevoCilindro.razor",
+      "Modo": "100644",
+      "ObjetoGit": "f488b8e4f727f1447ed2558676b570c48f235499"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/OperacionTecnica.razor",
+      "Modo": "100644",
+      "ObjetoGit": "9039f18397d17aa433992b9cbb260ee16e36adef"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/OperacionTecnica.razor.cs",
+      "Modo": "100644",
+      "ObjetoGit": "65f1b5b5f209b7c485778a8587a6936c10c416c5"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/Ordenes.razor",
+      "Modo": "100644",
+      "ObjetoGit": "f924ace65ee2088de50e2c1824339684c61106fa"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Pages/Refrigerantes.razor",
+      "Modo": "100644",
+      "ObjetoGit": "f243a83cdc9af4324173d4a58b5eb5954d1b59e8"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Program.cs",
+      "Modo": "100644",
+      "ObjetoGit": "085cb4abe5c27f7b54e7da4b1014ca5a9a89bc4d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Properties/launchSettings.json",
+      "Modo": "100644",
+      "ObjetoGit": "cda2a8337ed038cb79bb8d1251cee66a74d5279c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Services/InventarioClient.cs",
+      "Modo": "100644",
+      "ObjetoGit": "16404a2be0fe2a42daa0563306f13ec8d8735a48"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Services/SesionService.cs",
+      "Modo": "100644",
+      "ObjetoGit": "22a4f6120db2165667cc3b0af46d341a895e8cfe"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Services/TrabajoClient.cs",
+      "Modo": "100644",
+      "ObjetoGit": "628046dfc0a699bc977bc99c0fbd763dc0ba3e88"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/Services/TrabajoLocalService.cs",
+      "Modo": "100644",
+      "ObjetoGit": "c078f3ba0e51f9a534164f53000ac533ed3d3204"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/_Imports.razor",
+      "Modo": "100644",
+      "ObjetoGit": "922094eef9645d0535a93d46f64a5fa04d77062c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/css/app.css",
+      "Modo": "100644",
+      "ObjetoGit": "885d842bf6b0566dbd10b0be94e0f3fc16a2aaf3"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/index.html",
+      "Modo": "100644",
+      "ObjetoGit": "f7b6684e1096608e02a3f2ac08a09b153073f32a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/js/qr-reader.js",
+      "Modo": "100644",
+      "ObjetoGit": "516c8419e4edd5a098bcd6a6077b49035208199a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/js/trabajo-local.js",
+      "Modo": "100644",
+      "ObjetoGit": "a2f1dd3f287e090b0846564a7b62b8dcfb3e1b46"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/js/vendor/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "07d3cf3b9334c095ed3032b2d1dc027ac9a4641a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/js/vendor/jsQR.LICENSE",
+      "Modo": "100644",
+      "ObjetoGit": "8f71f43fee3f78649d238238cbde51e6d7055c82"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/js/vendor/jsQR.js",
+      "Modo": "100644",
+      "ObjetoGit": "429896a9d087eb3977cf67521f738d01af17c808"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/service-worker.js",
+      "Modo": "100644",
+      "ObjetoGit": "68527ced3b92de4a860a1a6065e8e12c30ab5948"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web/wwwroot/service-worker.published.js",
+      "Modo": "100644",
+      "ObjetoGit": "7cb3e482ad7b8b9f869d16c3dd03094f324ce436"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.slnLaunch",
+      "Modo": "100644",
+      "ObjetoGit": "fab00f3cfdd51d2b5ef360460d24525f92dd0f96"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.slnx",
+      "Modo": "100644",
+      "ObjetoGit": "8620ae7abd70fce88b3048c76556694dbe927638"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/CORRECCION_UBICACIONES_2026_10_22.md",
+      "Modo": "100644",
+      "ObjetoGit": "09921841443f1c6e1c60fb60ff32c03c1d79aa71"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/Iniciar-Revision.ps1",
+      "Modo": "100644",
+      "ObjetoGit": "bc25be0aefe50c0f5a1351c973dc298020831046"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "9809c6096ef8150c977a9e1eebcaa4376426629e"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/03_CODIGO/TRABAJO_TECNICO.md",
+      "Modo": "100644",
+      "ObjetoGit": "1224cdb9f593cbf7af91b796e1b7cf708af3409f"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/ACCESO_PRIMERA_ENTREGA.png",
+      "Modo": "100644",
+      "ObjetoGit": "acb0cde8c21ed0fe18cfd6f5a04515599a48170f"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/DECISIONES_Y_PENDIENTES.md",
+      "Modo": "100644",
+      "ObjetoGit": "62e14e82df407ed3a78891c9d2e4b062de6706ea"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/RESUMEN_API_CONECTADA.png",
+      "Modo": "100644",
+      "ObjetoGit": "34017c6dad9381a32e707d266a6a02b43b093485"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/CAPSTONE.md",
+      "Modo": "100644",
+      "ObjetoGit": "d1ce68b3418b772e8ae0af80e7c09a47569fe045"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/CODIGO.md",
+      "Modo": "100644",
+      "ObjetoGit": "047df3973284623f8be2b96823f68ed184836941"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/DATOS_Y_NEGOCIO.md",
+      "Modo": "100644",
+      "ObjetoGit": "56009cb22678e31810631c03c17400a566cada0d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/FUENTES_EXTERNAS.md",
+      "Modo": "100644",
+      "ObjetoGit": "949b4c21855850f47d6d53dd0b0bc7417917fe1d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/INFORME_GENERAL.md",
+      "Modo": "100644",
+      "ObjetoGit": "813920cddf444e2d21b7a0dd00d7b0575ee08655"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/PLAN_DEFENSA_Y_AVANCES.md",
+      "Modo": "100644",
+      "ObjetoGit": "0861a67f17c43d1dedbe4c5f67d1a935ac47f174"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "14b3ed5eaf5f2246a97599eb8da668af440b796d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/2.4_GuiaEstudiante_Fase 2_DesarrolloProyecto APT.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "80e56a92c6da81f34d8a685e14a70c5c1da85f21"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/2.5_APT122_Sumativa Avance Fase2.pdf.txt",
+      "Modo": "100644",
+      "ObjetoGit": "b9751d05b0ed75627e86b8cd70f4a8b859e6a550"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/2.6_GuiaEstudiante_Fase 2_Informe Final Proyecto APT.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "923f376cc72ec5c75917fcab7f5b123888aa0531"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__AFRISAN_ATAM_Fase_1_Arquitectura_Propuesta.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "7949c2d27b05324da66ee0a422fcff28b8ebc47c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__APIS__Actual__AFRISAN_Identificacion_APIs_Actualizado.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "280fcff9831821a4fcce6bc7979776ed1da82ffd"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__APIS__Historico__AFRISAN_10_IDENTIFICACION_APIS.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "8b9409aa1498a4ed50b7fd756f6f87ca69b12eec"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__ARQUITECTURA TECNICA__AFRISAN_06_ARQUITECTURA_TECNICA.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "dd52cd70f76225b747dcf011761768bbd5aa5c1e"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__EDT__AFRISAN_02_LINKS_EDT_MER.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "d9552e0fee8986093478e9db7f4cade4788f2cc8"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__EDT__AFRISAN_03_EDT_3_NIVELES.pdf.txt",
+      "Modo": "100644",
+      "ObjetoGit": "2d838584139bdd2cf2dbe2bdc7946e5bf23c1664"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__FACTIBILIDAD_Y_RECURSOS__Actual__AFRISAN_08_FACTIBILIDAD_TECNICA_ACTUALIZADO.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "4c8cc01160a4d3bb96babe5bd9f656b6e612a926"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__FACTIBILIDAD_Y_RECURSOS__Actual__AFRISAN_09_RECURSOS_TECNICOS_ACTUALIZADO.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "f0253686d2618867592c2683a0f6789f9fcef1b0"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__FACTIBILIDAD_Y_RECURSOS__Historico__AFRISAN_08_FACTIBILIDAD_TECNICA.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "22ce0e84b4d696385c04798e6977b2a83fb694eb"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__FACTIBILIDAD_Y_RECURSOS__Historico__AFRISAN_09_RECURSOS_TECNICOS.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "fd0a4fa8e7d27dad8337e3eca1ffaf267d06074a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__VISTAS_4_1__Actual__02_Arquitectura_4_1.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "4ed3b837c4150516fe403f0ecb0bdffe1c4fcd33"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/ARQUITECTURA__VISTAS_4_1__Historico__AFRISAN_07_ARQUITECTURA_4_1.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "ce66550f6349523cb3f6a9c969b6e229758ce3ac"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__00_Acta_de_Constitucion_AFRISAN_Corregida.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "cbbba4a800cd8792a2556bdf9ce5d40635e2badb"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__01_Product_Backlog_AFRISAN_Corregido.xlsx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "e63902b051dfd46c6899f4d715b24e9c3880cbd0"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__02_Sprint_Backlog_AFRISAN_Corregido.xlsx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "515b3c4f94e360d99ce5de2b236e8df47693ce6a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__03_Plan_de_Trabajo_e_Hitos_AFRISAN_Corregido.xlsx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "bccceff5ac867e851d3781340194f2586fc2c751"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__04_Carta_Gantt_AFRISAN_Corregida.xlsx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "5deb4684f9d7735444a27d8f1b5f3ee171611ea9"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__05_Informe_Fase_1_AFRISAN_Corregido.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "5c1797636ac608563b39e2cab69f64c08e1bb214"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__06_Plan_de_Comunicacion_AFRISAN_Corregido.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "432f67d3ea93f8fc07a7211797b262f4b195ef60"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__07_Pauta_Entrevista_Tecnica_AFRISAN_Corregida.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "fc57d2a4ad08737006089dc5d79eeff3dd5a2885"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__08_RACI_AFRISAN_Corregido.pdf.txt",
+      "Modo": "100644",
+      "ObjetoGit": "8e2bed79e053df7c135e8c550f7fcbde6ce803e9"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__09_Retrospectiva_Semana_1_AFRISAN_Corregida.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "194bdd93b133e9a1cf384f3b57fb17116f73d71d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__10_Retrospectiva_Semana_2_AFRISAN_Corregida.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "0392dad887da1d6c0a87ab2789d9fd3e8c1afa0b"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__11_Retrospectiva_Semana_3_AFRISAN_Corregida.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "76f40c343b9d4c40d06fbf7973c2f029006b8972"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__Documentación del Proyecto__ACTUAL__12_Retrospectiva_Semana_4_AFRISAN_Corregida.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "300c11d30095117797f3d641c1967172ec767e4a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__EVA_2__01_Plan_de_Trabajo_y_Backlog_Fase2_AFRISAN.xlsx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "539b8259691a99c2770ac928751cced74b7aab80"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/REVISION_2026_10_20/extracciones_capstone/EVIDENCIAS_GRUPALES__EVA_2__02_Informe_Avance_Fase2_AFRISAN.docx.txt",
+      "Modo": "100644",
+      "ObjetoGit": "4ad7d7cbdb7cfaea81c533d90734aabc9f301f7c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/TECNICO_ORDENES_2026_10_20.png",
+      "Modo": "100644",
+      "ObjetoGit": "6eefb6cce7e848df3179c2bbfd0f57561f6af1be"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/AUTORIZADOR_LISTA.png",
+      "Modo": "100644",
+      "ObjetoGit": "6a0a12100465c3ab8306352c32f25b8d0868093e"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/QR_INVALIDO.png",
+      "Modo": "100644",
+      "ObjetoGit": "deed555cdca1f44e54fd42130b688f23589c2618"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/QR_LEIDO_FICHA.png",
+      "Modo": "100644",
+      "ObjetoGit": "3afd225df527177b8135fb1782d292dce954412b"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "f52fe347b65714cf13fce132d9de86167c8228be"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/resultados_http.json",
+      "Modo": "100644",
+      "ObjetoGit": "a69d082398bc14fc2dceedc46292948bd3a0e1aa"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/verificar_flujo_http.py",
+      "Modo": "100644",
+      "ObjetoGit": "933f881449f095268750b5369ede613a047e2dec"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/ANTECEDENTES/01_PLAN_DE_TRABAJO_8_COLUMNAS_FASE_2.md",
+      "Modo": "100644",
+      "ObjetoGit": "67acf4d9406c92c4a0d18297f5751b2166cf2fff"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/ANTECEDENTES/02_Informe_Avance_Fase2_AFRISAN.docx",
+      "Modo": "100644",
+      "ObjetoGit": "a099d44cee65b3067b4791f307d647c9ea1ecc74"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/ANTECEDENTES/INFORME_AVANCE_FASE_2_AFRISAN.md",
+      "Modo": "100644",
+      "ObjetoGit": "1c2bd28afc175773c38b7334091a16b48f5b7720"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/Guion_Defensa_AFRISAN.md",
+      "Modo": "100644",
+      "ObjetoGit": "0fa4e745cc23144ff73adc92335997ae6728b9da"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/Informe_Avance_AFRISAN_2026_10_22.docx",
+      "Modo": "100644",
+      "ObjetoGit": "e5a83de9231186289ee6bebbea574fe17b5d3c49"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/Informe_Avance_AFRISAN_2026_10_22.md",
+      "Modo": "100644",
+      "ObjetoGit": "2188771cbdf9c7e7e5af7a888749bad89efda11c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/Plan_Trabajo_Actualizado.md",
+      "Modo": "100644",
+      "ObjetoGit": "b8304704f8e4ebdc014a537b87e76faa5af9f712"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/Presentacion_Avance_AFRISAN_2026_10_22.pptx",
+      "Modo": "100644",
+      "ObjetoGit": "2fd662e3500e327b1f1e8b9a1aff4088d9e6e9fd"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "7a8b6de1d59fe43af12e0647897a35bc08acc7ae"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/api-error.log",
+      "Modo": "100644",
+      "ObjetoGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/api.log",
+      "Modo": "100644",
+      "ObjetoGit": "e11dece8b8e5c731d5a430346cec7ff28f27a67d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/qr-api-error.log",
+      "Modo": "100644",
+      "ObjetoGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/qr-api-final-error.log",
+      "Modo": "100644",
+      "ObjetoGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/qr-api-final.log",
+      "Modo": "100644",
+      "ObjetoGit": "95691d1efd3d130b29055dfe85c442aba8a0810d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/qr-api.log",
+      "Modo": "100644",
+      "ObjetoGit": "fe941ea08e66a3beb69503589dd815ba7dae80e2"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/qr-web-error.log",
+      "Modo": "100644",
+      "ObjetoGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/qr-web.log",
+      "Modo": "100644",
+      "ObjetoGit": "e4c4b3dcb5810cf17a116881057c9ff91c7a4be1"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/web-error.log",
+      "Modo": "100644",
+      "ObjetoGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/codigo_local/web.log",
+      "Modo": "100644",
+      "ObjetoGit": "e4c4b3dcb5810cf17a116881057c9ff91c7a4be1"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/diagrama_supabase/supabase-schema-sugsgvrqxtzeaddkvzii.svg",
+      "Modo": "100644",
+      "ObjetoGit": "c819509b47fe83d54b1b9722d73e8de706f26df6"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/candidate.pptx",
+      "Modo": "100644",
+      "ObjetoGit": "2fd662e3500e327b1f1e8b9a1aff4088d9e6e9fd"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/candidate.pptx.inspect.ndjson",
+      "Modo": "100644",
+      "ObjetoGit": "d3e0bbdbfc0a323f79bde3bad189809f77627465"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/crear_entrega.py",
+      "Modo": "100644",
+      "ObjetoGit": "21b2804a7f5676e1f50d2678c183652ef0629540"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/crear_presentacion.mjs",
+      "Modo": "100644",
+      "ObjetoGit": "cee38460e188b9e1fb90d37359f0a40dc38570fe"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/exportado/Presentacion_Avance_AFRISAN_2026_10_22.pptx",
+      "Modo": "100644",
+      "ObjetoGit": "2fd662e3500e327b1f1e8b9a1aff4088d9e6e9fd"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides.json",
+      "Modo": "100644",
+      "ObjetoGit": "b728903135d0b8dd023e0fe73df2e2737d67773b"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-01.png",
+      "Modo": "100644",
+      "ObjetoGit": "946a74050a0fc998db27a094fa93a1670afb48e3"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-02.png",
+      "Modo": "100644",
+      "ObjetoGit": "34fb9d49663d93658a8401e67c713bec2af66db7"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-03.png",
+      "Modo": "100644",
+      "ObjetoGit": "fc65bc0c53c93009460c4a895ff727d89d8377f6"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-04.png",
+      "Modo": "100644",
+      "ObjetoGit": "c9da0eddf6c43dabbea2d1a437efd6e5e780d6c9"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-05.png",
+      "Modo": "100644",
+      "ObjetoGit": "d74898491386d94aad7802544b93638b82b67b06"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-06.png",
+      "Modo": "100644",
+      "ObjetoGit": "7f949f28436b422931eeace47beeab8af70e9ca9"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-07.png",
+      "Modo": "100644",
+      "ObjetoGit": "2c3070d5c5a2da7dc6d03522906dbe22d84f6f5f"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-08.png",
+      "Modo": "100644",
+      "ObjetoGit": "cb8f8816f03bae24c571e3ea70b5ab17e47d7ef8"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-09.png",
+      "Modo": "100644",
+      "ObjetoGit": "b65675a0dcf8779643c0caea72a52699ff0e656f"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-10.png",
+      "Modo": "100644",
+      "ObjetoGit": "6954874280f6879c4a014a096f223a4e1266a464"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-11.png",
+      "Modo": "100644",
+      "ObjetoGit": "884e36482f15c41fb3fb2dc62ef69b8913471607"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-12.png",
+      "Modo": "100644",
+      "ObjetoGit": "4b7116c583c2b81cf37d10b1c87758e6df01a65c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-13.png",
+      "Modo": "100644",
+      "ObjetoGit": "cd564d77d0072116ce85e94aa62807d6f1a2a347"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/slides/slide-14.png",
+      "Modo": "100644",
+      "ObjetoGit": "96ed6a7bfce13d0868bcc59a8b6bb113f717a8a5"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/entrega_local/validation.json",
+      "Modo": "100644",
+      "ObjetoGit": "0a1026ba68ffb6da58bb7f0a03a18d261139c57d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/ajustar_custodia_ui.py",
+      "Modo": "100644",
+      "ObjetoGit": "a875c2d4ae9e126e6cf1e6b0d05e2fde48bf89b9"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/autorizar_lista.py",
+      "Modo": "100644",
+      "ObjetoGit": "0e2bdb1e9f7e36fe8f2cac8954b03461d04a27c4"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/corregir_ubicaciones.py",
+      "Modo": "100644",
+      "ObjetoGit": "982de5dcfe27efc18051aa4983fa1cdae9a96a3d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/demo-api-error.log",
+      "Modo": "100644",
+      "ObjetoGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/demo-api.log",
+      "Modo": "100644",
+      "ObjetoGit": "9200aa7e8a39d1eeb692d35816e4d52ab108c781"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/demo-web-error.log",
+      "Modo": "100644",
+      "ObjetoGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/demo-web.log",
+      "Modo": "100644",
+      "ObjetoGit": "270ebdd9f103c45a86f3f1bfafacc7452d9a7b9b"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/jsqr-1.4.0.tgz",
+      "Modo": "100644",
+      "ObjetoGit": "de0c2a02c2c181a44dedbb1725c51662b06a92a8"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/regresion_ubicaciones/Program.cs",
+      "Modo": "100644",
+      "ObjetoGit": "27c46a736062b0d52f40d696d5e6b3a3f7b84884"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/regresion_ubicaciones/regresion.csproj",
+      "Modo": "100644",
+      "ObjetoGit": "f5204227224aba9eadd6bdca4aad9f8dfe876af0"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/verificacion_qr/datos_ui.json",
+      "Modo": "100644",
+      "ObjetoGit": "4639c7e686ef85d09bd21ab26270229f829caa6d"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/verificacion_qr/qr-real.png",
+      "Modo": "100644",
+      "ObjetoGit": "317a33418139d748816f4b0a6574c3bc45552053"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/verificacion_qr/resultados.json",
+      "Modo": "100644",
+      "ObjetoGit": "a69d082398bc14fc2dceedc46292948bd3a0e1aa"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/verificacion_qr/sin-qr.png",
+      "Modo": "100644",
+      "ObjetoGit": "60da40717eac98927bab7d4deb7073c57211f1be"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ARCHIVOS_LOCALES/raiz_local/verificar_flujo_qr.py",
+      "Modo": "100644",
+      "ObjetoGit": "0b29ad324b718829f994a504b7f8a9228b27ec58"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ENTORNO_DESARROLLO.txt",
+      "Modo": "100644",
+      "ObjetoGit": "7ff5de9ea450c057770b8d7e1a13aec28d487e39"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/ESTADO_PARA_RETOMAR.md",
+      "Modo": "100644",
+      "ObjetoGit": "115a8b4fd37d208da9f636c58bb81aa1a668f79c"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/INVENTARIO_ARCHIVOS_LOCALES.json",
+      "Modo": "100644",
+      "ObjetoGit": "b8c73d1e677e60b3a24e7df21c035efe94cdc475"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "3b81634866a0b2b24777e36657a2465aa9309777"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/Verificar-Respaldo.ps1",
+      "Modo": "100644",
+      "ObjetoGit": "fec7ca80c55a55cff6fc621210ea362e63a3679a"
+    },
+    {
+      "Ruta": "AFRISAN_NUEVO/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "11ce2c991dc5b21f53179f1f0eba1f3d75f35369"
+    },
+    {
+      "Ruta": "ARQUITECTURA/AFRISAN_ATAM_Fase_1_Arquitectura_Propuesta.docx",
+      "Modo": "100644",
+      "ObjetoGit": "d57d5d944a626f27d491f14c69ff50787523d00e"
+    },
+    {
+      "Ruta": "ARQUITECTURA/APIS/Actual/AFRISAN_Identificacion_APIs_Actualizado.docx",
+      "Modo": "100644",
+      "ObjetoGit": "ba9c76ca9080ed8751d36c1a6adf6f81639f1890"
+    },
+    {
+      "Ruta": "ARQUITECTURA/APIS/Historico/AFRISAN_10_IDENTIFICACION_APIS.docx",
+      "Modo": "100644",
+      "ObjetoGit": "a7002be882e22639043ada2baf5a50b096cced60"
+    },
+    {
+      "Ruta": "ARQUITECTURA/ARQUITECTURA TECNICA/AFRISAN_06_ARQUITECTURA_TECNICA.docx",
+      "Modo": "100644",
+      "ObjetoGit": "366a3aa051a107b25b8f687f9074a0111a691627"
+    },
+    {
+      "Ruta": "ARQUITECTURA/DIAGRAMAS/AFRISAN_04_DIAGRAMA_DESPLIEGUE.drawio",
+      "Modo": "100644",
+      "ObjetoGit": "27d86631b1078aea8fdd37e5d4399a643b869674"
+    },
+    {
+      "Ruta": "ARQUITECTURA/DIAGRAMAS/AFRISAN_04_DIAGRAMA_DESPLIEGUE.png",
+      "Modo": "100644",
+      "ObjetoGit": "8b25c232c17a0cd80d65990e7a1fb7c8b972f4a0"
+    },
+    {
+      "Ruta": "ARQUITECTURA/DIAGRAMAS/AFRISAN_04_DIAGRAMA_DESPLIEGUE.png.png",
+      "Modo": "100644",
+      "ObjetoGit": "b278236bb6412a280ba147b65ee64b832dfb68ca"
+    },
+    {
+      "Ruta": "ARQUITECTURA/DIAGRAMAS/AFRISAN_05_DIAGRAMA_COMPONENTES.drawio",
+      "Modo": "100644",
+      "ObjetoGit": "e2b414aec766e01d18528f9701d128d303304ee2"
+    },
+    {
+      "Ruta": "ARQUITECTURA/DIAGRAMAS/AFRISAN_05_DIAGRAMA_COMPONENTES.png",
+      "Modo": "100644",
+      "ObjetoGit": "cb7a0d17007586e162dd3c30a6f7ad23c4347634"
+    },
+    {
+      "Ruta": "ARQUITECTURA/DIAGRAMAS/AFRISAN_05_DIAGRAMA_COMPONENTES.png.png",
+      "Modo": "100644",
+      "ObjetoGit": "f4942b13a795107365073d2dca7d9c64e6a4e4c8"
+    },
+    {
+      "Ruta": "ARQUITECTURA/EDT/AFRISAN_02_LINKS_EDT_MER.docx",
+      "Modo": "100644",
+      "ObjetoGit": "28d1e5bb9561a84f502a9df26f0cf2367281dabd"
+    },
+    {
+      "Ruta": "ARQUITECTURA/EDT/AFRISAN_03_EDT_3_NIVELES.pdf",
+      "Modo": "100644",
+      "ObjetoGit": "d7c71230cb782779cc4033f9326ef7de31cd0693"
+    },
+    {
+      "Ruta": "ARQUITECTURA/EDT/edt-afrisan.png",
+      "Modo": "100644",
+      "ObjetoGit": "315e887ce3717da8efccc161fd61efff0a0b1ccf"
+    },
+    {
+      "Ruta": "ARQUITECTURA/FACTIBILIDAD_Y_RECURSOS/Actual/AFRISAN_08_FACTIBILIDAD_TECNICA_ACTUALIZADO.docx",
+      "Modo": "100644",
+      "ObjetoGit": "9754084ea7f9f7ddb7fc8da896e26e6b7f34938e"
+    },
+    {
+      "Ruta": "ARQUITECTURA/FACTIBILIDAD_Y_RECURSOS/Actual/AFRISAN_09_RECURSOS_TECNICOS_ACTUALIZADO.docx",
+      "Modo": "100644",
+      "ObjetoGit": "1510ce08c1327182c745d114d290103969daa1f1"
+    },
+    {
+      "Ruta": "ARQUITECTURA/FACTIBILIDAD_Y_RECURSOS/Historico/AFRISAN_08_FACTIBILIDAD_TECNICA.docx",
+      "Modo": "100644",
+      "ObjetoGit": "37c13853c50a24ec5486120ba5095d99e8b7b238"
+    },
+    {
+      "Ruta": "ARQUITECTURA/FACTIBILIDAD_Y_RECURSOS/Historico/AFRISAN_09_RECURSOS_TECNICOS.docx",
+      "Modo": "100644",
+      "ObjetoGit": "6a3e8dc2d17d4de4449f802c23f5b76e4a9d5cfb"
+    },
+    {
+      "Ruta": "ARQUITECTURA/MODELO DE DATOS/Actual/MER - SISTEMA AFRISAN.png",
+      "Modo": "100644",
+      "ObjetoGit": "596653c756b7e1f60847ac18c3e7c8271c4e6ae1"
+    },
+    {
+      "Ruta": "ARQUITECTURA/MODELO DE DATOS/Historica/AFRISAN_01_MER.png",
+      "Modo": "100644",
+      "ObjetoGit": "a8379a172acc86eff47fc761dfbe77641d785c89"
+    },
+    {
+      "Ruta": "ARQUITECTURA/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "99e129660031d37f04d8ebb762c89738d6d25e75"
+    },
+    {
+      "Ruta": "ARQUITECTURA/VISTAS_4_1/Actual/02_Arquitectura_4_1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "dc6bb45dd24e81e8e19f7e09da7c4073cacf051f"
+    },
+    {
+      "Ruta": "ARQUITECTURA/VISTAS_4_1/Historico/AFRISAN_07_ARQUITECTURA_4_1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "b55f9560c1c077c80a655e6b290985fd364454fc"
+    },
+    {
+      "Ruta": "Afrisan.Api/Afrisan.Api.csproj",
+      "Modo": "100644",
+      "ObjetoGit": "260ee9241262d89eafd47254676cd417c37c8091"
+    },
+    {
+      "Ruta": "Afrisan.Api/Afrisan.Api.http",
+      "Modo": "100644",
+      "ObjetoGit": "86f79a1498314d8946bde905e5b08ccc9b684097"
+    },
+    {
+      "Ruta": "Afrisan.Api/Controllers/AuthController.cs",
+      "Modo": "100644",
+      "ObjetoGit": "db133dba702005b56cea105dccf7a070ea51b873"
+    },
+    {
+      "Ruta": "Afrisan.Api/Controllers/CilindrosController.cs",
+      "Modo": "100644",
+      "ObjetoGit": "2aa19b3fdb0fa5989d7d6eddb0a9da487c37641a"
+    },
+    {
+      "Ruta": "Afrisan.Api/Controllers/GasRefrigerantesController.cs",
+      "Modo": "100644",
+      "ObjetoGit": "5048c283d63577d840e10b11b5878d7fcc7a4823"
+    },
+    {
+      "Ruta": "Afrisan.Api/Controllers/MovimientosInventarioController.cs",
+      "Modo": "100644",
+      "ObjetoGit": "a61f66db0a206dba5729353fdb1ed10cf7eb9bc5"
+    },
+    {
+      "Ruta": "Afrisan.Api/Controllers/OrdenesTrabajoController.cs",
+      "Modo": "100644",
+      "ObjetoGit": "6256fe53c8f23f6d22bea29ca72d06f0c14d9774"
+    },
+    {
+      "Ruta": "Afrisan.Api/Controllers/UsuariosController.cs",
+      "Modo": "100644",
+      "ObjetoGit": "2ea8f0f158ccb919121e96ee1cf7ba21ea7d7a58"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/CilindroDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "45580023d75b80fc80364ab9e89e453919a34a90"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/CrearCilindroDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "e8104c04a4e9e12d20dbac178911c46a4b2b2c62"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/CrearOrdenTrabajoDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "2ddf5f43764286c48dee74913d61bdf54a65c6a3"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/CrearUsuarioDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "f3e72d5d632dd4f5924e8915f32e0796d474de31"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/DespachoCilindroDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "3fcdfe113e36d088754f910416992ceb8226fb95"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/GasRefrigeranteDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "dd3079dde5e6852556d9a9b8376fafc77b27d2eb"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/LoginDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "a1663c333e7798046bc83f315b7700025a6884f3"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/PesoKgAttribute.cs",
+      "Modo": "100644",
+      "ObjetoGit": "56b59e60bf194934d65a39fdaf8c88660c98a0c9"
+    },
+    {
+      "Ruta": "Afrisan.Api/DTOs/RetornoCilindroDto.cs",
+      "Modo": "100644",
+      "ObjetoGit": "46e01b892714c16c123d380a3d34f9de3798d1df"
+    },
+    {
+      "Ruta": "Afrisan.Api/Data/AfrisanDbContext.cs",
+      "Modo": "100644",
+      "ObjetoGit": "dae8ce4b2a6b758798ffabbe1bec741382035713"
+    },
+    {
+      "Ruta": "Afrisan.Api/Data/AfrisanDbContextFactory.cs",
+      "Modo": "100644",
+      "ObjetoGit": "3af006b5fb8bde3c358a050f232f2a70c270dc0f"
+    },
+    {
+      "Ruta": "Afrisan.Api/Data/DatabaseHealthCheck.cs",
+      "Modo": "100644",
+      "ObjetoGit": "c4c22938b06535f8c2b38a2655147168fa712413"
+    },
+    {
+      "Ruta": "Afrisan.Api/Data/DatabaseInitializer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "8918fedf32fa31793d7be09e62f89aebfc1d2a2b"
+    },
+    {
+      "Ruta": "Afrisan.Api/Data/DocumentedModelConfiguration.cs",
+      "Modo": "100644",
+      "ObjetoGit": "195562c448d2d8a6c3b76b87800b3944a54b473d"
+    },
+    {
+      "Ruta": "Afrisan.Api/Data/IdentitySeeder.cs",
+      "Modo": "100644",
+      "ObjetoGit": "63361cf41f18f0d8b6356e4375798ab0a5a2c278"
+    },
+    {
+      "Ruta": "Afrisan.Api/Data/UsuarioStore.cs",
+      "Modo": "100644",
+      "ObjetoGit": "de22d1c28fc7dc89624e863168c0ea8dcab3b68c"
+    },
+    {
+      "Ruta": "Afrisan.Api/Database/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "06708a6ca4af15638c1b30d08b272a64e68dcea5"
+    },
+    {
+      "Ruta": "Afrisan.Api/Database/RestringirDataApi.sql",
+      "Modo": "100644",
+      "ObjetoGit": "8ba502138ca0556db4856bbc91746175b33b855b"
+    },
+    {
+      "Ruta": "Afrisan.Api/Database/Scripts/ActualizarDesdeIdentity.sql",
+      "Modo": "100644",
+      "ObjetoGit": "38d2b409563654165e59b5b29dc7321934a3d0ef"
+    },
+    {
+      "Ruta": "Afrisan.Api/Database/Scripts/InstalacionCompleta.sql",
+      "Modo": "100644",
+      "ObjetoGit": "95257e73f32a39d33fd0406b0bc8592c3f6a0c88"
+    },
+    {
+      "Ruta": "Afrisan.Api/Database/VERIFICACION.md",
+      "Modo": "100644",
+      "ObjetoGit": "7a646557eb96fccf68ea1d632bc94d670d032196"
+    },
+    {
+      "Ruta": "Afrisan.Api/Demo/DemoEndpoints.cs",
+      "Modo": "100644",
+      "ObjetoGit": "7928b51d53a508a04fa6e5dcb154e59c373cd021"
+    },
+    {
+      "Ruta": "Afrisan.Api/Demo/DemoKeyRepository.cs",
+      "Modo": "100644",
+      "ObjetoGit": "345eca65325eb2f18dc08877d79689ed8800f23b"
+    },
+    {
+      "Ruta": "Afrisan.Api/Demo/DemoStore.cs",
+      "Modo": "100644",
+      "ObjetoGit": "cf581e0a1faa7e9e8f6452508821647aea9c6387"
+    },
+    {
+      "Ruta": "Afrisan.Api/Demo/DemoValidationFilter.cs",
+      "Modo": "100644",
+      "ObjetoGit": "eefecc01c7ab82a5a42dbd3404bcb8f8414db745"
+    },
+    {
+      "Ruta": "Afrisan.Api/Demo/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "0f2a276e6c3357e6e898acf5d80791a943bffba4"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260914174144_InitialCreate.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "b84c4c1486869275dfaa09fa399fec3ffdf93473"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260914174144_InitialCreate.cs",
+      "Modo": "100644",
+      "ObjetoGit": "3e6f16c0372b1fad7b760d8a47e4117e77afdd94"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260917154926_AgregarGasRefrigerante.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "feeda86effb47b71263c546141d4da22a8f47662"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260917154926_AgregarGasRefrigerante.cs",
+      "Modo": "100644",
+      "ObjetoGit": "1655e983fff908c1c8d6975237896f919fbdddc0"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260923002731_AgregarMovimientosInventario.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "4f26a0f386ff1a542d37151d9eb2edbb30181d3f"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260923002731_AgregarMovimientosInventario.cs",
+      "Modo": "100644",
+      "ObjetoGit": "0717dff660ce7810c2bba310a4bc937715829ba8"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260923182217_CodigoQrUnico.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "6449397b20ea7f6fe84b58a8b7603593f8a3fd50"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20260923182217_CodigoQrUnico.cs",
+      "Modo": "100644",
+      "ObjetoGit": "50de89cc3de3352fbc6a8e49a8391bfc42b7bfd4"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261001165958_AgregarTaraCilindro.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "dc0be4d75f833b6d9787f5a92ec51419c26f2823"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261001165958_AgregarTaraCilindro.cs",
+      "Modo": "100644",
+      "ObjetoGit": "bbd4220dc0c20ba65fc84945bb95ac1cc0c4a90d"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261004203655_AgregarOrdenTrabajo.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "e2b85040959da56b4870b28a49b0b7e9c6e97104"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261004203655_AgregarOrdenTrabajo.cs",
+      "Modo": "100644",
+      "ObjetoGit": "cfd73b009370cdd6584f475a8c8685cb85f7a3a6"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261007175616_AgregarIdentityUsuariosRoles.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "ba5ede80ef0b6b2b64deb94f9526deca89fd05e6"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261007175616_AgregarIdentityUsuariosRoles.cs",
+      "Modo": "100644",
+      "ObjetoGit": "8f3f8fd110c48d44d3c1af87e06e6f299b8f7ab9"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261019031737_AlinearMerRolesSucursalesIntervenciones.Designer.cs",
+      "Modo": "100644",
+      "ObjetoGit": "687b73a03fa6fa73ee92852712cd75229f405d01"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/20261019031737_AlinearMerRolesSucursalesIntervenciones.cs",
+      "Modo": "100644",
+      "ObjetoGit": "2bc1fc7d879e0d2b63415d6aa13bc6c2cd992b7a"
+    },
+    {
+      "Ruta": "Afrisan.Api/Migrations/AfrisanDbContextModelSnapshot.cs",
+      "Modo": "100644",
+      "ObjetoGit": "4f8c48b539a1361854d82bf03ba065ee07d0c72b"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/CausaFalla.cs",
+      "Modo": "100644",
+      "ObjetoGit": "a58795c2aafc9b627f7100e96cc1072d84beb5d1"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/CertificadoCilindro.cs",
+      "Modo": "100644",
+      "ObjetoGit": "2392bc3493717f8a74e30cad95e533f163d83fef"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/CertificadoDisposicion.cs",
+      "Modo": "100644",
+      "ObjetoGit": "0c18c95e33112374f6a9d08d9516a37d1bb0d585"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/Cilindro.cs",
+      "Modo": "100644",
+      "ObjetoGit": "e6feeef83d7004369d5094f53085ceb8c1c110b0"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/Cliente.cs",
+      "Modo": "100644",
+      "ObjetoGit": "fae17b5253aa178454981715e611153c39a18eff"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/Equipo.cs",
+      "Modo": "100644",
+      "ObjetoGit": "3ee44b6aabfc2e307bf2093a92344029c4b98e17"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/GasRefrigerante.cs",
+      "Modo": "100644",
+      "ObjetoGit": "bbf16d8bd83d3b9d8af889590213353579b818a5"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/Intervencion.cs",
+      "Modo": "100644",
+      "ObjetoGit": "d47893f428627d21a9c3ea97ddded7c48443984d"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/MovimientoInventario.cs",
+      "Modo": "100644",
+      "ObjetoGit": "420ba8a22551655685ff5780f643115b54e4c8e2"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/OrdenTrabajo.cs",
+      "Modo": "100644",
+      "ObjetoGit": "e1f46aba4416b163a4fa1fe82e6648cddb4f36e2"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/PrecioRefrigerante.cs",
+      "Modo": "100644",
+      "ObjetoGit": "82767bb00236b3254f34a8ee171aae43879fb4e9"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/RegistroAuditoria.cs",
+      "Modo": "100644",
+      "ObjetoGit": "b4e480f3868587bed8d09ca2645d4854b878d74d"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/Sucursal.cs",
+      "Modo": "100644",
+      "ObjetoGit": "f86fb57230cf120f298ea4ca7828362115dda7b4"
+    },
+    {
+      "Ruta": "Afrisan.Api/Models/Usuario.cs",
+      "Modo": "100644",
+      "ObjetoGit": "27f670fe771a972e162cca5b3df0c7a66e9cec80"
+    },
+    {
+      "Ruta": "Afrisan.Api/Program.cs",
+      "Modo": "100644",
+      "ObjetoGit": "7e5b0d70d75c52abe66b66364ff8859f9cf0e6ab"
+    },
+    {
+      "Ruta": "Afrisan.Api/Properties/launchSettings.json",
+      "Modo": "100644",
+      "ObjetoGit": "c482760245a2bf71b9926b700b33e36595705a4a"
+    },
+    {
+      "Ruta": "Afrisan.Api/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "b2ee326bcfe5bb59d01142ddb8bdeac3ce6576a8"
+    },
+    {
+      "Ruta": "Afrisan.Api/appsettings.Development.json",
+      "Modo": "100644",
+      "ObjetoGit": "065e47c379ec6daef9928b8982983435df43085a"
+    },
+    {
+      "Ruta": "Afrisan.Api/appsettings.json",
+      "Modo": "100644",
+      "ObjetoGit": "10f68b8c8b4f796baf8ddeee7551b6a52b9437cc"
+    },
+    {
+      "Ruta": "Afrisan.Web/Afrisan.Web.csproj",
+      "Modo": "100644",
+      "ObjetoGit": "1f82dbc2017df4e0c0a5123e400a8c49eceb3455"
+    },
+    {
+      "Ruta": "Afrisan.Web/App.razor",
+      "Modo": "100644",
+      "ObjetoGit": "187d0e36e73a3a280656195ce22a2eaf97185954"
+    },
+    {
+      "Ruta": "Afrisan.Web/Layout/MainLayout.razor",
+      "Modo": "100644",
+      "ObjetoGit": "4ce04378aea15d767e24f5709581ff580231a524"
+    },
+    {
+      "Ruta": "Afrisan.Web/Layout/MainLayout.razor.css",
+      "Modo": "100644",
+      "ObjetoGit": "ecf25e5b2e4fe21d61aabba74ae233cde6e4a4a6"
+    },
+    {
+      "Ruta": "Afrisan.Web/Layout/NavMenu.razor",
+      "Modo": "100644",
+      "ObjetoGit": "caa0818107317a2db94d088c51f258ec013bb051"
+    },
+    {
+      "Ruta": "Afrisan.Web/Layout/NavMenu.razor.css",
+      "Modo": "100644",
+      "ObjetoGit": "881d128a5fb1ff3e76ba3f897fe649bbb69798e3"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/Cilindros.razor",
+      "Modo": "100644",
+      "ObjetoGit": "b0020010c9b483574c36c5ce0c24b6f255ec5c05"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/Counter.razor",
+      "Modo": "100644",
+      "ObjetoGit": "ef23cb31607f8888025536ef3a18f653ebb225db"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/DetalleCilindro.razor",
+      "Modo": "100644",
+      "ObjetoGit": "30691ea96ec0c9ddf071a6ffca148288b470c88f"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/GasesRefrigerantes.razor",
+      "Modo": "100644",
+      "ObjetoGit": "fb95dc0284e837c30ea96ce23ea6ac3386d72be0"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/Home.razor",
+      "Modo": "100644",
+      "ObjetoGit": "d3e020455d57fe45f6b8121b59a99cb66de5ce1a"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/IdentificacionQr.razor",
+      "Modo": "100644",
+      "ObjetoGit": "b79a3be7c676b3e03aff661c8f8e7c421887db87"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/Login.razor",
+      "Modo": "100644",
+      "ObjetoGit": "eaf574826e2669e0314f4771fb261bf79cfe792a"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/RedirectToLogin.razor",
+      "Modo": "100644",
+      "ObjetoGit": "dcd9e31842153c41c0658591248fb987a42c3d8b"
+    },
+    {
+      "Ruta": "Afrisan.Web/Pages/Weather.razor",
+      "Modo": "100644",
+      "ObjetoGit": "8a083fc20b7978b634447f4551863389e807064d"
+    },
+    {
+      "Ruta": "Afrisan.Web/Program.cs",
+      "Modo": "100644",
+      "ObjetoGit": "f2bdd18b83ccb046b99a752e67efdb5fe3201038"
+    },
+    {
+      "Ruta": "Afrisan.Web/Properties/launchSettings.json",
+      "Modo": "100644",
+      "ObjetoGit": "8e7a566f93c9a28cb24fad7fed81aac7bc0f26e8"
+    },
+    {
+      "Ruta": "Afrisan.Web/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "8b137891791fe96927ad78e64b0aad7bded08bdc"
+    },
+    {
+      "Ruta": "Afrisan.Web/Services/AuthService.cs",
+      "Modo": "100644",
+      "ObjetoGit": "b9b412b46ba69ca88f40413171bc0d8fa58e68aa"
+    },
+    {
+      "Ruta": "Afrisan.Web/Services/EntornoService.cs",
+      "Modo": "100644",
+      "ObjetoGit": "dd141bc0e4421e63dc6da68b13bbe44f6547f15d"
+    },
+    {
+      "Ruta": "Afrisan.Web/Services/JwtAuthenticationStateProvider.cs",
+      "Modo": "100644",
+      "ObjetoGit": "bb26cd2b9f251471fda101a350b355ee01fa1cba"
+    },
+    {
+      "Ruta": "Afrisan.Web/_Imports.razor",
+      "Modo": "100644",
+      "ObjetoGit": "bbdd67424e1a572f745db26d05c291b2717c0e64"
+    },
+    {
+      "Ruta": "Afrisan.Web/wwwroot/css/app.css",
+      "Modo": "100644",
+      "ObjetoGit": "54a8aa38c33ef9079348041e6e2ea9b35196f540"
+    },
+    {
+      "Ruta": "Afrisan.Web/wwwroot/css/bootstrap/bootstrap.min.css",
+      "Modo": "100644",
+      "ObjetoGit": "02ae65b5fe5d12c881eb054006f68b52a2818615"
+    },
+    {
+      "Ruta": "Afrisan.Web/wwwroot/css/bootstrap/bootstrap.min.css.map",
+      "Modo": "100644",
+      "ObjetoGit": "afcd9e33e9eae3876cdc0dfaafa5a80e012b1631"
+    },
+    {
+      "Ruta": "Afrisan.Web/wwwroot/favicon.png",
+      "Modo": "100644",
+      "ObjetoGit": "8422b59695935d180d11d5dbe99653e711097819"
+    },
+    {
+      "Ruta": "Afrisan.Web/wwwroot/icon-192.png",
+      "Modo": "100644",
+      "ObjetoGit": "166f56da7612ea74df6a297154c8d281a4f28a14"
+    },
+    {
+      "Ruta": "Afrisan.Web/wwwroot/index.html",
+      "Modo": "100644",
+      "ObjetoGit": "0969e36f885efad25e78add79be0603d125e955b"
+    },
+    {
+      "Ruta": "Afrisan.Web/wwwroot/sample-data/weather.json",
+      "Modo": "100644",
+      "ObjetoGit": "b7459733f9d58566cf5e4649e592bc56b09b15c5"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/1.4_APT122_FormativaFase1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "b4ef4f3fa3ec4c1c0a066bf8b26d31cdc543631e"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/1.5_GuiaEstudiante_Fase 1_Definicion Proyecto APT (1).docx",
+      "Modo": "100644",
+      "ObjetoGit": "3ed1f4c6568bc1d615f5fa77acd3ae61767f1b72"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/APT AFRISAN.pptx",
+      "Modo": "100644",
+      "ObjetoGit": "c5a1f9a852a29d631e8689b83e06ef61e7a23cd7"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/00_Acta_de_Constitucion_AFRISAN_Corregida.docx",
+      "Modo": "100644",
+      "ObjetoGit": "9668d28277314ae9a59496689f766f2a06772974"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/01_Product_Backlog_AFRISAN_Corregido.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "4ecf870c979378559cea46ba2616c208e9e07753"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/02_Sprint_Backlog_AFRISAN_Corregido.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "bfe0cedb1547325b47031b7b34322a8ef1fa40c4"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/03_Plan_de_Trabajo_e_Hitos_AFRISAN_Corregido.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "331573be093617d20d5b0db0300fa9b4b5847884"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/04_Carta_Gantt_AFRISAN_Corregida.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "0664cbebca1a36cb84bd868e1846c94f20d1624d"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/05_Informe_Fase_1_AFRISAN_Corregido.docx",
+      "Modo": "100644",
+      "ObjetoGit": "b11f7a97018fda05e6b0385253c08e12a2077f3e"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/06_Plan_de_Comunicacion_AFRISAN_Corregido.docx",
+      "Modo": "100644",
+      "ObjetoGit": "c3adaacce99efe4c002c89ed197f6819ade71d92"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/07_Pauta_Entrevista_Tecnica_AFRISAN_Corregida.docx",
+      "Modo": "100644",
+      "ObjetoGit": "e2e239fa3b52d08eeff13cb0814ace26078035ff"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/08_RACI_AFRISAN_Corregido.pdf",
+      "Modo": "100644",
+      "ObjetoGit": "66dd0778b96251c351cb82e4a6c66d051aed66d2"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/09_Retrospectiva_Semana_1_AFRISAN_Corregida.docx",
+      "Modo": "100644",
+      "ObjetoGit": "eaba75baec37064d5c60cab573c208f1c2f69bd0"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/10_Retrospectiva_Semana_2_AFRISAN_Corregida.docx",
+      "Modo": "100644",
+      "ObjetoGit": "31d2f251c02524cd9c030c4223317be668d8322e"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/11_Retrospectiva_Semana_3_AFRISAN_Corregida.docx",
+      "Modo": "100644",
+      "ObjetoGit": "70d2133eca61ce7301f10c759d359d89bd2495f2"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/12_Retrospectiva_Semana_4_AFRISAN_Corregida.docx",
+      "Modo": "100644",
+      "ObjetoGit": "5058821ab943da37ad95d67ad34cbe3afb205e2f"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "66d29e856af54fc6493005242385a1a37971a856"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Acta de Constitución.docx",
+      "Modo": "100644",
+      "ObjetoGit": "e45ebb9f49b47f4ca4ad5a5ff9d882a9e674b689"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Gantt APT AFRISAN.mpp",
+      "Modo": "100644",
+      "ObjetoGit": "da60962a586f2157c684929b80037883a239ec4b"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Informe_Fase_1_AFRISAN_APT.docx",
+      "Modo": "100644",
+      "ObjetoGit": "c1cf4ad881bf695dd699cde51d96c41c2b91435c"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/PMOInformatica Plantilla Scrum Lista de tareas de la iteración.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "260c047b6904ee47b7a06898fbc6eb941ec83162"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/PMOInformatica Plantilla de Product Backlog.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "79fd9da939017ff8399d6f33309a2bf560459c1e"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Pauta y Registro de Entrevista Técnica.docx",
+      "Modo": "100644",
+      "ObjetoGit": "2debe42c113b88e7e45ca7ae06e80f5984fc87c7"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Plan Comunicacion.docx",
+      "Modo": "100644",
+      "ObjetoGit": "af6f35a6094916312787da7d1e5c15ba49114417"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Plan de Trabajo e Hitos.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "9abdeaf27e470955470c22f1a493425a51e771ea"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/RACI.pdf",
+      "Modo": "100644",
+      "ObjetoGit": "41af6cbf6c2419c0ba902793e005fd16128e7b4e"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "4fad83494e3b937146b1790f5458a1ea4da49fd4"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Resumen de la  Reunión Retrospectiva  Semana 1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "850bf7a282e757db009b117cb89d5ea5c0bb1c3a"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Resumen de la  Reunión Retrospectiva  Semana 2.docx",
+      "Modo": "100644",
+      "ObjetoGit": "5eda2a498b3840a2148f49fe466a45a54d3b4596"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Resumen de la  Reunión Retrospectiva  Semana 3.docx",
+      "Modo": "100644",
+      "ObjetoGit": "5f4b57cd89baa3389bef5474b7e538556c9f292c"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/Documentación del Proyecto/HISTORICO/Resumen de la  Reunión Retrospectiva  Semana 4.docx",
+      "Modo": "100644",
+      "ObjetoGit": "c038eabdcffee74c0b573e48d14e97e0b14d4fe8"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/01_PLAN_DE_TRABAJO_8_COLUMNAS_FASE_2.md",
+      "Modo": "100644",
+      "ObjetoGit": "b8304704f8e4ebdc014a537b87e76faa5af9f712"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/01_Plan_de_Trabajo_y_Backlog_Fase2_AFRISAN.xlsx",
+      "Modo": "100644",
+      "ObjetoGit": "1b51c76fdba828bc358a200b71ba4793daaad680"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/02_Informe_Avance_Fase2_AFRISAN.docx",
+      "Modo": "100644",
+      "ObjetoGit": "e5a83de9231186289ee6bebbea574fe17b5d3c49"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/02_PRODUCT_BACKLOG_FASE_2.md",
+      "Modo": "100644",
+      "ObjetoGit": "ab622cc309c0d84d6e908c0d37e34702aac61cb6"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/03_MONITOREO_Y_JUSTIFICACION_AJUSTES.md",
+      "Modo": "100644",
+      "ObjetoGit": "943a5f50ee512d1dd80ade0fb7f30c93de2fe350"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/04_MATRIZ_VALIDACION_PENDIENTE.md",
+      "Modo": "100644",
+      "ObjetoGit": "d36300b3f6ef20c942345bdbc6cff9a969e3053b"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/INFORME_AVANCE_FASE_2_AFRISAN.md",
+      "Modo": "100644",
+      "ObjetoGit": "2188771cbdf9c7e7e5af7a888749bad89efda11c"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/PLAN_PREPARACION_EVA_2.md",
+      "Modo": "100644",
+      "ObjetoGit": "415f14178598c6c62ed14cb3ef3cb706b41b90ec"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/EVA_2/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "c0ad67795e4481d94994d59c31874cb6a56bf0e4"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "12c4ac7366fc1d7863593d79f789edd113b84ec8"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/SPRINT_1/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "b3f49b83cb6e5c76e9c360b3c030df1e19f5ac47"
+    },
+    {
+      "Ruta": "EVIDENCIAS_GRUPALES/SPRINT_2/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "61848c92276488c44bc3582e0c60fa070432733d"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/Carolina/Carolina_Ávila_1.1_APT122_AutoevaluacionFase1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "20d3f285d63deb9583d17d8ee6ff3f9262b09cb3"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/Carolina/Carolina_Ávila_1.2_APT122_AutoevaluacionFase1.docx.docx",
+      "Modo": "100644",
+      "ObjetoGit": "c63794977a4b3ca453abf8eec65947b5c4f8b15e"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/Carolina/Carolina_Ávila_1.3_APT122_AutoevaluacionFase1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "11c306c7227532e20e2b1884711247d68520241a"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/Dante/1.1_APT122_AutoevaluacionCompetenciasFase1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "023cc62a9e1dc3543d077e5f604a5645dc527958"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/Dante/1.2_APT122_DiarioReflexionFase1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "53581d0f6517e14871fdd6d4fc02a87fbde0d9b6"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/Dante/1.3_APT122_AutoevaluaciónFase1.docx",
+      "Modo": "100644",
+      "ObjetoGit": "a2d14324aa0e24322967889078dd3041548cd10c"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "6908d2bf134bc9efc6d960926b719e045ec9d3d5"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/YAREK/LARRAGUIBEL_YAREK_1.1_AUTOEVALUACION_COMPETENCIAS.docx",
+      "Modo": "100644",
+      "ObjetoGit": "6286aa828cbbe0889bf5f096d83b8d13461e9936"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/YAREK/LARRAGUIBEL_YAREK_1.2_DIARIO_REFLEXION.docx",
+      "Modo": "100644",
+      "ObjetoGit": "9c39a2e0978323138cd37619cecba7e3ca50c761"
+    },
+    {
+      "Ruta": "EVIDENCIAS_INDIVIDUALES/YAREK/LARRAGUIBEL_YAREK_1.3_AUTOEVALUACION.docx",
+      "Modo": "100644",
+      "ObjetoGit": "11c306c7227532e20e2b1884711247d68520241a"
+    },
+    {
+      "Ruta": "Iniciar-Demo.ps1",
+      "Modo": "100644",
+      "ObjetoGit": "003aeacfd8d7d9425b11bfcc29bf69f325c62a90"
+    },
+    {
+      "Ruta": "MOCKUPS/Gases refrigerantes Afrisan.png",
+      "Modo": "100644",
+      "ObjetoGit": "9d88a455669b44ee894cb3b2c6be472b284d35b6"
+    },
+    {
+      "Ruta": "MOCKUPS/Gestion de cilindros afrisan.png",
+      "Modo": "100644",
+      "ObjetoGit": "2636891a6f3705bc5366c96a8a4e0d9ce0e804df"
+    },
+    {
+      "Ruta": "MOCKUPS/IDENTIFICACION QR AFRISAN.png",
+      "Modo": "100644",
+      "ObjetoGit": "9aa1d5b4da080d02d81d3f7659e29d201ac21860"
+    },
+    {
+      "Ruta": "MOCKUPS/Link Prototipo Mockups Figma",
+      "Modo": "100644",
+      "ObjetoGit": "11626ea8ec2c9c2e32d53891aabedbadf0d81792"
+    },
+    {
+      "Ruta": "MOCKUPS/README.md",
+      "Modo": "100644",
+      "ObjetoGit": "37c67278966edf3e41768bd5c53a9fa8e83b16a7"
+    },
+    {
+      "Ruta": "MOCKUPS/afriasan principal.png",
+      "Modo": "100644",
+      "ObjetoGit": "969b3b223ab8a47796b63e367b597dabc5010134"
+    },
+    {
+      "Ruta": "README.md",
+      "Modo": "100644",
+      "ObjetoGit": "fdb2a1e1e4beaa8c80c93bb1367b74a7c0997e22"
+    }
+  ]
+}

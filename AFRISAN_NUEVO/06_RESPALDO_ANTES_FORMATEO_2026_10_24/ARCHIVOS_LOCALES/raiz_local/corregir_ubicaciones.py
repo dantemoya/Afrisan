@@ -1,0 +1,21 @@
+from pathlib import Path
+base=Path('AFRISAN_NUEVO/03_CODIGO/Afrisan.Nuevo.Web')
+changes={}
+def edit(file,old,new):
+ path=base/file;s=changes.get(path,path.read_text(encoding='utf-8-sig'))
+ assert old in s,(file,old[:80]);changes[path]=s.replace(old,new)
+edit(Path('Pages/NuevoCilindro.razor'),'<label for="cil-serie">','<label for="cil-ubicacion">Ubicación inicial</label><InputSelect id="cil-ubicacion" @bind-Value="form.UbicacionInicial"><option value="Bodega">Bodega</option><option value="Sucursal">Ya instalado en sucursal</option></InputSelect>\n                    @if (form.UbicacionInicial == "Sucursal") { <label for="cil-sucursal">Sucursal donde está instalado</label><InputText id="cil-sucursal" @bind-Value="form.SucursalInicial" maxlength="200" /><p class="field-help">Registra una existencia inicial en sucursal; no suma stock en Bodega.</p> }\n                    <label for="cil-serie">')
+edit(Path('Pages/NuevoCilindro.razor'),'Observacion = form.Observacion });','Observacion = form.Observacion, UbicacionInicial = form.UbicacionInicial, SucursalInicial = form.UbicacionInicial == "Sucursal" ? form.SucursalInicial : null });')
+edit(Path('Pages/NuevaOt.razor'),'Deben existir en inventario. Esta preparación declara su ubicación inicial en esa sucursal y los reserva para el retiro.','Deben estar registrados como instalados en esta sucursal. Crear la OT no traslada cilindros de Bodega. Los reemplazos se seleccionan después, en la entrega de Bodega.')
+edit(Path('Pages/Inicio.razor'),'c.Estado == "Disponible"','c.Ubicacion == "Bodega" && c.Estado == "Disponible"')
+edit(Path('Pages/Inicio.razor'),'<span>Disponibles</span>','<span>Disponibles en Bodega</span>')
+edit(Path('Pages/Inventario.razor'),'<div><label for="filtro-estado">','<div><label for="filtro-ubicacion">Ubicación</label><select id="filtro-ubicacion" @bind="ubicacion"><option value="Bodega">Bodega</option><option value="Sucursal">Sucursales</option><option value="Tecnico">Con técnico</option><option value="">Todas las ubicaciones</option></select></div>\n        <div><label for="filtro-estado">')
+edit(Path('Pages/Inventario.razor'),'private string busqueda = "", gas = "", estado = "";','private string busqueda = "", gas = "", estado = "", ubicacion = "Bodega";')
+edit(Path('Pages/Inventario.razor'),'items.Where(c => (gas == ""','items.Where(c => (ubicacion == "" || c.Ubicacion == ubicacion) && (gas == ""')
+edit(Path('Pages/Inventario.razor'),'busqueda = ""; gas = ""; estado = "";','busqueda = ""; gas = ""; estado = ""; ubicacion = "Bodega";')
+edit(Path('Pages/Inventario.razor'),'· @c.Ubicacion</small>','· @c.Ubicacion @(c.Sucursal is null ? "" : $"({c.Sucursal})")</small>')
+edit(Path('Pages/DetalleOt.razor'),'<input id="entrega-codigo" @bind="codigoEntrega" placeholder="AFR-000002" />','<select id="entrega-codigo" @bind="codigoEntrega"><option value="">Selecciona un cilindro disponible</option>@foreach (var c in disponiblesBodega) { <option value="@c.Codigo">@c.Codigo — @c.RefrigeranteCodigo — @Formato.Gramos(c.ContenidoSegunPesajeGr) de gas</option> }</select>@if (disponiblesBodega.Length == 0) { <p class="field-help">No hay cilindros disponibles en Bodega para los refrigerantes de esta OT. Registra y pesa el cilindro de reemplazo en Bodega.</p> }')
+edit(Path('Pages/DetalleOt.razor'),'private OtResponse? ot;','private OtResponse? ot;\n    private CilindroResponse[] disponiblesBodega = [];')
+edit(Path('Pages/DetalleOt.razor'),'ot = await Local.OrdenAsync(Id); if (EsTecnico)','ot = await Local.OrdenAsync(Id); if (EsBodega) disponiblesBodega = (await Api.CilindrosAsync()).Where(c => c.Ubicacion == "Bodega" && c.Estado == "Disponible" && c.PesajeRegistrado is not null && ot.Detalle.Any(l => l.RefrigeranteId == c.RefrigeranteId)).ToArray(); if (EsTecnico)')
+for path,s in changes.items():path.write_text(s,encoding='utf-8')
+print('Actualizadas',len(changes),'pantallas')

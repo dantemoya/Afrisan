@@ -17,6 +17,8 @@ else
             <EditForm Model="form" OnValidSubmit="Guardar"><DataAnnotationsValidator /><ValidationSummary />
                 <fieldset disabled="@guardando"><legend>Identificación del cilindro</legend>
                     <label for="cil-gas">Refrigerante</label><InputSelect id="cil-gas" @bind-Value="form.RefrigeranteId"><option value="0">Selecciona un refrigerante</option>@foreach (var g in gases) { <option value="@g.Id">@g.Codigo — @g.Nombre</option> }</InputSelect><ValidationMessage For="() => form.RefrigeranteId" />
+                    <label for="cil-ubicacion">Ubicación inicial</label><InputSelect id="cil-ubicacion" @bind-Value="form.UbicacionInicial"><option value="Bodega">Bodega</option><option value="Sucursal">Ya instalado en sucursal</option></InputSelect>
+                    @if (form.UbicacionInicial == "Sucursal") { <label for="cil-sucursal">Sucursal donde está instalado</label><InputText id="cil-sucursal" @bind-Value="form.SucursalInicial" maxlength="200" /><p class="field-help">Registra una existencia inicial en sucursal; no suma stock en Bodega.</p> }
                     <label for="cil-serie">Número de serie <span class="optional">Opcional</span></label><InputText id="cil-serie" @bind-Value="form.NumeroSerie" maxlength="120" />
                     <div class="form-grid"><div><label for="cil-capacidad">Capacidad de gas (g)</label><InputNumber id="cil-capacidad" @bind-Value="form.CapacidadGr" min="1" step="1" /><ValidationMessage For="() => form.CapacidadGr" /></div><div><label for="cil-tara">Tara del envase (g)</label><InputNumber id="cil-tara" @bind-Value="form.TaraGr" min="1" step="1" /><ValidationMessage For="() => form.TaraGr" /></div></div>
                     <p class="field-help">Ingresa gramos enteros. Ejemplo: 10 kg = 10.000 g. La capacidad no incluye el peso del envase.</p>
@@ -60,7 +62,7 @@ else
         try
         {
             var creado = await Api.CrearCilindroAsync(new() { RefrigeranteId = form.RefrigeranteId, NumeroSerie = form.NumeroSerie,
-                CapacidadGr = form.CapacidadGr, TaraGr = form.TaraGr, PesoInicialGr = form.PesoInicialGr, Observacion = form.Observacion });
+                CapacidadGr = form.CapacidadGr, TaraGr = form.TaraGr, PesoInicialGr = form.PesoInicialGr, Observacion = form.Observacion, UbicacionInicial = form.UbicacionInicial, SucursalInicial = form.UbicacionInicial == "Sucursal" ? form.SucursalInicial : null });
             Nav.NavigateTo($"cilindros/{creado.Codigo}");
         }
         catch (Exception ex) { error = Formato.Error(ex); }

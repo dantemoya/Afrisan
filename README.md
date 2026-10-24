@@ -3,6 +3,8 @@ Repositorio oficial del proyecto "Sistema Integral de Gestión y Trazabilidad de
 
 ## Trabajo nuevo: comenzar aquí
 
+Respaldo previo al formateo del 24/10/2026: [guía de restauración y estado del proyecto](AFRISAN_NUEVO/06_RESPALDO_ANTES_FORMATEO_2026_10_24/README.md).
+
 Desde el 19 de octubre de 2026, la revisión del negocio y el desarrollo nuevo se
 organizan en **[AFRISAN_NUEVO](AFRISAN_NUEVO/README.md)**, a cargo de Dante Moya.
 Incluye procesos, base de datos y seguimiento. La aplicación nueva de registro

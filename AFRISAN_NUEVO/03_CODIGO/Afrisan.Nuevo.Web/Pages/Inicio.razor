@@ -8,7 +8,7 @@
 @if (error is not null) { <div class="notice error" role="alert">@error <button class="text-button" @onclick="Cargar">Reintentar</button></div> }
 <div class="metric-grid" aria-busy="@cargando">
     <div class="metric"><span>Cilindros registrados</span><strong>@Valor(cilindros.Length)</strong><small>Envases identificados</small></div>
-    <div class="metric"><span>Disponibles</span><strong>@Valor(cilindros.Count(c => c.Estado == "Disponible"))</strong><small>Con refrigerante según pesaje</small></div>
+    <div class="metric"><span>Disponibles en Bodega</span><strong>@Valor(cilindros.Count(c => c.Ubicacion == "Bodega" && c.Estado == "Disponible"))</strong><small>Con refrigerante según pesaje</small></div>
     <div class="metric"><span>Pendientes de pesaje</span><strong>@Valor(cilindros.Count(c => c.PesajeRegistrado is null))</strong><small>Sin lectura inicial registrada</small></div>
     <div class="metric"><span>Tipos de refrigerante</span><strong>@Valor(refrigerantes.Length)</strong><small>Catálogo registrado</small></div>
 </div>

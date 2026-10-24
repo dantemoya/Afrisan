@@ -19,9 +19,9 @@ else
         <section class="panel"><h2>Pedido y autorización</h2><div class="table-wrap"><table><thead><tr><th>Refrigerante</th><th>Solicitado</th><th>Autorizado</th></tr></thead><tbody>@foreach (var l in ot.Detalle) { <tr><td>@l.Refrigerante</td><td>@Formato.Gramos(l.GrSolicitados)</td><td>@Formato.Gramos(l.GrAutorizados)</td></tr> }</tbody></table></div><p class="field-help">Estos importes de masa son del pedido. No son límites semanales/mensuales ni una medición de consumo o emisiones.</p><h3>Cilindros previstos para retiro</h3><p>@(ot.CilindrosARetirar.Length == 0 ? "Sin retiros previstos: pedido para agregados." : string.Join(", ", ot.CilindrosARetirar))</p></section>
         <section class="panel"><h2>Entrega registrada por bodega</h2>
             @if (ot.Entregas.Length == 0) { <p class="muted">Bodega todavía no registró cilindros entregados.</p> }
-            @foreach (var e in ot.Entregas) { <p><strong>@e.Codigo</strong> · @e.Refrigerante<br /><small>@Formato.Gramos(e.PesoBrutoGr) bruto · @e.Fecha.ToLocalTime().ToString("dd/MM HH:mm")</small></p> }
+            @foreach (var e in ot.Entregas) { <p><strong>@e.Codigo</strong> · @e.Refrigerante<br /><small>@Formato.Gramos(e.PesoBrutoGr) bruto · @e.Fecha.ToLocalTime().ToString("dd/MM HH:mm") · @e.Estado</small></p> }
             @if (EsBodega && ot.Estado == "Asignada")
-            { <label for="entrega-codigo">Código del cilindro disponible en bodega</label><input id="entrega-codigo" @bind="codigoEntrega" placeholder="AFR-000002" /><button class="btn secondary mt" disabled="@ocupado" @onclick="Entregar">Registrar entrega al técnico</button> }
+            { <label for="entrega-codigo">Código del cilindro disponible en bodega</label><select id="entrega-codigo" @bind="codigoEntrega"><option value="">Selecciona un cilindro disponible</option>@foreach (var c in disponiblesBodega) { <option value="@c.Codigo">@c.Codigo — @c.RefrigeranteCodigo — @Formato.Gramos(c.ContenidoSegunPesajeGr) de gas</option> }</select>@if (disponiblesBodega.Length == 0) { <p class="field-help">No hay cilindros disponibles en Bodega para los refrigerantes de esta OT. Registra y pesa el cilindro de reemplazo en Bodega.</p> }<button class="btn secondary mt" disabled="@ocupado" @onclick="Entregar">Registrar entrega al técnico</button> }
         </section>
     </div>
     <section class="panel mt"><div class="panel-heading"><h2>Cambios y agregados</h2>@if (EsTecnico && ot.Estado == "Asignada") { <a class="btn primary" href="@($"ordenes/{Id}/operacion/{Guid.NewGuid()}")">+ Registrar trabajo físico</a> }</div>
@@ -47,7 +47,7 @@ else
     @if (fotosVisibles.Count > 0) { <section class="panel mt"><h2>Evidencias del trabajo seleccionado</h2><div class="photo-grid">@foreach (var f in fotosVisibles) { <figure><img src="@f.Url" alt="@($"Pesaje {f.Info.Grupo} de {f.Info.CodigoCilindro}")" /><figcaption>@f.Info.Grupo · @f.Info.CodigoCilindro<br />@f.Info.Nombre</figcaption></figure> }</div><button class="btn subtle" @onclick="() => fotosVisibles.Clear()">Ocultar fotos</button></section> }
     @if (EsBodega && ot.Estado != "Cerrada")
     {
-        <section class="panel mt"><h2>Recepción oficial de bodega</h2><p class="muted">Recibe el envase retirado de sucursal o un cilindro entregado que no se utilizó.</p><div class="form-grid"><div><label for="recepcion-codigo">Código recibido</label><input id="recepcion-codigo" @bind="codigoRecepcion" /></div><div><label for="recepcion-peso">Peso bruto recibido (g)</label><InputNumber id="recepcion-peso" @bind-Value="pesoRecepcion" min="0" step="1" /></div></div><label for="recepcion-nota">Observación</label><textarea id="recepcion-nota" @bind="notaRecepcion" maxlength="1000"></textarea><button class="btn primary mt" disabled="@ocupado" @onclick="Recibir">Confirmar recepción física</button></section>
+        <section class="panel mt"><h2>Recepción oficial de bodega</h2><p class="muted">Recibe el envase retirado de sucursal o un cilindro entregado que no se utilizó.</p><div class="form-grid"><div><label for="recepcion-codigo">Código recibido</label><select id="recepcion-codigo" @bind="codigoRecepcion"><option value="">Selecciona un envase pendiente</option>@foreach (var codigo in RecepcionesPendientes) { <option value="@codigo">@codigo</option> }</select></div><div><label for="recepcion-peso">Peso bruto recibido (g)</label><InputNumber id="recepcion-peso" @bind-Value="pesoRecepcion" min="0" step="1" /></div></div><label for="recepcion-nota">Observación</label><textarea id="recepcion-nota" @bind="notaRecepcion" maxlength="1000"></textarea><button class="btn primary mt" disabled="@ocupado" @onclick="Recibir">Confirmar recepción física</button></section>
     }
     @if (EsTecnico || EsBodega)
     {
@@ -70,6 +70,7 @@ else
 @code {
     [Parameter] public Guid Id { get; set; }
     private OtResponse? ot;
+    private CilindroResponse[] disponiblesBodega = [];
     private BorradorLocal[] borradores = [];
     private IncidenciaLocal[] incidenciasLocales = [];
     private bool cargando = true, ocupado;
@@ -78,6 +79,7 @@ else
     private long? pesoRecepcion;
     private readonly Dictionary<Guid, string> respuestas = [];
     private readonly List<(FotoResponse Info, string Url)> fotosVisibles = [];
+    private string[] RecepcionesPendientes => ot is null ? [] : ot.Operaciones.Where(o => o.Estado == "Registrada" && o.Tipo == "Reemplazo" && !o.RecibidoBodega).Select(o => o.CodigoRetirado!).Concat(ot.Entregas.Where(e => e.Estado == "ConTecnico").Select(e => e.Codigo)).Distinct().ToArray();
     private bool EsTecnico => Sesion.Sesion?.Rol == "Tecnico";
     private bool EsBodega => Sesion.Sesion?.Rol == "Bodega";
     private bool EsAutorizador => Sesion.Sesion?.Rol == "Autorizador";
@@ -85,7 +87,7 @@ else
     private async Task Cargar()
     {
         cargando = true; error = null; fotosVisibles.Clear();
-        try { ot = await Local.OrdenAsync(Id); if (EsTecnico) { borradores = await Local.BorradoresAsync(); incidenciasLocales = await Local.IncidenciasAsync(); } foreach (var i in ot.Incidencias) respuestas.TryAdd(i.Id, ""); }
+        try { ot = await Local.OrdenAsync(Id); if (EsBodega) disponiblesBodega = (await Api.CilindrosAsync()).Where(c => c.Ubicacion == "Bodega" && c.Estado == "Disponible" && c.PesajeRegistrado is not null && ot.Detalle.Any(l => l.RefrigeranteId == c.RefrigeranteId)).ToArray(); if (EsTecnico) { borradores = await Local.BorradoresAsync(); incidenciasLocales = await Local.IncidenciasAsync(); } foreach (var i in ot.Incidencias) respuestas.TryAdd(i.Id, ""); }
         catch (Exception ex) { error = Formato.Error(ex); }
         finally { cargando = false; }
     }

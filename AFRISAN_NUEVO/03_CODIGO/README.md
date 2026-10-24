@@ -1,5 +1,16 @@
 # AFRISAN nuevo · Primera entrega de inventario
 
+## Actualización del 22 de octubre
+
+Se incorporó selección de cilindros mediante listas en el módulo del Autorizador,
+lectura de imágenes QR y cámara, descarga PNG compatible, descarte de borradores
+y correcciones de custodia y versiones. La [validación de esta entrega](../04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/README.md)
+registra 17 comprobaciones HTTP satisfactorias y pruebas de navegador de selección,
+creación de OT, lectura de imagen QR, imagen inválida y descarga. La cámara física
+no se probó. Esta actualización prevalece sobre los pendientes históricos de QR
+por cámara y ausencia de pruebas indicados más abajo. La persistencia central
+sigue siendo temporal en memoria.
+
 ## Actualización: procesos del técnico (20 de octubre de 2026)
 
 Se añadió el módulo de OT asignadas, reemplazos/agregados, fotos múltiples por

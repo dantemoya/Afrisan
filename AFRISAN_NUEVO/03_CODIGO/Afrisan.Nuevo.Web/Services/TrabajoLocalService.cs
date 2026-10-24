@@ -14,6 +14,7 @@ public sealed class TrabajoLocalService(InventarioClient api, SesionService sesi
     public bool ConsultaOffline { get; private set; }
     public bool Sincronizando { get; private set; }
     public string? Mensaje { get; private set; }
+    private string UsuarioCache => $"{Usuario}:{sesion.Entorno?.Instancia}";
     private string Usuario => sesion.Sesion?.Usuario ?? "";
 
     public async Task IniciarAsync()
@@ -35,7 +36,7 @@ public sealed class TrabajoLocalService(InventarioClient api, SesionService sesi
         catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException)
         {
             ConsultaOffline = true;
-            return await js.InvokeAsync<OtResponse[]>("afrisanLocal.listar", "ot", Usuario);
+            return await js.InvokeAsync<OtResponse[]>("afrisanLocal.listar", "ot", UsuarioCache);
         }
     }
     public async Task<OtResponse> OrdenAsync(Guid idOt)
@@ -45,17 +46,31 @@ public sealed class TrabajoLocalService(InventarioClient api, SesionService sesi
         catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException)
         {
             ConsultaOffline = true;
-            return (await js.InvokeAsync<OtResponse[]>("afrisanLocal.listar", "ot", Usuario)).FirstOrDefault(o => o.Id == idOt)
+            return (await js.InvokeAsync<OtResponse[]>("afrisanLocal.listar", "ot", UsuarioCache)).FirstOrDefault(o => o.Id == idOt)
                 ?? throw new InvalidOperationException("Esta OT no está guardada para consulta sin conexión. Ábrela primero con conexión.");
         }
     }
-    public ValueTask CacheAsync(OtResponse ot) => js.InvokeVoidAsync("afrisanLocal.guardar", "ot", Usuario, ot.Id.ToString(), ot);
+    public ValueTask CacheAsync(OtResponse ot) => js.InvokeVoidAsync("afrisanLocal.guardar", "ot", UsuarioCache, ot.Id.ToString(), ot);
     public ValueTask GuardarLocalAsync(BorradorLocal borrador)
     {
         if (borrador.Usuario != Usuario || string.IsNullOrWhiteSpace(Usuario)) throw new InvalidOperationException("No se puede guardar el trabajo sin una sesión identificada.");
         return js.InvokeVoidAsync("afrisanLocal.guardar", "borrador", Usuario, borrador.Datos.Id.ToString(), borrador);
     }
-    public ValueTask<BorradorLocal[]> BorradoresAsync() => js.InvokeAsync<BorradorLocal[]>("afrisanLocal.listar", "borrador", Usuario);
+    public async ValueTask<BorradorLocal[]> BorradoresAsync() => (await js.InvokeAsync<BorradorLocal[]>("afrisanLocal.listar", "borrador", Usuario)).Where(b => !b.Descartado).ToArray();
+    public async Task DescartarAsync(Guid otId, Guid operacionId)
+    {
+        if (!await sincronizacion.WaitAsync(0)) throw new InvalidOperationException("Espera a que termine la sincronización antes de descartar.");
+        try
+        {
+            var local = (await BorradoresAsync()).FirstOrDefault(b => b.OtId == otId && b.Datos.Id == operacionId);
+            var ot = await api.OrdenAsync(otId); // Requiere conexión: no ocultar un borrador remoto por error de red.
+            var op = ot.Operaciones.FirstOrDefault(o => o.Id == operacionId);
+            if (op is not null) ot = await api.DescartarOperacionAsync(otId, operacionId, local?.Datos.Version ?? op.Version);
+            if (local is not null) await GuardarLocalAsync(local with { Descartado = true, Pendiente = false, ConfirmarAlSincronizar = false });
+            await CacheAsync(ot);
+        }
+        finally { sincronizacion.Release(); }
+    }
     public ValueTask<IncidenciaLocal[]> IncidenciasAsync() => js.InvokeAsync<IncidenciaLocal[]>("afrisanLocal.listar", "incidencia", Usuario);
     private ValueTask ConservarIncidencia(IncidenciaLocal incidencia) => js.InvokeVoidAsync("afrisanLocal.guardar", "incidencia", Usuario, incidencia.Datos.Id.ToString(), incidencia);
     public ValueTask GuardarIncidenciaAsync(Guid ot, CrearIncidenciaRequest datos)
@@ -85,7 +100,7 @@ public sealed class TrabajoLocalService(InventarioClient api, SesionService sesi
                 {
                     foreach (var eliminada in actual.FotosEliminar)
                     {
-                        var eliminacion = await api.QuitarFotoAsync(actual.OtId, actual.Datos.Id, eliminada);
+                        var eliminacion = await api.QuitarFotoAsync(actual.OtId, actual.Datos.Id, eliminada, actual.Datos.Version);
                         actual = actual with { Datos = actual.Datos with { Version = eliminacion.Version } };
                         await GuardarLocalAsync(actual);
                     }
@@ -94,11 +109,11 @@ public sealed class TrabajoLocalService(InventarioClient api, SesionService sesi
                     await GuardarLocalAsync(actual);
                     foreach (var foto in actual.Fotos)
                     {
-                        remoto = await api.SubirFotoAsync(actual.OtId, actual.Datos.Id, foto);
+                        remoto = await api.SubirFotoAsync(actual.OtId, actual.Datos.Id, foto with { Version = actual.Datos.Version });
                         actual = actual with { Datos = actual.Datos with { Version = remoto.Version } };
                         await GuardarLocalAsync(actual);
                     }
-                    if (actual.ConfirmarAlSincronizar) remoto = await api.ConfirmarOperacionAsync(actual.OtId, actual.Datos.Id);
+                    if (actual.ConfirmarAlSincronizar) remoto = await api.ConfirmarOperacionAsync(actual.OtId, actual.Datos.Id, actual.Datos.Version);
                     await GuardarLocalAsync(actual with { Datos = actual.Datos with { Version = remoto.Version }, FotosEliminar = [], Pendiente = false, Error = null });
                     await CacheAsync(await api.OrdenAsync(actual.OtId));
                 }

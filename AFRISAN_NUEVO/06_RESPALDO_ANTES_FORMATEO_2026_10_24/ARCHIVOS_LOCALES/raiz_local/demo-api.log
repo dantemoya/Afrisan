@@ -1,0 +1,13 @@
+Usando la configuración de inicio de Afrisan.Api\Properties\launchSettings.json...
+info: Afrisan.Api[0]
+      AFRISAN DEMO: datos simulados en memoria. Se reinician al cerrar la API.
+warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+      No XML encryptor configured. Key {f0bbd205-85fe-4c66-89e5-64fcf945dd84} may be persisted to storage in unencrypted form.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5141
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\pcdan\OneDrive\Escritorio\Afrisan\Afrisan.Api

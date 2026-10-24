@@ -1,0 +1,284 @@
+[
+  {
+    "Origen": ".local/ajustar_custodia_ui.py",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/ajustar_custodia_ui.py",
+    "Bytes": 6895,
+    "SHA256": "5F897BBAE57185A7D6FCE7F66C548F54A67CD86C8045BE42524BA0DC5C421D8E"
+  },
+  {
+    "Origen": ".local/autorizar_lista.py",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/autorizar_lista.py",
+    "Bytes": 5409,
+    "SHA256": "831BCF29CD5ADD46E0177CFC8E26DD41178DE536C87AA4A91AC7E12168DC534F"
+  },
+  {
+    "Origen": ".local/corregir_ubicaciones.py",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/corregir_ubicaciones.py",
+    "Bytes": 3904,
+    "SHA256": "4D516886D67837245451DF8C0B4C8AD971A0E6FCF3008B4B3F8FD31A0F7F9F22"
+  },
+  {
+    "Origen": ".local/demo-api-error.log",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/demo-api-error.log",
+    "Bytes": 0,
+    "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Origen": ".local/demo-api.log",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/demo-api.log",
+    "Bytes": 762,
+    "SHA256": "4E2AAED2ACF173C0A29D7C40F8A6DAEC360DFF2B2CF521733C881DED8E548178"
+  },
+  {
+    "Origen": ".local/demo-web-error.log",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/demo-web-error.log",
+    "Bytes": 0,
+    "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Origen": ".local/demo-web.log",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/demo-web.log",
+    "Bytes": 457,
+    "SHA256": "B824568FC975BAF9739F8EC305F97EBC1C769D61310B330268709B6E000C0CAD"
+  },
+  {
+    "Origen": ".local/jsqr-1.4.0.tgz",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/jsqr-1.4.0.tgz",
+    "Bytes": 64745,
+    "SHA256": "B5299B37917A1FE7A8CAB9DD5CC6B8ACCF82663ADD80ABE5BF7761A921CC6602"
+  },
+  {
+    "Origen": ".local/verificar_flujo_qr.py",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/verificar_flujo_qr.py",
+    "Bytes": 7429,
+    "SHA256": "A87E47348BF6BCAA3DB6E44654D042D7B97C10BA7335CC0595164C43D6E67907"
+  },
+  {
+    "Origen": ".local/regresion_ubicaciones/Program.cs",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/regresion_ubicaciones/Program.cs",
+    "Bytes": 3378,
+    "SHA256": "3111AF74B06253E5AB67988863306AB3307E345AB4208E418D35851F0F231D58"
+  },
+  {
+    "Origen": ".local/regresion_ubicaciones/regresion.csproj",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/regresion_ubicaciones/regresion.csproj",
+    "Bytes": 341,
+    "SHA256": "C2AC668175E662227507827CEEBF0BE31DE1413C67F30F7A28B7A06CFB82B847"
+  },
+  {
+    "Origen": ".local/verificacion_qr/datos_ui.json",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/verificacion_qr/datos_ui.json",
+    "Bytes": 182,
+    "SHA256": "C921E18E48A6C566DF26D16DB769F9ACEEA21C1ECEDA1B840F5092A08CC61E3F"
+  },
+  {
+    "Origen": ".local/verificacion_qr/qr-real.png",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/verificacion_qr/qr-real.png",
+    "Bytes": 343,
+    "SHA256": "A6E0FF2053F9598BD1A7B17EDF2A2522E80BE2CC2CF877B45E3DB34CA1C02A79"
+  },
+  {
+    "Origen": ".local/verificacion_qr/resultados.json",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/verificacion_qr/resultados.json",
+    "Bytes": 1077,
+    "SHA256": "00A4CC7FE373B676CEAE6667C88E41BEF6CFCDAAFCA9FA2224CDBFC12355CC9A"
+  },
+  {
+    "Origen": ".local/verificacion_qr/sin-qr.png",
+    "Respaldo": "ARCHIVOS_LOCALES/raiz_local/verificacion_qr/sin-qr.png",
+    "Bytes": 287,
+    "SHA256": "1D4C203D5C185173A2B0F28030283807AAA28EFFB0E3DD20E0B44E9981BC0944"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/api-error.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/api-error.log",
+    "Bytes": 0,
+    "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/api.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/api.log",
+    "Bytes": 4272,
+    "SHA256": "A9B00461A45C4112BA1DD4725C9C8279C1F98603B536A59CA6F2A36333F6F8AC"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/qr-api-error.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/qr-api-error.log",
+    "Bytes": 0,
+    "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/qr-api-final-error.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/qr-api-final-error.log",
+    "Bytes": 0,
+    "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/qr-api-final.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/qr-api-final.log",
+    "Bytes": 48835,
+    "SHA256": "98DCD28D5C727243C02E6D0076C2A81256D3295195CA4641364452582FA882E3"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/qr-api.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/qr-api.log",
+    "Bytes": 65283,
+    "SHA256": "9D14A8A5170260FF1A814CDC6A2F8AC5CC85D799A6BF1537BA3673F3EF081119"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/qr-web-error.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/qr-web-error.log",
+    "Bytes": 0,
+    "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/qr-web.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/qr-web.log",
+    "Bytes": 493,
+    "SHA256": "B2372815F16D5242E37D1A9B32B4446FB7F66A8EF6B9B126C913CD29BFC1338A"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/web-error.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/web-error.log",
+    "Bytes": 0,
+    "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/03_CODIGO/.local/web.log",
+    "Respaldo": "ARCHIVOS_LOCALES/codigo_local/web.log",
+    "Bytes": 493,
+    "SHA256": "B2372815F16D5242E37D1A9B32B4446FB7F66A8EF6B9B126C913CD29BFC1338A"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/candidate.pptx",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/candidate.pptx",
+    "Bytes": 109253,
+    "SHA256": "25D0DA82AE90D1D90E30783EE20E8A7E6D72D80E7B9890DB7D9BEEB80F39D587"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/candidate.pptx.inspect.ndjson",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/candidate.pptx.inspect.ndjson",
+    "Bytes": 30654,
+    "SHA256": "A6C23A7A1C36B121F23E0239484830E20FCD419F8879EAED2F036F8A6856270C"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/crear_entrega.py",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/crear_entrega.py",
+    "Bytes": 31248,
+    "SHA256": "9450E5E5BB2A08309465594DAC15EBA127BAA0CF8D45A5C1EB6E8D2096E2E1D8"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/crear_presentacion.mjs",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/crear_presentacion.mjs",
+    "Bytes": 3333,
+    "SHA256": "43ABB3961A2E4065A9312495AD67E5C4FE95A9E8511EEA05FB510994392E7584"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides.json",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides.json",
+    "Bytes": 7842,
+    "SHA256": "0BB859014A1EBDDA7E4AE3FA2631D750813BD07C18F0854CFA287843AE1597E4"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/validation.json",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/validation.json",
+    "Bytes": 3606,
+    "SHA256": "DE5414ABAA337D9111787100C8B998C736DF5B7369A5EF2FD8EE80B0F3C84E9A"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/exportado/Presentacion_Avance_AFRISAN_2026_10_22.pptx",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/exportado/Presentacion_Avance_AFRISAN_2026_10_22.pptx",
+    "Bytes": 109253,
+    "SHA256": "25D0DA82AE90D1D90E30783EE20E8A7E6D72D80E7B9890DB7D9BEEB80F39D587"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-01.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-01.png",
+    "Bytes": 35232,
+    "SHA256": "9997A848F5FEEB2DC9885E373F3356DCF82ACC974A1AB5D92E45AFEF033874AA"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-02.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-02.png",
+    "Bytes": 38557,
+    "SHA256": "FB95649EAB22ECD0EB462874E0157DD4E7F13F289D720566B593B7C8E0AFA729"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-03.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-03.png",
+    "Bytes": 43377,
+    "SHA256": "518247632F093F19D537715CF0A236AE8FDE648D32E613CB61002009E9F37733"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-04.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-04.png",
+    "Bytes": 37005,
+    "SHA256": "46C4DD5B20D7D8818E168F1CF0E388D5452E76BDA0F7F7EA8C9168FD0534234E"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-05.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-05.png",
+    "Bytes": 36677,
+    "SHA256": "029D9855BE0C9AC6086F43862D866D64F786F14EB890DC281E52F449FB3DE773"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-06.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-06.png",
+    "Bytes": 97152,
+    "SHA256": "18EB4DEDECC0094FE5A2252E589A862781BE34FD92C105028A4A61AC8358A967"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-07.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-07.png",
+    "Bytes": 40584,
+    "SHA256": "6435DD6F1D515763D5F4142B92B3866DBA1206E76AD5C774C30858B66489DE5D"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-08.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-08.png",
+    "Bytes": 40573,
+    "SHA256": "9161CB12B9DFB98318D9AC3809A86A251974908EAE6FE7C6EA50291EAABBB3F9"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-09.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-09.png",
+    "Bytes": 43250,
+    "SHA256": "124AEC703FF0A9D7E527212E3E1E540E594E663540290BBE0870F8F317A150A4"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-10.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-10.png",
+    "Bytes": 40789,
+    "SHA256": "03A370F35B4C06E0CFC5A301FB8180BC3E5770BA8C4D231A8366B36C068F7E8B"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-11.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-11.png",
+    "Bytes": 39485,
+    "SHA256": "5D3882710442E5B13084F4BCDED9A9749A7E00FD04A3C8EE42C4393136FF58BE"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-12.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-12.png",
+    "Bytes": 40115,
+    "SHA256": "47DF12F7ADE9792D5A6F09CE7B992D43AC2567B05FD82EDDA8BB2A2997AD011C"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-13.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-13.png",
+    "Bytes": 41521,
+    "SHA256": "70E0FFC9767619360E6D99F5C7B4BB2AB177FCF456BB8BF038F2C9734E305380"
+  },
+  {
+    "Origen": "AFRISAN_NUEVO/05_ENTREGA_AVANCE_2026_10_22/.local/slides/slide-14.png",
+    "Respaldo": "ARCHIVOS_LOCALES/entrega_local/slides/slide-14.png",
+    "Bytes": 39843,
+    "SHA256": "5065AD121782DA17988DBE479E17E3DD0B5D6C144F3490F29EF38447B9002491"
+  },
+  {
+    "Origen": "Downloads/supabase-schema-sugsgvrqxtzeaddkvzii.svg (adjunto histórico)",
+    "Respaldo": "ARCHIVOS_LOCALES/diagrama_supabase/supabase-schema-sugsgvrqxtzeaddkvzii.svg",
+    "Bytes": 13182010,
+    "SHA256": "DA3073C041458B79CC4FD666081BFDE759495DAEF1E89B88928A75148CAE5152"
+  }
+]

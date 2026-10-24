@@ -24,6 +24,8 @@ public sealed record RefrigeranteResponse(long Id, string Codigo, string Nombre)
 /// <summary>Alta del envase. Peso inicial es lectura bruta opcional, nunca capacidad inferida.</summary>
 public sealed record CrearCilindroRequest
 {
+    [Required] public string UbicacionInicial { get; init; } = "Bodega";
+    [StringLength(200)] public string? SucursalInicial { get; init; }
     [Range(1, long.MaxValue)] public long RefrigeranteId { get; init; }
     [StringLength(120)] public string? NumeroSerie { get; init; }
     [Range(1, long.MaxValue)] public long CapacidadGr { get; init; }

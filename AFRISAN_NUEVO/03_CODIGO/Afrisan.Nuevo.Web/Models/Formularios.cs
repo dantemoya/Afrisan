@@ -16,6 +16,8 @@ public sealed class RefrigeranteForm
 }
 public sealed class CilindroForm
 {
+    public string UbicacionInicial { get; set; } = "Bodega";
+    [StringLength(200)] public string? SucursalInicial { get; set; }
     [Range(1, long.MaxValue, ErrorMessage = "Selecciona un refrigerante.")] public long RefrigeranteId { get; set; }
     [StringLength(120)] public string? NumeroSerie { get; set; }
     [Range(1, long.MaxValue, ErrorMessage = "La capacidad debe ser mayor a cero.")] public long CapacidadGr { get; set; }

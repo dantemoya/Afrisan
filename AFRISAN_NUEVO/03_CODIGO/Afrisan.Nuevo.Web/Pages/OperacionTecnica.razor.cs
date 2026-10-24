@@ -13,6 +13,7 @@ public partial class OperacionTecnica : IAsyncDisposable
 {
     [Parameter] public Guid Id { get; set; }
     [Parameter] public Guid OperacionId { get; set; }
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
     [Inject] private InventarioClient Api { get; set; } = default!;
     [Inject] private TrabajoLocalService Local { get; set; } = default!;
     [Inject] private SesionService Sesion { get; set; } = default!;
@@ -38,6 +39,7 @@ public partial class OperacionTecnica : IAsyncDisposable
             ot = await Local.OrdenAsync(Id);
             var local = (await Local.BorradoresAsync()).FirstOrDefault(b => b.OtId == Id && b.Datos.Id == OperacionId);
             var remoto = ot.Operaciones.FirstOrDefault(o => o.Id == OperacionId);
+            if (remoto?.Estado == "Descartada") throw new InvalidOperationException("Este borrador fue descartado. Vuelve a la OT para registrar otro trabajo.");
             if (remoto?.Estado == "Registrada") { registrada = true; return; }
             instancia = local?.Datos.Instancia ?? Sesion.Entorno?.Instancia ?? "";
             if (string.IsNullOrWhiteSpace(instancia)) throw new InvalidOperationException("Abre la OT con conexión antes de preparar un borrador offline.");
@@ -104,6 +106,13 @@ public partial class OperacionTecnica : IAsyncDisposable
         ocupado = true; error = null;
         try { pendienteConfirmar = false; await GuardarLocal(); mensaje = "Borrador y fotos conservados en este navegador. Aún no se confirmó el trabajo en la API."; }
         catch (Exception ex) { error = "No se pudo guardar localmente: " + ex.Message; }
+        finally { ocupado = false; }
+    }
+    private async Task Descartar()
+    {
+        if (ocupado) return; ocupado = true; error = null;
+        try { await Local.DescartarAsync(Id, OperacionId); Navigation.NavigateTo($"ordenes/{Id}"); }
+        catch (Exception ex) { error = Formato.Error(ex); }
         finally { ocupado = false; }
     }
     private Task GuardarYEnviar() => Enviar(false);

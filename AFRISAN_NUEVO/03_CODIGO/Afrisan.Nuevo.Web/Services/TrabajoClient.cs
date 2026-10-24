@@ -22,17 +22,18 @@ public sealed partial class InventarioClient
         await RevisarAsync(respuesta);
         return await respuesta.Content.ReadFromJsonAsync<OperacionResponse>() ?? throw new InvalidOperationException("No se pudo confirmar el guardado; consulta el borrador antes de repetir.");
     }
-    public Task<OperacionResponse> ConfirmarOperacionAsync(Guid id, Guid operacion) => PostSinCuerpo<OperacionResponse>(OtRuta(id) + $"/operaciones/{operacion}/confirmar");
+    public Task<OperacionResponse> ConfirmarOperacionAsync(Guid id, Guid operacion, int version) => PostSinCuerpo<OperacionResponse>(OtRuta(id) + $"/operaciones/{operacion}/confirmar?version={version}");
     public Task<OtResponse> InformarEntregaAsync(Guid id, Guid operacion) => PostSinCuerpo<OtResponse>(OtRuta(id) + $"/operaciones/{operacion}/informar-entrega");
+    public Task<OtResponse> DescartarOperacionAsync(Guid id, Guid operacion, int version) => PostSinCuerpo<OtResponse>(OtRuta(id) + $"/operaciones/{operacion}/descartar?version={version}");
     public Task<OtResponse> CerrarOtAsync(Guid id) => PostSinCuerpo<OtResponse>(OtRuta(id) + "/cerrar");
     private async Task<T> PostSinCuerpo<T>(string ruta)
     {
         using var respuesta = await http.PostAsync(ruta, null); await RevisarAsync(respuesta);
         return await respuesta.Content.ReadFromJsonAsync<T>() ?? throw new InvalidOperationException("Respuesta no confirmada; vuelve a consultar.");
     }
-    public async Task<OperacionResponse> QuitarFotoAsync(Guid id, Guid operacion, Guid foto)
+    public async Task<OperacionResponse> QuitarFotoAsync(Guid id, Guid operacion, Guid foto, int version)
     {
-        using var respuesta = await http.DeleteAsync(OtRuta(id) + $"/operaciones/{operacion}/fotos/{foto}"); await RevisarAsync(respuesta);
+        using var respuesta = await http.DeleteAsync(OtRuta(id) + $"/operaciones/{operacion}/fotos/{foto}?version={version}"); await RevisarAsync(respuesta);
         return await respuesta.Content.ReadFromJsonAsync<OperacionResponse>() ?? throw new InvalidOperationException("No se pudo confirmar la eliminación de la foto del borrador.");
     }
     public async Task<string> FotoAsync(Guid id, Guid operacion, FotoResponse foto)

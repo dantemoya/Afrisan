@@ -58,13 +58,21 @@ public sealed class InventarioStore
                 throw new ReglaInventarioException("El número de serie ya corresponde a otro cilindro.", 409);
             if (dto.CapacidadGr <= 0 || dto.TaraGr <= 0) throw new ReglaInventarioException("Capacidad y tara deben ser mayores que cero.");
             if (dto.PesoInicialGr.HasValue) ValidarPeso(dto.PesoInicialGr.Value, dto.TaraGr, dto.CapacidadGr);
+            // Un alta de existencias en sucursal no representa una entrada a Bodega.
+            if (dto.UbicacionInicial is not ("Bodega" or "Sucursal"))
+                throw new ReglaInventarioException("Selecciona Bodega o Sucursal como ubicación inicial.");
+            var sucursal = Limpiar(dto.SucursalInicial);
+            if (dto.UbicacionInicial == "Sucursal" && string.IsNullOrWhiteSpace(sucursal))
+                throw new ReglaInventarioException("Indica la sucursal donde ya está instalado el cilindro.");
+            if (dto.UbicacionInicial == "Bodega") sucursal = null;
             var fecha = DateTimeOffset.UtcNow;
             var id = siguienteCilindro++;
             var pesaje = dto.PesoInicialGr is { } peso ? new PesajeResponse(peso, fecha, usuario, Limpiar(dto.Observacion)) : null;
             var registro = new CilindroResponse(id, $"AFR-{id:D6}", serie, refrigerante.Id, refrigerante.Codigo, refrigerante.Nombre,
-                dto.CapacidadGr, dto.TaraGr, Estado(pesaje, dto.TaraGr), fecha, pesaje);
+                dto.CapacidadGr, dto.TaraGr, dto.UbicacionInicial == "Sucursal" ? "Instalado" : Estado(pesaje, dto.TaraGr), fecha, pesaje,
+                dto.UbicacionInicial, sucursal);
             cilindros.Add(registro);
-            eventos[id] = [new(fecha, "Alta", usuario, "Envase registrado con un único tipo de refrigerante.")];
+            eventos[id] = [new(fecha, "Alta", usuario, $"Envase registrado en {dto.UbicacionInicial} {sucursal} con un único tipo de refrigerante.")];
             if (pesaje is not null) eventos[id].Add(new(fecha, "Pesaje inicial", usuario, $"Lectura bruta de {pesaje.PesoBrutoGr:N0} g; es un ingreso, no un despacho."));
             return registro;
         }

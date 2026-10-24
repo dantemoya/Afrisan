@@ -24,7 +24,7 @@ public static class TrabajoEndpoints
             .RequireAuthorization(p => p.RequireRole("Tecnico"));
         grupo.MapPost("/{id:guid}/operaciones/{operacion:guid}/fotos", (Guid id, Guid operacion, SubirFotoRequest dto, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.Foto(id, operacion, dto, user)))
             .RequireAuthorization(p => p.RequireRole("Tecnico"));
-        grupo.MapDelete("/{id:guid}/operaciones/{operacion:guid}/fotos/{foto:guid}", (Guid id, Guid operacion, Guid foto, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.QuitarFoto(id, operacion, foto, user)))
+        grupo.MapDelete("/{id:guid}/operaciones/{operacion:guid}/fotos/{foto:guid}", (Guid id, Guid operacion, Guid foto, int version, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.QuitarFoto(id, operacion, foto, user, version)))
             .RequireAuthorization(p => p.RequireRole("Tecnico"));
         grupo.MapGet("/{id:guid}/operaciones/{operacion:guid}/fotos/{foto:guid}", (Guid id, Guid operacion, Guid foto, TrabajoStore store, ClaimsPrincipal user, HttpContext ctx) =>
         {
@@ -33,7 +33,7 @@ public static class TrabajoEndpoints
             ctx.Response.Headers.XContentTypeOptions = "nosniff";
             return TypedResults.File(imagen.Bytes, imagen.Mime);
         });
-        grupo.MapPost("/{id:guid}/operaciones/{operacion:guid}/confirmar", (Guid id, Guid operacion, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.Confirmar(id, operacion, user)))
+        grupo.MapPost("/{id:guid}/operaciones/{operacion:guid}/confirmar", (Guid id, Guid operacion, int version, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.Confirmar(id, operacion, user, version)))
             .RequireAuthorization(p => p.RequireRole("Tecnico"));
         grupo.MapPost("/{id:guid}/operaciones/{operacion:guid}/informar-entrega", (Guid id, Guid operacion, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.InformarEntrega(id, operacion, user)))
             .RequireAuthorization(p => p.RequireRole("Tecnico"));
@@ -41,6 +41,8 @@ public static class TrabajoEndpoints
             .RequireAuthorization(p => p.RequireRole("Tecnico", "Bodega"));
         grupo.MapPost("/{id:guid}/incidencias/{incidencia:guid}/resolver", (Guid id, Guid incidencia, ResolverIncidenciaRequest dto, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.Resolver(id, incidencia, dto, user)))
             .RequireAuthorization(p => p.RequireRole("Autorizador"));
+        grupo.MapPost("/{id:guid}/operaciones/{operacion:guid}/descartar", (Guid id, Guid operacion, int version, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.Descartar(id, operacion, version, user)))
+            .RequireAuthorization(p => p.RequireRole("Tecnico"));
         grupo.MapPost("/{id:guid}/termino-tecnico", (Guid id, TerminarTrabajoRequest dto, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.Terminar(id, dto, user)))
             .RequireAuthorization(p => p.RequireRole("Tecnico"));
         grupo.MapPost("/{id:guid}/cerrar", (Guid id, TrabajoStore store, ClaimsPrincipal user) => TypedResults.Ok(store.Cerrar(id, user)))

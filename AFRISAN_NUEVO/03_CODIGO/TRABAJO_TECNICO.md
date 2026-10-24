@@ -1,5 +1,14 @@
 # Entrega de trabajo técnico · 20 de octubre de 2026
 
+Actualización posterior del 22/10: [selección, QR y correcciones de flujo](../04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/README.md).
+Se añadieron listas para seleccionar envases, lectura de imágenes QR y cámara,
+control de custodia por entrega, versiones en fotos/confirmación y descarte de
+borradores. La validación nueva incluye regresión HTTP y comprobaciones de navegador;
+las referencias a cámara o pruebas pendientes del texto original son históricas.
+
+Actualización del 22/10: [corrección de ubicaciones](CORRECCION_UBICACIONES_2026_10_22.md).
+El alta ahora distingue Bodega y existencias instaladas en sucursal. Crear OT ya no reubica envases de Bodega como preparación del ejemplo. Ese cambio sustituye el paso 3 y la primera decisión provisional de este documento. La corrección incluye una regresión aislada del recorrido, sin prueba integral en navegador.
+
 Responsable: Dante Moya. Tecnología: misma solución .NET 8 / API / Blazor
 WebAssembly. **Modo de revisión en memoria, sin modificar Supabase.**
 

@@ -33,7 +33,7 @@ else
                 @if (form.Tipo == "Reemplazo")
                 {
                     <section class="panel"><span class="eyebrow">01 / ENVASE QUE SE RETIRA</span><h2>Cilindro retirado</h2>
-                        <label for="op-retirado">Código en la sucursal</label><InputSelect id="op-retirado" @bind-Value="form.CodigoRetirado" disabled='@fotos.Any(f => f.Grupo == "Retirado")'><option value="">Selecciona el cilindro</option>@foreach (var codigo in ot.CilindrosARetirar) { <option>@codigo</option> }</InputSelect>
+                        <label for="op-retirado">Código en la sucursal</label><InputSelect id="op-retirado" @bind-Value="form.CodigoRetirado" disabled='@fotos.Any(f => f.Grupo == "Retirado")'><option value="">Selecciona el cilindro</option>@foreach (var codigo in ot.CilindrosARetirar.Where(c => !ot.Operaciones.Any(o => o.Id != OperacionId && o.Estado == "Registrada" && o.CodigoRetirado == c))) { <option>@codigo</option> }</InputSelect>
                         <label for="op-peso-retirado">Peso bruto del retirado (g)</label><InputNumber id="op-peso-retirado" @bind-Value="form.PesoRetiradoGr" min="0" step="1" />
                         <div class="photo-heading"><h3>Fotos del pesaje</h3><span class="badge pending">Obligatorias</span></div>
                         <p class="field-help">Se debe ver la lectura de balanza del envase retirado. Puedes agregar varias fotos.</p>
@@ -42,7 +42,7 @@ else
                     </section>
                 }
                 <section class="panel"><span class="eyebrow">@(form.Tipo == "Reemplazo" ? "02" : "01") / ENVASE QUE SE INSTALA</span><h2>Cilindro instalado</h2>
-                    <label for="op-instalado">Código entregado por bodega</label><InputSelect id="op-instalado" @bind-Value="form.CodigoInstalado" disabled='@fotos.Any(f => f.Grupo == "Instalado")'><option value="">Selecciona el cilindro</option>@foreach (var entrega in ot.Entregas) { <option value="@entrega.Codigo">@entrega.Codigo — @entrega.Refrigerante</option> }</InputSelect>
+                    <label for="op-instalado">Código entregado por bodega</label><InputSelect id="op-instalado" @bind-Value="form.CodigoInstalado" disabled='@fotos.Any(f => f.Grupo == "Instalado")'><option value="">Selecciona el cilindro</option>@foreach (var entrega in ot.Entregas.Where(e => e.Estado == "ConTecnico")) { <option value="@entrega.Codigo">@entrega.Codigo — @entrega.Refrigerante</option> }</InputSelect>
                     <label for="op-peso-instalado">Peso bruto del instalado (g)</label><InputNumber id="op-peso-instalado" @bind-Value="form.PesoInstaladoGr" min="0" step="1" />
                     <div class="photo-heading"><h3>Fotos del pesaje</h3><span class="badge pending">Obligatorias</span></div>
                     <p class="field-help">Fotografía la lectura de balanza del envase de reemplazo. No reutilices la foto del retirado.</p>
@@ -54,6 +54,7 @@ else
                 <div class="form-actions"><button type="button" class="btn secondary" @onclick="GuardarSoloLocal">Guardar borrador local</button><button type="button" class="btn secondary" @onclick="GuardarYEnviar">Guardar y sincronizar borrador</button><button type="button" class="btn primary" @onclick="Confirmar">Confirmar cambio con evidencias</button></div>
             </section></fieldset>
         </EditForm>
+        <button type="button" class="btn subtle" disabled="@ocupado" @onclick="Descartar">Descartar este borrador</button>
         <p class="fine-print">Los campos se conservan al cambiar su valor y las fotos al adjuntarlas. Comprueba el estado de guardado antes de salir. La legibilidad y correspondencia de la imagen requieren revisión humana.</p>
     }
 }

@@ -49,15 +49,14 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
             foreach (var c in retirados)
             {
                 if (!lineas.Any(l => l.RefrigeranteId == c.RefrigeranteId)) Fallar("El cilindro a retirar no corresponde a un refrigerante del pedido.");
-                if (c.Ubicacion == "Tecnico" || (c.Ubicacion == "Sucursal" && !string.Equals(c.Sucursal, dto.Sucursal.Trim(), StringComparison.OrdinalIgnoreCase)))
-                    Fallar($"{c.Codigo} ya tiene otra ubicación/custodia registrada.", 409);
+                if (c.Ubicacion != "Sucursal" || !string.Equals(c.Sucursal, dto.Sucursal.Trim(), StringComparison.OrdinalIgnoreCase))
+                    Fallar($"{c.Codigo} no está instalado en esa sucursal. Los cilindros de Bodega se registran como entrega, no como retiro.", 409);
                 if (ordenes.Values.Any(o => o.Estado != "Cerrada" && o.Retirar.Contains(c.Codigo))) Fallar($"{c.Codigo} está solicitado en otra OT abierta.", 409);
             }
             var ot = new Orden { Id = Guid.NewGuid(), Codigo = $"OT-{ordenes.Count + 1:D6}", Sucursal = dto.Sucursal.Trim(),
                 Direccion = dto.Direccion.Trim(), Descripcion = dto.Descripcion.Trim(), Tecnico = tecnico.Email,
                 Autorizador = Actor(user), Detalle = lineas, Retirar = codigos };
-            foreach (var c in retirados)
-                inventario.Ubicar(c.Codigo, "Sucursal", "Instalado", ot.Sucursal, null, Actor(user), "Ubicación inicial declarada por Autorizador para la OT");
+            // Autorizar una OT reserva el retiro; no cambia la ubicación física.
             ordenes.Add(ot.Id, ot); altas.Add(dto.IdOperacion, (huella, ot.Id));
             Anotar(ot, user, "OT autorizada", "Pedido manual de revisión, técnico y cilindros a retirar registrados. No es integración Defontana.");
             return Ver(ot);
@@ -68,9 +67,10 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
     {
         lock (inventario.SyncRoot)
         {
-            var ot = Acceder(id, user); Abierta(ot);
+            var ot = Acceder(id, user); Editable(ot);
             var c = BuscarCilindro(dto.Codigo);
-            if (ot.Entregas.Any(e => e.Codigo == c.Codigo)) return Ver(ot);
+            if (ot.Entregas.Any(e => e.Codigo == c.Codigo && e.Estado == "ConTecnico")) return Ver(ot);
+            if (ot.Entregas.Any(e => e.Codigo == c.Codigo && e.Estado == "Instalado")) Fallar("Este cilindro ya se instaló en esta OT.", 409);
             if (c.Ubicacion != "Bodega" || c.Estado != "Disponible" || c.PesajeRegistrado is null) Fallar("Solo se entrega un cilindro disponible, pesado y ubicado en bodega.", 409);
             if (!ot.Detalle.Any(l => l.RefrigeranteId == c.RefrigeranteId)) Fallar("El refrigerante no está en el detalle autorizado de esta OT.");
             ot.Entregas.Add(new(c.Codigo, c.RefrigeranteCodigo, c.TaraGr, c.CapacidadGr, c.PesajeRegistrado!.PesoBrutoGr, Actor(user), DateTimeOffset.UtcNow));
@@ -99,6 +99,7 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
             }
             else
             {
+                if (op.Estado == "Descartada") Fallar("Este borrador fue descartado. Crea una operación nueva.", 409);
                 if ((op.Datos with { Version = 0 }) == (limpio with { Version = 0 })) return VerOperacion(op);
                 if (op.Estado != "Borrador") Fallar("La operación ya fue confirmada. Solicita rectificación al Autorizador.", 409);
                 if (dto.Version != op.Version) Fallar("Otra pestaña modificó el borrador. Consulta la versión actual antes de resolver el conflicto.", 409);
@@ -128,6 +129,7 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
                 return VerOperacion(op);
             }
             if (op.Estado != "Borrador") Fallar("Las evidencias confirmadas no se reemplazan.", 409);
+            if (dto.Version != op.Version) Fallar("El borrador cambió antes de adjuntar la foto. Consulta su versión actual.", 409);
             if (op.Fotos.Values.Any(f => f.Bytes.AsSpan().SequenceEqual(datos))) Fallar("La misma fotografía ya está adjunta a esta operación. Cada envase debe tener su propia evidencia.", 409);
             if (op.Fotos.Values.Count(f => f.Info.Grupo == dto.Grupo) >= 8) Fallar("Máximo 8 fotos por cada grupo de pesaje en esta revisión.");
             if (bytesFotos + datos.Length > 256L * 1024 * 1024) Fallar("La memoria de evidencias de esta instancia está llena. No se guardó la foto.", 409);
@@ -138,12 +140,13 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
         }
     }
 
-    public OperacionResponse QuitarFoto(Guid id, Guid operacionId, Guid fotoId, ClaimsPrincipal user)
+    public OperacionResponse QuitarFoto(Guid id, Guid operacionId, Guid fotoId, ClaimsPrincipal user, int? version = null)
     {
         lock (inventario.SyncRoot)
         {
             var ot = Acceder(id, user); Editable(ot); var op = OperacionDe(ot, operacionId);
             if (op.Estado != "Borrador") Fallar("No se eliminan evidencias de trabajos confirmados.", 409);
+            if (version.HasValue && version != op.Version) Fallar("El borrador cambió antes de retirar la foto. No se sobrescribieron datos.", 409);
             if (op.Fotos.Remove(fotoId, out var foto)) { bytesFotos -= foto.Bytes.Length; op.Version++; Anotar(ot, user, "Foto retirada del borrador", fotoId.ToString()); }
             return VerOperacion(op);
         }
@@ -158,17 +161,19 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
         }
     }
 
-    public OperacionResponse Confirmar(Guid id, Guid operacionId, ClaimsPrincipal user)
+    public OperacionResponse Confirmar(Guid id, Guid operacionId, ClaimsPrincipal user, int? version = null)
     {
         lock (inventario.SyncRoot)
         {
             var ot = Acceder(id, user); var op = OperacionDe(ot, operacionId);
             if (op.Estado == "Registrada") return VerOperacion(op);
             Editable(ot);
+            if (op.Estado != "Borrador") Fallar("El borrador fue descartado.", 409);
+            if (version.HasValue && version != op.Version) Fallar("El borrador cambió antes de confirmar. Revísalo otra vez.", 409);
             var d = op.Datos;
             if (d.CodigoInstalado is null || d.PesoInstaladoGr is null) Fallar("Falta cilindro instalado y su peso bruto.");
             var nuevo = BuscarCilindro(d.CodigoInstalado!);
-            if (!ot.Entregas.Any(e => e.Codigo == nuevo.Codigo) || nuevo.Ubicacion != "Tecnico" || nuevo.Tecnico != ot.Tecnico) Fallar("El cilindro no está en la entrega/custodia de este técnico.", 409);
+            if (!ot.Entregas.Any(e => e.Codigo == nuevo.Codigo && e.Estado == "ConTecnico") || nuevo.Ubicacion != "Tecnico" || nuevo.Tecnico != ot.Tecnico) Fallar("El cilindro no está en la entrega/custodia de esta OT.", 409);
             ValidarPeso(nuevo, d.PesoInstaladoGr!.Value);
             if (!op.Fotos.Values.Any(f => f.Info.Grupo == "Instalado")) Fallar("Adjunta al menos una foto del pesaje del cilindro instalado.");
             CilindroResponse? viejo = null;
@@ -176,7 +181,7 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
             {
                 if (d.CodigoRetirado is null || d.PesoRetiradoGr is null) Fallar("El reemplazo exige cilindro retirado y su peso bruto.");
                 viejo = BuscarCilindro(d.CodigoRetirado!);
-                if (viejo.Codigo == nuevo.Codigo || !ot.Retirar.Contains(viejo.Codigo) || viejo.Ubicacion != "Sucursal" || viejo.Sucursal != ot.Sucursal) Fallar("El cilindro retirado no corresponde a esta sucursal/pedido.", 409);
+                if (viejo.Codigo == nuevo.Codigo || !ot.Retirar.Contains(viejo.Codigo) || viejo.Ubicacion != "Sucursal" || !string.Equals(viejo.Sucursal, ot.Sucursal, StringComparison.OrdinalIgnoreCase)) Fallar("El cilindro retirado no corresponde a esta sucursal/pedido.", 409);
                 if (viejo.RefrigeranteId != nuevo.RefrigeranteId) Fallar("El reemplazo debe conservar el tipo de refrigerante del envase retirado.");
                 ValidarPeso(viejo, d.PesoRetiradoGr!.Value);
                 if (!op.Fotos.Values.Any(f => f.Info.Grupo == "Retirado")) Fallar("Adjunta al menos una foto del pesaje del cilindro retirado.");
@@ -184,6 +189,8 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
             if (ot.Operaciones.Values.Any(o => o != op && o.Estado == "Registrada" &&
                 (o.Datos.CodigoInstalado == nuevo.Codigo || viejo is not null && o.Datos.CodigoRetirado == viejo.Codigo))) Fallar("Uno de los cilindros ya se utilizó en otra operación de esta OT.", 409);
             // Todas las comprobaciones preceden a las escrituras bajo el bloqueo común.
+            var entrega = ot.Entregas.FindLastIndex(e => e.Codigo == nuevo.Codigo && e.Estado == "ConTecnico");
+            ot.Entregas[entrega] = ot.Entregas[entrega] with { Estado = "Instalado" };
             inventario.Ubicar(nuevo.Codigo, "Sucursal", "Instalado", ot.Sucursal, null, Actor(user), $"Instalación física en {ot.Codigo}", d.PesoInstaladoGr);
             if (viejo is not null) inventario.Ubicar(viejo.Codigo, "Tecnico", "RetiradoPendienteRecepcion", null, ot.Tecnico, Actor(user), $"Retiro físico de {ot.Sucursal}", d.PesoRetiradoGr);
             op.Estado = "Registrada"; op.Version++; op.Actualizada = DateTimeOffset.UtcNow;
@@ -210,10 +217,12 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
             var c = BuscarCilindro(dto.Codigo); ValidarPeso(c, dto.PesoBrutoGr);
             var op = ot.Operaciones.Values.FirstOrDefault(o => o.Estado == "Registrada" && o.Datos.CodigoRetirado == c.Codigo);
             if (op?.Recibido == true) return Ver(ot);
-            if (op is null && !ot.Entregas.Any(e => e.Codigo == c.Codigo)) Fallar("No hay retiro ni entrega sin uso de ese envase en esta OT.");
+            var entrega = ot.Entregas.FindLastIndex(e => e.Codigo == c.Codigo && e.Estado == "ConTecnico");
+            if (op is null && entrega < 0) Fallar("No hay retiro ni entrega sin uso pendiente de ese envase en esta OT.", 409);
             if (c.Ubicacion != "Tecnico" || c.Tecnico != ot.Tecnico) Fallar("El envase no está bajo esta custodia.", 409);
             inventario.Ubicar(c.Codigo, "Bodega", dto.PesoBrutoGr == c.TaraGr ? "Vacio" : "Disponible", null, null, Actor(user), "Recepción de envase retirado", dto.PesoBrutoGr);
             if (op is not null) { op.Recibido = true; op.UsuarioRecepcion = Actor(user); op.FechaRecepcion = DateTimeOffset.UtcNow; }
+            else ot.Entregas[entrega] = ot.Entregas[entrega] with { Estado = "Devuelto", PesoRecepcionGr = dto.PesoBrutoGr, UsuarioRecepcion = Actor(user), FechaRecepcion = DateTimeOffset.UtcNow };
             Anotar(ot, user, "Recepción oficial de bodega", $"{c.Codigo}: {dto.PesoBrutoGr} g. {dto.Observacion}");
             return Ver(ot);
         }
@@ -257,7 +266,7 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
             var ot = Acceder(id, user);
             if (ot.Estado == "PendienteRevision") return Ver(ot);
             Editable(ot);
-            if (ot.Operaciones.Count == 0 || ot.Operaciones.Values.Any(o => o.Estado == "Borrador")) Fallar("Registra al menos una operación y confirma todos los borradores antes de informar el término.");
+            if (!ot.Operaciones.Values.Any(o => o.Estado == "Registrada") || ot.Operaciones.Values.Any(o => o.Estado == "Borrador")) Fallar("Registra al menos una operación y confirma o descarta los borradores antes de informar el término.");
             if (ot.Retirar.Any(c => !ot.Operaciones.Values.Any(o => o.Estado == "Registrada" && o.Datos.CodigoRetirado == c)) && string.IsNullOrWhiteSpace(dto.Observacion))
                 Fallar("Quedan cilindros del pedido sin retirar. Explica la ejecución parcial al Autorizador.");
             ot.Estado = "PendienteRevision"; ot.ObservacionTermino = dto.Observacion?.Trim();
@@ -272,10 +281,23 @@ public sealed class TrabajoStore(InventarioStore inventario, SesionesDemo sesion
             var ot = Acceder(id, user);
             if (ot.Estado == "Cerrada") return Ver(ot);
             if (ot.Estado != "PendienteRevision") Fallar("El técnico aún no ha informado el término.");
-            if (ot.Operaciones.Values.Any(o => o.Datos.Tipo == "Reemplazo" && !o.Recibido)) Fallar("Bodega debe confirmar los envases retirados antes del cierre.");
-            if (ot.Entregas.Any(e => BuscarCilindro(e.Codigo).Ubicacion == "Tecnico")) Fallar("Quedan envases entregados sin instalar ni devolver. Registra la incidencia y resuelve antes del cierre.");
+            if (ot.Operaciones.Values.Any(o => o.Estado == "Registrada" && o.Datos.Tipo == "Reemplazo" && !o.Recibido)) Fallar("Bodega debe confirmar los envases retirados antes del cierre.");
+            if (ot.Entregas.Any(e => e.Estado == "ConTecnico")) Fallar("Quedan envases de esta OT sin instalar ni devolver. Resuelve sus entregas antes del cierre.");
             if (ot.Incidencias.Any(i => i.Respuesta is null)) Fallar("Hay incidencias o rectificaciones sin revisar.");
             ot.Estado = "Cerrada"; Anotar(ot, user, "Cierre administrativo", "Autorizador verificó el trabajo y las recepciones.");
+            return Ver(ot);
+        }
+    }
+
+    public OtResponse Descartar(Guid id, Guid operacionId, int version, ClaimsPrincipal user)
+    {
+        lock (inventario.SyncRoot)
+        {
+            var ot = Acceder(id, user); Editable(ot); var op = OperacionDe(ot, operacionId);
+            if (op.Estado == "Descartada") return Ver(ot);
+            if (op.Estado != "Borrador" || op.Version != version) Fallar("Solo se descarta un borrador sin cambios pendientes de otra pestaña.", 409);
+            op.Estado = "Descartada"; op.Version++; op.Actualizada = DateTimeOffset.UtcNow;
+            Anotar(ot, user, "Borrador descartado", operacionId.ToString());
             return Ver(ot);
         }
     }
