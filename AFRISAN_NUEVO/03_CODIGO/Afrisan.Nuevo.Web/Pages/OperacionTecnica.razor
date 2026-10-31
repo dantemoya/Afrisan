@@ -24,7 +24,7 @@ else
     @if (mensaje is not null) { <div class="notice info" role="status">@mensaje</div> }
     @if (Local.ConsultaOffline) { <div class="notice warning">Sin conexión. Trabaja con la OT guardada. Los datos y fotos se conservarán localmente; todavía no son una confirmación del servidor.</div> }
     @if (registrada) { <section class="panel"><p>Este cambio ya está confirmado. Para corregirlo, vuelve a la OT y solicita una rectificación al Autorizador.</p><a class="btn primary" href="@($"ordenes/{Id}")">Ver trabajo registrado</a></section> }
-    else if (ot.Estado != "Asignada") { <div class="notice warning">La OT ya fue enviada a revisión. No se puede modificar este borrador; solicita revisión al Autorizador.</div> }
+    else if (ot.Estado is not ("Asignada" or "EnProcesoDespacho" or "EnTerreno")) { <div class="notice warning">La OT ya fue enviada a revisión. No se puede modificar este borrador; solicita revisión al Autorizador.</div> }
     else
     {
         <EditForm EditContext="contexto" OnValidSubmit="GuardarYEnviar"><DataAnnotationsValidator /><ValidationSummary />
@@ -42,7 +42,7 @@ else
                     </section>
                 }
                 <section class="panel"><span class="eyebrow">@(form.Tipo == "Reemplazo" ? "02" : "01") / ENVASE QUE SE INSTALA</span><h2>Cilindro instalado</h2>
-                    <label for="op-instalado">Código entregado por bodega</label><InputSelect id="op-instalado" @bind-Value="form.CodigoInstalado" disabled='@fotos.Any(f => f.Grupo == "Instalado")'><option value="">Selecciona el cilindro</option>@foreach (var entrega in ot.Entregas.Where(e => e.Estado == "ConTecnico")) { <option value="@entrega.Codigo">@entrega.Codigo — @entrega.Refrigerante</option> }</InputSelect>
+                    <label for="op-instalado">Cilindro retirado de bodega para esta OT</label><InputSelect id="op-instalado" @bind-Value="form.CodigoInstalado" disabled='@fotos.Any(f => f.Grupo == "Instalado")'><option value="">Selecciona el cilindro</option>@foreach (var entrega in ot.Entregas.Where(e => e.Estado == "EnProcesoDespacho")) { <option value="@entrega.Codigo">@entrega.Codigo — @entrega.Refrigerante</option> }</InputSelect>
                     <label for="op-peso-instalado">Peso bruto del instalado (g)</label><InputNumber id="op-peso-instalado" @bind-Value="form.PesoInstaladoGr" min="0" step="1" />
                     <div class="photo-heading"><h3>Fotos del pesaje</h3><span class="badge pending">Obligatorias</span></div>
                     <p class="field-help">Fotografía la lectura de balanza del envase de reemplazo. No reutilices la foto del retirado.</p>

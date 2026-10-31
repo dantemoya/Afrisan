@@ -1,3 +1,5 @@
+-- HISTÓRICO: modelo anterior de cargas a equipos. Para el flujo confirmado
+-- el 25/10/2026 usar 04_Crear_Afrisan_Contexto_Actual.sql, sin ejecutar ambos.
 -- INSTALACIÓN EN BASE VACÍA: TABLAS SIN DATOS INICIALES.
 -- Ejecutar SOLO este archivo completo en SQL Editor de Supabase.
 -- No ejecutar además los scripts 01 ni 02.

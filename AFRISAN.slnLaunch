@@ -1,14 +1,14 @@
 [
   {
-    "Name": "AMBOS",
+    "Name": "AFRISAN NUEVO - AMBOS",
     "Projects": [
       {
-        "Path": "Afrisan.Api\\Afrisan.Api.csproj",
+        "Path": "AFRISAN_NUEVO\\03_CODIGO\\Afrisan.Nuevo.Api\\Afrisan.Nuevo.Api.csproj",
         "Action": "Start",
         "DebugTarget": "http"
       },
       {
-        "Path": "Afrisan.Web\\Afrisan.Web.csproj",
+        "Path": "AFRISAN_NUEVO\\03_CODIGO\\Afrisan.Nuevo.Web\\Afrisan.Nuevo.Web.csproj",
         "Action": "Start",
         "DebugTarget": "http"
       }

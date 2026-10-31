@@ -1,5 +1,10 @@
 # Procesos de negocio del técnico
 
+Actualización confirmada por Dante el 25/10/2026:
+[retiro por el Técnico y orden de revisión](12_FLUJO_TERRENO_DESPACHO_Y_REVISION.md).
+El Técnico elige y retira con peso/foto; Bodega confirma y aprueba antes de la
+revisión del Autorizador. Ese acuerdo prevalece sobre las propuestas anteriores.
+
 Fecha: 20 de octubre de 2026. Responsable del proyecto: Dante Moya.
 Estado: recorrido de negocio para revisión. Dante solicitó después su programación:
 se añadió una versión funcional de revisión en memoria, descrita en

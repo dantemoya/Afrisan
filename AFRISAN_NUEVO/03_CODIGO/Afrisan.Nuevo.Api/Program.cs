@@ -5,6 +5,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+// Diagnóstico independiente: no inicia HTTP ni modifica datos o permisos.
+if (args.Contains("--verificar-supabase", StringComparer.OrdinalIgnoreCase))
+{
+    Environment.ExitCode = await ConexionSupabase.VerificarAsync(builder.Configuration);
+    return;
+}
 // Primera entrega de revisión: no hay conexión ni escrituras a PostgreSQL/Supabase.
 // La producción deberá registrar un proveedor persistente y autenticación real.
 if (!builder.Environment.IsDevelopment())

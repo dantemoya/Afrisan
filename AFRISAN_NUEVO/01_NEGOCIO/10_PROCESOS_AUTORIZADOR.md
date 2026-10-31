@@ -1,5 +1,10 @@
 # Procesos del Autorizador
 
+Actualización confirmada el 25/10/2026:
+[revisión de fotos y registro después de la aprobación de Bodega](12_FLUJO_TERRENO_DESPACHO_Y_REVISION.md).
+El Autorizador conserva la preparación de OT y realiza su revisión final solamente
+después de la confirmación/aprobación de los cilindros y pesos por Bodega.
+
 Fecha: 20 de octubre de 2026. Responsable del proyecto: Dante Moya.
 
 Estado: recorrido para revisión. Las responsabilidades 1, 2, 7, 8 y 9 fueron

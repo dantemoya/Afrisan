@@ -1,5 +1,10 @@
 # PN-04 · Despachar cilindros y abrir custodia
 
+Actualización del 25/10/2026: el
+[retiro lo registra el Técnico, con peso y foto](12_FLUJO_TERRENO_DESPACHO_Y_REVISION.md).
+Ese acuerdo y su implementación en memoria sustituyen la atribución del registro
+del despacho a Bodega indicada en la propuesta histórica siguiente.
+
 Estado: propuesta para revisión de Dante; no aprobada ni implementada.
 Referencia: HU-01, HU-02 y RN-01. Fotos de bodega según conversación previa;
 no confundirlas con la evidencia obligatoria de terreno de HU-06.

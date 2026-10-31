@@ -1,177 +1,87 @@
-# Base propuesta para la aplicación nueva
+# Base de datos del contexto actual de AFRISAN
 
-Preparado el 19 de octubre de 2026 para Dante Moya.
+Actualización: **25 de octubre de 2026**. Flujo: Técnico retira con peso/foto → cambio físico → Bodega recibe y aprueba → Autorizador revisa y cierra.
 
-## Archivo a ejecutar
+## Archivo vigente
 
-### Base vacía, sin poblar tablas (versión solicitada más reciente)
+Usar únicamente **[04_Crear_Afrisan_Contexto_Actual.sql](04_Crear_Afrisan_Contexto_Actual.sql)**, completo, en SQL Editor de Supabase con la identidad administradora de la base.
 
-Usa **03_Crear_Tablas_Sin_Datos.sql** si eliminaste los esquemas anteriores.
-Ejecuta únicamente ese archivo, completo, en SQL Editor. Crea **afrisan** y
-**afrisan_bi** con 16 tablas vacías, relaciones, validaciones, funciones,
-triggers y vistas. No inserta roles, usuarios, catálogos ni datos simulados.
-Los INSERT dentro de las funciones de auditoría se ejecutarán solamente ante
-operaciones futuras; no cargan datos durante la instalación.
+- Crea `afrisan_actual` y `afrisan_bi_actual`, con **31 tablas y nueve vistas**.
+- Es una instalación vacía: sin roles, usuarios, contraseñas, catálogos ni ejemplos.
+- No borra ni migra `afrisan`, `afrisan_nuevo`, `public`, `auth` ni Storage.
+- El paquete comparte una transacción. Si esos esquemas nuevos ya existen, falla sin reemplazarlos. No añadir DROP para ocultar ese error: primero revisar lo existente.
+- No ejecutar además los archivos 01, 02 o 03: son propuestas anteriores del modelo de cargas a equipos, conservadas como antecedentes.
+- Seleccionar `afrisan_actual` en Table Editor/Schema Visualizer. Si una sesión queda en transacción fallida, ejecutar ROLLBACK antes de reintentar.
 
-Si persiste un esquema afrisan/afrisan_bi, CREATE SCHEMA detendrá el script:
-el archivo no borra ni reemplaza objetos existentes. La aplicación requerirá
-aprovisionar roles y usuarios posteriormente para poder iniciar sesión.
+**No se ejecutó este SQL en tu Supabase. La API actual continúa en memoria.** Instalar tablas no conecta automáticamente EF Core ni migra registros anteriores.
 
-Los archivos 01 y 02 se conservan como versiones anteriores. No son pasos
-adicionales que deban ejecutarse después del 03.
+## Correspondencia con el contexto
 
-**Si apareció `schema "afrisan" already exists`, usa en su lugar
-`02_MER_Completo_Afrisan_Nuevo.sql`.** Es el script completo de instalación en
-los esquemas separados **afrisan_nuevo** y **afrisan_bi_nuevo**. No borra ni
-actualiza los esquemas anteriores. No ejecutes ambos archivos para una misma
-aplicación: son alternativas de instalación, no pasos consecutivos.
-
-El archivo 02 admite que esos esquemas nuevos existan vacíos; si contienen tablas,
-vistas, secuencias o funciones, se detiene para no ocultar diferencias. Después
-de ejecutarlo, selecciona **afrisan_nuevo** en el editor/visualizador de tablas.
-Las instrucciones de unidades, autenticación y límites de este documento siguen
-siendo aplicables sustituyendo el esquema por afrisan_nuevo y el de BI por
-afrisan_bi_nuevo. El contexto de auditoría del archivo 02 se llama
-`afrisan_nuevo.id_usuario`.
-
-`01_Crear_Afrisan_Supabase.sql`: copia **todo** el contenido en SQL Editor de
-Supabase y ejecútalo como propietario. Está envuelto en una transacción.
-
-El archivo crea los esquemas **afrisan** y **afrisan_bi**. Las tablas manuales
-existentes en public se conservan, sin copiar sus datos. Si alguno de los dos
-esquemas ya existe, se detiene; no añade DROP ni omite diferencias silenciosamente.
-Tras un error, si tu sesión conserva una transacción abortada, ejecuta ROLLBACK
-antes de corregir el problema y volver a ejecutar el archivo completo.
-
-En Table Editor/Schema Visualizer selecciona **afrisan**, no public, para ver
-las nuevas tablas. No añadas estos esquemas a los expuestos por Data API todavía.
-
-**No se ha ejecutado en tu proyecto Supabase ni se ha probado contra PostgreSQL.**
-Es una propuesta de instalación para la aplicación nueva, no una confirmación de
-despliegue ni una migración compatible con el modelo EF Core anterior.
-
-## Nombres y unidades
-
-Se mantienen Usuario, Rol, Cliente, Sucursales, Refrigerantes, Cilindros,
-OrdenTrabajo, Movimientos y Costos con nombres cercanos a tu captura.
-Los nombres llevan comillas y distinguen mayúsculas/minúsculas, por ejemplo:
-
-```sql
-select * from afrisan."Cilindros";
-select * from afrisan."BalanceCilindro";
-select * from afrisan."EstadoCilindros";
-```
-
-- `Salida = true`: despacho; `false`: retorno. El retorno lleva `Id_Despacho`.
-- Los IDs de cada FK usan el mismo tipo que su PK.
-- Pesos en gramos enteros: **10 kg = 10000 g**. La interfaz puede mostrar kg.
-- `Capacidadgr` es masa máxima de gas; `TaraGr` es masa del envase vacío.
-- `PesoGrBruto` es lectura total de balanza. `PesoRegistradoGr` se deriva del
-  último movimiento en EstadoCilindros; ContenidoEstimadoGr descuenta las cargas.
-- `CilindroQR` conserva el código identificador, no el archivo de imagen.
-- Las fotos son rutas de objetos en Storage privado, no bytea.
-- Las fechas con hora son timestamptz. El agrupamiento mensual usa America/Santiago.
-- Precios por gramo con ocho decimales: **30000 CLP/kg = 30 CLP/g**.
-  La aplicación convierte los precios al mostrarlos o ingresarlos en kg.
-- Costos pertenece a una intervención. PrecioTotal se calcula con gramos y
-  tarifa aplicada, más PrecioCilindro solo si hay un cargo de envase acordado.
-- Una OT pertenece a una sucursal en esta propuesta; si el cliente maneja OT que
-  abarcan varias sucursales, se debe modificar esa relación antes de usarla.
-
-## Cobertura de los requisitos
-
-Fuente funcional: `EVIDENCIAS_GRUPALES/Documentación del Proyecto/ACTUAL/01_Product_Backlog_AFRISAN_Corregido.xlsx`,
-hojas Historias de Usuario y Criterios de Aceptación. No se inventan valores GWP,
-precios, causas de falla, cuentas de usuario ni credenciales.
-
-| Historia | Estructura y reglas incluidas |
+| Necesidad | Representación nueva |
 | --- | --- |
-| HU-01 / HU-02 | QR único, referencia de OT externa, múltiples cilindros por OT, tara, capacidad, pesajes, técnico custodio y usuario registrador. |
-| HU-03 | Un rol por usuario; hash de contraseña, cuenta activa y campos de bloqueo. Sin tabla de permisos. |
-| HU-04 | UUID único de operación en movimientos e intervenciones; dispositivo, creación local y recepción. |
-| HU-05 | Intervención por equipo, sucursal, causa, técnico, cilindro y despacho exacto; validación de OT y gas compatibles. |
-| HU-06 | Foto y peso restante exigidos para cerrar intervención. Campos para revisor y fecha de revisión. |
-| HU-07 | Verde menor a 5%, amarillo entre 5% y 15%, rojo mayor a 15% o nueva carga en menos de 30 días. Rojo exige plan. Vista mensual de sucursales con más de tres críticas. |
-| HU-08 | Un retorno por despacho; consumo declarado y descalce físico; conforme solo si valor absoluto menor a 200 g. Bloqueo de cierre de OT con pendientes o descalces. |
-| HU-09 | Certificado con folio, entrega, documento y lote de cilindros clasificados como chatarra. |
-| HU-10 | Tarifas por vigencia, costos aplicados, GWP con fuente/metodología, emisiones estimadas y vistas para BI. |
+| Cinco roles, incluido Autorizador | Rol y Usuario; sin tabla Permisos. |
+| Técnico obligatorio desde la OT | OrdenTrabajo.Id_Tecnico; técnico activo y rol comprobados. |
+| Pedido por gas | DetalleOT: solicitado y autorizado por refrigerante. |
+| Retiros previstos de sucursal | RetiroPrevisto, independiente del despacho desde Bodega. |
+| Técnico retira con peso/foto | Despacho, Pesaje y EvidenciaPesaje; custodia y ubicación actualizadas. |
+| Reemplazo o agregado físico | OperacionTerreno vincula instalado/retirado; agregado sin retirado ficticio. |
+| Pesos independientes | Pesaje de Inicial, Despacho, Retirado, Instalado y Recepcion. |
+| Recepción del retirado | RecepcionBodega referencia la operación; no exige que ese envase haya salido en esa OT. |
+| Devolución sin uso | Referencia el despacho exacto. |
+| Aprobaciones sucesivas | RevisionOT distingue Bodega y Autorizador; valida orden, actor, fecha y pendientes. |
+| Incidencias/rectificación | Solicitud, motivo y respuesta; no reemplaza libremente hechos confirmados. |
+| Trazabilidad | CustodiaActual, HistorialCilindro, EventoOT y Auditoria. |
+| Límites y jerarquía | LimiteSucursal, historial, bloqueo por Jefatura y desbloqueo explícito. |
+| Excesos | MedicionLimite, operaciones relacionadas y RevisionExceso de Jefatura. |
+| Costos | Concepto, cantidad, unidad, tarifa y moneda explícitos por operación. |
+| Emisiones | Estimación separada con masa emitida, factor, fuente y metodología. |
+| Disposición | Baja administrativa, lote pendiente y recepción posterior del certificado. |
 
-Auditoria es una decisión de implementación para respaldar cambios: no se
-presenta como una historia de usuario adicional. Se registran INSERT/UPDATE/DELETE
-con datos anteriores/nuevos y se excluyen hashes y VersionSeguridad.
+El modelo representa reemplazo físico de cilindros: no obliga a inventar un equipo, causa de falla o consumo para guardar el cambio. Las estructuras antiguas de carga de gas a equipos y su semáforo requieren reconciliación si se retoman; no se presentan como el mismo negocio.
 
-## Autenticación y acceso
+## Flujo e integridad
 
-La propuesta continúa con **autenticación desde la API**, como indica HU-03.
-Usuario no se vincula automáticamente a Supabase Auth; si se decide usar ese
-servicio, hay que cambiar este diseño antes de integrarlo.
-
-`Clave_Usuario` recibe únicamente un hash creado por la API con un mecanismo
-como PasswordHasher. No insertar una contraseña escrita directamente en SQL.
-El primer administrador se aprovisiona desde un proceso de backend.
-
-Todas las tablas tienen RLS activado y no hay políticas ni permisos para anon o
-authenticated. Un esquema personalizado tampoco se publica automáticamente en
-Data API. La aplicación nueva accederá desde su API, usando una identidad
-PostgreSQL de servidor configurada por separado. Nunca poner esas credenciales
-en Blazor WebAssembly, JavaScript ni el repositorio.
-
-La API debe comprobar rol, usuario activo y sesión; obtener el Id_Usuario del
-token verificado; y establecer el actor de auditoría con una consulta parametrizada
-en la misma transacción:
-
-```sql
-select set_config('afrisan.id_usuario', :id_usuario_autenticado::text, true);
+```mermaid
+flowchart LR
+  A[OT asignada] --> B[Técnico retira con peso y foto]
+  B --> C[En proceso de despacho]
+  C --> D[Cambio con fotos de ambos pesajes]
+  D --> E[Pendiente de Bodega]
+  E --> F[Bodega recibe, confirma y aprueba]
+  F --> G[Autorizador revisa fotos y registro]
+  G --> H[Cerrada]
 ```
 
-Las escrituras hechas directamente en SQL Editor sin ese contexto conservan el
-usuario de PostgreSQL y un Id_Usuario nulo. El propietario puede administrar
-triggers y datos: la auditoría no es un mecanismo contra el propietario de BD.
+Se conservan peso de salida, terreno y recepción por separado. Las diferencias quedan visibles en `afrisan_bi_actual."PesajesRecepcion"`; no se inventa una tolerancia ni se declaran pérdidas automáticamente. El cierre comprueba registros históricos de esa OT, aunque un envase se reutilice después. Una ejecución parcial exige explicación y libera reservas no ejecutadas al cerrar.
 
-### Power BI
+La función `afrisan_actual.retirar_cilindro` registra salida, foto y custodia en una transacción y compara el contenido de los reintentos. La API debe conservar los UUID y usar control de versión al editar borradores; una clave UNIQUE no implementa por sí sola toda la sincronización offline.
 
-El esquema afrisan_bi ofrece ConsumoIntervenciones, Conciliacion y
-SucursalesCriticasMes. No incluye claves ni fotografías privadas. Usa una
-conexión PostgreSQL de solo lectura dedicada y otorga acceso únicamente a esas
-vistas, cuando se defina su identidad. Por ejemplo, sustituyendo el nombre real:
+## Límites pendientes de definición
 
-```sql
--- Ejemplo, NO forma parte del script de instalación:
--- GRANT USAGE ON SCHEMA afrisan_bi TO lector_bi_real;
--- GRANT SELECT ON ALL TABLES IN SCHEMA afrisan_bi TO lector_bi_real;
-```
+Se representan Semana/Mes por sucursal, vigencia, autor e historial. Una modificación de Jefatura bloquea a Bodega; solamente Jefatura puede habilitarla nuevamente. Autorizador no modifica ni desbloquea esos límites porque su permiso de edición sigue por definir.
 
-Estas vistas usan los permisos de su propietario sobre las tablas subyacentes:
-se diseñan para un lector BI confiable que puede ver todas las sucursales.
-No otorgar acceso al esquema afrisan ni a sus tablas a ese lector. Si se necesita
-segmentación por cliente, diseñar las vistas/políticas antes de conceder acceso.
-No sumar importes de monedas distintas ni convertir emisiones desconocidas en
-cero; las vistas distinguen falta de valoración y estimación.
+**No se activa un cómputo automático ni se bloquea el trabajo por exceso.** Deben acordarse masa computable, calendario, fecha aplicable y desglose por gas. MedicionLimite conserva una medición declarada, metodología y versión histórica seleccionada; no sustituye esa definición.
 
-## Responsabilidades pendientes de la aplicación
+Tarifas, costos, emisiones, baja y certificados se restringen provisionalmente a Administrador técnico. Esa asignación no constituye aprobación del reparto de esas tareas entre roles de negocio; debe ratificarse antes de habilitar sus pantallas. La corrección material de registros aprobados requiere un procedimiento adicional; Incidencia conserva la solicitud y su conclusión sin alterar el original.
 
-La instalación prepara la persistencia y algunas reglas de integridad. Sigue
-siendo necesario implementar:
+## Unidades, archivos y acceso
 
-- API, validación de sesiones/roles, emisión y revocación de tokens y bloqueo.
-- Aprovisionamiento seguro de usuarios y permisos del usuario técnico de BD.
-- Importación/integración Defontana y validación contra el ERP.
-- Captura de fotos, bucket privado y comprobación real de existencia/acceso
-  del archivo: una ruta no acredita por sí misma una fotografía válida.
-- Persistencia local offline, sincronización, reintentos y conflictos. Un UUID
-  repetido debe devolver la operación existente si su contenido coincide.
-- Reconciliación de semáforos cuando llegan cargas antiguas offline: el trigger
-  considera las cargas anteriores ya presentes, no recalcula trabajos futuros
-  recibidos antes. No se permite insertar cargas después del retorno sin un
-  procedimiento de regularización; sincronizar antes del cierre de custodia.
-- Selección de tarifa vigente por fecha/moneda y copiado de su precio a Costos.
-  Los triggers no eligen tarifas ni inventan factores GWP.
-- Metodología para estimar masa emitida: refrigerante utilizado no equivale
-  automáticamente a refrigerante emitido. Sin estimación/factor, CO2e queda NULL.
-- Resolución de descalces y rectificaciones auditadas. La propuesta bloquea
-  edición/borrado de pesajes y edición de trabajos cerrados. No existe todavía
-  un procedimiento de ajuste: un descalce se mantiene visible y bloquea cierre.
-- Definición adicional de «sobreconsumo recurrente mensual» de sucursal.
-- Interfaz de alertas, revisión, reportes y configuración de Power BI.
+- Gramos enteros: 1 kg = 1.000 g. Capacidad es masa máxima del gas; tara es masa del envase; contenido según pesaje = bruto menos tara.
+- Fechas de hechos en timestamptz. OT con Id_Publico UUID para mapear URLs/API; las PK internas usan identidad. Operaciones con UUID estable y versión de borrador.
+- Precios NUMERIC y moneda explícita. No equiparar masa instalada con consumo, cobro ni emisiones. Sin estimación, las emisiones son desconocidas; no cero automático.
+- Fotos: metadatos de objetos privados con ruta, MIME, tamaño y SHA-256. La API debe verificar archivo real, firma/hash y acceso Storage antes de confirmar; una ruta o un hash aportado por cliente no prueba una fotografía.
+- No hay cuentas precargadas. El backend debe aprovisionar roles/usuarios y hashes seguros. La longitud de Clave_Usuario no comprueba el algoritmo de hash.
+- RLS habilitado en todas las tablas; acceso revocado a PUBLIC y, si existen, anon/authenticated. No se publica Data API ni se crean políticas de navegador.
+- La API de confianza establece el actor de sesión verificado EN LA MISMA TRANSACCIÓN: `select set_config('afrisan_actual.id_usuario', :id::text, true)`. Nunca aceptar ese valor desde un campo libre del cliente.
+- Antes de conectar falta aprovisionar una identidad PostgreSQL de servidor con permisos/políticas adecuados. No poner credenciales PostgreSQL ni claves de servicio en Blazor/JavaScript. El propietario de instalación puede eludir RLS: la prueba como propietario no acredita permisos de backend.
+- Power BI requiere una identidad de lectura dedicada y permisos explícitos solo sobre vistas de afrisan_bi_actual. No se exponen contraseñas ni rutas de fotos; el SQL no configura informes, licencias ni acceso de usuarios.
 
-No se incluye una tabla Permisos ni se modifica la aplicación actual.
+## Validación e integración
+
+Paquete ejecutado en **PostgreSQL 18.6 embebido, PGlite 0.5.11**, con **144 comprobaciones correctas**: tablas vacías, esquema anterior conservado, tres reemplazos, agregado/ejecución parcial, reutilización, roles, recepción, revisiones, límites, costos, emisiones y certificado.
+
+[Resultados y repetición](../04_SEGUIMIENTO/VALIDACION_SQL_CONTEXTO_2026_10_25/README.md).
+
+No se probó en servidor Supabase, con dos conexiones simultáneas, permisos reales de backend, bucket privado, cámara o sincronización de dispositivos. La API sigue usando stores en memoria: falta mapear IDs/relaciones, implementar repositorios/transacciones, configurar autenticación/Storage y repetir los recorridos después de reiniciarla.
+
+Componentes de mantenimiento en `contexto_actual/`. Para reconstruir el paquete: `python contexto_actual/construir_sql.py`. Para instalar se usa solo el archivo 04 generado, no también los componentes.

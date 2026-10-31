@@ -10,6 +10,9 @@ public sealed partial class InventarioClient
     public Task<OtResponse> OrdenAsync(Guid id) => ObtenerAsync<OtResponse>(OtRuta(id));
     public Task<OtResponse> CrearOtAsync(CrearOtRequest dto) => EnviarAsync<OtResponse>("ordenes-trabajo", dto);
     public Task<OtResponse> EntregarAsync(Guid id, EntregarCilindroRequest dto) => EnviarAsync<OtResponse>(OtRuta(id) + "/entregas", dto);
+    public Task<CilindroResponse[]> DisponiblesOtAsync(Guid id) => ObtenerAsync<CilindroResponse[]>(OtRuta(id) + "/cilindros-disponibles");
+    public Task<OtResponse> AprobarBodegaAsync(Guid id, RevisarTrabajoRequest dto) => EnviarAsync<OtResponse>(OtRuta(id) + "/aprobar-bodega", dto);
+    public Task<OtResponse> RevisarAutorizadorAsync(Guid id, RevisarTrabajoRequest dto) => EnviarAsync<OtResponse>(OtRuta(id) + "/revision-autorizador", dto);
     public Task<OtResponse> RecibirAsync(Guid id, RecibirCilindroRequest dto) => EnviarAsync<OtResponse>(OtRuta(id) + "/recepciones", dto);
     public Task<OtResponse> IncidenciaAsync(Guid id, CrearIncidenciaRequest dto) => EnviarAsync<OtResponse>(OtRuta(id) + "/incidencias", dto);
     public Task<OtResponse> ResolverAsync(Guid id, Guid incidencia, ResolverIncidenciaRequest dto) => EnviarAsync<OtResponse>(OtRuta(id) + $"/incidencias/{incidencia}/resolver", dto);
@@ -40,5 +43,10 @@ public sealed partial class InventarioClient
     {
         using var respuesta = await http.GetAsync(OtRuta(id) + $"/operaciones/{operacion}/fotos/{foto.Id}"); await RevisarAsync(respuesta);
         return $"data:{foto.ContentType};base64," + Convert.ToBase64String(await respuesta.Content.ReadAsByteArrayAsync());
+    }
+    public async Task<string> FotoDespachoAsync(Guid id, EntregaResponse entrega)
+    {
+        using var respuesta = await http.GetAsync(OtRuta(id) + $"/entregas/{entrega.Id}/foto"); await RevisarAsync(respuesta);
+        return $"data:{entrega.FotoDespacho!.ContentType};base64," + Convert.ToBase64String(await respuesta.Content.ReadAsByteArrayAsync());
     }
 }

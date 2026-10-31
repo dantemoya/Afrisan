@@ -8,8 +8,24 @@ Respaldo previo al formateo del 24/10/2026: [guía de restauración y estado del
 Desde el 19 de octubre de 2026, la revisión del negocio y el desarrollo nuevo se
 organizan en **[AFRISAN_NUEVO](AFRISAN_NUEVO/README.md)**, a cargo de Dante Moya.
 Incluye procesos, base de datos y seguimiento. La aplicación nueva de registro
-y consulta en memoria está en [AFRISAN_NUEVO/03_CODIGO](AFRISAN_NUEVO/03_CODIGO/README.md);
-los proyectos de la raíz corresponden a la implementación anterior.
+y trabajo técnico en memoria está en [AFRISAN_NUEVO/03_CODIGO](AFRISAN_NUEVO/03_CODIGO/README.md).
+La solución **[AFRISAN.slnx](AFRISAN.slnx)** de la raíz abre esos proyectos nuevos.
+
+Actualización del 30/10/2026: se incorporan los avances locales del flujo de
+terreno, los esquemas SQL revisados, la preparación del diagnóstico de Supabase
+y la documentación académica en español. Consulta:
+
+- [Documentación actual Afrisan_DM](Afrisan_DM/README.md) y [paquete ZIP](Afrisan_DM.zip).
+- [Base de datos y esquema del contexto actual](AFRISAN_NUEVO/02_BASE_DATOS/README.md).
+- [Revisión del esquema recibido el 29 de octubre](AFRISAN_NUEVO/02_BASE_DATOS/REVISION_ESQUEMA_2026_10_29/README.md).
+- [Configuración local y diagnóstico de Supabase](AFRISAN_NUEVO/03_CODIGO/CONEXION_SUPABASE.md).
+- [Tablero de seguimiento](AFRISAN_NUEVO/04_SEGUIMIENTO/TRELLO_2026_10_29/Tablero_AFRISAN.md).
+
+Se retiraron los proyectos antiguos `Afrisan.Api` y `Afrisan.Web`, junto con
+`Iniciar-Demo.ps1` (limpieza local del 25/10/2026, incorporada al repositorio
+el 30/10/2026). Su código permanece recuperable
+en el historial de Git (por ejemplo, en el commit `e0f5c94`). La documentación,
+las evidencias y el respaldo histórico se conservan.
 
 Los scripts que estaban en BASE_DATOS_NUEVA ahora están en
 [AFRISAN_NUEVO/02_BASE_DATOS](AFRISAN_NUEVO/02_BASE_DATOS/README.md).
@@ -22,20 +38,21 @@ El informe de avance, el plan de trabajo y el backlog de Fase 2 se encuentran en
 
 La arquitectura está aprobada, según confirmación del estudiante recibida el 16 de octubre de 2026. El trabajo actual se concentra en completar el flujo de bodega, validar su funcionamiento y reunir evidencias de EVA 2.
 
-## Ejecutar la implementación anterior con datos simulados
+## Ejecutar la aplicación actual
 
-En desarrollo está activado el modo demostración: no requiere PostgreSQL,
-Supabase ni secretos de conexión.
+Abre **AFRISAN.slnx**, selecciona el perfil **AFRISAN NUEVO - AMBOS** y ejecuta
+con F5. También se puede abrir la solución de `AFRISAN_NUEVO/03_CODIGO`.
 
-En dos terminales, desde esta carpeta:
-
-```powershell
-dotnet run --project Afrisan.Api --launch-profile http
-```
+Para iniciar desde PowerShell en la raíz del repositorio:
 
 ```powershell
-dotnet run --project Afrisan.Web --launch-profile http
+.\AFRISAN_NUEVO\03_CODIGO\Iniciar-Revision.ps1
 ```
 
-Abre http://localhost:5226/login y selecciona una cuenta de demostración.
-Los cambios se conservan en memoria hasta reiniciar la API.
+Abre [AFRISAN](http://localhost:5286/acceso). La API usa el puerto 5181.
+El inventario, los trabajos y las fotografías permanecen en memoria hasta reiniciar
+la API. No requiere conexión a Supabase en este modo. No iniciar el script y F5
+simultáneamente si los servidores ya están encendidos.
+
+Último recorrido implementado: [retiro por el técnico, aprobación de Bodega y
+revisión del Autorizador](AFRISAN_NUEVO/04_SEGUIMIENTO/FLUJO_TERRENO_2026_10_25/README.md).

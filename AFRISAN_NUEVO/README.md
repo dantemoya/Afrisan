@@ -45,11 +45,13 @@ Las fuentes se conservan en sus ubicaciones originales:
 
 ## Separación del proyecto anterior
 
-Afrisan.Api, Afrisan.Web, AFRISAN.slnx y el inicio de demostración de la raíz
-siguen siendo la implementación anterior. La solución nueva es
-03_CODIGO/Afrisan.Nuevo.slnx (API 5181 / Web 5286). Las evidencias conservan su autoría
-histórica. No se borraron proyectos ni documentos para cambiar la composición
-actual del equipo.
+El 25/10/2026, a petición de Dante, se quitaron de la copia local los proyectos
+antiguos Afrisan.Api y Afrisan.Web y su iniciador Iniciar-Demo.ps1. Su código sigue
+en el historial de Git; los documentos y las evidencias conservan su autoría.
+
+AFRISAN.slnx y su perfil de inicio en la raíz ahora abren únicamente los tres
+proyectos nuevos de 03_CODIGO. También se mantiene la solución
+03_CODIGO/Afrisan.Nuevo.slnx (API 5181 / Web 5286).
 
 La antigua carpeta BASE_DATOS_NUEVA se trasladó completa a 02_BASE_DATOS.
 Los nombres de sus archivos se conservaron. No se ejecutó SQL en Supabase

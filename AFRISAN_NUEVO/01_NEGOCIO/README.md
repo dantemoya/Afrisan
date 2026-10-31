@@ -1,5 +1,9 @@
 # Procesos del negocio
 
+Último acuerdo, 25/10/2026:
+[retiro del Técnico, cambio, confirmación de Bodega y revisión del Autorizador](12_FLUJO_TERRENO_DESPACHO_Y_REVISION.md).
+Prevalece sobre las propuestas previas de despacho y orden de revisión.
+
 Responsable: Dante Moya. Fecha: 19 de octubre de 2026.
 
 Los documentos distinguen **acuerdos expresos**, **propuestas en revisión** y

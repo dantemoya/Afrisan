@@ -1,5 +1,39 @@
 # AFRISAN nuevo · Primera entrega de inventario
 
+## Preparación de conexión a Supabase (29 de octubre)
+
+Se añadió una [configuración local y comprobación de solo lectura](CONEXION_SUPABASE.md)
+con Npgsql y TLS. El comando `--verificar-supabase` consulta los objetos esperados
+sin iniciar HTTP ni escribir datos. **La aplicación continúa en memoria** hasta
+implementar los repositorios persistentes; configurar la conexión no cambia ese modo.
+
+## Esquema corregido para futura persistencia (25 de octubre)
+
+Se preparó [04_Crear_Afrisan_Contexto_Actual.sql](../02_BASE_DATOS/04_Crear_Afrisan_Contexto_Actual.sql)
+para el flujo actual, con validación local del SQL. La [guía de base de datos](../02_BASE_DATOS/README.md)
+explica instalación y correspondencia de entidades. **La API continúa en memoria**;
+no se ejecutó este script en Supabase ni se implementó todavía el adaptador persistente.
+
+## Flujo de terreno actualizado (25 de octubre)
+
+El Técnico registra el retiro de Bodega con peso y foto obligatoria; el cilindro
+queda En proceso de despacho. Después del cambio y la devolución, Bodega confirma
+los envases y sus pesos y aprueba el trabajo. El Autorizador revisa fotografías y
+registros después de esa aprobación y antes del cierre. La
+[validación del flujo corregido](../04_SEGUIMIENTO/FLUJO_TERRENO_2026_10_25/README.md)
+incluye 274 comprobaciones satisfactorias en tres casos y un recorrido adicional
+completo por formularios del navegador. Esta actualización sustituye el despacho
+por Bodega descrito en los antecedentes siguientes. Continúa en memoria.
+
+## Validación de los tres roles (25 de octubre)
+
+Se ejecutaron tres recorridos completos de Bodega → Autorizador → Técnico →
+Bodega → Autorizador, con tres refrigerantes, nueve cilindros de valores distintos
+y tres OT cerradas. La [evidencia y el guion repetible](../04_SEGUIMIENTO/VALIDACION_ROLES_2026_10_25/README.md)
+registran 278 comprobaciones satisfactorias por HTTP y consultas en navegador
+con las tres cuentas. Son datos e imágenes sintéticos en memoria; esta validación
+no acredita todavía la integración con PostgreSQL/Supabase.
+
 ## Actualización del 22 de octubre
 
 Se incorporó selección de cilindros mediante listas en el módulo del Autorizador,

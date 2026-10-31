@@ -1,5 +1,10 @@
 # Entrega de trabajo técnico · 20 de octubre de 2026
 
+Actualización del 25/10: [retiro del Técnico con foto y aprobación previa de Bodega](../04_SEGUIMIENTO/FLUJO_TERRENO_2026_10_25/README.md).
+Esta versión prevalece sobre el despacho por Bodega y el envío directo al
+Autorizador descritos abajo. Incluye tres pruebas HTTP completas y una OT
+completada desde los formularios. La persistencia sigue en memoria.
+
 Actualización posterior del 22/10: [selección, QR y correcciones de flujo](../04_SEGUIMIENTO/VALIDACION_QR_Y_SELECCION_2026_10_22/README.md).
 Se añadieron listas para seleccionar envases, lectura de imágenes QR y cámara,
 control de custodia por entrega, versiones en fotos/confirmación y descarte de

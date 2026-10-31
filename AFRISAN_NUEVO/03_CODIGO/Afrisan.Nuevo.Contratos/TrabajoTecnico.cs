@@ -25,18 +25,38 @@ public sealed record CrearOtRequest
 public sealed record LineaOtResponse(long RefrigeranteId, string Refrigerante, long GrSolicitados, long GrAutorizados);
 /// <summary>Envase entregado al técnico; recepción de retirados se confirma por bodega.</summary>
 public sealed record EntregaResponse(string Codigo, string Refrigerante, long TaraGr, long CapacidadGr, long PesoBrutoGr, string Usuario, DateTimeOffset Fecha,
-    string Estado = "ConTecnico", long? PesoRecepcionGr = null, string? UsuarioRecepcion = null, DateTimeOffset? FechaRecepcion = null);
+    string Estado = "EnProcesoDespacho", long? PesoRecepcionGr = null, string? UsuarioRecepcion = null, DateTimeOffset? FechaRecepcion = null,
+    Guid Id = default, FotoResponse? FotoDespacho = null);
 /// <summary>Registro operativo de la OT sin fotografías binarias.</summary>
 public sealed record OtResponse(Guid Id, string Codigo, string Sucursal, string Direccion, string Descripcion,
     string TecnicoEmail, string Estado, string Autorizador, DateTimeOffset Fecha,
     LineaOtResponse[] Detalle, string[] CilindrosARetirar, EntregaResponse[] Entregas,
     OperacionResponse[] Operaciones, IncidenciaResponse[] Incidencias, EventoResponse[] Historial,
-    string? ObservacionTermino);
-/// <summary>Entrega desde bodega a la OT de un cilindro disponible.</summary>
+    string? ObservacionTermino, RevisionTrabajoResponse? AprobacionBodega = null, RevisionTrabajoResponse? RevisionAutorizador = null);
+/// <summary>Retiro físico de bodega registrado por el técnico asignado, con peso y foto.</summary>
 public sealed record EntregarCilindroRequest
 {
+    public Guid IdOperacion { get; init; }
     [Required, StringLength(120)] public string Codigo { get; init; } = "";
+    [Range(0, long.MaxValue)] public long PesoBrutoGr { get; init; }
+    [Required] public FotoPesajeRequest? Foto { get; init; }
 }
+
+public sealed record FotoPesajeRequest
+{
+    public Guid Id { get; init; }
+    [Required, StringLength(150)] public string Nombre { get; init; } = "";
+    [Required, StringLength(30)] public string ContentType { get; init; } = "";
+    [Required, MaxLength(5_600_000)] public string Base64 { get; init; } = "";
+}
+
+/// <summary>Confirmación humana de la revisión; no equivale a verificar automáticamente una fotografía.</summary>
+public sealed record RevisarTrabajoRequest
+{
+    public bool ConfirmoRevision { get; init; }
+    [StringLength(2000)] public string? Observacion { get; init; }
+}
+public sealed record RevisionTrabajoResponse(string Usuario, DateTimeOffset Fecha, string? Observacion);
 /// <summary>Recepción oficial en bodega de un envase retirado de la sucursal.</summary>
 public sealed record RecibirCilindroRequest
 {
@@ -74,7 +94,8 @@ public sealed record FotoResponse(Guid Id, string Grupo, string CodigoCilindro, 
 public sealed record OperacionResponse(Guid Id, int Version, string Tipo, string? CodigoRetirado,
     string? CodigoInstalado, long? PesoRetiradoGr, long? PesoInstaladoGr, string? Observacion,
     string Estado, FotoResponse[] Fotos, DateTimeOffset Actualizada, bool EntregaInformada,
-    bool RecibidoBodega, string? UsuarioRecepcion, DateTimeOffset? FechaRecepcion);
+    bool RecibidoBodega, string? UsuarioRecepcion, DateTimeOffset? FechaRecepcion,
+    long? PesoRecepcionGr = null, string? ObservacionRecepcion = null);
 /// <summary>Incidencia o solicitud de rectificación, sin alterar el registro original.</summary>
 public sealed record CrearIncidenciaRequest
 {
